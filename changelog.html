@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transmission — What's New</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 40px 20px 80px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 32px; }
+  h2 {
+    font-size: 19px; margin: 40px 0 8px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h2:first-of-type { margin-top: 0; }
+  h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 8px; }
+  ul { padding-left: 22px; margin: 8px 0; }
+  li { margin: 8px 0; }
+  p { margin: 8px 0; }
+  code {
+    background: var(--code-bg); border-radius: 4px; padding: 1px 5px;
+    font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  a { color: var(--link); }
+  strong { color: var(--fg); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="subtitle">Transmission · what's changed, release by release</p>
+<h1 id="changelog">Changelog</h1>
+<p>All notable changes to Transmission are documented here. The format follows
+<a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and the project uses
+major-version codenames drawn from The Smiths.</p>
+<h2 id="unreleased">[Unreleased]</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li><strong>Duplicate Consolidate-destination guard.</strong> Setting a page to Keep/Evolve
+when another page already targets the same Sitemap node now offers to
+Consolidate it into that page instead — catching the mistake the moment it
+happens, as a proactive complement to the bulk Consolidation Candidates
+workflow.</li>
+<li><strong>Check for Updates.</strong> Transmission checks for a newer version at startup
+and via <strong>Help → Check for Updates…</strong>, with a &quot;What&#39;s New&quot; changelog viewer
+and a link to download the latest release.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li><strong>Nav → Sitemap rename finished</strong> across the UI, exports, and docs — the
+remaining <code>Nav_*</code> audit/export columns are renamed to <code>Sitemap_*</code> for
+clients (e.g. <code>Sitemap_Destination</code>, <code>Sitemap_ID</code>, <code>Sitemap_SortID</code>).</li>
+</ul>
+<h2 id="252--how-soon-is-now">[2.5.2] — &quot;How Soon Is Now?&quot;</h2>
+<h3 id="added-1">Added</h3>
+<ul>
+<li><strong>Visual Sitemap site-root toggle</strong> — a &quot;Show a site root box in the Visual
+Sitemap&quot; setting (Project Settings → Identity) suppresses the synthetic
+site-root box; when off, the sitemap&#39;s own top-level node(s) become the
+root(s) instead, so single- and multi-section sites both lay out cleanly.</li>
+</ul>
+<h2 id="251--how-soon-is-now">[2.5.1] — &quot;How Soon Is Now?&quot;</h2>
+<h3 id="added-2">Added</h3>
+<ul>
+<li><strong><code>Page_Breadcrumb</code> audit column</strong> — the derived on-page breadcrumb for a
+row&#39;s assigned sitemap node, honoring the breadcrumb-parent override axis
+and the Home-label prefix. Distinct from <code>Sitemap_Destination</code> (the
+physical IA label chain). Read-only; shown in Table View by default.</li>
+</ul>
+<h2 id="250--how-soon-is-now">[2.5.0] — &quot;How Soon Is Now?&quot;</h2>
+<p>A &quot;content cockpit&quot; release: the Visual Sitemap is rewritten from the ground
+up as a self-contained engine, consolidation gets a sturdier data model, and
+the audit bar gains direct sitemap assignment and dark mode.</p>
+<h3 id="added-3">Added</h3>
+<ul>
+<li><strong>Visual Sitemap rewritten as a self-contained engine.</strong> The
+D3-in-a-hidden-window renderer is retired; one portable engine
+(<code>src/sitemap-template.js</code>) now powers the in-app view (via an Electron
+<code>&lt;webview&gt;</code>), the client-shareable HTML export, and the print/PDF export.
+Threshold-based per-node horizontal/vertical layout, a color-rule engine,
+and a Settings panel (Layout / Colors / Legend) replace the old renderer.
+The <code>d3</code> and <code>mermaid</code> dependencies are fully removed.</li>
+<li><strong>Two-column Consolidate target model</strong> — the consolidation target is now
+stored as a stable page identity (<code>_ConsolidateTargetId</code>) plus a derived,
+always-fresh relative-path display (<code>Consolidate_Into</code>), so the link
+survives the target page later being placed in the nav tree or gaining a
+URL override.</li>
+<li>Offer to remove an orphaned nav node when its last assigned page is Killed
+or Consolidated away.</li>
+<li><strong>Dark mode</strong> for the app chrome.</li>
+</ul>
+<h3 id="changed-1">Changed</h3>
+<ul>
+<li>The Sitemap is reframed as <strong>content organization</strong>, decoupled from URL and
+breadcrumb; pages can now be assigned to a sitemap node directly from the
+audit bar.</li>
+</ul>
+<h2 id="241--how-soon-is-now">[2.4.1] — &quot;How Soon Is Now?&quot;</h2>
+<h3 id="changed-2">Changed</h3>
+<ul>
+<li><strong>The nav &quot;IA Report&quot; became the Menu Report.</strong> The polished section-card +
+tree report is now fed by the independent <strong>menus</strong> rather than <code>inMenu</code>-filtered
+nav nodes — reached via <strong>Menus → Report</strong> and <strong>Reports → Menu Report…</strong> (the
+old nav-editor IA-Report button was removed). One card per menu with its item
+hierarchy, page-count badges on page references, <code>↗</code> on external links, <code>≡</code> on
+headers, and a red <strong>missing</strong> badge on broken references. PDF / HTML export.
+This retires the lingering <code>inMenu</code>-vs-report question.</li>
+</ul>
+<h2 id="240--how-soon-is-now">[2.4.0] — &quot;How Soon Is Now?&quot;</h2>
+<p>A visualization-focused release: the sitemaps gain layouts, palettes, and
+collapse, and the Nav Tree sitemap is reframed as the content-IA &quot;Visual Sitemap.&quot;</p>
+<h3 id="added-4">Added</h3>
+<ul>
+<li><strong>Sitemap layouts</strong> (both sitemaps) — <strong>Outline</strong>, <strong>Top-down tree</strong>, and
+<strong>Mega columns</strong> (sections fan into side-by-side columns, items stacked beneath).</li>
+<li><strong>Color by + Palette</strong> — color the IA sitemap by <strong>Section / Build pattern /
+Page status / KKE</strong> (menus by <strong>Item kind / Section</strong>), in a <strong>Meaningful</strong>,
+<strong>Client brand</strong>, or <strong>Mono</strong> palette. A client-brand palette editor lives in
+<strong>Project Settings → Identity</strong> and is shared across both sitemaps.</li>
+<li><strong>Collapse + Levels</strong> — a per-node <strong>Collapse</strong> flag summarizes a subtree as a
+single box with a &quot;has more underneath&quot; stack, and a <strong>Levels</strong> selector caps
+the visible depth — built for large (1000+ node) trees.</li>
+<li><strong>Seed from content tree</strong> (Menus) reworked into a pick-a-branch + depth dialog.</li>
+</ul>
+<h3 id="changed-3">Changed</h3>
+<ul>
+<li>The <strong>Nav Tree → Sitemap</strong> is now the <strong>Visual Sitemap</strong> of the content IA:
+retitled, the &quot;Menu items only&quot; toggle removed, and the border now encodes
+build phase (solid = current build, dashed = phased).</li>
+<li>The legacy per-node <strong>In-menu</strong> controls (checkbox, Set/Clear Menu, node-editor
+toggle) are <strong>repurposed to Collapse</strong>. <code>inMenu</code> data still round-trips.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Per-menu sitemap rendered every card with the last menu&#39;s tree (concurrent
+renders clobbered a shared temp file) — temp files are now unique per call.</li>
+</ul>
+<h2 id="230--how-soon-is-now">[2.3.0] — &quot;How Soon Is Now?&quot;</h2>
+<p>Decouples the navigation tree&#39;s four overloaded jobs into independent axes and
+builds out an independent menu subsystem.</p>
+<h3 id="added-5">Added</h3>
+<ul>
+<li><strong>URL override</strong> (<code>Url_Path</code>) — a nav node can publish at an address independent
+of its place in the menu; the override re-roots its sub-pages too. Containment and
+URL become separate axes.</li>
+<li><strong>Breadcrumb axis</strong> (<code>Breadcrumb_Parent</code>) — set an arbitrary on-page breadcrumb top
+independent of both the tree and the URL: mark a node a breadcrumb root or re-root
+it onto any node; sub-pages inherit. Optional project &quot;Home&quot; prefix + advisory
+max-depth (Project Settings → Identity). The rendered page breadcrumb is exported
+in the Migration Tracker Nav Plan, the Nav Tree column-picker export, and the menu
+export.</li>
+<li><strong>Menus</strong> — a new full-panel view (Cmd+Shift+M) for building independent navigation
+structures that reference content pages: multiple arbitrary menus (drag to reorder),
+three item kinds (page / link / header, switchable in place), drag-and-drop nesting,
+per-menu placement (controlled vocab) + description, and seed-from-content-tree.</li>
+<li><strong>CMS-agnostic menu export</strong> — a neutral structured deliverable (Excel <code>Menus</code> sheet
+or nested JSON) any CMS import maps from; page refs resolve to target URLs.</li>
+<li><strong>Menu broken-reference check</strong> — flags menu items pointing at deleted pages, with
+re-pick / remove.</li>
+<li><strong>Per-menu sitemap</strong> — each menu rendered as a box-tree (items colored by kind), with
+zoom/pan and per-menu SVG download.</li>
+</ul>
+<h3 id="changed-4">Changed</h3>
+<ul>
+<li><strong>Nav node editor</strong> reorganized into labeled, color-pilled sections (Context /
+Identity / Addressing &amp; breadcrumb / Notes / Build / Write / Migrate) for scannability.</li>
+<li><strong>Unified drag-and-drop</strong> — the nav tree and menu item tree now share one engine and
+one clean indicator style.</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<ul>
+<li>The vestigial sidebar-row → nav-node drag-assign (unreachable since the Nav Tree view
+hides the sidebar). Assign pages via the audit-bar <strong>Nav</strong> button.</li>
+</ul>
+<h2 id="220--how-soon-is-now">[2.2.0] — &quot;How Soon Is Now?&quot;</h2>
+<h3 id="changed-5">Changed</h3>
+<ul>
+<li><strong>Renamed</strong> the product from &quot;KKE Audit Tool&quot; to <strong>Transmission</strong> (a Joy Division
+song; version codenames remain Smiths titles). The <strong>KKE</strong> methodology and all
+<code>KKE_*</code> columns/sheets are unchanged, so existing files stay compatible. App ID is
+now <code>com.jakala.transmission</code>; a one-time migration carries old prefs to the new
+user-data folder.</li>
+<li><strong>Content Type ↔ Registry sync.</strong> The Content Type Registry editor now surfaces
+in-use content types that lack a crosswalk (split-aware), with a &quot;Show all
+pick-list types&quot; toggle; adding a type from the audit-bar dropdown seeds a registry
+stub. Untouched stubs aren&#39;t persisted.</li>
+<li><strong>Documentation re-architecture.</strong> <code>USER_GUIDE.md</code> rebuilt as a friendly,
+lifecycle-spined manual; a set of terse <code>walkthroughs/</code> added as standalone
+checklists; <code>help.html</code> restructured to match. All docs moved under <code>docs/</code>.</li>
+</ul>
+<h3 id="added-6">Added</h3>
+<ul>
+<li><strong>Report template engine</strong> (Markdown + Mustache) for the Migration Direction Brief.</li>
+<li><strong>Migration Direction Brief</strong> report covering three roles — Writer, Builder, and
+<strong>Migrator</strong> — grouped by target spec.</li>
+<li><strong>Pre-Handoff Check</strong>, <strong>Content Type Crosswalk</strong> report, and the needs-placement
+filter.</li>
+</ul>
+<h3 id="build">Build</h3>
+<ul>
+<li>Universal macOS build is <strong>signed and notarized</strong> (stapled <code>.dmg</code> and <code>.zip</code>).</li>
+</ul>
+
+</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
-  "version": "2.5.2",
-  "publishedAt": "2026-06-29",
-  "notes": "Visual Sitemap gains a site-root toggle. See What's New for the full changelog.",
+  "version": "2.5.3",
+  "publishedAt": "2026-07-08",
+  "notes": "Adds Check for Updates and Duplicate Menu. See What's New for the full changelog.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission/releases/latest"
 }

@@ -47,6 +47,20 @@
 <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and the project uses
 major-version codenames drawn from The Smiths.</p>
 <h2 id="unreleased">[Unreleased]</h2>
+<h2 id="261--how-soon-is-now">[2.6.1] — &quot;How Soon Is Now?&quot;</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li><strong>Sidebar row list could get stuck truncated after using a full-width
+view.</strong> The virtual-scrolled row list sizes itself off the sidebar
+container&#39;s height, which is zero while the Sitemap, Table, Redirects, or
+Menus view is hiding it. Anything that mutated row data and re-rendered
+during that window — bulk sitemap assignment, Create Sitemap from Audit,
+promoting a hub node from the node editor — painted a truncated list that
+stuck around after returning to the Audit view, until an unrelated filter
+change happened to force a fresh render. The row list now skips painting
+while hidden and always repaints fresh the moment the Audit view is shown
+again.</li>
+</ul>
 <h2 id="260--how-soon-is-now">[2.6.0] — &quot;How Soon Is Now?&quot;</h2>
 <h3 id="added">Added</h3>
 <ul>
@@ -103,7 +117,7 @@ at the Build section&#39;s Page Status field for tracking &quot;Not Started&quot
 menu / Delete menu</strong>) now stays pinned to the top of the panel while
 scrolling a long menu.</li>
 </ul>
-<h3 id="fixed">Fixed</h3>
+<h3 id="fixed-1">Fixed</h3>
 <ul>
 <li><strong>SME Review workflow only recognized the exact <code>Change: X</code> format.</strong> A
 bare status value with no prefix (e.g. an SME just typing <code>Kill</code> instead of
@@ -234,7 +248,7 @@ build phase (solid = current build, dashed = phased).</li>
 <li>The legacy per-node <strong>In-menu</strong> controls (checkbox, Set/Clear Menu, node-editor
 toggle) are <strong>repurposed to Collapse</strong>. <code>inMenu</code> data still round-trips.</li>
 </ul>
-<h3 id="fixed-1">Fixed</h3>
+<h3 id="fixed-2">Fixed</h3>
 <ul>
 <li>Per-menu sitemap rendered every card with the last menu&#39;s tree (concurrent
 renders clobbered a shared temp file) — temp files are now unique per call.</li>

@@ -1,7 +1,7 @@
 {
-  "version": "2.6.0",
+  "version": "2.6.1",
   "publishedAt": "2026-07-10",
-  "notes": "Adds Treemap, bulk sitemap assignment, Create Sitemap from Audit, and hub-node-to-page promotion. Fixes SME review, dark-mode reports, and per-menu sitemap diagrams. See What's New for the full changelog.",
+  "notes": "Fixes the sidebar row list getting stuck truncated after using the Sitemap, Table, Redirects, or Menus view. See What's New for the full changelog.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission/releases/latest"
 }

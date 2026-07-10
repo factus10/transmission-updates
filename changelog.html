@@ -46,8 +46,94 @@
 <p>All notable changes to Transmission are documented here. The format follows
 <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and the project uses
 major-version codenames drawn from The Smiths.</p>
-<h2 id="253--how-soon-is-now">[2.5.3] — &quot;How Soon Is Now?&quot;</h2>
+<h2 id="unreleased">[Unreleased]</h2>
+<h2 id="260--how-soon-is-now">[2.6.0] — &quot;How Soon Is Now?&quot;</h2>
 <h3 id="added">Added</h3>
+<ul>
+<li><strong>&quot;External link&quot; Visual Sitemap color rule.</strong> A new color-rule condition
+matches nodes that point off-site (a nav node with an external URL, or a
+<code>Link</code>-kind menu item) so they can be colored distinctly from ordinary
+pages regardless of section or depth. A one-click <strong>&quot;Mark external links&quot;</strong>
+button in the Colors tab adds it at the top of the rule list; it&#39;s also
+selectable manually via <strong>+ Add rule</strong>.</li>
+<li><strong>&quot;Color by field&quot; Visual Sitemap color rule.</strong> Color the sitemap by
+<strong>Phase</strong>, <strong>Node Type</strong>, <strong>Page Status</strong>, <strong>Build Pattern</strong>, or any of the
+three <strong>assignee</strong> roles — pick a field in the Colors tab and click
+<strong>Color by field</strong> for one rule per value actually in use (including a
+bucket for &quot;not set,&quot; so gaps are visible at a glance). Page Status reuses
+the same colors you&#39;ve already assigned it in Project Settings, so the
+sitemap and the rest of the app agree on what each status looks like.</li>
+<li><strong>Treemap.</strong> A new squarified-treemap view of the content inventory
+(Sitemap toolbar → <strong>Treemap</strong>, next to Visual Sitemap) — boxes sized by
+page count, colored by KKE decision, top-level section, or (at full depth)
+any tracked build field. Pick <strong>Depth</strong> and <strong>Color by</strong> in a small dialog
+and Generate; pan/zoom/Fit, a legend, and Export HTML/PDF match the Visual
+Sitemap. Hand-rolled, no charting library added.</li>
+<li><strong>Add and clone menu items directly under another item.</strong> Every menu item
+row now has its own <strong>+</strong> (add a Page/Link/Header as that item&#39;s child,
+no more adding at the bottom and dragging it into place) and <strong>⧉</strong>
+(duplicate the item and its whole subtree as a sibling, ready to edit into
+a variant elsewhere in the menu).</li>
+<li><strong>Bulk sitemap assignment.</strong> Select or filter a batch of pages (e.g. the
+&quot;Needs sitemap placement&quot; filter), then <strong>Assign to Sitemap…</strong> in the
+bulk-action bar to place all of them at once — pick an existing sitemap
+node or create a new bucket (top-level or nested) as the destination. Each
+page becomes its own child node, with slug and label auto-derived from its
+URL and title; pages already on the sitemap are skipped. Built for getting
+dozens or hundreds of pages placed fast, then reorganizing with the
+Sitemap editor&#39;s existing drag-and-drop.</li>
+<li><strong>Create Sitemap from Audit.</strong> A new <strong>Project → Create Sitemap from
+Audit…</strong> tool auto-generates a whole starter tree from the crawl&#39;s own
+URLs in one pass — pick how many URL segments become nested sections
+(bucket depth) and whether to include Kill/Exclude/unreviewed pages, then
+Generate. <code>/about/leadership</code> becomes <strong>About → Leadership</strong> on its own.
+Safe to run on a file that already has a sitemap, or run again later — it
+only merges into matching section names, never replaces or deletes.</li>
+<li><strong>Hub node → content page.</strong> A net-new (&quot;NEW&quot;) sitemap node&#39;s editor now
+shows an amber banner explaining the gap, with a <strong>Create Page</strong> button
+that promotes it into a real spreadsheet row — a new Keep page, tagged
+<code>net-new</code>, assigned to the node — so it flows through the rest of the
+audit and migration tracker like any other page. The banner also points
+at the Build section&#39;s Page Status field for tracking &quot;Not Started&quot; →
+&quot;In Progress&quot; before it&#39;s promoted.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>The Menus view&#39;s item toolbar (<strong>+ Page / + Link / + Header / Duplicate
+menu / Delete menu</strong>) now stays pinned to the top of the panel while
+scrolling a long menu.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li><strong>SME Review workflow only recognized the exact <code>Change: X</code> format.</strong> A
+bare status value with no prefix (e.g. an SME just typing <code>Kill</code> instead of
+<code>Change: Kill</code>) was silently invisible everywhere — the conflict filter,
+the resolve dialog, the progress dashboard, and the SME Review Status
+report all missed it. It&#39;s now recognized the same as an explicit
+<code>Change:</code>, and the override value is never required to match one of the
+project&#39;s currently-configured KKE states — an SME&#39;s own wording (typo,
+custom term, whatever) carries through into <code>Final_KKE</code> rather than being
+dropped. The two &quot;pick a value&quot; dropdowns involved (the resolve dialog&#39;s
+Final KKE select, and Table View&#39;s inline SME_Decision/Final_KKE editor)
+now keep an out-of-vocabulary value visible and pre-selected instead of
+silently losing it.</li>
+<li><strong>Client reports were nearly unreadable in dark mode.</strong> Executive Summary,
+Content Inventory, Menu Report, and the other client-facing reports are
+built with colors hardcoded for a white background (the same markup doubles
+as the exported HTML/PDF, which always renders on white). The live in-app
+preview now forces that same white surface instead of inheriting the app&#39;s
+dark panel background, which had made near-black report text nearly
+invisible.</li>
+<li><strong>Per-menu Sitemap diagram could render items detached from their menu.</strong>
+Menu item ids are only unique within their own menu, but the diagram merges
+every menu into one shared engine instance that indexed node positions by
+id globally — two different menus reusing the same local item id (routine
+and expected) could silently overwrite each other&#39;s computed position,
+making one item appear to float unattached. Node ids in this diagram are
+now namespaced per menu.</li>
+</ul>
+<h2 id="253--how-soon-is-now">[2.5.3] — &quot;How Soon Is Now?&quot;</h2>
+<h3 id="added-1">Added</h3>
 <ul>
 <li><strong>Duplicate Consolidate-destination guard.</strong> Setting a page to Keep/Evolve
 when another page already targets the same Sitemap node now offers to
@@ -63,14 +149,14 @@ testing a different mega-menu structure) without touching the original.
 The copy is selected immediately and pre-picked in the Export dialog&#39;s
 &quot;just this menu&quot; scope.</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-1">Changed</h3>
 <ul>
 <li><strong>Nav → Sitemap rename finished</strong> across the UI, exports, and docs — the
 remaining <code>Nav_*</code> audit/export columns are renamed to <code>Sitemap_*</code> for
 clients (e.g. <code>Sitemap_Destination</code>, <code>Sitemap_ID</code>, <code>Sitemap_SortID</code>).</li>
 </ul>
 <h2 id="252--how-soon-is-now">[2.5.2] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-1">Added</h3>
+<h3 id="added-2">Added</h3>
 <ul>
 <li><strong>Visual Sitemap site-root toggle</strong> — a &quot;Show a site root box in the Visual
 Sitemap&quot; setting (Project Settings → Identity) suppresses the synthetic
@@ -78,7 +164,7 @@ site-root box; when off, the sitemap&#39;s own top-level node(s) become the
 root(s) instead, so single- and multi-section sites both lay out cleanly.</li>
 </ul>
 <h2 id="251--how-soon-is-now">[2.5.1] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-2">Added</h3>
+<h3 id="added-3">Added</h3>
 <ul>
 <li><strong><code>Page_Breadcrumb</code> audit column</strong> — the derived on-page breadcrumb for a
 row&#39;s assigned sitemap node, honoring the breadcrumb-parent override axis
@@ -89,7 +175,7 @@ physical IA label chain). Read-only; shown in Table View by default.</li>
 <p>A &quot;content cockpit&quot; release: the Visual Sitemap is rewritten from the ground
 up as a self-contained engine, consolidation gets a sturdier data model, and
 the audit bar gains direct sitemap assignment and dark mode.</p>
-<h3 id="added-3">Added</h3>
+<h3 id="added-4">Added</h3>
 <ul>
 <li><strong>Visual Sitemap rewritten as a self-contained engine.</strong> The
 D3-in-a-hidden-window renderer is retired; one portable engine
@@ -107,14 +193,14 @@ URL override.</li>
 or Consolidated away.</li>
 <li><strong>Dark mode</strong> for the app chrome.</li>
 </ul>
-<h3 id="changed-1">Changed</h3>
+<h3 id="changed-2">Changed</h3>
 <ul>
 <li>The Sitemap is reframed as <strong>content organization</strong>, decoupled from URL and
 breadcrumb; pages can now be assigned to a sitemap node directly from the
 audit bar.</li>
 </ul>
 <h2 id="241--how-soon-is-now">[2.4.1] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="changed-2">Changed</h3>
+<h3 id="changed-3">Changed</h3>
 <ul>
 <li><strong>The nav &quot;IA Report&quot; became the Menu Report.</strong> The polished section-card +
 tree report is now fed by the independent <strong>menus</strong> rather than <code>inMenu</code>-filtered
@@ -127,7 +213,7 @@ This retires the lingering <code>inMenu</code>-vs-report question.</li>
 <h2 id="240--how-soon-is-now">[2.4.0] — &quot;How Soon Is Now?&quot;</h2>
 <p>A visualization-focused release: the sitemaps gain layouts, palettes, and
 collapse, and the Nav Tree sitemap is reframed as the content-IA &quot;Visual Sitemap.&quot;</p>
-<h3 id="added-4">Added</h3>
+<h3 id="added-5">Added</h3>
 <ul>
 <li><strong>Sitemap layouts</strong> (both sitemaps) — <strong>Outline</strong>, <strong>Top-down tree</strong>, and
 <strong>Mega columns</strong> (sections fan into side-by-side columns, items stacked beneath).</li>
@@ -140,7 +226,7 @@ single box with a &quot;has more underneath&quot; stack, and a <strong>Levels</s
 the visible depth — built for large (1000+ node) trees.</li>
 <li><strong>Seed from content tree</strong> (Menus) reworked into a pick-a-branch + depth dialog.</li>
 </ul>
-<h3 id="changed-3">Changed</h3>
+<h3 id="changed-4">Changed</h3>
 <ul>
 <li>The <strong>Nav Tree → Sitemap</strong> is now the <strong>Visual Sitemap</strong> of the content IA:
 retitled, the &quot;Menu items only&quot; toggle removed, and the border now encodes
@@ -148,7 +234,7 @@ build phase (solid = current build, dashed = phased).</li>
 <li>The legacy per-node <strong>In-menu</strong> controls (checkbox, Set/Clear Menu, node-editor
 toggle) are <strong>repurposed to Collapse</strong>. <code>inMenu</code> data still round-trips.</li>
 </ul>
-<h3 id="fixed">Fixed</h3>
+<h3 id="fixed-1">Fixed</h3>
 <ul>
 <li>Per-menu sitemap rendered every card with the last menu&#39;s tree (concurrent
 renders clobbered a shared temp file) — temp files are now unique per call.</li>
@@ -156,7 +242,7 @@ renders clobbered a shared temp file) — temp files are now unique per call.</l
 <h2 id="230--how-soon-is-now">[2.3.0] — &quot;How Soon Is Now?&quot;</h2>
 <p>Decouples the navigation tree&#39;s four overloaded jobs into independent axes and
 builds out an independent menu subsystem.</p>
-<h3 id="added-5">Added</h3>
+<h3 id="added-6">Added</h3>
 <ul>
 <li><strong>URL override</strong> (<code>Url_Path</code>) — a nav node can publish at an address independent
 of its place in the menu; the override re-roots its sub-pages too. Containment and
@@ -178,7 +264,7 @@ re-pick / remove.</li>
 <li><strong>Per-menu sitemap</strong> — each menu rendered as a box-tree (items colored by kind), with
 zoom/pan and per-menu SVG download.</li>
 </ul>
-<h3 id="changed-4">Changed</h3>
+<h3 id="changed-5">Changed</h3>
 <ul>
 <li><strong>Nav node editor</strong> reorganized into labeled, color-pilled sections (Context /
 Identity / Addressing &amp; breadcrumb / Notes / Build / Write / Migrate) for scannability.</li>
@@ -191,7 +277,7 @@ one clean indicator style.</li>
 hides the sidebar). Assign pages via the audit-bar <strong>Nav</strong> button.</li>
 </ul>
 <h2 id="220--how-soon-is-now">[2.2.0] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="changed-5">Changed</h3>
+<h3 id="changed-6">Changed</h3>
 <ul>
 <li><strong>Renamed</strong> the product from &quot;KKE Audit Tool&quot; to <strong>Transmission</strong> (a Joy Division
 song; version codenames remain Smiths titles). The <strong>KKE</strong> methodology and all
@@ -206,7 +292,7 @@ stub. Untouched stubs aren&#39;t persisted.</li>
 lifecycle-spined manual; a set of terse <code>walkthroughs/</code> added as standalone
 checklists; <code>help.html</code> restructured to match. All docs moved under <code>docs/</code>.</li>
 </ul>
-<h3 id="added-6">Added</h3>
+<h3 id="added-7">Added</h3>
 <ul>
 <li><strong>Report template engine</strong> (Markdown + Mustache) for the Migration Direction Brief.</li>
 <li><strong>Migration Direction Brief</strong> report covering three roles — Writer, Builder, and

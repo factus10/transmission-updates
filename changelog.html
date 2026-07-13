@@ -47,6 +47,17 @@
 <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and the project uses
 major-version codenames drawn from The Smiths.</p>
 <h2 id="unreleased">[Unreleased]</h2>
+<h2 id="262--how-soon-is-now">[2.6.2] — &quot;How Soon Is Now?&quot;</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li><strong>Suggested destination in bulk sitemap assignment.</strong> The Multi-bar&#39;s
+Assign to Sitemap… dialog now offers a one-click <strong>Suggested</strong> node when
+some of the selected pages already have a sibling page placed on the
+sitemap (e.g. <code>/about</code> is already assigned while you&#39;re placing
+<code>/about/leadership</code>) — the same auto-suggestion the single-page Sitemap
+picker uses, extended to the whole batch, with a count of how many pages
+agree.</li>
+</ul>
 <h2 id="261--how-soon-is-now">[2.6.1] — &quot;How Soon Is Now?&quot;</h2>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -62,7 +73,7 @@ while hidden and always repaints fresh the moment the Audit view is shown
 again.</li>
 </ul>
 <h2 id="260--how-soon-is-now">[2.6.0] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added">Added</h3>
+<h3 id="added-1">Added</h3>
 <ul>
 <li><strong>&quot;External link&quot; Visual Sitemap color rule.</strong> A new color-rule condition
 matches nodes that point off-site (a nav node with an external URL, or a
@@ -147,7 +158,7 @@ making one item appear to float unattached. Node ids in this diagram are
 now namespaced per menu.</li>
 </ul>
 <h2 id="253--how-soon-is-now">[2.5.3] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-1">Added</h3>
+<h3 id="added-2">Added</h3>
 <ul>
 <li><strong>Duplicate Consolidate-destination guard.</strong> Setting a page to Keep/Evolve
 when another page already targets the same Sitemap node now offers to
@@ -170,7 +181,7 @@ remaining <code>Nav_*</code> audit/export columns are renamed to <code>Sitemap_*
 clients (e.g. <code>Sitemap_Destination</code>, <code>Sitemap_ID</code>, <code>Sitemap_SortID</code>).</li>
 </ul>
 <h2 id="252--how-soon-is-now">[2.5.2] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-2">Added</h3>
+<h3 id="added-3">Added</h3>
 <ul>
 <li><strong>Visual Sitemap site-root toggle</strong> — a &quot;Show a site root box in the Visual
 Sitemap&quot; setting (Project Settings → Identity) suppresses the synthetic
@@ -178,7 +189,7 @@ site-root box; when off, the sitemap&#39;s own top-level node(s) become the
 root(s) instead, so single- and multi-section sites both lay out cleanly.</li>
 </ul>
 <h2 id="251--how-soon-is-now">[2.5.1] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-3">Added</h3>
+<h3 id="added-4">Added</h3>
 <ul>
 <li><strong><code>Page_Breadcrumb</code> audit column</strong> — the derived on-page breadcrumb for a
 row&#39;s assigned sitemap node, honoring the breadcrumb-parent override axis
@@ -189,7 +200,7 @@ physical IA label chain). Read-only; shown in Table View by default.</li>
 <p>A &quot;content cockpit&quot; release: the Visual Sitemap is rewritten from the ground
 up as a self-contained engine, consolidation gets a sturdier data model, and
 the audit bar gains direct sitemap assignment and dark mode.</p>
-<h3 id="added-4">Added</h3>
+<h3 id="added-5">Added</h3>
 <ul>
 <li><strong>Visual Sitemap rewritten as a self-contained engine.</strong> The
 D3-in-a-hidden-window renderer is retired; one portable engine
@@ -227,7 +238,7 @@ This retires the lingering <code>inMenu</code>-vs-report question.</li>
 <h2 id="240--how-soon-is-now">[2.4.0] — &quot;How Soon Is Now?&quot;</h2>
 <p>A visualization-focused release: the sitemaps gain layouts, palettes, and
 collapse, and the Nav Tree sitemap is reframed as the content-IA &quot;Visual Sitemap.&quot;</p>
-<h3 id="added-5">Added</h3>
+<h3 id="added-6">Added</h3>
 <ul>
 <li><strong>Sitemap layouts</strong> (both sitemaps) — <strong>Outline</strong>, <strong>Top-down tree</strong>, and
 <strong>Mega columns</strong> (sections fan into side-by-side columns, items stacked beneath).</li>
@@ -256,7 +267,7 @@ renders clobbered a shared temp file) — temp files are now unique per call.</l
 <h2 id="230--how-soon-is-now">[2.3.0] — &quot;How Soon Is Now?&quot;</h2>
 <p>Decouples the navigation tree&#39;s four overloaded jobs into independent axes and
 builds out an independent menu subsystem.</p>
-<h3 id="added-6">Added</h3>
+<h3 id="added-7">Added</h3>
 <ul>
 <li><strong>URL override</strong> (<code>Url_Path</code>) — a nav node can publish at an address independent
 of its place in the menu; the override re-roots its sub-pages too. Containment and
@@ -306,7 +317,7 @@ stub. Untouched stubs aren&#39;t persisted.</li>
 lifecycle-spined manual; a set of terse <code>walkthroughs/</code> added as standalone
 checklists; <code>help.html</code> restructured to match. All docs moved under <code>docs/</code>.</li>
 </ul>
-<h3 id="added-7">Added</h3>
+<h3 id="added-8">Added</h3>
 <ul>
 <li><strong>Report template engine</strong> (Markdown + Mustache) for the Migration Direction Brief.</li>
 <li><strong>Migration Direction Brief</strong> report covering three roles — Writer, Builder, and

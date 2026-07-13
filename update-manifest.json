@@ -1,7 +1,7 @@
 {
-  "version": "2.6.1",
-  "publishedAt": "2026-07-10",
-  "notes": "Fixes the sidebar row list getting stuck truncated after using the Sitemap, Table, Redirects, or Menus view. See What's New for the full changelog.",
+  "version": "2.6.2",
+  "publishedAt": "2026-07-13",
+  "notes": "Adds a one-click Suggested destination to the bulk sitemap assignment dialog. See What's New for the full changelog.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission/releases/latest"
 }

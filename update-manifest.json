@@ -1,7 +1,7 @@
 {
-  "version": "2.6.4",
-  "publishedAt": "2026-07-16",
-  "notes": "Bulk sitemap assignment gets a KKE gate, a URL-structure placement mode, and bulk select/delete with undo, plus 19 correctness fixes across filters, the Glossary editor, thumbnail caching, and the Sitemap tree. See What's New for the full changelog.",
+  "version": "2.7.0",
+  "publishedAt": "2026-07-17",
+  "notes": "A codebase-wide review sweep: two dozen fixes across the reports, exports, audit bar, and sitemap tools — rogue KKE values no longer dropped from reports, internal columns kept out of client exports, and three report PDFs styled correctly again — plus the restored audit-bar redirect indicator and much faster bulk sitemap assignment. See What's New for the full changelog.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

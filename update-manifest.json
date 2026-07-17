@@ -1,7 +1,7 @@
 {
-  "version": "2.7.0",
+  "version": "2.7.1",
   "publishedAt": "2026-07-17",
-  "notes": "A codebase-wide review sweep: two dozen fixes across the reports, exports, audit bar, and sitemap tools — rogue KKE values no longer dropped from reports, internal columns kept out of client exports, and three report PDFs styled correctly again — plus the restored audit-bar redirect indicator and much faster bulk sitemap assignment. See What's New for the full changelog.",
+  "notes": "A small follow-up to 2.7.0: \"delete selected\" in the Sitemap editor is much faster on large sitemaps, the delete confirmation now reports the true number of nodes it will remove (not just the top-level branches), and the \"select all\" checkbox no longer stays checked after the selection is cleared. See What's New for details.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

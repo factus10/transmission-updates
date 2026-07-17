@@ -1,7 +1,7 @@
 {
-  "version": "2.7.1",
+  "version": "2.7.2",
   "publishedAt": "2026-07-17",
-  "notes": "A small follow-up to 2.7.0: \"delete selected\" in the Sitemap editor is much faster on large sitemaps, the delete confirmation now reports the true number of nodes it will remove (not just the top-level branches), and the \"select all\" checkbox no longer stays checked after the selection is cleared. See What's New for details.",
+  "notes": "Two Sitemap-editor undo/redo fixes: undoing a node deletion now fully restores the rest of the tree (pages under renumbered nodes had been left with stale sort positions and paths), and redoing a deletion now repeats what it originally did with the node’s pages — reassigning them to the parent or another node — instead of clearing them. See What’s New for details.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

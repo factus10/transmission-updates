@@ -47,9 +47,16 @@
 <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and the project uses
 major-version codenames drawn from The Smiths.</p>
 <h2 id="unreleased">[Unreleased]</h2>
+<h2 id="272--how-soon-is-now">[2.7.2] — &quot;How Soon Is Now?&quot;</h2>
+<p>Two Sitemap-editor undo/redo correctness fixes.</p>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li><strong>Undoing a Sitemap-node deletion now fully restores the rest of the tree.</strong> Deleting a node renumbers the nodes that come after it; undoing brought the deleted node back but left the pages assigned to those renumbered nodes showing stale sort positions, paths, and breadcrumbs. Undo now re-syncs every affected page, so it&#39;s a true round-trip.</li>
+<li><strong>Redoing a node deletion now repeats what the delete actually did with its pages.</strong> If you deleted a node and sent its pages to the parent (or to another node), then undid, redoing had <em>cleared</em> those pages instead of re-sending them. Redo now reapplies the original choice — and safely falls back to clearing only if the chosen destination no longer exists.</li>
+</ul>
 <h2 id="271--how-soon-is-now">[2.7.1] — &quot;How Soon Is Now?&quot;</h2>
 <p>A small follow-up to 2.7.0 with three Sitemap-editor fixes.</p>
-<h3 id="fixed">Fixed</h3>
+<h3 id="fixed-1">Fixed</h3>
 <ul>
 <li><strong>The bulk-delete confirmation now reports the real number of nodes it will remove.</strong> It had counted only the top-level branches in your selection, so deleting a whole nested selection could say &quot;Delete 20 nodes&quot; while ~1,500 actually disappeared. The count now includes the selected branches and everything beneath them (with a note explaining the difference), matching the page count shown beside it.</li>
 <li><strong>The &quot;select all&quot; checkbox in the Sitemap editor no longer stays checked after the selection is cleared</strong> — for example, right after a bulk delete has emptied it.</li>
@@ -64,7 +71,7 @@ major-version codenames drawn from The Smiths.</p>
 <ul>
 <li><strong>The redirect indicator is back in the audit bar.</strong> When the selected page has a redirect destination, a small amber badge in the <strong>Decide</strong> cluster shows where it points (<code>↪ /new-path</code>, full URL on hover) — click it to open that page in the Redirect Editor, or the <strong>×</strong> to clear the destination. An intentional <code>404</code> shows as a <code>404</code> badge. This per-page affordance had been lost when the Redirects button moved to the view switcher; the sidebar&#39;s <strong>R</strong> dot only told you <em>that</em> a page redirected, not where.</li>
 </ul>
-<h3 id="fixed-1">Fixed</h3>
+<h3 id="fixed-2">Fixed</h3>
 <ul>
 <li><strong>Reports no longer drop &quot;rogue&quot; KKE values.</strong> A page whose KKE is a typo, or a custom state that was later removed, was silently omitted from the Progress dashboard&#39;s reviewed count and from the Content Inventory report&#39;s per-section tallies — so a section&#39;s bar could visibly under-total against its own page count, and the dashboard could disagree with the sidebar&#39;s own reviewed percentage. Both now count every decision under its own label.</li>
 <li><strong>Client-facing exports no longer leak internal columns.</strong> The <strong>Client Export</strong> and <strong>Filtered Rows</strong> exports were including <code>_</code>-prefixed engine columns — the internal consolidation-target ID, raw AI-assessment output — in spreadsheets meant for clients. They now exclude them, matching every other surface.</li>
@@ -97,7 +104,7 @@ major-version codenames drawn from The Smiths.</p>
 <li><strong>KKE gate + placement modes for bulk sitemap assignment.</strong> The sidebar&#39;s &quot;Assign to Sitemap&quot; bulk action now defaults to Keep/Evolve pages only (mirroring Create Sitemap from Audit), with an &quot;include Kill/Exclude/unreviewed pages too&quot; opt-in for building a full current-state snapshot — plus one batched confirmation before sweeping in Consolidate pages, since those merge into another page&#39;s URL rather than getting their own. A new placement choice lets you preserve each page&#39;s URL structure as nested sections instead of always flattening into direct children.</li>
 <li><strong>Bulk multi-select and delete in the Sitemap editor, with undo.</strong> Every tree row now has a checkbox (plain click, shift-click range-select, select-all, and a new &quot;Select Empty Branches&quot; shortcut for finding dead sections after later killing/consolidating pages). Bulk delete covers the whole selection in one confirmation, and — like every other sitemap edit — a single Cmd+Z reverses the entire batch. Single-node delete (the tree row&#39;s ✕, the node editor&#39;s own Delete button, and the &quot;clear assignment + delete now-empty node&quot; flow) is now undoable too, having been folded into the same shared delete path.</li>
 </ul>
-<h3 id="fixed-2">Fixed</h3>
+<h3 id="fixed-3">Fixed</h3>
 <ul>
 <li><strong>Filter state could leak between files on open.</strong> The &quot;Unclassified&quot; toolbar button, the KKE filter, and the group filter could all inherit stale state from whichever file was previously open, occasionally leaving a filter showing &quot;active&quot; with nothing actually filtered.</li>
 <li><strong>Sidebar page thumbnails could silently never appear.</strong> The hover-preview cache was keyed by the webview&#39;s resolved URL after a page finished loading, but looked up by the row&#39;s declared crawl Address — any redirect, trailing-slash normalization, or protocol upgrade (common in Screaming Frog exports) meant the thumbnail was cached under a key the lookup never checked.</li>
@@ -120,7 +127,7 @@ major-version codenames drawn from The Smiths.</p>
 <li><strong>Undoing a KKE decision didn&#39;t record the reversal in the audit trail</strong>, so the exported change log could permanently disagree with the actual data after a Cmd+Z.</li>
 </ul>
 <h2 id="263--how-soon-is-now">[2.6.3] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="fixed-3">Fixed</h3>
+<h3 id="fixed-4">Fixed</h3>
 <ul>
 <li><strong>Redirect destinations could disagree between the Redirect Editor and the exported CSV.</strong> Redirect resolution was implemented three separate times and had drifted: the editor&#39;s live preview did a one-hop lookup instead of following full Consolidate chains and didn&#39;t carry through the <code>404</code> sentinel, and the CSV export had no Consolidate handling at all (silently dropping consolidation redirects) while shipping literal <code>404,301</code> rows for intentional deindexes. All three now share one resolver, and SME-resolved Kill/Consolidate decisions (<code>Final_KKE</code>) are correctly picked up everywhere a redirect is derived.</li>
 <li><strong>Batch AI/rubric assessment silently overwrote human KKE decisions with no audit trail or undo.</strong> Running a batch Assess now only writes to the AI&#39;s own suggestion field, matching how the equivalent &quot;AI Suggest for Unreviewed&quot; already behaved — your own KKE calls are never silently replaced. The per-row &quot;Accept suggestion&quot; button also now logs the change and supports Undo like every other KKE edit.</li>
@@ -149,7 +156,7 @@ picker uses, extended to the whole batch, with a count of how many pages
 agree.</li>
 </ul>
 <h2 id="261--how-soon-is-now">[2.6.1] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="fixed-4">Fixed</h3>
+<h3 id="fixed-5">Fixed</h3>
 <ul>
 <li><strong>Sidebar row list could get stuck truncated after using a full-width
 view.</strong> The virtual-scrolled row list sizes itself off the sidebar
@@ -218,7 +225,7 @@ at the Build section&#39;s Page Status field for tracking &quot;Not Started&quot
 menu / Delete menu</strong>) now stays pinned to the top of the panel while
 scrolling a long menu.</li>
 </ul>
-<h3 id="fixed-5">Fixed</h3>
+<h3 id="fixed-6">Fixed</h3>
 <ul>
 <li><strong>SME Review workflow only recognized the exact <code>Change: X</code> format.</strong> A
 bare status value with no prefix (e.g. an SME just typing <code>Kill</code> instead of
@@ -349,7 +356,7 @@ build phase (solid = current build, dashed = phased).</li>
 <li>The legacy per-node <strong>In-menu</strong> controls (checkbox, Set/Clear Menu, node-editor
 toggle) are <strong>repurposed to Collapse</strong>. <code>inMenu</code> data still round-trips.</li>
 </ul>
-<h3 id="fixed-6">Fixed</h3>
+<h3 id="fixed-7">Fixed</h3>
 <ul>
 <li>Per-menu sitemap rendered every card with the last menu&#39;s tree (concurrent
 renders clobbered a shared temp file) — temp files are now unique per call.</li>

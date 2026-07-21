@@ -1,7 +1,7 @@
 {
-  "version": "2.8.0",
+  "version": "2.8.1",
   "publishedAt": "2026-07-20",
-  "notes": "The Visual Sitemap can now be pushed to a Miro board as real, editable shapes — one per page, positioned as laid out, connected parent to child, and carrying your colour coding. Connect once from App Settings → Miro. Colour rules were rebuilt too: cards can be coloured by any of 15 dimensions drawn from the sitemap or your audit data, rules can combine conditions, and colour and line style can come from separate rules. Also fixes long page names spilling outside their card. See What’s New for details.",
+  "notes": "Fixes a packaging bug that made 2.8.0 crash on launch (\"Cannot find module ./miro\"). All of 2.8.0’s features are unchanged — the Miro sitemap export, the reworked colour rules, and the card-label fix. If 2.8.0 crashed for you, this release fixes it; if it launched, nothing else is different. See What’s New for the full 2.8.0 feature list.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

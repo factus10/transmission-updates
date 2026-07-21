@@ -1,7 +1,7 @@
 {
-  "version": "2.8.1",
+  "version": "2.8.2",
   "publishedAt": "2026-07-20",
-  "notes": "Fixes a packaging bug that made 2.8.0 crash on launch (\"Cannot find module ./miro\"). All of 2.8.0’s features are unchanged — the Miro sitemap export, the reworked colour rules, and the card-label fix. If 2.8.0 crashed for you, this release fixes it; if it launched, nothing else is different. See What’s New for the full 2.8.0 feature list.",
+  "notes": "Three Visual Sitemap fixes: collapsing a branch is now the +/− button only (so an errant click can’t hide a section while you’re setting its colour), the node colour picker stays open while you adjust it, and the Legend panel no longer renders behind the sitemap. No changes to the Miro export. See What’s New for details.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

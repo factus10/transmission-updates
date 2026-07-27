@@ -1,7 +1,7 @@
 {
-  "version": "2.9.6",
-  "publishedAt": "2026-07-22",
-  "notes": "The Miro export is now usable with a large Miro account — search your boards or paste a board link to pick from thousands, and re-export to a board you used before (remembered by its ID, so it survives a rename). New Appearance controls set the connector style, card corners, border thickness, and an optional color key (a legend built from your color rules), all remembered per project. Also fixes an export that failed on long page names and tidies the sitemap toolbar. See What's New for the full list.",
+  "version": "2.9.7",
+  "publishedAt": "2026-07-27",
+  "notes": "The Visual Sitemap gains a Page counts toggle in its toolbar, next to Numbers, that hides each card's page tally so you can read the tree by its labels alone. Your choice is remembered per project and carries into the interactive HTML and PDF exports.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

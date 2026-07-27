@@ -1,7 +1,7 @@
 {
-  "version": "2.9.7",
+  "version": "2.9.8",
   "publishedAt": "2026-07-27",
-  "notes": "The Visual Sitemap gains a Page counts toggle in its toolbar, next to Numbers, that hides each card's page tally so you can read the tree by its labels alone. Your choice is remembered per project and carries into the interactive HTML and PDF exports.",
+  "notes": "The Visual Sitemap's Page counts toggle now applies to the Miro export as well — turn it off and export to Miro for label-only cards, matching the in-app view and the HTML and PDF exports. Collapsed sections still show how much content is folded beneath them.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

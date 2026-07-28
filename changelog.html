@@ -47,6 +47,16 @@
 <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and the project uses
 major-version codenames drawn from The Smiths.</p>
 <h2 id="unreleased">[Unreleased]</h2>
+<h2 id="299--how-soon-is-now">[2.9.9] — &quot;How Soon Is Now?&quot;</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li><strong>The synthetic &quot;site root&quot; box in the Visual Sitemap is now off by default.</strong> Sitemaps show your own top-level nodes as the roots, with no extra wrapper box above them. Turn it back on per project in Project Settings → Identity (&quot;Show a site root box in the Visual Sitemap&quot;) — and that choice now sticks. Note this affects existing projects: any that relied on the old default will no longer show the wrapper box until you re-enable it.</li>
+<li><strong>Turning off Page counts now gives a fully label-only Miro export.</strong> Previously the &quot;N pages&quot; tallies were dropped but collapsed sections kept a &quot;+N&quot; marker; now both are suppressed, so each exported card shows just the node&#39;s text.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li><strong>The &quot;Show a site root box&quot; setting is now preserved for .xlsx projects.</strong> Unchecking it and reopening the spreadsheet silently reverted it — boolean project settings weren&#39;t surviving the spreadsheet round-trip (a stored &quot;off&quot; read back as the text &quot;FALSE&quot; and was ignored). Booleans now round-trip correctly. (.transmission projects were already fine.)</li>
+</ul>
 <h2 id="298--how-soon-is-now">[2.9.8] — &quot;How Soon Is Now?&quot;</h2>
 <h3 id="changed">Changed</h3>
 <ul>

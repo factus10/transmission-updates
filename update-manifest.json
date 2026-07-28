@@ -1,7 +1,7 @@
 {
-  "version": "2.9.8",
-  "publishedAt": "2026-07-27",
-  "notes": "The Visual Sitemap's Page counts toggle now applies to the Miro export as well — turn it off and export to Miro for label-only cards, matching the in-app view and the HTML and PDF exports. Collapsed sections still show how much content is folded beneath them.",
+  "version": "2.9.9",
+  "publishedAt": "2026-07-28",
+  "notes": "The Visual Sitemap's synthetic 'site root' box is now off by default — your own top-level nodes are the roots — and that setting now persists reliably for spreadsheet projects (it had been silently reverting). Separately, turning off Page counts now also clears the '+N' markers from the Miro export, for fully label-only cards.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

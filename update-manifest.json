@@ -1,7 +1,7 @@
 {
-  "version": "2.9.9",
-  "publishedAt": "2026-07-28",
-  "notes": "The Visual Sitemap's synthetic 'site root' box is now off by default — your own top-level nodes are the roots — and that setting now persists reliably for spreadsheet projects (it had been silently reverting). Separately, turning off Page counts now also clears the '+N' markers from the Miro export, for fully label-only cards.",
+  "version": "2.11.0",
+  "publishedAt": "2026-07-29",
+  "notes": "Two releases in one — 2.10.0 was never cut, so this covers everything since 2.9.9. The audience prioritization and jobs-to-be-done workshops now feed the Keep/Kill/Evolve call directly, so a page that serves nobody the client invested in surfaces as a finding rather than a hunch — with four new reports, and two tools (inherit-from-section, and AI suggestion against your own audience library) that make tagging affordable on a full crawl. An audit can now consolidate several source sites, each with its own scope, owner and redirect map. And URL variant triage reads each page's rel=canonical to strip alternate views out of the queue: on a 13,000-row crawl that halved the work before any judgement was made.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

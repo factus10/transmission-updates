@@ -1,7 +1,7 @@
 {
-  "version": "2.11.0",
-  "publishedAt": "2026-07-29",
-  "notes": "Two releases in one — 2.10.0 was never cut, so this covers everything since 2.9.9. The audience prioritization and jobs-to-be-done workshops now feed the Keep/Kill/Evolve call directly, so a page that serves nobody the client invested in surfaces as a finding rather than a hunch — with four new reports, and two tools (inherit-from-section, and AI suggestion against your own audience library) that make tagging affordable on a full crawl. An audit can now consolidate several source sites, each with its own scope, owner and redirect map. And URL variant triage reads each page's rel=canonical to strip alternate views out of the queue: on a 13,000-row crawl that halved the work before any judgement was made.",
+  "version": "2.11.1",
+  "publishedAt": "2026-07-30",
+  "notes": "A fix for the Visual Sitemap's color rules. Picking a section under \"Top-level section\" could save the rule against a different section — usually the level above — and reopening it showed a third one, as though the choice hadn't stuck. It had: the list was offering the wrong values behind the right names. Related, and the reason it went unnoticed: on a sitemap built under a single root page the whole tree counted as one section, so coloring by section colored everything alike, in the Visual Sitemap and the Treemap both. The sections beneath a lone root are now treated as the sections. If you already have a section color rule in a sitemap like that, it was matching the entire tree and now matches just the root — re-point it at the section you actually meant.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

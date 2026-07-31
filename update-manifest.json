@@ -1,7 +1,7 @@
 {
-  "version": "2.13.1",
+  "version": "2.14.0",
   "publishedAt": "2026-07-31",
-  "notes": "A quick fix release. The legend in the Content Flow and Treemap diagrams now opens in front of the visualization instead of being clipped away at the edge of the toolbar, so you can actually read what the colors mean. And in Content Flow, the toolbar buttons no longer stop responding after you switch the left column between current section and source site — Legend, Fit and the export buttons were being re-registered on every switch, so a second click undid the first and the legend appeared to do nothing at all.",
+  "notes": "Every visualization now exports a **PNG** alongside HTML and PDF — the whole diagram at full size, for slides and documents that won't place a PDF. The **Treemap** is recolorable: open the Legend to change a whole category, or right-click a single box to call it out in a client deck, and your palette saves with the project. The Treemap and Content Flow can now be **exported to Miro** the way the Visual Sitemap already could.\n\n**Consolidate** gained guardrails: a page can no longer consolidate into itself (or into a page that consolidates back into it), choosing a target marked Keep or Kill now offers to set it to Evolve, and a chip in the sidebar shows how many Consolidate pages still have no target — usually more than you'd expect.\n\nFixed: exporting the Content Flow gave you the view it opened with rather than the one on screen, so a PDF could show a completely different reading than the one you meant to hand over.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

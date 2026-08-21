@@ -73,7 +73,7 @@
 <ol>
 <li><strong>Audit</strong> view (<strong>Cmd+1</strong>) → <strong>KKE</strong> filter → check <strong>Keep</strong> + <strong>Evolve</strong> → <strong>+ Field filter</strong> → field <code>Sitemap_ID</code>, operator <strong>is blank</strong> → <strong>Apply</strong>.</li>
 <li>For each row, click <strong>Sitemap</strong> (in the <strong>DECIDE</strong> cluster) → drill to the right node → <strong>Assign</strong>. Use <strong>+ Child</strong> in the picker footer to create a new node inline if no good home exists yet.</li>
-<li>To place many similar pages at once: multi-select them in the sidebar (<strong>Cmd/Shift-click</strong>), then <strong>drag the selection onto a node</strong> in the tree.</li>
+<li>To place many similar pages at once: multi-select them in the sidebar (<strong>Cmd/Shift-click</strong>), then use the Multi-bar&#39;s <strong>Assign to Sitemap…</strong> action — pick an existing node or create a new bucket, and choose whether the pages land as direct children or keep their URL structure.</li>
 </ol>
 <blockquote>
 <p>Fast path: the stats line&#39;s <strong>N need placement</strong> link is clickable — it jumps you straight to the audit view filtered to exactly those rows. Work the list down to zero.</p>
@@ -97,7 +97,7 @@
 <p>Open a node&#39;s editor (double-click the label, or <strong>✎</strong>). The top fields define what kind of node it is:</p>
 <ul>
 <li><strong>Node type</strong> — <strong>Page (standard)</strong> / <strong>Header / organizing level</strong> / <strong>Fragment / shared content</strong>. A <strong>Header</strong> is a grouping level with no page of its own; a <strong>Fragment</strong> is shared/embedded content with no menu entry, breadcrumb, or redirect (see the Build &amp; Direction walkthrough).</li>
-<li><strong>In menu</strong> — toggles whether the node appears in the navigation menus. (<strong>Set Menu ✓</strong> / <strong>Clear Menu</strong> in the toolbar bulk-toggle this for all <em>visible</em> nodes — combine with the Depth filter.)</li>
+<li><strong>Collapse</strong> — folds this node&#39;s subtree in the Visual Sitemap, so a big branch doesn&#39;t swamp the diagram. (<strong>Collapse ✓</strong> / <strong>Expand</strong> in the toolbar set this for all <em>visible</em> nodes — combine with the Depth filter.) Menu membership is no longer a node property: menus are their own view (§3 note below).</li>
 <li><strong>External URL</strong> — point a menu item at an outside URL instead of a built page.</li>
 <li><strong>Reference</strong> — alias this node to another node (a &quot;→ breadcrumb&quot; target) so the same destination can appear in two places without duplicating it.</li>
 </ul>
@@ -131,7 +131,7 @@
 </ul>
 <p><strong>Filter the tree</strong> with the toolbar dropdowns:</p>
 <ul>
-<li><strong>Depth:</strong> collapse to a level (then bulk <strong>Set Menu ✓</strong> / <strong>Clear Menu</strong> on what&#39;s visible).</li>
+<li><strong>Depth:</strong> collapse to a level (then bulk <strong>Collapse ✓</strong> / <strong>Expand</strong> on what&#39;s visible).</li>
 <li><strong>Phase:</strong> current vs. non-current (§4).</li>
 <li><strong>Build:</strong> by status / assignee / pattern / guidance presence (Build &amp; Direction walkthrough).</li>
 </ul>
@@ -144,10 +144,14 @@
 </ul>
 <hr>
 <h2 id="8-see-it-and-report-on-it">8. See it and report on it</h2>
-<p><strong>Visual Sitemap</strong> — toolbar <strong>Sitemap</strong>: a box-style tree where solid borders = in-menu, dashed = not in menu, fill color = build pattern, a stacked shadow = hidden children, and a corner badge = page count. Toggle <strong>Menu items only</strong>, switch <strong>Visual / Text Tree</strong> tabs, zoom/pan, and export as <strong>PDF</strong> or <strong>SVG/HTML</strong>.</p>
+<p><strong>Visual Sitemap</strong> — toolbar <strong>Visual Sitemap</strong>: an interactive box-tree. A card&#39;s <strong>+/−</strong> collapses its branch, scroll zooms, drag pans, <strong>Fit</strong> frames the whole thing. A stacked shadow means a collapsed branch or a multi-page leaf; a <strong>dashed</strong> border means the node is phased. The <strong>Counts</strong> dropdown decides what the line under each label reports, and <strong>Settings</strong> holds <strong>Layout</strong> (card sizes, corner radius, and the connector color and weight), <strong>Colors</strong> (the rule engine — color by depth, section, or any of fifteen fields), and <strong>Legend</strong>. Right-click a node to force a layout direction or set its color. Export as interactive <strong>HTML</strong>, a one-page <strong>PDF</strong>, a <strong>PNG</strong>, or straight onto a <strong>Miro</strong> board.</p>
+<blockquote>
+<p>If the tree is too big to draw, the <strong>shape check</strong> says so before the diagram opens — and the ⚠ in the stats line opens it any time. See the User Guide for what it measures and what each repair buys.</p>
+</blockquote>
+<p><strong>Treemap</strong> and <strong>Content Flow</strong> sit next to it in the toolbar: the first sizes each section by how much content is in it, the second traces where the current site&#39;s content lands in the new tree.</p>
 <p><strong>IA &amp; coverage reports:</strong></p>
 <ul>
-<li><strong>IA Report</strong> (toolbar) or <strong>Reports → Sitemap &amp; IA…</strong> — the sitemap with per-node page and redirect counts; flags empty, redirect-only, and header nodes.</li>
+<li><strong>Reports → Menu Report…</strong> — each menu as a section-by-section tree, with page counts and broken references flagged. (Also reachable from the Menus view&#39;s <strong>Report</strong> button.)</li>
 <li><strong>Reports → Sitemap Coverage Report…</strong> — empty leaves, hubs, overloaded nodes, and path mismatches.</li>
 <li><strong>Reports → Net New Content Brief…</strong> — every node that needs brand-new content.</li>
 </ul>
@@ -158,7 +162,7 @@
 <li><input disabled="" type="checkbox"> No <strong>empty</strong> leaf nodes left unexplained (assign / net-new / phase / delete)</li>
 <li><input disabled="" type="checkbox"> No <strong>duplicate Sitemap_ID</strong> warning in the stats line</li>
 <li><input disabled="" type="checkbox"> No red <strong>duplicate-slug</strong> highlights within a branch</li>
-<li><input disabled="" type="checkbox"> <strong>In menu</strong> set correctly on every node that belongs in navigation</li>
+<li><input disabled="" type="checkbox"> Menus drawn in the <strong>Menus</strong> view for every navigation that ships (the sitemap is where pages <em>live</em>, not how people reach them)</li>
 <li><input disabled="" type="checkbox"> Phased work is marked <strong>Future / Stretch / Archived</strong>, not left in the current build</li>
 <li><input disabled="" type="checkbox"> Net-new sections are intentional, not accidental <strong>NEW</strong> badges</li>
 </ul>

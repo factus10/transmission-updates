@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Related Practices — Roadmap — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<hr>
+<h2 id="title-related-practices--roadmap-status-stub-last-reviewed-2026-04-28">title: Related Practices — Roadmap
+status: stub
+last-reviewed: 2026-04-28</h2>
+<h1 id="related-practices--roadmap">Related Practices — Roadmap</h1>
+<p>Pages we should write next. The wiki currently focuses on the <a href="index.html">KKE / disposition framework</a>. The practices that <em>feed</em> and <em>consume</em> the framework deserve their own pages over time.</p>
+<p>This is a stub. Add new pages by following the conventions in <a href="index.html#conventions">README.md</a>.</p>
+<hr>
+<h2 id="practices-that-feed-the-audit">Practices that feed the audit</h2>
+<h3 id="rubrics--definition-structure-examples">Rubrics — definition, structure, examples</h3>
+<p><strong>Why we need it:</strong> rubrics are the criteria each page is evaluated against. Field rules (mechanical) vs content rules (subjective). The current audit tool has a rubric system but it&#39;s underdocumented.</p>
+<p><strong>What the page should cover:</strong></p>
+<ul>
+<li>What a rubric is and why we use them</li>
+<li>Field rule syntax (operators, examples)</li>
+<li>Content rule philosophy (when to use AI vs auditor judgment)</li>
+<li>How to design a rubric for a specific engagement (the conversation with the client)</li>
+<li>When rubrics fail / when not to use them</li>
+</ul>
+<h3 id="audience-prioritization--jobs-to-be-done">Audience Prioritization &amp; Jobs-to-be-Done</h3>
+<p><strong>Why we need it:</strong> we run these workshops on most engagements, and until the audit tool grew audience tagging their output never reached a single row — KKE got argued on traffic and quality, both of which are downstream proxies for relevance to a person. Audience is now a first-class authority source alongside GA and the rubric, so the methodology should catch up to the tooling.</p>
+<p><strong>What the page should cover:</strong></p>
+<ul>
+<li>Running the prioritization workshop (who&#39;s in the room, how the ranking is forced, how many tiers is too many)</li>
+<li>Translating workshop output into a tiered audience library the audit can consume</li>
+<li>What each tier <em>commits you to</em> downstream (Primary → Keep pressure; Tertiary → Evolve pressure)</li>
+<li>Tagging strategy at scale: section-level bulk passes vs page-by-page, and when the tagging isn&#39;t worth it</li>
+<li>Reading the disagreement cases (high traffic + no priority audience; low traffic + priority audience)</li>
+<li>JTBD statements: capturing them, and using unserved jobs to justify net-new content</li>
+</ul>
+<h3 id="sme-review-workflow">SME Review Workflow</h3>
+<p><strong>Why we need it:</strong> the SME round is where most engagements lose time and clarity. Captures: how to structure the export, how to onboard SMEs, common SME failure modes (writing prose where dropdowns are required, not specifying targets for Consolidate, missing deadlines).</p>
+<p><strong>What the page should cover:</strong></p>
+<ul>
+<li>The SME export format (column choices, dropdowns, instructions)</li>
+<li>SME onboarding template (an email + a video script)</li>
+<li>Common SME failure modes and how to recover</li>
+<li>When to push back vs accept SME recommendations</li>
+<li>Handling cross-SME disagreements</li>
+</ul>
+<h3 id="nav-and-ia-decisions">Nav and IA Decisions</h3>
+<p><strong>Why we need it:</strong> the audit and the IA are two sides of one coin but treated as separate workstreams in most engagements. This page should document where they intersect.</p>
+<p><strong>What the page should cover:</strong></p>
+<ul>
+<li>When IA decisions block audit decisions (and vice versa)</li>
+<li>The Nav Editor as a thinking tool, not just a deliverable</li>
+<li>Net new content nodes (pages that don&#39;t exist yet but the IA needs)</li>
+<li>Hub nodes vs leaf nodes</li>
+<li>Mapping audit dispositions to nav locations</li>
+</ul>
+<h3 id="analytics-informed-audits">Analytics-Informed Audits</h3>
+<p><strong>Why we need it:</strong> GA4 data is one of the strongest authority sources but methodology varies wildly across engagements. The current audit tool has a <a href="../user-guide.html#8-suggested_kke">GA KKE feature</a> with documented methodology — this page should capture the strategy around when and how to use it.</p>
+<p><strong>What the page should cover:</strong></p>
+<ul>
+<li>When analytics input is reliable vs misleading (low-traffic sites, recent migrations, tracking gaps)</li>
+<li>How to weight analytics against editorial judgment</li>
+<li>The four GA4 metrics we use and why (Sessions, Engagement Rate, Avg Session Duration, Views per Session)</li>
+<li>PERCENTRANK normalization and why</li>
+<li>When to override the analytics-derived recommendation</li>
+</ul>
+<h3 id="ai-assisted-assessment">AI-Assisted Assessment</h3>
+<p><strong>Why we need it:</strong> AI evaluation against rubrics is increasingly part of our process. The page should capture what AI is good at, what it isn&#39;t, and how to integrate it.</p>
+<p><strong>What the page should cover:</strong></p>
+<ul>
+<li>What AI can evaluate (rubric content rules, broad quality assessment)</li>
+<li>What AI shouldn&#39;t evaluate (strategic decisions, brand fit, regulated content)</li>
+<li>Prompt design for content evaluation</li>
+<li>Integration patterns with rubrics</li>
+<li>When to discard AI output</li>
+</ul>
+<hr>
+<h2 id="practices-that-consume-the-audit">Practices that consume the audit</h2>
+<h3 id="migration-planning">Migration Planning</h3>
+<p><strong>Why we need it:</strong> the audit&#39;s deliverables (redirect maps, content briefs) are inputs to migration. This page documents how to translate audit data into a migration plan.</p>
+<p><strong>What the page should cover:</strong></p>
+<ul>
+<li>Redirect map generation and quality control</li>
+<li>Content brief authoring (what info from the audit ends up in the brief)</li>
+<li>Migration sequencing (which dispositions ship first)</li>
+<li>Pre-migration QA checklist</li>
+<li>Post-migration validation</li>
+</ul>
+<h3 id="content-briefs">Content Briefs</h3>
+<p><strong>Why we need it:</strong> Evolve, Replace, and Consolidate-target pages all need content briefs. The format isn&#39;t standardized and varies by client.</p>
+<p><strong>What the page should cover:</strong></p>
+<ul>
+<li>Brief structure (problem, audience, scope, sources, success criteria)</li>
+<li>Inputs from the audit (what data populates the brief automatically)</li>
+<li>Brief vs ticket vs spec — when each is appropriate</li>
+<li>SEO inputs into briefs</li>
+</ul>
+<h3 id="reporting--stakeholder-communication">Reporting &amp; Stakeholder Communication</h3>
+<p><strong>Why we need it:</strong> the audit produces a lot of data; stakeholders see only summaries. The summaries are where the audit&#39;s value lands or doesn&#39;t.</p>
+<p><strong>What the page should cover:</strong></p>
+<ul>
+<li>Executive summary structure</li>
+<li>The Migration Checklist deliverable</li>
+<li>Per-section / per-content-owner reports</li>
+<li>Progress reports during the audit (when to send, what to include)</li>
+<li>How to surface multi-authority disagreement (Pattern G) vs flatten it</li>
+</ul>
+<hr>
+<h2 id="cross-cutting">Cross-cutting</h2>
+<h3 id="engagement-phases">Engagement Phases</h3>
+<p><strong>Why we need it:</strong> Discovery / Audit / Plan / Build is a useful frame but each phase has substructure. This page should document the substructure for each.</p>
+<h3 id="tooling-decisions">Tooling Decisions</h3>
+<p><strong>Why we need it:</strong> when do we use the audit tool? When do we fall back to Excel? When do we add a new tool? Documenting this prevents tooling sprawl.</p>
+<h3 id="common-client-quirks">Common Client Quirks</h3>
+<p><strong>Why we need it:</strong> every client has its own audit-affecting quirks (regulated industries, multi-brand sites, multilingual content, multi-CMS environments). A page per quirk type, building over time.</p>
+<hr>
+<h2 id="how-to-add-a-new-page">How to add a new page</h2>
+<p>When you&#39;re ready to write one of these:</p>
+<ol>
+<li>Create the file in <code>wiki/</code> using a kebab-case filename matching the link above (e.g. <code>rubrics.md</code>, <code>sme-review-workflow.md</code>).</li>
+<li>Add front-matter (<code>status: working</code>, <code>last-reviewed: &lt;date&gt;</code>).</li>
+<li>Update <a href="index.html">the index</a> — add the page under the right section.</li>
+<li>Cross-link from related pages (the <a href="the-five-dimensions.html">Five Dimensions</a>, <a href="patterns.html">Patterns</a>, <a href="content-audit-disposition.html">CAD</a>).</li>
+<li>Add new terms to <a href="glossary.html">the Glossary</a>.</li>
+</ol>
+<p>Replace the entry above with a working link once the page exists.</p>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="index.html">Wiki Index</a></li>
+<li><a href="content-audit-overview.html">Content Audit Overview</a></li>
+</ul>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patterns Where KKE Breaks — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<hr>
+<h2 id="title-patterns-where-kke-breaks-status-working-last-reviewed-2026-04-28">title: Patterns Where KKE Breaks
+status: working
+last-reviewed: 2026-04-28</h2>
+<h1 id="patterns-where-kke-breaks">Patterns Where KKE Breaks</h1>
+<p>Recurring situations in real audits where the four-state KKE vocabulary doesn&#39;t have language for what&#39;s actually happening. Each pattern is named so we can say &quot;this is a Pattern A situation&quot; and skip the re-deriving.</p>
+<blockquote>
+<p><strong>Format:</strong> each pattern includes the situation, what auditors typically do under KKE, what&#39;s actually wrong, and what the <a href="the-five-dimensions.html">Five Dimensions analysis</a> says is happening.</p>
+</blockquote>
+<hr>
+<h2 id="a-the-post-launch-problem">A. The Post-Launch Problem</h2>
+<p><strong>Situation:</strong> Mid-audit, the client de-scopes a section. Pages are valid content, just not in this cycle.</p>
+<p><strong>Under KKE:</strong> Auditor marks them all <code>Exclude</code>. Or invents a custom state like <code>Post-Launch</code>.</p>
+<p><strong>What&#39;s wrong:</strong> Now the de-scoped pages are indistinguishable from genuine crawl noise (sitemap fragments, admin URLs). The client report says &quot;we&#39;re excluding 200 pages&quot; without telling anyone <em>why</em>. The migration team can&#39;t tell what to defer vs. what to drop.</p>
+<p><strong>What&#39;s really going on:</strong> <a href="the-five-dimensions.html#1-scope--is-this-page-in-this-audit">Scope</a> and <a href="the-five-dimensions.html#2-content-fate--what-happens-to-the-content">Content Fate</a> are different dimensions; KKE collapses them. &quot;Out-of-crawl-scope&quot; and &quot;Deferred&quot; are both Scope values, but they need different downstream handling.</p>
+<p><strong>Tactical mitigation in the tool:</strong> Custom KKE states + Consolidation Candidates filter bar lets you de-scope pages by KKE state or Group without touching individual decisions.</p>
+<hr>
+<h2 id="b-the-implicit-consolidate">B. The Implicit Consolidate</h2>
+<p><strong>Situation:</strong> Auditor reviews three pages on the same topic — three landing pages competing for the same keyword, or four blog posts that should be one comprehensive guide. The right call is to merge them into one canonical page.</p>
+<p><strong>Under KKE (before Consolidate existed):</strong> Auditors used &quot;assign multiple pages to one nav node&quot; as a covert <em>these should merge</em> signal. The data didn&#39;t say it; the human reading the audit had to infer it from page counts.</p>
+<p><strong>What&#39;s wrong:</strong> Implicit conventions don&#39;t survive handoffs. The migration team gets the spreadsheet without the auditor&#39;s mental model. The intent is invisible.</p>
+<p><strong>What&#39;s really going on:</strong> Content Fate has more values than Preserve / Improve / Retire. &quot;Merge&quot; is a real fate.</p>
+<p><strong>Resolution:</strong> We added Consolidate as a first-class KKE state. The picker captures the target; redirects chase the target through nav changes; the Consolidation Candidates workflow finds groups in bulk. This pattern is largely <em>resolved</em> by tooling because we recognized the missing concept.</p>
+<p><strong>Lesson:</strong> any pattern auditors are communicating with implicit conventions is a missing first-class concept. There are probably others we haven&#39;t named yet.</p>
+<hr>
+<h2 id="c-keep-but-moved">C. Keep But Moved</h2>
+<p><strong>Situation:</strong> Page is high-quality (Keep), but its URL is changing because the IA is being reorganized.</p>
+<p><strong>Under KKE:</strong> <code>KKE = Keep</code>. <code>Redirect_Destination</code> = new URL. Two columns to express one decision.</p>
+<p><strong>What&#39;s wrong:</strong> The KKE column alone doesn&#39;t tell the migration team &quot;this URL is changing.&quot; Reports that group by KKE miss the URL change. A reader scanning for &quot;what&#39;s moving&quot; has to consult Redirect_Destination separately.</p>
+<p><strong>What&#39;s really going on:</strong> <a href="the-five-dimensions.html#2-content-fate--what-happens-to-the-content">Content Fate (Preserve)</a> and <a href="the-five-dimensions.html#3-url-fate--what-happens-to-the-url">URL Fate (Move)</a> are independent dimensions. KKE bundles them.</p>
+<hr>
+<h2 id="d-the-half-decision">D. The Half-Decision</h2>
+<p><strong>Situation:</strong> Auditor reviews a page, can&#39;t decide between Keep and Evolve, wants to flag it for stakeholder input.</p>
+<p><strong>Under KKE:</strong> Leaves blank (looks Unreviewed) or marks Flagged + adds Notes. Neither is a clean &quot;needs decision from someone else&quot; state.</p>
+<p><strong>What&#39;s wrong:</strong> Confidence is conflated with absence. A blank cell could mean &quot;haven&#39;t gotten to it&quot; or &quot;looked at it but unsure.&quot; The audit&#39;s progress meter can&#39;t distinguish.</p>
+<p><strong>What&#39;s really going on:</strong> <a href="the-five-dimensions.html#4-process-state--where-is-this-decision-in-the-workflow">Process State</a> is a missing dimension. KKE assumes binary (decided / not decided).</p>
+<hr>
+<h2 id="e-the-split">E. The Split</h2>
+<p><strong>Situation:</strong> One page is doing three jobs — about-the-team, about-services, about-history all on <code>/about</code>. Decision: split into three pages.</p>
+<p><strong>Under KKE:</strong> No state for this. Auditor adds a Note. Migration team has to read every Note to catch it.</p>
+<p><strong>What&#39;s wrong:</strong> Easy to miss. Inconsistent across auditors. Not surfaced in any report.</p>
+<p><strong>What&#39;s really going on:</strong> Content Fate is missing the <strong>Split</strong> value. Inverse of Consolidate.</p>
+<hr>
+<h2 id="f-cross-engagement-orphan">F. Cross-Engagement Orphan</h2>
+<p><strong>Situation:</strong> Audit covers Marketing&#39;s site. <code>/support</code> is owned by Customer Service, not part of this engagement. Marketing wants the audit to acknowledge those pages but not decide on them.</p>
+<p><strong>Under KKE:</strong> Not Keep, not Evolve, not Kill. <code>Exclude</code> is closest but lumps these with crawl noise.</p>
+<p><strong>What&#39;s wrong:</strong> &quot;We didn&#39;t decide&quot; is different from &quot;we excluded.&quot; A custom state helps but doesn&#39;t cleanly differentiate.</p>
+<p><strong>What&#39;s really going on:</strong> <a href="the-five-dimensions.html#1-scope--is-this-page-in-this-audit">Scope</a> has more values than &quot;in&quot; and &quot;out.&quot; <code>OutOfAuthority</code> is a real category.</p>
+<hr>
+<h2 id="g-multiple-authorities-disagree">G. Multiple Authorities Disagree</h2>
+<p><strong>Situation:</strong> Page has <code>KKE = Keep</code> (auditor likes it), <code>GA_KKE = Kill</code> (no traffic), <code>SME_Decision = Change: Evolve</code> (subject expert says it&#39;s outdated). Three authorities, three answers.</p>
+<p><strong>Under KKE:</strong> Final_KKE makes the auditor pick one as the resolved value, as if the disagreement didn&#39;t matter.</p>
+<p><strong>What&#39;s wrong:</strong> The disagreement <em>is</em> a signal. A page where Analytics and SME agree but Auditor disagrees is interesting. A page where all three disagree is a research target. Flattening to Final_KKE loses that.</p>
+<p><strong>What&#39;s really going on:</strong> <a href="the-five-dimensions.html#5-authority--whose-decision-is-this">Authority</a> is a real dimension. KKE-the-original-framework assumed a single authority per page. We&#39;ve added authority columns operationally; the framework hasn&#39;t caught up.</p>
+<p><strong>Tactical mitigation:</strong> SME conflict resolution UI. But it doesn&#39;t surface analytics-vs-auditor or AI-vs-SME conflicts the same way.</p>
+<hr>
+<h2 id="h-replace-vs-evolve">H. Replace vs Evolve</h2>
+<p><strong>Situation:</strong> Page is well-trafficked but its premise is wrong (e.g. lists 2018 pricing structure, hasn&#39;t been updated). The content team needs to start over.</p>
+<p><strong>Under KKE:</strong> Marked Evolve.</p>
+<p><strong>What&#39;s wrong:</strong> &quot;Evolve&quot; implies iteration (&quot;improve in place&quot;). The migration team estimates the work as a minor revision. It&#39;s actually a complete rewrite. Effort estimates are wrong.</p>
+<p><strong>What&#39;s really going on:</strong> Content Fate is missing <strong>Replace</strong>. Different effort, different brief, different timeline.</p>
+<hr>
+<h2 id="cross-pattern-observations">Cross-pattern observations</h2>
+<p>Three patterns are largely <em>resolved</em> by tooling once we named the missing concept:</p>
+<ul>
+<li><strong>Pattern B</strong> — Consolidate is a first-class state with full workflow</li>
+<li><strong>Pattern G&#39;s governance subset</strong> — Custom KKE merge / rogue cleanup handles vocabulary drift across authorities</li>
+<li><strong>Pattern A&#39;s tactical layer</strong> — filter bar in Consolidation Candidates lets you scope by KKE/Group</li>
+</ul>
+<p>Five patterns are <em>mitigated but not resolved</em> — the tooling makes them survivable in practice without changing the data model. A future audit will hit them again:</p>
+<ul>
+<li>A (Post-Launch problem persists conceptually)</li>
+<li>C (Keep But Moved)</li>
+<li>D (Half-Decision)</li>
+<li>E (Split)</li>
+<li>F (Cross-Engagement Orphan)</li>
+<li>H (Replace vs Evolve)</li>
+</ul>
+<p>The full conceptual fix is the <a href="content-audit-disposition.html">proposed CAD framework</a>.</p>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="the-five-dimensions.html">Why KKE Falls Short — The Five Dimensions</a></li>
+<li><a href="content-audit-disposition.html">Content Audit Disposition (CAD)</a></li>
+<li><a href="vocabulary-governance.html">Vocabulary Governance</a></li>
+</ul>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

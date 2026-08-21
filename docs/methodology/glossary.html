@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossary — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<hr>
+<h2 id="title-glossary-status-working-last-reviewed-2026-04-28">title: Glossary
+status: working
+last-reviewed: 2026-04-28</h2>
+<h1 id="glossary">Glossary</h1>
+<p>Every term used elsewhere in the wiki, defined once. When in doubt, link here rather than re-defining.</p>
+<hr>
+<h3 id="audit">Audit</h3>
+<p>A systematic review of every page on a site to decide what stays, what changes, what merges, and what goes — and to capture rationale and downstream actions for each. See <a href="content-audit-overview.html">Content Audit Overview</a>.</p>
+<h3 id="authority">Authority</h3>
+<p>The source of an audit recommendation. Common authorities: Auditor, SME, Analytics (GA), AI. See <a href="the-five-dimensions.html#5-authority--whose-decision-is-this">The Five Dimensions: Authority</a>.</p>
+<h3 id="authority-stamped">Authority-stamped</h3>
+<p>Data values whose source is recorded with them. <code>KKE_Recommendation</code> is auditor-stamped; <code>SME_Decision</code> is SME-stamped; <code>GA_KKE_Recommendation</code> is analytics-stamped. The current audit tool treats authority as a column dimension; CAD treats it as a first-class concept.</p>
+<h3 id="cad--content-audit-disposition">CAD — Content Audit Disposition</h3>
+<p>The proposed framework that decompresses KKE into separate columns for Scope, Content Fate, URL Fate, and Process State. See <a href="content-audit-disposition.html">Content Audit Disposition</a>.</p>
+<h3 id="cannibalization">Cannibalization</h3>
+<p>When multiple URLs on the same site target the same query/topic and dilute each other&#39;s ranking. The textbook fix is consolidation. See Pattern B in <a href="patterns.html#b-the-implicit-consolidate">Patterns</a>.</p>
+<h3 id="compression-problem">Compression problem</h3>
+<p>The argument that KKE collapses five independent decisions into one column, hiding important distinctions. The central thesis of <a href="the-five-dimensions.html">Why KKE Falls Short</a>.</p>
+<h3 id="confidence">Confidence</h3>
+<p>Synonym for <a href="the-five-dimensions.html#4-process-state--where-is-this-decision-in-the-workflow">Process State</a>. How sure the auditor is about a decision.</p>
+<h3 id="consolidate">Consolidate</h3>
+<p>A KKE state we&#39;ve added to the four originals: this page is going away, and its content is being merged into another page in the inventory. The destination is recorded in <code>Consolidate_Into</code>. See <a href="kke-classic.html#the-fifth-state-consolidate">KKE Classic — The Fifth State</a>.</p>
+<h3 id="consolidate-target">Consolidate target</h3>
+<p>The page that absorbs another page&#39;s content during a Consolidate operation. Recorded in the <code>Consolidate_Into</code> column on the source page.</p>
+<h3 id="consolidation-candidates">Consolidation Candidates</h3>
+<p>A workflow tool in the audit app that surfaces every nav node with 2+ assigned pages, letting auditors bulk-resolve them by picking a target per group.</p>
+<h3 id="content-fate">Content Fate</h3>
+<p>What should happen to the content of a page. One of the <a href="the-five-dimensions.html#2-content-fate--what-happens-to-the-content">Five Dimensions</a>. Values: Preserve, Improve, Replace, Merge, Split, Retire.</p>
+<h3 id="crawl-noise">Crawl noise</h3>
+<p>Pages that got crawled but aren&#39;t real content — sitemap fragments, JSON endpoints, search results, admin URLs. A common form of OutOfCrawl scope.</p>
+<h3 id="disposition">Disposition</h3>
+<p>Records-management term meaning &quot;what we&#39;re doing with this.&quot; The umbrella term for an audit decision in the <a href="content-audit-disposition.html">CAD framework</a>. A disposition is the combination of Scope + Content Fate + URL Fate (+ optionally Process State).</p>
+<h3 id="evolve">Evolve</h3>
+<p>KKE state: content has value but needs work. Improve in place — rewrite, expand, restructure, update — without changing its identity. See <a href="kke-classic.html#evolve">KKE Classic</a>.</p>
+<h3 id="exclude">Exclude</h3>
+<p>KKE state: page is not part of the audit&#39;s recommendations. Catch-all that conflates several distinct Scope reasons. See <a href="kke-classic.html#exclude">KKE Classic</a> and <a href="patterns.html#a-the-post-launch-problem">Pattern A</a>.</p>
+<h3 id="final_kke">Final_KKE</h3>
+<p>A column representing the resolved disposition after authority-level inputs have been reconciled. Currently column-based; in CAD this becomes the synthesis of multiple authority disposition column-sets.</p>
+<h3 id="five-dimensions">Five Dimensions</h3>
+<p>The conceptual decomposition that KKE compresses: Scope, Content Fate, URL Fate, Process State, Authority. See <a href="the-five-dimensions.html">The Five Dimensions</a>.</p>
+<h3 id="folksonomy">Folksonomy</h3>
+<p>A vocabulary that emerges from informal use rather than formal taxonomy. KKE works as a folksonomy — five labels everyone learns in 30 seconds — but degrades when used as a strict taxonomy.</p>
+<h3 id="governance">Governance</h3>
+<p>The operational layer that keeps controlled vocabularies clean: detection, normalization, audit trail. See <a href="vocabulary-governance.html">Vocabulary Governance</a>.</p>
+<h3 id="keep">Keep</h3>
+<p>KKE state: content is high-quality, on-strategy, performing well. Migrate as-is. See <a href="kke-classic.html#keep">KKE Classic</a>.</p>
+<h3 id="kill">Kill</h3>
+<p>KKE state: content is low-quality, off-strategy, redundant, or has no audience. Remove. URL retires (with redirect or deliberate 404). See <a href="kke-classic.html#kill">KKE Classic</a>.</p>
+<h3 id="kke">KKE</h3>
+<p>The four-state vocabulary used in most content audits today: Keep / Kill / Evolve / Exclude. We&#39;ve added Consolidate as a fifth. See <a href="kke-classic.html">KKE Classic</a>.</p>
+<h3 id="mra">MRA</h3>
+<p>Sibling framework: Migrate / Revise / Archive. Migration-flavored. Same compression problem as KKE. See <a href="kke-classic.html#sibling-frameworks">KKE Classic — Sibling Frameworks</a>.</p>
+<h3 id="pattern-a-through-h">Pattern A through H</h3>
+<p>Named patterns in <a href="patterns.html">Patterns Where KKE Breaks</a>. Each is a recurring real-engagement situation that exposes a different facet of KKE&#39;s compression problem.</p>
+<h3 id="percentrank">PERCENTRANK</h3>
+<p>Statistical normalization method used in the audit tool&#39;s <a href="../user-guide.html#8-suggested_kke">GA KKE</a> feature: each page&#39;s metric value is converted to its percentile rank against all other pages, so values across radically different scales (sessions, engagement rate, duration) become comparable.</p>
+<h3 id="process-state">Process State</h3>
+<p>Where a decision sits in the audit workflow. One of the <a href="the-five-dimensions.html#4-process-state--where-is-this-decision-in-the-workflow">Five Dimensions</a>. Values: Unreviewed, InReview, Decided, PendingSME, PendingStakeholder, Resolved.</p>
+<h3 id="rogue-value">Rogue value</h3>
+<p>A KKE value present in row data that isn&#39;t in the defined custom states or built-ins. Typically a typo, legacy import, or SME-invented label. See <a href="vocabulary-governance.html#1-detection">Vocabulary Governance — Detection</a>.</p>
+<h3 id="rubric">Rubric</h3>
+<p>A structured set of rules used to evaluate pages against criteria. Field rules (mechanical, evaluated by tool against spreadsheet data) and content rules (subjective, evaluated by AI or auditor). Rubrics produce inputs to the audit decision but live alongside, not inside, the disposition framework.</p>
+<h3 id="scope">Scope</h3>
+<p>Whether a page is in the audit at all. One of the <a href="the-five-dimensions.html#1-scope--is-this-page-in-this-audit">Five Dimensions</a>. Values: InScope, OutOfCrawl, Deferred, OutOfAuthority, ComplianceHold, ThirdParty.</p>
+<h3 id="sme">SME</h3>
+<p>Subject Matter Expert. A non-auditor authority who reviews pages they have domain expertise on. Their input is captured in <code>SME_Decision</code> and <code>SME_Notes</code>.</p>
+<h3 id="split">Split</h3>
+<p>A Content Fate value: one page becomes 2+ pages. Inverse of Consolidate. Currently not first-class in KKE; auditors typically note it in free text.</p>
+<h3 id="url-fate">URL Fate</h3>
+<p>What happens to a URL. One of the <a href="the-five-dimensions.html#3-url-fate--what-happens-to-the-url">Five Dimensions</a>. Values: Preserve, Move, Redirect, 404. Independent of Content Fate.</p>
+<h3 id="vocabulary-drift">Vocabulary drift</h3>
+<p>The gradual divergence of values used in audit data when no governance is in place. SMEs invent labels, auditors typo, imports introduce legacy values. See <a href="vocabulary-governance.html">Vocabulary Governance</a>.</p>
+<h2 id="see-also">See also</h2>
+<p>Every page in this wiki uses these terms. Start at <a href="index.html">the index</a>.</p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

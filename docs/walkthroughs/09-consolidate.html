@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consolidate Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="consolidate-walkthrough">Consolidate Walkthrough</h1>
+<p>How to fold redundant pages into a single surviving page — so three thin pages on one topic become one strong page, with the other two redirecting in.</p>
+<blockquote>
+<p>Prerequisite: a file is open with KKE calls in progress.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li><strong>Consolidate</strong> is a KKE call that says &quot;this page&#39;s content merges <em>into</em> another page.&quot; The page you consolidate <strong>away</strong> points at a <strong>target</strong>; the <strong>target</strong> is what survives (usually <strong>Evolve</strong>).</li>
+<li>A consolidated page needs <strong>no sitemap placement</strong> — it folds into its target. The redirect resolver later chases the target through its computed path, any further consolidations, and explicit redirects (cycle-safe) so the URL lands somewhere real.</li>
+<li>The app warns when a consolidate points at a <strong>dead target</strong> (a page that doesn&#39;t exist or is itself being killed) so you never strand a redirect.</li>
+</ul>
+<hr>
+<h2 id="1-consolidate-one-page">1. Consolidate one page</h2>
+<ol>
+<li>With the page selected, press <strong>4</strong> or click <strong>Consolidate</strong> — this opens <strong>Consolidate into…</strong>, a searchable, sortable list of every page in the inventory.</li>
+<li>Pick the target page. The app sets <code>Consolidate_Into</code> and KKE = <strong>Consolidate</strong>, and clears the page&#39;s own sitemap assignment.</li>
+</ol>
+<blockquote>
+<p>It won&#39;t clobber an existing consolidate intent (e.g. one set by an SME&#39;s Final KKE) — your earlier decision is preserved.</p>
+</blockquote>
+<hr>
+<h2 id="2-find-consolidation-groups-in-bulk">2. Find consolidation groups in bulk</h2>
+<p>When several pages already share one sitemap node, they&#39;re likely consolidation candidates:</p>
+<ul>
+<li><strong>Sitemap → Consolidation Candidates…</strong> lists every node with <strong>2+</strong> assigned pages, largest first.</li>
+<li>For each group, pick the <strong>target</strong> (set to <strong>Evolve</strong>); the rest become <strong>Consolidate</strong> pointing at it, with their nav + explicit redirects cleared. Skip a group to leave it untouched for the session.</li>
+</ul>
+<p>You&#39;ll also get flagged automatically, without running this workflow: marking a page Keep/Evolve (or assigning its sitemap node) when another Keep/Evolve page already sits at that destination pops a <strong>&quot;Did you mean to Consolidate?&quot;</strong> prompt naming the other page, with a one-click <strong>Consolidate into it</strong>.</p>
+<hr>
+<h2 id="3-catch-broken-targets">3. Catch broken targets</h2>
+<p>Two sidebar special filters keep consolidations honest:</p>
+<ul>
+<li><strong>Consolidate: no target</strong> — marked Consolidate but no target chosen.</li>
+<li><strong>Consolidate: dead target</strong> — the target doesn&#39;t exist or is itself Kill/missing (the sidebar dot turns amber).</li>
+</ul>
+<p>Resolve both before shipping — every consolidated page must point at a live survivor.</p>
+<hr>
+<h2 id="quick-checklist-for-clean-consolidation">Quick checklist for &quot;clean consolidation&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Every <strong>Consolidate</strong> page has a target (<strong>no target</strong> filter is empty)</li>
+<li><input disabled="" type="checkbox"> No <strong>dead target</strong> warnings remain</li>
+<li><input disabled="" type="checkbox"> Each target survives as <strong>Keep/Evolve</strong> (not itself killed)</li>
+<li><input disabled="" type="checkbox"> Consolidated pages have no stray sitemap assignment</li>
+<li><input disabled="" type="checkbox"> Redirects resolve to a real URL (verify in the Redirect Editor)</li>
+</ul>
+<hr>
+<p><em>See also: the <strong>Redirects</strong> walkthrough (how targets resolve to URLs) and <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

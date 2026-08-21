@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multi-auditor Merge Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="multi-auditor-merge-walkthrough">Multi-auditor Merge Walkthrough</h1>
+<p>How to combine KKE decisions when more than one auditor worked the same inventory in parallel — merge their file into yours and resolve the disagreements.</p>
+<blockquote>
+<p>Prerequisite: two audited copies of the <strong>same</strong> inventory (same URLs), each with KKE calls.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>Two auditors split a large crawl, each making calls in their own copy of the file.</li>
+<li>Merging reads the <strong>other</strong> auditor&#39;s decisions, matches rows by URL, and reports <strong>agreements</strong> vs <strong>conflicts</strong> (where the two of you made different KKE calls on the same page).</li>
+<li>You resolve conflicts one at a time, choosing whose call wins — the merge never silently overwrites.</li>
+</ul>
+<hr>
+<h2 id="1-run-the-merge">1. Run the merge</h2>
+<ol>
+<li>Open your copy.</li>
+<li><strong>File → Merge Auditor Decisions…</strong> and pick the other auditor&#39;s file.</li>
+<li>The app matches rows and reports: how many decisions came in, agreements, and the number of <strong>conflicts</strong>. If there are none, you&#39;re done.</li>
+</ol>
+<hr>
+<h2 id="2-resolve-conflicts">2. Resolve conflicts</h2>
+<p>When conflicts exist, a resolution dialog lists each one — the page, <strong>your</strong> call, and <strong>their</strong> call — with a running &quot;N conflicts remaining&quot; count. Work down the list, picking the correct call for each, until all are resolved.</p>
+<blockquote>
+<p>This reuses the same resolution pattern as SME conflict resolution, so it&#39;ll feel familiar if you&#39;ve done an SME round.</p>
+</blockquote>
+<hr>
+<h2 id="3-save-the-merged-result">3. Save the merged result</h2>
+<p>After resolving, <strong>Cmd+S</strong>. The merged decisions and the change-log entries persist to your file, which is now the combined source of truth.</p>
+<hr>
+<h2 id="quick-checklist-for-merge-complete">Quick checklist for &quot;merge complete&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Merged the other auditor&#39;s file into your copy</li>
+<li><input disabled="" type="checkbox"> Every reported <strong>conflict</strong> resolved (0 remaining)</li>
+<li><input disabled="" type="checkbox"> Spot-checked a few merged rows</li>
+<li><input disabled="" type="checkbox"> Saved (<strong>Cmd+S</strong>) — combined state is the canonical file</li>
+</ul>
+<hr>
+<p><em>See also: the <strong>SME Review</strong> walkthrough (same resolution UX for expert decisions) and <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

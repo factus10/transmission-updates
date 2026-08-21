@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KKE — The Classic Framework — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<hr>
+<h2 id="title-kke--the-classic-framework-status-stable-last-reviewed-2026-04-28">title: KKE — The Classic Framework
+status: stable
+last-reviewed: 2026-04-28</h2>
+<h1 id="kke--the-classic-framework">KKE — The Classic Framework</h1>
+<p>The four-state vocabulary used in most content audits today, including most of ours. This page documents what KKE <em>is</em> and how it&#39;s used. The argument for moving past it lives in <a href="the-five-dimensions.html">Why KKE Falls Short</a>.</p>
+<h2 id="the-four-states">The four states</h2>
+<h3 id="keep">Keep</h3>
+<p>Content is high-quality, on-strategy, performing well. Migrate as-is. URL may stay or move depending on IA changes; content stays.</p>
+<p><strong>Typical signals:</strong> healthy traffic, positive engagement metrics, current information, no overlap with other pages.</p>
+<h3 id="kill">Kill</h3>
+<p>Content is low-quality, off-strategy, redundant, or has no audience. Remove it. URL retires (with a redirect to the most appropriate destination, or a deliberate 404).</p>
+<p><strong>Typical signals:</strong> zero or near-zero traffic, outdated information, broken purpose (e.g. event pages from past events), redundant with better-performing pages.</p>
+<h3 id="evolve">Evolve</h3>
+<p>Content has value but needs work. Improve in place — rewrite, expand, restructure, update — without changing its identity. URL typically stays.</p>
+<p><strong>Typical signals:</strong> decent traffic but high bounce, partially current information, gaps in coverage, structurally outdated.</p>
+<h3 id="exclude">Exclude</h3>
+<p>Page should not be part of the audit&#39;s recommendations. Either it shouldn&#39;t have been crawled in the first place, or it&#39;s out of scope.</p>
+<p><strong>Typical signals:</strong> crawl noise (sitemap fragments, JSON endpoints, search result pages), administrative URLs, pages owned by another team, regulated content under legal hold.</p>
+<blockquote>
+<p><strong>Note:</strong> the auditor convention has historically conflated several distinct uses of Exclude. See <a href="patterns.html#a-the-post-launch-problem">Patterns: The Post-Launch Problem</a> and <a href="the-five-dimensions.html#scope">Why KKE Falls Short — Scope dimension</a>.</p>
+</blockquote>
+<h2 id="sibling-frameworks">Sibling frameworks</h2>
+<p>KKE is one of several four-bucket triage rubrics used in the industry. They share the same architecture — a single column of mutually-exclusive labels — and the same limitations.</p>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Values</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>KKE</strong></td>
+<td>Keep / Kill / Evolve / Exclude</td>
+<td>The version we use most often.</td>
+</tr>
+<tr>
+<td><strong>MRA</strong></td>
+<td>Migrate / Revise / Archive</td>
+<td>Migration-flavored. &quot;Archive&quot; is closer to &quot;Exclude&quot; than to &quot;Kill.&quot;</td>
+</tr>
+<tr>
+<td><strong>KKER</strong></td>
+<td>Keep / Kill / Evolve / Replace</td>
+<td>Adds Replace as distinct from Evolve. Closer to acknowledging Content Fate as a real dimension.</td>
+</tr>
+<tr>
+<td><strong>CCC</strong></td>
+<td>Cull / Consolidate / Create</td>
+<td>More strategic-flavored. Notably includes Consolidate as a first-class state — most other frameworks don&#39;t.</td>
+</tr>
+<tr>
+<td><strong>Triage</strong></td>
+<td>Various, often Keep / Fix / Toss</td>
+<td>Informal.</td>
+</tr>
+</tbody></table>
+<p>All of them share KKE&#39;s compression problem. None of them addresses Authority or Confidence as real dimensions.</p>
+<h2 id="the-fifth-state-consolidate">The fifth state: Consolidate</h2>
+<p>We&#39;ve added <strong>Consolidate</strong> as a fifth state in our practice. It means: <em>this page is going away, and its content is being merged into another page in the inventory.</em> The destination is recorded in a <code>Consolidate_Into</code> column.</p>
+<p>Consolidate is the merge option. Without it, auditors are forced to choose between:</p>
+<ul>
+<li>Kill (which discards the content&#39;s value)</li>
+<li>Evolve (which leaves cannibalization in place across multiple &quot;improved&quot; pages)</li>
+</ul>
+<p>Neither is right when the correct decision is &quot;merge these into one canonical page.&quot;</p>
+<p>Consolidate brings its own data requirements: the target URL must be picked, the redirect must chase the target through any URL changes the target itself goes through, and SMEs need a way to recommend it (<code>Change: Consolidate</code>). See <a href="../user-guide.html#9-consolidate">the audit tool&#39;s Consolidate workflow</a> for the operational specifics.</p>
+<h2 id="when-kke-works-well">When KKE works well</h2>
+<p>KKE is genuinely useful as a <strong>client-facing summary</strong>:</p>
+<ul>
+<li>&quot;We reviewed 3,400 pages: 1,100 Keep, 1,200 Kill, 800 Evolve, 200 Consolidate, 100 Exclude.&quot;</li>
+<li>The five labels fit on one line of a deck.</li>
+<li>Stakeholders grasp the categories instantly.</li>
+</ul>
+<p>It also works fine for <strong>simple sites</strong> where the patterns in <a href="patterns.html">Patterns Where KKE Breaks</a> don&#39;t show up in volume.</p>
+<h2 id="when-kke-breaks-down">When KKE breaks down</h2>
+<p>The five-state vocabulary stops being enough when:</p>
+<ul>
+<li>Multiple authorities (auditor, SME, analytics, AI) disagree about the same page</li>
+<li>Pages need to be deferred without being excluded</li>
+<li>The page is high-quality but its URL is changing</li>
+<li>One page should become two or three pages</li>
+<li>Multiple pages should become one</li>
+</ul>
+<p>The <a href="the-five-dimensions.html">Five Dimensions analysis</a> explains why these break the model. The <a href="patterns.html">Patterns page</a> catalogs how they show up in real engagements.</p>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="content-audit-overview.html">Content Audit Overview</a></li>
+<li><a href="the-five-dimensions.html">Why KKE Falls Short — The Five Dimensions</a></li>
+<li><a href="patterns.html">Patterns Where KKE Breaks</a></li>
+<li><a href="content-audit-disposition.html">Content Audit Disposition (CAD)</a></li>
+</ul>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

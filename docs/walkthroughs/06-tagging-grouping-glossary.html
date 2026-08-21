@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tagging, Grouping & the Glossary Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="tagging-grouping--the-glossary-walkthrough">Tagging, Grouping &amp; the Glossary Walkthrough</h1>
+<p>How to build a consistent vocabulary across the audit — so &quot;thin content&quot; means the same thing on page 12 and page 1,200 — and document it for the client.</p>
+<blockquote>
+<p>Prerequisite: a file is open.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<p>Three distinct vocabulary fields, each with a different job:</p>
+<ul>
+<li><strong>Group</strong> — <em>one per page.</em> The high-level bucket a page belongs to (e.g. &quot;Admissions,&quot; &quot;Research&quot;). Drives the <strong>Group</strong> filter and section-level reports.</li>
+<li><strong>Primary Tag</strong> — <em>one per page.</em> The single most important descriptor — the page&#39;s headline characteristic.</li>
+<li><strong>Tags</strong> — <em>many per page.</em> A free, comma-separated set of finer descriptors (<code>thin-content, outdated, evergreen</code>).</li>
+</ul>
+<p>The <strong>Glossary</strong> is the layer that keeps these honest: a per-name definition so every auditor uses each term the same way, and so the client gets a documented key.</p>
+<hr>
+<h2 id="1-apply-the-vocabulary">1. Apply the vocabulary</h2>
+<p>In the <strong>Classify</strong> cluster of the audit bar:</p>
+<ul>
+<li><strong>Group</strong> / <strong>Primary</strong> are single-select dropdowns; each has <strong>+ New…</strong> to define a value on the fly (sanitized and added to the library).</li>
+<li><strong>Tags</strong> is a chip input — <strong>+ Add tag</strong> picks from the library or creates a new tag inline.</li>
+</ul>
+<p>For many pages at once, use the <strong>Multi-bar</strong>: <strong>Set Group</strong>, <strong>Set Primary Tag</strong>, or <strong>Add Tag</strong> (see <strong>Bulk Operations</strong>).</p>
+<blockquote>
+<p>Consistency beats coverage. A small, well-defined tag set applied uniformly is far more useful in reports than a sprawling one applied ad hoc.</p>
+</blockquote>
+<hr>
+<h2 id="2-document-terms-in-the-glossary">2. Document terms in the Glossary</h2>
+<p><strong>Project → Edit Glossary…</strong> opens the editor:</p>
+<ul>
+<li>Two sections — <strong>Tags</strong> and <strong>Groups</strong> — list every known name.</li>
+<li>Add <strong>Notes</strong> (markdown) per term: what it means, when to apply it, examples.</li>
+<li>Empty-notes entries are pruned on save, so only documented terms persist.</li>
+</ul>
+<p>The glossary travels with the file (the <strong>KKE_Glossary</strong> sheet), so the definitions move with the project.</p>
+<hr>
+<h2 id="3-hand-the-glossary-to-the-client">3. Hand the glossary to the client</h2>
+<p>In the glossary editor, <strong>Export for Word…</strong> writes an <code>.html</code> file you can open directly in Word — a clean, formatted key of every tag and group with its definition. Use it as an appendix to the audit deliverable so stakeholders can read the tagged inventory without the app.</p>
+<hr>
+<h2 id="quick-checklist-for-good-vocabulary">Quick checklist for &quot;good vocabulary&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Every page has a <strong>Group</strong> (section-level reports depend on it)</li>
+<li><input disabled="" type="checkbox"> <strong>Primary Tag</strong> set where one descriptor clearly dominates</li>
+<li><input disabled="" type="checkbox"> <strong>Tags</strong> drawn from a deliberate, reused set — not freeform sprawl</li>
+<li><input disabled="" type="checkbox"> Every term in active use has a <strong>Glossary</strong> definition</li>
+<li><input disabled="" type="checkbox"> Glossary <strong>exported for Word</strong> if the client needs the key</li>
+<li><input disabled="" type="checkbox"> Saved (<strong>Cmd+S</strong>)</li>
+</ul>
+<hr>
+<p><em>Next (Classify for migration): <strong>Content Types &amp; the Crosswalk</strong>. See also <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

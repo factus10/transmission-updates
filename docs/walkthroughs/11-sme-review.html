@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SME Review Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="sme-review-walkthrough">SME Review Walkthrough</h1>
+<p>How to get subject-matter experts to validate your KKE calls without giving them the app — a round-trip through a self-contained spreadsheet they fill in and you reconcile.</p>
+<blockquote>
+<p>Prerequisite: KKE calls made on the pages you want reviewed.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<p>The loop is <strong>export → reviewer fills dropdowns → import → resolve</strong>:</p>
+<ul>
+<li>You <strong>export</strong> a standalone <code>.xlsx</code> with built-in dropdowns. The SME needs only Excel.</li>
+<li>They record an <strong>SME Decision</strong> per page (approve your call, or change it) plus notes.</li>
+<li>You <strong>import</strong> their file back, <strong>compare</strong> their decisions against yours, and <strong>resolve</strong> every conflict into a <strong>Final KKE</strong>.</li>
+</ul>
+<p>The SME&#39;s columns (<strong>SME_Decision</strong>, <strong>SME_Notes</strong>, <strong>Content_Owner</strong>) merge in alongside your audit — they never overwrite your original KKE.</p>
+<hr>
+<h2 id="1-export-for-review">1. Export for review</h2>
+<ol>
+<li><strong>SME → Export for SME Review…</strong> opens the export modal.</li>
+<li>Optionally <strong>split by Content Owner</strong> — produces one file per owner so each reviewer sees only their pages.</li>
+<li>The export uses ExcelJS to embed <strong>data-validation dropdowns</strong> (so SMEs pick from a fixed list, not free-type), and ships.</li>
+</ol>
+<blockquote>
+<p>The file is fully standalone — hand it off by email; the reviewer needs no install.</p>
+</blockquote>
+<hr>
+<h2 id="2-reviewer-fills-it-in">2. Reviewer fills it in</h2>
+<p>Each page row offers an <strong>SME Decision</strong>: <strong>Approve</strong> the recommendation, or <strong>Change: Keep / Kill / Evolve / Exclude</strong>, with room for <strong>SME Notes</strong> and <strong>Content Owner</strong>. They fill, save, send it back.</p>
+<hr>
+<h2 id="3-import-their-decisions">3. Import their decisions</h2>
+<p><strong>SME → Import SME Decisions…</strong> reads the returned file (pick the sheet if prompted) and merges <strong>SME_Decision</strong>, <strong>SME_Notes</strong>, <strong>Content_Owner</strong> into your working data — matched by URL, leaving your KKE column intact.</p>
+<hr>
+<h2 id="4-compare-and-resolve">4. Compare and resolve</h2>
+<ul>
+<li><strong>SME → Compare KKE vs SME…</strong> shows where the SME agreed vs. diverged from your call — a quick read on the review.</li>
+<li><strong>SME → Resolve Conflicts…</strong> reconciles into <strong>Final_KKE</strong>: where the SME <strong>approved</strong>, Final matches your KKE; where they chose <strong>Change: X</strong>, Final becomes their override.</li>
+</ul>
+<p>Two sidebar special filters help you work the list: <strong>SME conflicts</strong> and <strong>SME pending</strong>.</p>
+<blockquote>
+<p>Turn on <strong>Show SME fields</strong> (App Settings) to see SME Decision / Final KKE / Content Owner inline in the <strong>Decide</strong> cluster while you reconcile.</p>
+</blockquote>
+<hr>
+<h2 id="quick-checklist-for-sme-review-complete">Quick checklist for &quot;SME review complete&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Exported (split by owner if multiple reviewers)</li>
+<li><input disabled="" type="checkbox"> Reviewer file(s) imported — SME columns populated</li>
+<li><input disabled="" type="checkbox"> <strong>Compare KKE vs SME</strong> reviewed for divergence</li>
+<li><input disabled="" type="checkbox"> <strong>Resolve Conflicts</strong> run — every reviewed page has a <strong>Final KKE</strong></li>
+<li><input disabled="" type="checkbox"> <strong>SME conflicts / pending</strong> filters are empty</li>
+<li><input disabled="" type="checkbox"> Saved (<strong>Cmd+S</strong>)</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Multi-auditor Merge</strong> — combining work from several auditors. See also <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

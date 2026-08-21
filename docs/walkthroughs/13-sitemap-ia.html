@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sitemap & IA Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="sitemap--ia-walkthrough">Sitemap &amp; IA Walkthrough</h1>
+<p>How to build the <strong>future-state sitemap</strong> and place every page you&#39;re keeping onto it. This is where the audit stops being a list of pages and becomes the shape of the new site.</p>
+<blockquote>
+<p>Prerequisite: you&#39;ve made KKE calls (at least <strong>Keep</strong> / <strong>Evolve</strong>) on the pages that matter. Placement operates on those rows; <strong>Kill</strong> and <strong>Consolidate</strong> pages don&#39;t get placed (they fold into a target or redirect).</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>The <strong>audit rows</strong> answer &quot;what do we do with each <em>existing</em> page?&quot;</li>
+<li>The <strong>sitemap</strong> answers &quot;what is the <em>new</em> site?&quot; — its sections, hierarchy, and URLs.</li>
+<li>You connect the two by <strong>placing</strong> each Keep/Evolve page onto a sitemap node. A node can carry <strong>0</strong> source pages (net-new), <strong>1</strong>, or <strong>many</strong> (a consolidation target).</li>
+<li>The tree is the source of truth for breadcrumbs and the computed URL of every node. Rename a node and the change cascades to its descendants and to every page assigned under it.</li>
+</ul>
+<p>Open the tree with <strong>Cmd+Shift+T</strong> (or the <strong>Sitemap</strong> tab in the view switcher). The <strong>stats line</strong> under the toolbar is your dashboard — learn to read it (see §6).</p>
+<blockquote>
+<p>Starting fresh? You don&#39;t have to open the Sitemap first. On any page in the <strong>Audit</strong> view, clicking the audit bar&#39;s <strong>Sitemap</strong> button when the sitemap is still empty offers an inline form (Label prefilled from the title, Slug from the URL) and a <strong>Create &amp; assign</strong> button that creates the first root node and assigns the page in one step.</p>
+</blockquote>
+<hr>
+<h2 id="1-place-every-keepevolve-page">1. Place every Keep/Evolve page</h2>
+<p>Goal: drive <strong>need placement</strong> in the stats line to <strong>0</strong>.</p>
+<p>&quot;Need placement&quot; = Keep/Evolve rows with no sitemap node yet. To find and assign them:</p>
+<ol>
+<li><strong>Audit</strong> view (<strong>Cmd+1</strong>) → <strong>KKE</strong> filter → check <strong>Keep</strong> + <strong>Evolve</strong> → <strong>+ Field filter</strong> → field <code>Sitemap_ID</code>, operator <strong>is blank</strong> → <strong>Apply</strong>.</li>
+<li>For each row, click <strong>Sitemap</strong> (in the <strong>DECIDE</strong> cluster) → drill to the right node → <strong>Assign</strong>. Use <strong>+ Child</strong> in the picker footer to create a new node inline if no good home exists yet.</li>
+<li>To place many similar pages at once: multi-select them in the sidebar (<strong>Cmd/Shift-click</strong>), then <strong>drag the selection onto a node</strong> in the tree.</li>
+</ol>
+<blockquote>
+<p>Fast path: the stats line&#39;s <strong>N need placement</strong> link is clickable — it jumps you straight to the audit view filtered to exactly those rows. Work the list down to zero.</p>
+</blockquote>
+<p>Consolidation note: pages you marked <strong>Consolidate</strong> don&#39;t need placement — they fold into their target. The <em>target</em> page (usually <strong>Evolve</strong>) is what gets the sitemap node.</p>
+<hr>
+<h2 id="2-shape-the-future-state-tree">2. Shape the future-state tree</h2>
+<p>In the <strong>Sitemap</strong>:</p>
+<ul>
+<li><strong>Rename / re-slug</strong> inline — double-click the label, or open the <strong>✎</strong> node editor. The <strong>Label</strong> drives the breadcrumb; the <strong>Slug</strong> drives the computed URL segment. Changes cascade to descendants and assigned pages.</li>
+<li><strong>Reorder / reparent</strong> by dragging the grip handle. Top/bottom third of a row = move as a sibling; middle = drop <em>into</em> the row as a child.</li>
+<li><strong>Add</strong> nodes: <strong>+ Root Node</strong> (toolbar) or the <strong>+</strong> on a row.</li>
+<li><strong>Clone branch</strong> (<strong>⧉</strong>) deep-copies a node and its children as a sibling — structure only, no page assignments.</li>
+<li><strong>Remediate</strong> (toolbar) ensures every assigned page has a child node in the tree — useful after a bulk reorganization.</li>
+</ul>
+<blockquote>
+<p>Gotcha: duplicate slugs inside the same branch are highlighted in red. Two children of one parent can&#39;t share a slug — they&#39;d collide on the same URL.</p>
+</blockquote>
+<hr>
+<h2 id="3-node-type-references-and-external-links">3. Node type, references, and external links</h2>
+<p>Open a node&#39;s editor (double-click the label, or <strong>✎</strong>). The top fields define what kind of node it is:</p>
+<ul>
+<li><strong>Node type</strong> — <strong>Page (standard)</strong> / <strong>Header / organizing level</strong> / <strong>Fragment / shared content</strong>. A <strong>Header</strong> is a grouping level with no page of its own; a <strong>Fragment</strong> is shared/embedded content with no menu entry, breadcrumb, or redirect (see the Build &amp; Direction walkthrough).</li>
+<li><strong>In menu</strong> — toggles whether the node appears in the navigation menus. (<strong>Set Menu ✓</strong> / <strong>Clear Menu</strong> in the toolbar bulk-toggle this for all <em>visible</em> nodes — combine with the Depth filter.)</li>
+<li><strong>External URL</strong> — point a menu item at an outside URL instead of a built page.</li>
+<li><strong>Reference</strong> — alias this node to another node (a &quot;→ breadcrumb&quot; target) so the same destination can appear in two places without duplicating it.</li>
+</ul>
+<blockquote>
+<p>Menus are built separately (the <strong>Menus</strong> view / <strong>Cmd+Shift+M</strong>), but you can add a page to one without leaving the audit: the audit bar&#39;s <strong>Menu</strong> button first ensures the page is on the sitemap, then lets you pick an existing menu, start a <strong>+ New menu…</strong>, or create your first menu on the spot.</p>
+</blockquote>
+<hr>
+<h2 id="4-phase-out-of-scope-work">4. Phase out-of-scope work</h2>
+<p>Not everything in the tree ships in this build. In the node editor, set <strong>Phase</strong>:</p>
+<ul>
+<li><strong>— Current build (default)</strong> — counts toward the live build.</li>
+<li><strong>Future / Aspirational</strong>, <strong>Stretch goal</strong>, <strong>Archived</strong>, or any custom value — excluded from the &quot;current&quot; counts and optionally from exports.</li>
+</ul>
+<p>Phased nodes get a phase badge in the tree and never raise a net-new &quot;NEW&quot; badge. Filter by phase with the toolbar <strong>Phase:</strong> dropdown (<strong>All</strong> / <strong>Current build only</strong> / <strong>Non-current only</strong>). On export you&#39;ll be asked whether to include phased nodes.</p>
+<hr>
+<h2 id="5-read-the-gap-signals">5. Read the gap signals</h2>
+<p>Two badges tell you where the tree is incomplete:</p>
+<ul>
+<li><strong>NEW</strong> (yellow, in the Pages column) — a <strong>net-new</strong> node: it has descendant pages but no source page of its own. Expected for brand-new sections; a flag if you didn&#39;t mean it.</li>
+<li><strong>Empty leaf</strong> (red) — a node with no pages <em>and</em> no redirects pointing at it. Either assign content, mark it net-new, phase it, or delete it before hand-off.</li>
+</ul>
+<p>A <strong>⚠ N duplicate IDs</strong> link appears in the stats line if any Sitemap_ID is assigned to two nodes — click it to auto-renumber the duplicates.</p>
+<hr>
+<h2 id="6-track-coverage-in-the-stats-line">6. Track coverage in the stats line</h2>
+<p>The stats line reads, in order:</p>
+<p><code>N nodes · M current (A assigned, H net new, E empty) · [phase buckets] · P pages placed · [F fragments] · [status tallies] · X need placement</code></p>
+<ul>
+<li><strong>need placement → 0</strong> is your &quot;every Keep/Evolve page is in the IA&quot; check (§1).</li>
+<li><strong>empty</strong> is your coverage-gap count (§5).</li>
+<li><strong>status tallies</strong> (e.g. &quot;5 built · 3 in progress&quot;) track build completion — covered in the Build &amp; Direction walkthrough.</li>
+</ul>
+<p><strong>Filter the tree</strong> with the toolbar dropdowns:</p>
+<ul>
+<li><strong>Depth:</strong> collapse to a level (then bulk <strong>Set Menu ✓</strong> / <strong>Clear Menu</strong> on what&#39;s visible).</li>
+<li><strong>Phase:</strong> current vs. non-current (§4).</li>
+<li><strong>Build:</strong> by status / assignee / pattern / guidance presence (Build &amp; Direction walkthrough).</li>
+</ul>
+<p>Also: <strong>Collapse All</strong> / <strong>Expand All</strong>, and fold state persists across re-renders.</p>
+<hr>
+<h2 id="7-resolve-overlapping-pages-optional">7. Resolve overlapping pages (optional)</h2>
+<p>If several pages landed on one node, they may be consolidation candidates:</p>
+<ul>
+<li>Toolbar → <strong>Consolidation Candidates…</strong> lists every node with <strong>2+</strong> assigned pages. Pick the target (→ <strong>Evolve</strong>); the rest become <strong>Consolidate</strong> pointing at it, with their sitemap assignment cleared.</li>
+</ul>
+<hr>
+<h2 id="8-see-it-and-report-on-it">8. See it and report on it</h2>
+<p><strong>Visual Sitemap</strong> — toolbar <strong>Sitemap</strong>: a box-style tree where solid borders = in-menu, dashed = not in menu, fill color = build pattern, a stacked shadow = hidden children, and a corner badge = page count. Toggle <strong>Menu items only</strong>, switch <strong>Visual / Text Tree</strong> tabs, zoom/pan, and export as <strong>PDF</strong> or <strong>SVG/HTML</strong>.</p>
+<p><strong>IA &amp; coverage reports:</strong></p>
+<ul>
+<li><strong>IA Report</strong> (toolbar) or <strong>Reports → Sitemap &amp; IA…</strong> — the sitemap with per-node page and redirect counts; flags empty, redirect-only, and header nodes.</li>
+<li><strong>Reports → Sitemap Coverage Report…</strong> — empty leaves, hubs, overloaded nodes, and path mismatches.</li>
+<li><strong>Reports → Net New Content Brief…</strong> — every node that needs brand-new content.</li>
+</ul>
+<hr>
+<h2 id="quick-checklist-for-good-ia">Quick checklist for &quot;good IA&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>need placement = 0</strong> — every Keep/Evolve page sits on a node</li>
+<li><input disabled="" type="checkbox"> No <strong>empty</strong> leaf nodes left unexplained (assign / net-new / phase / delete)</li>
+<li><input disabled="" type="checkbox"> No <strong>duplicate Sitemap_ID</strong> warning in the stats line</li>
+<li><input disabled="" type="checkbox"> No red <strong>duplicate-slug</strong> highlights within a branch</li>
+<li><input disabled="" type="checkbox"> <strong>In menu</strong> set correctly on every node that belongs in navigation</li>
+<li><input disabled="" type="checkbox"> Phased work is marked <strong>Future / Stretch / Archived</strong>, not left in the current build</li>
+<li><input disabled="" type="checkbox"> Net-new sections are intentional, not accidental <strong>NEW</strong> badges</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Build &amp; Direction</strong> — annotate these nodes with target specs, build metadata, and Builder / Writer / Migrator assignments, then generate the per-person worklists. See also <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

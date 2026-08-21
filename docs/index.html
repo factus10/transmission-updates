@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Transmission documentation</h1>
+<p>Everything you need to run a content audit and migration in Transmission. New here? Start with the <a href="quick-start.html">Quick Start</a>, then <a href="running-an-audit.html">Running an Audit</a>.</p>
+<div class="index-section">
+<h2>Start here</h2>
+<ul class="index-list">
+  <li><a href="quick-start.html">Transmission — Quick Start</a><span class="blurb">The five-minute tour of the core loop.</span></li>
+  <li><a href="running-an-audit.html">Running an Audit with Transmission</a><span class="blurb">The opinionated engagement sequence — what to do in what order, and why the order matters.</span></li>
+  <li><a href="user-guide.html">Transmission — User Guide</a><span class="blurb">The full manual, feature by feature.</span></li>
+</ul>
+</div>
+<div class="index-section">
+<h2>Walkthroughs</h2>
+<p>One-page checklists for each stage of the lifecycle — the terse version of the User Guide.</p>
+<ul class="index-list">
+  <li><a href="walkthroughs/index.html">Transmission — Process Walkthroughs</a></li>
+  <li><a href="walkthroughs/01-getting-started.html">Getting Started Walkthrough</a></li>
+  <li><a href="walkthroughs/02-project-setup.html">Project Setup Walkthrough</a></li>
+  <li><a href="walkthroughs/03-running-the-audit-pass.html">Running the Audit Pass Walkthrough</a></li>
+  <li><a href="walkthroughs/04-finding-the-work.html">Finding the Work Walkthrough</a></li>
+  <li><a href="walkthroughs/05-bulk-operations.html">Bulk Operations Walkthrough</a></li>
+  <li><a href="walkthroughs/06-tagging-grouping-glossary.html">Tagging, Grouping & the Glossary Walkthrough</a></li>
+  <li><a href="walkthroughs/07-content-types-crosswalk.html">Content Types & the Crosswalk Walkthrough</a></li>
+  <li><a href="walkthroughs/08-suggested-kke.html">Suggested_KKE Walkthrough</a></li>
+  <li><a href="walkthroughs/09-consolidate.html">Consolidate Walkthrough</a></li>
+  <li><a href="walkthroughs/10-non-200-triage.html">Non-200 Triage Walkthrough</a></li>
+  <li><a href="walkthroughs/11-sme-review.html">SME Review Walkthrough</a></li>
+  <li><a href="walkthroughs/12-multi-auditor-merge.html">Multi-auditor Merge Walkthrough</a></li>
+  <li><a href="walkthroughs/13-sitemap-ia.html">Sitemap & IA Walkthrough</a></li>
+  <li><a href="walkthroughs/14-build-direction.html">Build & Direction Walkthrough</a></li>
+  <li><a href="walkthroughs/15-redirects.html">Redirects Walkthrough</a></li>
+  <li><a href="walkthroughs/16-producing-the-outputs.html">Producing the Outputs Walkthrough</a></li>
+  <li><a href="walkthroughs/17-migration-tracker.html">Migration Tracker Hand-off Walkthrough</a></li>
+  <li><a href="walkthroughs/18-preflight-handoff.html">Pre-flight & Hand-off Walkthrough</a></li>
+  <li><a href="walkthroughs/19-templates.html">Templates Walkthrough</a></li>
+  <li><a href="walkthroughs/20-component-inventory.html">Component Inventory Walkthrough</a></li>
+</ul>
+</div>
+<div class="index-section">
+<h2>Methodology</h2>
+<p>Practice-level guidance behind the tool: the frameworks, the vocabulary, and how the decisions are meant to be made.</p>
+<ul class="index-list">
+  <li><a href="methodology/index.html">Content Practice Wiki</a></li>
+  <li><a href="methodology/content-audit-disposition.html">Content Audit Disposition (CAD)</a></li>
+  <li><a href="methodology/content-audit-overview.html">Content Audit Overview</a></li>
+  <li><a href="methodology/glossary.html">Glossary</a></li>
+  <li><a href="methodology/kke-classic.html">KKE — The Classic Framework</a></li>
+  <li><a href="methodology/kke-rubric-baseline.html">KKE Rubric — Baseline Definitions</a></li>
+  <li><a href="methodology/migration-track-baseline.html">Migration Track — Baseline Definitions</a></li>
+  <li><a href="methodology/patterns.html">Patterns Where KKE Breaks</a></li>
+  <li><a href="methodology/related-practices-roadmap.html">Related Practices — Roadmap</a></li>
+  <li><a href="methodology/the-five-dimensions.html">Why KKE Falls Short — The Five Dimensions</a></li>
+  <li><a href="methodology/vocabulary-governance.html">Vocabulary Governance</a></li>
+</ul>
+</div>
+<div class="index-section">
+<h2>Report templates</h2>
+<p>For customizing the briefs Transmission generates.</p>
+<ul class="index-list">
+  <li><a href="report-templates/fields-assignee-brief.html">Template fields — Writer / Builder Brief</a></li>
+  <li><a href="report-templates/writer-builder-brief.html">{{report.title}}</a></li>
+</ul>
+</div>
+<div class="index-section">
+<h2>Background</h2>
+<ul class="index-list">
+  <li><a href="content-audit-framework.html">Content Audit Framework — A Critical Review of KKE</a><span class="blurb">The thinking behind Keep / Kill / Evolve, and where the framework strains.</span></li>
+</ul>
+</div>
+<footer>Transmission — content audit and migration platform. <a href="../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

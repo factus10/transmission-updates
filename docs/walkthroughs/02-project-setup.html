@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Setup Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="project-setup-walkthrough">Project Setup Walkthrough</h1>
+<p>How to configure a project so the rest of the audit runs smoothly — identity, the KKE vocabulary, where suggestions come from, and the migration vocabularies. Five minutes here saves friction everywhere downstream.</p>
+<blockquote>
+<p>Prerequisite: a file is open (see <strong>Getting Started</strong>).</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<p>There are <strong>two tiers of configuration</strong>, and they behave differently:</p>
+<ul>
+<li><strong>Project Settings</strong> — <em>&quot;Saved with this file — travels with the spreadsheet.&quot;</em> Anything client-specific lives here: site domain, custom KKE states, suggestion weights, page statuses, assignees, saved filters. Hand off the file and these come with it.</li>
+<li><strong>App Settings</strong> — <em>&quot;Applies to you, across all files.&quot;</em> Per-user UI preferences: auto-advance, which clusters are visible, your API key, sidebar columns, column mapping. These stay on your machine.</li>
+</ul>
+<p>If a setting should be the same for every auditor on this client, it belongs in <strong>Project Settings</strong>. If it&#39;s how <em>you</em> like to work, it&#39;s <strong>App Settings</strong>.</p>
+<hr>
+<h2 id="1-project-settings--the-five-tabs">1. Project Settings — the five tabs</h2>
+<p>Open with <strong>File → Project Settings…</strong> (or <strong>Project → Project Settings…</strong>). It&#39;s a tabbed modal:</p>
+<p><strong>Identity</strong> — <strong>Client name</strong>, <strong>Project name</strong>, <strong>Site domain</strong>, <strong>Default redirect destination</strong>. The site domain drives redirect URLs and sitemap paths; changing it offers to rewrite existing redirect destinations to the new domain.</p>
+<p><strong>KKE States</strong> — add <strong>custom KKE states</strong> (with a color), beyond the five built-ins (Keep / Kill / Evolve / Consolidate / Exclude), and clean up rogue values. Custom states are stored both with the file <em>and</em> in your app prefs, so new files inherit them.</p>
+<p><strong>Suggestions</strong> — configure the <strong>Suggested_KKE</strong> sources:</p>
+<ul>
+<li><strong>GA Analytics</strong> source — opens the GA column mapping + metric weights dialog.</li>
+<li><strong>Rubric</strong> source — runs the rubric batch.</li>
+<li><strong>Source weights</strong> (GA / Rubric, 0–5) with <strong>Save weights &amp; recompute</strong>.</li>
+</ul>
+<p><strong>Migration</strong> — the two controlled vocabularies used by the build phase:</p>
+<ul>
+<li><strong>Page Statuses</strong> — color, rename (cascades), reorder, delete (cascade-clears). Seeded with 6 defaults.</li>
+<li><strong>Assignees</strong> — one shared pool for Builder / Writer / Migrator, with per-name usage counts; rename/delete cascade across nodes.</li>
+</ul>
+<p><strong>Saved Filters</strong> — list of named filter bundles with <strong>Apply</strong> / <strong>Delete</strong> per row (created from the sidebar — see <strong>Finding the Work</strong>).</p>
+<blockquote>
+<p>All of these save into the file&#39;s <strong>KKE_Settings</strong> sheet on <strong>Cmd+S</strong>.</p>
+</blockquote>
+<hr>
+<h2 id="2-app-settings--per-user-preferences">2. App Settings — per-user preferences</h2>
+<p>Open with the <strong>⚙</strong> button (or <strong>File → App Settings</strong>). The subtitle confirms it: <em>Applies to you, across all files.</em></p>
+<ul>
+<li><strong>Auto-advance</strong> — jump to the next row after you assign a KKE status.</li>
+<li><strong>Show SME fields</strong> — reveal SME Decision / Final KKE / Content Owner in the audit bar.</li>
+<li><strong>Show Migration fields</strong> — reveal Content Nature / Migration Track.</li>
+<li><strong>Show Components cluster</strong> — reveal the design-pattern (Components) cluster.</li>
+<li><strong>Rubrics folder</strong> — point at your rubric markdown; <strong>Browse…</strong> / <strong>Edit…</strong>.</li>
+<li><strong>Claude API key</strong> — optional, enables AI assessment.</li>
+<li><strong>Sidebar columns</strong> — extra columns to show in the row list.</li>
+<li><strong>Column mapping</strong> — tell the app which spreadsheet columns hold KKE / Tags / Notes / Group / Primary, then <strong>Apply</strong>. Use this when your file&#39;s columns are named differently from the defaults.</li>
+</ul>
+<hr>
+<h2 id="3-decide-whats-on-screen">3. Decide what&#39;s on screen</h2>
+<p>The three <strong>Show …</strong> toggles (and the <strong>Components</strong> quick-chip above the audit bar) control how much of the audit bar you see. Turn on only what this engagement needs:</p>
+<ul>
+<li>Doing migration classification? Turn on <strong>Show Migration fields</strong>.</li>
+<li>Running an SME loop? Turn on <strong>Show SME fields</strong>.</li>
+<li>Inventorying UI components? Turn on <strong>Show Components cluster</strong>.</li>
+</ul>
+<p>Blank read-only metadata fields are hidden by default, and each audit-bar <strong>cluster collapses</strong> with a click — so the bar stays compact regardless.</p>
+<hr>
+<h2 id="quick-checklist-for-project-configured">Quick checklist for &quot;project configured&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Identity</strong> filled — at least <strong>Site domain</strong> (redirects/paths depend on it)</li>
+<li><input disabled="" type="checkbox"> Any <strong>custom KKE states</strong> the engagement needs are defined</li>
+<li><input disabled="" type="checkbox"> <strong>Suggestion sources</strong> set up if you&#39;ll use Suggested_KKE (GA mapping and/or rubrics, weights)</li>
+<li><input disabled="" type="checkbox"> <strong>Migration</strong> vocab seeded if you&#39;ll do the build phase (statuses + assignees)</li>
+<li><input disabled="" type="checkbox"> App Settings reflect how you want to work (auto-advance, visible clusters, API key)</li>
+<li><input disabled="" type="checkbox"> <strong>Saved</strong> — Project Settings persist to the file</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Running the Audit Pass</strong> — the field bar, KKE keys, and the embedded browser. See also <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

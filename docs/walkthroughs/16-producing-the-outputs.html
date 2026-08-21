@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Producing the Outputs Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="producing-the-outputs-walkthrough">Producing the Outputs Walkthrough</h1>
+<p>What every report is <em>for</em> and when to run it. The audit&#39;s value is in the deliverables — this is the map of which one answers which question.</p>
+<blockquote>
+<p>Prerequisite: an audited file. Most reports work with partial data, but read best once KKE calls, classification, and (for IA reports) the sitemap are in place.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>Reports are <strong>read-only views</strong> generated on demand from the current file — run them anytime, as often as you like.</li>
+<li>Each renders in a preview, and every report <strong>exports to PDF or HTML</strong> (HTML opens cleanly in Word).</li>
+<li>They group into three audiences: <strong>stakeholder</strong> narratives, <strong>IA/structure</strong> analyses, and <strong>delivery/engineering</strong> hand-offs.</li>
+</ul>
+<hr>
+<h2 id="1-stakeholder-reports-reports-menu">1. Stakeholder reports (Reports menu)</h2>
+<ul>
+<li><strong>Executive Summary…</strong> — the top-line story: counts by KKE call, what&#39;s being kept/killed/evolved, the shape of the work. Lead with this in a client readout.</li>
+<li><strong>Content Inventory by Section…</strong> — the full inventory grouped by Group/section. The detailed &quot;here&#39;s every page and its decision&quot; appendix.</li>
+<li><strong>SME Review Status…</strong> — where the expert review stands (approved / changed / pending). Run during the SME loop.</li>
+</ul>
+<hr>
+<h2 id="2-ia--structure-reports">2. IA &amp; structure reports</h2>
+<ul>
+<li><strong>Sitemap &amp; IA…</strong> — the future-state sitemap with per-node page and redirect counts; flags empty / redirect-only / header nodes. (Also the <strong>IA Report</strong> button in the sitemap toolbar.)</li>
+<li><strong>Sitemap Coverage Report…</strong> — empty leaves, hubs, overloaded nodes, path mismatches. The gap-finder.</li>
+<li><strong>Content Type Crosswalk…</strong> — current → target content-type mapping with page counts; flags types missing a registry entry.</li>
+<li><strong>Component Inventory…</strong> — UI-component frequency, one-offs, and co-occurrence (see the <strong>Component Inventory</strong> walkthrough).</li>
+</ul>
+<hr>
+<h2 id="3-delivery--engineering-reports">3. Delivery &amp; engineering reports</h2>
+<ul>
+<li><strong>Migration Direction Brief…</strong> — per-person worklists for the <strong>Writer / Builder / Migrator</strong> roles, grouped by target spec (see <strong>Build &amp; Direction</strong>). Supports custom templates.</li>
+<li><strong>Migration Checklist…</strong> — the retain / remove / update / redirect summary the migration team works from.</li>
+<li><strong>Net New Content Brief…</strong> — every sitemap node that needs brand-new content written.</li>
+<li><strong>Redirect Map Report…</strong> — Kill / URL-changed / intentional-404 redirects (see <strong>Redirects</strong>).</li>
+</ul>
+<hr>
+<h2 id="4-export">4. Export</h2>
+<p>In any report preview, use the <strong>PDF</strong> or <strong>HTML</strong> export buttons. HTML is best when the client wants to drop it into Word or a doc; PDF for a fixed deliverable.</p>
+<blockquote>
+<p>The <strong>Migration Direction Brief</strong> can be styled with custom Markdown templates — see the <strong>Templates</strong> walkthrough.</p>
+</blockquote>
+<hr>
+<h2 id="quick-checklist-for-outputs-produced">Quick checklist for &quot;outputs produced&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Executive Summary</strong> for the client readout</li>
+<li><input disabled="" type="checkbox"> <strong>Content Inventory</strong> as the detailed appendix</li>
+<li><input disabled="" type="checkbox"> IA reports (<strong>Sitemap &amp; IA</strong>, <strong>Sitemap Coverage</strong>) if the future sitemap is in scope</li>
+<li><input disabled="" type="checkbox"> <strong>Content Type Crosswalk</strong> if migration classification was done</li>
+<li><input disabled="" type="checkbox"> Delivery reports (<strong>Migration Direction Brief</strong>, <strong>Checklist</strong>, <strong>Net New</strong>) for the build team</li>
+<li><input disabled="" type="checkbox"> Each exported in the format the recipient needs (PDF / HTML)</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Migration Tracker Hand-off</strong> — the multi-sheet engineering workbook. See also <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

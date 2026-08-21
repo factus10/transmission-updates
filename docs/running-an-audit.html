@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Running an Audit with Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="index.html">Transmission documentation</a></nav>
+<h1 id="running-an-audit-with-transmission">Running an Audit with Transmission</h1>
+<p><em>The opinionated path. If you&#39;ve been handed a crawl and a client and don&#39;t know where to start, start here.</em></p>
+<p>Every other document describes <strong>what the tool can do</strong>. This one describes <strong>what to do, in what order, and why that order matters</strong>. The <a href="user-guide.html">User Guide</a> is the reference you&#39;ll come back to for any single feature; this is the sequence you run once per engagement.</p>
+<hr>
+<h2 id="before-anything-the-opinions-this-tool-holds">Before anything: the opinions this tool holds</h2>
+<p>Transmission is not neutral. A handful of decisions are baked in, and every one of them will bite you if you don&#39;t know about it. Read these once — they take two minutes and they prevent most early mistakes.</p>
+<p><strong>A blank cell means <em>nobody has looked yet</em>.</strong> It never means &quot;no&quot;. This is the single most important idea in the tool. A blank KKE is unreviewed. A blank <code>Audiences</code> cell is unreviewed. When you review something and conclude the answer is genuinely negative, you say so explicitly — tag the audience <code>— None (no target audience)</code>, set the KKE to <code>Exclude</code>. The distinction is what lets the tool tell &quot;we haven&#39;t got to it&quot; apart from &quot;we decided against it&quot;, and every report and suggestion depends on it.</p>
+<p><strong>Content you set aside still needs a decision.</strong> Marking a site out of scope narrows your report totals; it does not make the pages go away, and the tool will keep telling you so in a banner on every report. If a property genuinely isn&#39;t part of the work, record that as <code>Exclude</code> on the rows. Filtering is a lens; the decision belongs on the page.</p>
+<p><strong>The tool suggests; you decide.</strong> <code>Suggested_KKE</code> is a weighted vote from analytics, a rubric, and audience tiers. It never writes to your <code>KKE_Recommendation</code>. When the sources disagree the badge says so — that disagreement is usually more informative than any single source, so look at it rather than around it.</p>
+<p><strong>The crawl&#39;s own declarations beat our guesses.</strong> Where a site states something — <code>rel=canonical</code>, a status code — the tool reads it rather than inferring from URL patterns. A parameter-name rule is a guess about someone else&#39;s CMS; a canonical is that CMS telling you the answer.</p>
+<p><strong><code>Kill</code> and <code>Exclude</code> are different.</strong> <code>Kill</code> means the page is being removed and its URL needs a redirect decision. <code>Exclude</code> means the page isn&#39;t part of this audit&#39;s inventory at all — an alternate view, an out-of-scope property, an internal tool. Killing something you meant to exclude pollutes your redirect map with rules nobody needs.</p>
+<p><strong>Everything travels with the file.</strong> Libraries, settings, decisions, and the change log all live in the spreadsheet or the <code>.transmission</code> project. There&#39;s no server and no separate state. Hand someone the file and they have the whole audit.</p>
+<hr>
+<h2 id="the-shape-of-an-engagement">The shape of an engagement</h2>
+<pre><code>0. Reduce the crawl to real content     ← do this first, always
+1. Set the project up                    ← 20 minutes that save days
+2. Classify in bulk                      ← before you look at anything individually
+3. The audit pass                        ← the long part
+4. SME review                            ← optional, but usually the point
+5. IA, sitemap and menus                 ← if you&#39;re replatforming
+6. Redirects                             ← falls out of 3 + 5
+7. Build planning                        ← only if you&#39;re staffing the build
+8. Deliverables
+</code></pre>
+<p>Steps 0–3 are close to mandatory. Everything after depends on what you were hired to do — a pure content audit stops after 4; a replatform goes all the way through 8.</p>
+<hr>
+<h2 id="0-reduce-the-crawl-to-real-content">0. Reduce the crawl to real content</h2>
+<p><strong>Do this before you look at a single page.</strong> A crawl is a list of URLs that responded, not a list of pages. On a CMS-driven site, half of it routinely isn&#39;t content.</p>
+<blockquote>
+<p><strong>Why first:</strong> every step after this one costs time per row. On a recent 13,216-row crawl, this step took the real queue to 6,550 — the auditor&#39;s workload halved before any judgement was made. Do it later and you&#39;ll have spent that time already.</p>
+</blockquote>
+<p><strong>a. Triage non-200 pages.</strong> <code>Project → Triage Non-200 Pages…</code>. Groups by status code with a sensible default action per group. Redirects and 404s in a crawl are rarely content decisions; get them out of the queue.</p>
+<p><strong>b. Triage URL variants.</strong> <code>Project → Triage URL Variants…</code>. Reads each page&#39;s <code>rel=canonical</code> — the site&#39;s own statement that a URL isn&#39;t distinct content — and groups variants by the page they point at.</p>
+<ul>
+<li><strong>Query-only</strong> variants (same path, different query string) default to <code>Exclude</code>. The canonical&#39;s redirect already covers them.</li>
+<li><strong>Different-path</strong> variants default to <code>Consolidate</code> into the canonical, which writes the redirect for you.</li>
+<li>Anything whose canonical wasn&#39;t crawled is left alone; the <em>Canonical target not in this crawl</em> filter finds them.</li>
+</ul>
+<p>The whole triage undoes with one <code>Cmd+Z</code>, so it&#39;s safe to run and look at.</p>
+<p><strong>c. Name the source sites.</strong> <code>Project Settings → Sites</code>. One entry is created per domain found in the crawl. Two jobs here:</p>
+<ul>
+<li><strong>Merge the hosts that are really one site.</strong> <code>www.</code> is folded in automatically; whether <code>careers.</code> or <code>docs.</code> is the same site is your call. Each host shows its page count to make that obvious.</li>
+<li><strong>Un-tick &quot;In scope&quot;</strong> for any property that isn&#39;t part of this engagement. You&#39;ll be asked whether to record <code>Exclude</code> on those rows — say yes unless you intend to review them individually.</li>
+</ul>
+<blockquote>
+<p>If more than one site is in scope, <strong>set the Site Domain</strong> on the Identity tab. Without it, redirect destinations get built on whichever domain happens to come first in the crawl. The tool warns you; don&#39;t ignore it.</p>
+</blockquote>
+<p><strong>Skip this whole step if:</strong> single domain, no query strings, no non-200s. Rare, but it happens on small brochure sites.</p>
+<hr>
+<h2 id="1-set-the-project-up">1. Set the project up</h2>
+<p>Twenty minutes here saves days later, because most of it feeds automatic behavior downstream.</p>
+<p><strong>Identity</strong> (<code>Project Settings → Identity</code>) — client, project, site domain, default redirect destination. The domain is the one that matters; it&#39;s the target for every redirect you&#39;ll generate.</p>
+<p><strong>Audience library</strong> (<code>Project → Audience Library…</code>) — this is your audience prioritization workshop&#39;s output, and it is the step people skip and regret.</p>
+<ul>
+<li><strong>Paste from workshop…</strong> takes the table straight from your spreadsheet: name, tier, description.</li>
+<li>No workshop yet? <strong>Seed starter list…</strong> offers a <em>Higher education</em> or <em>General organization</em> set to start from — but treat that as scaffolding, not an answer.</li>
+<li><strong>Set the tiers.</strong> Everything downstream reads them: the picker&#39;s ordering, the coverage reports, and the audience vote in <code>Suggested_KKE</code>. A library left at the default <code>Secondary</code> for everything is inert — it will not be wrong, it will simply do nothing.</li>
+</ul>
+<p><strong>Jobs to be done</strong> (same tab, below Audiences) — the other half of the discovery workshop. Audiences answer <em>who</em>; jobs answer <em>what they came to do</em>. <strong>Paste from workshop…</strong> takes the table: short label, full statement, which audiences have it (blank = everybody).</p>
+<blockquote>
+<p>Worth doing even if you only get halfway. The payoff isn&#39;t the tagging — it&#39;s the inverse: a job with <strong>no page serving it</strong> is the strongest brief for net-new content you can write, because it traces back to something the client said themselves rather than to your opinion.</p>
+</blockquote>
+<p><strong>Content Type Registry</strong> (<code>Project → Content Type Registry…</code>) — only if you&#39;re replatforming. Maps each current content type to what it becomes in the new CMS, so classification flows automatically. The editor shows types in use with no crosswalk yet, so gaps are visible.</p>
+<p><strong>Target Spec Library</strong> (<code>Project → Target Spec Library…</code>) — also replatform-only, and only worth it if you&#39;re running the build. These are the page templates and content models the new site is assembled from; each carries default build guidance and a writer brief that pre-fill a page when you assign the spec in step 7. Seed the 12 built-ins and edit from there.</p>
+<p><strong>Rubric and analytics</strong> — optional, both feed <code>Suggested_KKE</code>. If you have GA4 data in the crawl the tool offers to configure it on open.</p>
+<hr>
+<h2 id="2-classify-in-bulk">2. Classify in bulk</h2>
+<p><strong>Do not start clicking through pages yet.</strong> Almost every classification is true of a whole section at once, and the Multi-bar exists for exactly this.</p>
+<p>Filter to a section — the search box, the KKE filter, or <strong>+ Field filter</strong> for any column — then apply to everything visible: set Group, Content Type, Published Status, or <strong>Add Audience</strong>.</p>
+<p>Audience and job tagging in particular are bulk jobs. Filter to <code>/admissions/</code>, select all, tag <em>Prospective Students</em> and <em>Compare programs</em>, move on. A large site is a few dozen passes plus hand-correction. Four filters give you the worklists:</p>
+<ul>
+<li><strong>Needs audience</strong> — Keep/Evolve pages nobody has assessed yet</li>
+<li><strong>Serves no priority audience</strong> — reviewed, and everything it serves is off-strategy</li>
+<li><strong>Needs a job</strong> — Keep/Evolve pages with no job tagged</li>
+<li><strong>Audience suggested by AI</strong> — a suggestion is waiting on your accept or reject</li>
+</ul>
+<p><strong>Then close the long tail.</strong> Bulk passes get the obvious sections; two tools finish the job.</p>
+<p><code>Project → Fill Audiences from Section…</code> spreads what you already tagged in a section onto that section&#39;s untagged pages. It costs nothing, needs no API key, invents nothing, and only fills blanks — so run it <em>after</em> your bulk passes, when there&#39;s something to propagate. It won&#39;t act on a section with fewer than three tagged pages, which is the point: it spreads your decision, it doesn&#39;t make one.</p>
+<p><code>Project → Suggest Audiences with AI…</code> handles what&#39;s left, against <em>your</em> audience library rather than a generic one. It never writes the <code>Audiences</code> column — suggestions queue up and you accept them by group (thousands of pages collapse into a few dozen distinct answers) or one at a time from the audit bar. Pilot it on one filtered section before running the whole crawl; it&#39;s billed to your own API key.</p>
+<blockquote>
+<p><strong>Order matters here.</strong> Both tools are only as good as what they learn from. Hand-tag a section, bulk-tag the obvious ones, <em>then</em> inherit, <em>then</em> let AI take the remainder — running AI first spends money answering questions you were about to answer for free.</p>
+</blockquote>
+<p><strong>Why all of this comes before the audit pass:</strong> a page you&#39;ve already classified is faster to judge, and the suggestion engine has more to work with by the time you get to it.</p>
+<hr>
+<h2 id="3-the-audit-pass">3. The audit pass</h2>
+<p>Now go page by page. The loop is: read the page in the built-in browser, make the call, capture why.</p>
+<ul>
+<li><strong>Keep · Kill · Evolve · Consolidate · Exclude</strong> — keyboard shortcuts for each; the sidebar advances automatically if you want it to.</li>
+<li><strong>Notes are the deliverable.</strong> Six months later the note is why anyone believes the decision. Write for the client, not for yourself.</li>
+<li><strong>Watch the Suggested KKE badge.</strong> It shows the winning source (<code>GA: Kill</code>, <code>Audience: Keep</code>) and flags disagreement with a ⚠. Disagreement is signal: <em>high traffic, no priority audience</em> is usually a legacy hub; <em>low traffic, priority audience</em> argues for promotion, not removal.</li>
+<li><strong>Consolidate opens a picker</strong> so you name the surviving page. That relationship writes the redirect later, so it&#39;s worth getting right at the point of decision.</li>
+<li><strong>Record components if the build team needs them.</strong> The <code>Components</code> quick-chip reveals a chip input for the UI patterns on the page — hero, card grid, accordion. This is the only thing that feeds the <strong>Component Inventory</strong> report, and it&#39;s cheap while you&#39;re already looking at the page. Skip it entirely if nobody downstream asked.</li>
+</ul>
+<p>Track progress with <strong>Audit Progress</strong> (<code>Cmd+P</code>).</p>
+<hr>
+<h2 id="4-sme-review">4. SME review</h2>
+<p>Where the client&#39;s experts confirm or overturn your calls. Usually the point of the engagement, and usually where schedules slip.</p>
+<p><code>SME → Export for SME Review…</code> produces a standalone spreadsheet with dropdowns, optionally split per content owner. Audience columns ride along — SMEs are frequently the only people who know who actually reads a page.</p>
+<p>Then <code>Import SME Decisions…</code>, <code>Compare KKE vs SME…</code> to see the conflicts side by side, and <code>Resolve Conflicts…</code> to produce <code>Final_KKE</code>. From that point on, <code>Final_KKE</code> is what every report and export reads.</p>
+<hr>
+<h2 id="5-ia-sitemap-and-menus">5. IA, sitemap and menus</h2>
+<p>Only if you&#39;re replatforming.</p>
+<p><strong>Build the tree.</strong> <strong>Create Sitemap from Audit…</strong> (<code>Project</code> menu) generates a starter tree from your URL structure — faster than hand-building and easy to reorganize afterwards in the <strong>Sitemap</strong> view (<code>Cmd+Shift+T</code>).</p>
+<p>Then place pages: the <strong>Needs sitemap placement</strong> filter finds Keep/Evolve pages with no home yet, and the Multi-bar&#39;s <strong>Assign to Sitemap…</strong> places many at once.</p>
+<p>Useful checks while you&#39;re here: <strong>Sitemap Coverage Report</strong> (empty nodes, overloaded nodes), and the <strong>Consolidation Candidates</strong> tool for nodes that ended up with several pages.</p>
+<p><strong>Then draw the menus — they are not the tree.</strong> The <strong>Menus</strong> view (<code>Cmd+Shift+M</code>) is a separate axis on purpose. The sitemap says where a page <em>lives</em>; a menu says how people <em>get to it</em>, and the two genuinely differ — a page has one home but can appear in the top bar, a footer, and a mega-menu, and plenty of pages appear in no menu at all.</p>
+<ul>
+<li><strong>Seed from content tree</strong> gets you a first draft from the sitemap; edit from there.</li>
+<li>Each menu has a <strong>placement</strong> (Top bar, Utility, Footer, Mega, …) so the hand-off says <em>where</em> it goes.</li>
+<li>Items are one of three kinds: a <strong>page</strong> (points at a sitemap node — the label follows the node if you rename it), an external <strong>link</strong>, or a label-only <strong>header</strong> for grouping.</li>
+<li>A red <strong>⚠ broken refs</strong> button appears if an item points at a node you&#39;ve since deleted. Fix those before exporting.</li>
+<li><strong>Report</strong> produces the client-facing Menu Report; <strong>Export…</strong> produces the CMS-agnostic structure (Excel or JSON) the build team imports.</li>
+</ul>
+<blockquote>
+<p>Skip menus if the engagement stops at the content audit. But if you&#39;re handing over an IA, the sitemap alone doesn&#39;t tell anyone what the navigation should say.</p>
+</blockquote>
+<h3 id="showing-the-current-state--do-it-in-a-copy">Showing the current state — do it in a copy</h3>
+<p>Clients often ask for <em>&quot;here&#39;s your site today&quot;</em> before they&#39;ll engage with where it&#39;s going, and <strong>Create Sitemap from Audit…</strong> produces that picture in one pass, since it builds the tree straight from the live URL structure.</p>
+<p><strong>Build it in a separate copy of the project, and archive that copy.</strong> Not in your working file.</p>
+<p>The reason is that a sitemap in Transmission is never purely descriptive. Placing a page on a node writes derived fields onto its row — <code>Computed Path</code>, <code>Sitemap_Destination</code>, <code>Page_Breadcrumb</code> — and on the next save the redirect resolver reads <code>Computed Path</code>, sees it differs from the page&#39;s live URL, and writes a <code>Redirect_Destination</code>. That is correct behavior for a <em>future-state</em> tree, where a page really is moving. For a <em>current-state</em> tree it manufactures redirects for pages that aren&#39;t going anywhere.</p>
+<p>Transmission now records which redirects it derived, so deleting a node takes its derived redirects with it and the fossils no longer outlive the tree. Redirects written <em>before</em> that record existed are still ambiguous, though — the app can&#39;t tell them from something you typed — so an older file can still be carrying them.</p>
+<p>So:</p>
+<ol>
+<li><strong>Copy the project first</strong> — <code>File → Save As Project…</code> to a new name, or duplicate the file in Finder. The Create Sitemap from Audit dialog asks what the tree is for; answering <em>where pages are today</em> offers <strong>Save a copy first…</strong>, which does this for you.</li>
+<li>Build the URL-derived tree <strong>in the copy</strong>, export the Visual Sitemap (HTML / PDF / Miro) and the Treemap from there, and keep that copy as the archived deliverable.</li>
+<li>Go back to your working file, untouched, and build the future state there.</li>
+</ol>
+<h3 id="resetting-a-file-where-it-already-happened">Resetting a file where it already happened</h3>
+<p>Symptoms, in rough order of how obvious they are:</p>
+<ul>
+<li>A page whose redirect destination is <strong>its own URL</strong> — a loop, and always wrong.</li>
+<li>A redirect whose path corresponds to <strong>no node in the current tree</strong> (a fossil of the deleted one).</li>
+<li>A <strong>Keep or Evolve page with no sitemap placement that still carries a redirect</strong>. It isn&#39;t moving, so it shouldn&#39;t have one at all. This is usually the largest group and the easiest to miss.</li>
+</ul>
+<p>To find them, use sidebar field filters — <code>Redirect_Destination is-not-blank</code> combined with <code>Sitemap_ID is-blank</code>, with the KKE filter on Keep + Evolve, isolates that last group exactly.</p>
+<p>To fix them, run <strong>Migration → Redirect Health Check…</strong>. It finds all three classes, groups them, shows every affected page, and repairs the groups you tick in a single undoable step. Anything whose destination still resolves to a real node in your sitemap is reported but never changed automatically — that may be a deliberate &quot;send this to the parent&quot;, and only you know.</p>
+<p>The Redirect Editor&#39;s <strong>Re-derive from sitemap</strong> is the blunter alternative: it re-points every <em>placed</em> row at its current node, skips unplaced rows entirely, and overwrites hand-set destinations (everything except a literal <code>404</code>). Prefer the health check.</p>
+<blockquote>
+<p>The cleanest habit remains the one above: a descriptive tree lives in its own archived copy, and the working file only ever holds the future state.</p>
+</blockquote>
+<p><strong>Show it.</strong> The Sitemap toolbar&#39;s <strong>Visual Sitemap</strong> renders the tree as an interactive box diagram — this is the artifact clients actually react to. Color it by KKE, section, phase, page status, or an audit field; export a shareable standalone HTML for the client, a PDF for the deck, or push it to a <strong>Miro</strong> board if the client works there (connect once in App Settings). <strong>Treemap</strong> answers a different question — where the content actually <em>is</em>, sized by page count — and is usually the more uncomfortable picture.</p>
+<hr>
+<h2 id="6-redirects">6. Redirects</h2>
+<p>Largely automatic if steps 3 and 5 were done properly — every <code>Kill</code> and every page whose URL changed already has a destination derived.</p>
+<p>Open the <strong>Redirects</strong> view (<code>Cmd+Shift+R</code>) to review, override, and fill gaps. <code>404</code> in a destination is meaningful: it means <em>deliberately let this die</em>, as distinct from blank, which means <em>not decided yet</em>.</p>
+<p>Then <code>Migration → Redirect Chain Check…</code> before you hand anything over. If the audit spans several source domains, the map splits per domain automatically — each retiring domain deploys its own configuration.</p>
+<hr>
+<h2 id="7-build-planning">7. Build planning</h2>
+<p>Only if you&#39;re staffing and sequencing the build rather than just handing over an inventory. All of it lives in the Sitemap node editor (double-click a node, or the ✎ button), in the <strong>Build</strong>, <strong>Write</strong> and <strong>Migrate</strong> sections.</p>
+<ul>
+<li><strong>Page Status</strong> — Not Started / In Progress / Built / In Review / Published / Blocked. Edit the vocabulary in Project Settings → Migration.</li>
+<li><strong>Three roles, one pool of people</strong> — a <strong>builder</strong> assembles the page, a <strong>writer</strong> produces the copy, a <strong>migrator</strong> maps the old content into the new CMS. One person often holds several; the roles are separate because the work and the timing are.</li>
+<li><strong>Build guidance</strong> and <strong>Writer brief</strong> are per-page markdown notes. Picking a <strong>Target Spec</strong> pre-fills them from that spec&#39;s defaults and asks before overwriting anything you already wrote.</li>
+<li>The tree shows this back to you as status pills and role chips, and the <strong>Build:</strong> filter narrows to <em>no status</em>, <em>no assignee</em>, <em>has guidance</em>, and so on — that filter is how you find what&#39;s unstaffed.</li>
+</ul>
+<p>This is what feeds <strong>Reports → Migration Direction Brief…</strong>, which prints one person&#39;s whole queue: their pages, the source pages behind each, and where consolidations are hiding. It&#39;s the per-person work order, and it&#39;s the reason to fill any of this in.</p>
+<blockquote>
+<p>Skip this whole step if the deliverable is the audit itself. It exists for engagements where you&#39;re also running the build.</p>
+</blockquote>
+<hr>
+<h2 id="8-deliverables">8. Deliverables</h2>
+<p><strong>Reports</strong> (all export to PDF or HTML; the HTML opens cleanly in Word):</p>
+<ul>
+<li><em>Stakeholder</em> — Executive Summary · Content Inventory by Section · SME Review Status</li>
+<li><em>Audience</em> — Audience Coverage · Audience × Section Matrix · Audience Debt · Jobs Coverage</li>
+<li><em>Consolidation</em> — Site Consolidation Overview · Cross-Site Duplicate Overlap</li>
+<li><em>IA</em> — Menu Report · Sitemap Coverage · Content Type Crosswalk · Component Inventory</li>
+<li><em>Build</em> — Migration Direction Brief · Migration Checklist · Net New Content Brief · Redirect Map</li>
+</ul>
+<p><strong>Diagrams</strong> (from the Sitemap toolbar, see step 5) — <strong>Visual Sitemap</strong> as interactive HTML for the client, PDF for the deck, or a <strong>Miro</strong> board; <strong>Treemap</strong> for the where-is-the-content picture. <strong>Menus → Export…</strong> hands the navigation to the build team as Excel or JSON.</p>
+<p><strong>Migration menu</strong> — <code>Pre-Handoff Check…</code> runs every pre-flight check at once; run it before you ship anything. <code>Migration Tracker…</code> is the engineering hand-off. <code>Export Redirect Map (CSV)…</code> is the redirect config itself, split per source domain when there&#39;s more than one.</p>
+<p><strong>File → Package for Handoff…</strong> zips the project with a README for the receiving team. <strong>File → Export…</strong> covers everything else — filtered rows, audit decisions, or a client-facing column subset via export profiles.</p>
+<hr>
+<h2 id="what-you-can-skip">What you can skip</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Skip when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>URL variant triage</td>
+<td>The crawl has no query strings and no duplicate paths</td>
+</tr>
+<tr>
+<td>Source sites</td>
+<td>Single domain (the registry still auto-creates one entry; ignore it)</td>
+</tr>
+<tr>
+<td>Audience tagging</td>
+<td>No audience research exists — but say so rather than leaving it blank by accident</td>
+</tr>
+<tr>
+<td>AI audience suggestion</td>
+<td>The crawl is small enough to bulk-tag, or you have no API key. Inherit-from-section is free and covers most of it</td>
+</tr>
+<tr>
+<td>Jobs to be done</td>
+<td>No JTBD workshop was run. The Jobs field stays hidden until the library has entries</td>
+</tr>
+<tr>
+<td>Component tagging</td>
+<td>Nobody downstream asked for a component inventory</td>
+</tr>
+<tr>
+<td>Content Type Registry / Target Spec Library</td>
+<td>Not replatforming</td>
+</tr>
+<tr>
+<td>SME round</td>
+<td>The client has no reviewers, or you&#39;re the expert</td>
+</tr>
+<tr>
+<td>Sitemap / redirects</td>
+<td>Content audit only, no migration</td>
+</tr>
+<tr>
+<td>Menus</td>
+<td>You&#39;re handing over an inventory, not an IA</td>
+</tr>
+<tr>
+<td>Build planning (step 7)</td>
+<td>You&#39;re not staffing or sequencing the build</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="common-mistakes">Common mistakes</h2>
+<p><strong>Auditing before triage.</strong> Doubles the queue and buries the real content. Step 0 exists for this.</p>
+<p><strong>Tagging audiences before setting tiers.</strong> Everything works, nothing happens. Tiers are what the reports and the vote read.</p>
+<p><strong>Using blank to mean &quot;no&quot;.</strong> Blank means unreviewed. Say no explicitly.</p>
+<p><strong>Killing what you meant to exclude.</strong> <code>Kill</code> puts a page in the redirect map. <code>Exclude</code> says it was never in the inventory.</p>
+<p><strong>Treating Suggested KKE as the answer.</strong> It&#39;s a weighted vote from partial signals. Its disagreements are more useful than its agreements.</p>
+<p><strong>Reaching for AI audience suggestion first.</strong> It learns nothing from an empty library and an untagged crawl. Tag by hand, bulk-tag, inherit from section, <em>then</em> pay for the remainder.</p>
+<p><strong>Leaving AI suggestions unreviewed.</strong> A pending suggestion is not a tagged page — it&#39;s an unanswered question, and every audience report still counts that page as untagged. Drain the queue before you run the readout.</p>
+<p><strong>Leaving Site Domain unset with several sites in scope.</strong> Redirect destinations get built on an arbitrary domain. The tool warns; heed it.</p>
+<p><strong>Building a &quot;current state&quot; sitemap in the working file.</strong> Placing pages writes redirects, and deleting the tree afterwards doesn&#39;t take them back — they survive to contradict the future-state tree you build next. Do it in an archived copy: <a href="#showing-the-current-state--do-it-in-a-copy">Showing the current state</a>.</p>
+<hr>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="user-guide.html">User Guide</a> — the full reference, feature by feature</li>
+<li><a href="quick-start.html">Quick Start</a> — the five-minute version of the core loop</li>
+<li><a href="content-audit-framework.html">Content Audit Framework</a> — the thinking behind KKE</li>
+<li><a href="methodology/index.html">Methodology wiki</a> — practice-level guidance</li>
+</ul>
+
+<footer>Transmission — content audit and migration platform. <a href="../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

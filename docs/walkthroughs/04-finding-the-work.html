@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding the Work Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="finding-the-work-walkthrough">Finding the Work Walkthrough</h1>
+<p>How to slice thousands of rows down to exactly the set you want to act on. Filtering well is what makes batch decisions and a clean audit possible.</p>
+<blockquote>
+<p>Prerequisite: a file is open.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>Filters are <strong>stackable and AND-ed</strong>: text search <strong>and</strong> KKE status <strong>and</strong> group <strong>and</strong> any field filters all apply together. Narrow from broad to specific.</li>
+<li>The sidebar list always reflects the current filter — and the <strong>Multi-bar</strong> at the bottom acts on exactly that filtered set (see <strong>Bulk Operations</strong>).</li>
+<li>Save a filter combination once and recall it later, so recurring slices (&quot;unreviewed thin content&quot;) are one click.</li>
+</ul>
+<hr>
+<h2 id="1-search">1. Search</h2>
+<p>The sidebar&#39;s top row is a search box with a <strong>scope</strong> selector:</p>
+<ul>
+<li><strong>All fields</strong> — matches any column.</li>
+<li><strong>URL</strong> — matches only the URL column.</li>
+<li><strong>Title</strong> — matches only the page title.</li>
+</ul>
+<p>The placeholder updates to reflect the scope. <strong>✕</strong> clears it.</p>
+<hr>
+<h2 id="2-filter-by-kke-status">2. Filter by KKE status</h2>
+<p>The <strong>KKE filter</strong> (toolbar row 2) is a <strong>checkbox dropdown</strong> — check <strong>multiple</strong> statuses and they&#39;re OR-ed together (e.g. <strong>Keep + Evolve</strong>). The button label reflects your selection. Beyond the literal statuses, it includes <strong>special filters</strong>:</p>
+<ul>
+<li><strong>Unreviewed</strong> — no KKE call yet.</li>
+<li><strong>Flagged</strong> — rows you marked with <strong>F</strong>.</li>
+<li><strong>Duplicates</strong>, <strong>SME conflicts / pending</strong>, <strong>Consolidate: no target / dead target</strong>, <strong>Shared nav</strong>, <strong>Needs placement</strong>, <strong>Suggested disagrees</strong>, <strong>Suggested ≠ your call</strong>.</li>
+</ul>
+<p>Use the <strong>Group</strong> dropdown alongside it to scope to one content group.</p>
+<hr>
+<h2 id="3-field-filters-any-column">3. Field filters (any column)</h2>
+<p>For anything the built-in filters don&#39;t cover, <strong>+ Field filter</strong>:</p>
+<ol>
+<li>Pick a <strong>field</strong>, an <strong>operator</strong> — <code>is blank</code>, <code>is not blank</code>, <code>contains</code>, <code>does not contain</code>, <code>equals</code>, <code>not equals</code>, <code>starts with</code>, <code>ends with</code> — and a <strong>value</strong>.</li>
+<li><strong>Apply</strong>. Active filters show as removable <strong>chips</strong>; add as many as you need (they AND together).</li>
+</ol>
+<blockquote>
+<p>Common move: KKE = <strong>Keep + Evolve</strong>, then <strong>+ Field filter</strong> <code>Sitemap_ID is blank</code> to find pages that still need a nav home. The <strong>Unclassified</strong> button is a one-click shortcut for <code>Content Nature is blank</code>.</p>
+</blockquote>
+<hr>
+<h2 id="4-save-and-recall-filters">4. Save and recall filters</h2>
+<p>Once you&#39;ve built a useful combination:</p>
+<ol>
+<li>Open <strong>Saved filters…</strong> → <strong>+ Save current filter…</strong>, name it.</li>
+<li>The bundle stores text, scope, KKE selection, group, <strong>and</strong> field filters — they all travel together.</li>
+<li>Recall any time from the dropdown; manage them in <strong>Project Settings → Saved Filters</strong>. (Saved filters persist with the file.)</li>
+</ol>
+<hr>
+<h2 id="5-global-search-cmdf">5. Global Search (Cmd+F)</h2>
+<p>For &quot;where is that one page/value&quot; rather than narrowing the work list:</p>
+<ul>
+<li><strong>Cmd+F</strong> opens the <strong>Global Search</strong> bar — searches across all columns, shows a <strong>match count</strong>, and <strong>◀ / ▶</strong> step through hits (jumping the selection to each). <strong>✕</strong> closes it.</li>
+</ul>
+<p>This is distinct from the sidebar filter: it finds and navigates rather than reducing the list.</p>
+<hr>
+<h2 id="quick-checklist-for-finding-the-work">Quick checklist for &quot;finding the work&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Search <strong>scope</strong> set to match what you&#39;re looking for (URL vs Title vs All)</li>
+<li><input disabled="" type="checkbox"> KKE filter using <strong>multi-check</strong> where you mean &quot;either&quot; (Keep + Evolve)</li>
+<li><input disabled="" type="checkbox"> Field filters layered for precise slices (e.g. <code>Sitemap_ID is blank</code>)</li>
+<li><input disabled="" type="checkbox"> Recurring slices saved as <strong>named filters</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Cmd+F</strong> for one-off lookups, sidebar filters for work sets</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Bulk Operations</strong> — act on the filtered set all at once. See also <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

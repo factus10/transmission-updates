@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redirects Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="redirects-walkthrough">Redirects Walkthrough</h1>
+<p>How to make sure every URL that&#39;s going away lands somewhere sensible — building the redirect map that keeps SEO equity and bookmarks alive after the migration.</p>
+<blockquote>
+<p>Prerequisite: KKE calls made (especially <strong>Kill</strong> and <strong>Consolidate</strong>), and a <strong>Site domain</strong> set in Project Settings.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>A redirect is needed for any <strong>Kill</strong> page and any page whose <strong>URL is changing</strong> (its new computed path differs from its current URL). Consolidated pages redirect to their target.</li>
+<li>You rarely set destinations by hand. The app <strong>resolves</strong> them from a priority order, and re-derives them from the sitemap on demand.</li>
+<li>One special value matters: <strong><code>404</code></strong> means &quot;let this URL die — do not write a redirect.&quot; It&#39;s distinct from blank (which means &quot;TBD&quot;).</li>
+</ul>
+<p><strong>Destination priority</strong> (highest wins): custom per-row destination → sitemap node path → project default destination → blank.</p>
+<hr>
+<h2 id="1-open-the-redirect-editor">1. Open the Redirect Editor</h2>
+<p><strong>Redirects</strong> tab (view switcher) or <strong>Cmd+Shift+R</strong>. It lists every page needing a redirect — Kill pages and URL-changed pages — each with its KKE badge, title (click to jump to that row in Audit), current URL, an editable <strong>destination</strong>, and a <strong>sitemap picker</strong> to point it at a node.</p>
+<blockquote>
+<p>Fragments (Renders as = Fragment) have no public URL and are excluded from the list automatically.</p>
+</blockquote>
+<hr>
+<h2 id="2-set-destinations-efficiently">2. Set destinations efficiently</h2>
+<ul>
+<li><strong>Re-derive from sitemap</strong> — recomputes destinations from current sitemap paths for every row with a sitemap assignment (skips explicit <code>404</code>s). Run this after you&#39;ve reorganized the sitemap.</li>
+<li><strong>Sitemap picker</strong> (per row) — point a single redirect at a specific node.</li>
+<li><strong>404 toggle</strong> — mark a row as an intentional 404 (no redirect rule).</li>
+<li><strong>Find/Replace</strong> — toggles a bar that <strong>filters</strong> the list to matching destinations (exact-match optional) and can <strong>Replace All</strong> across them — ideal for domain or path-prefix sweeps.</li>
+</ul>
+<p>The editor has its own status filter, text search, and sortable columns; opening it from a row auto-scrolls to that page.</p>
+<blockquote>
+<p>Destinations are also resolved automatically on <strong>Save</strong> for all Kill/URL-changed rows — the editor is for review and overrides, not a prerequisite for a correct export.</p>
+</blockquote>
+<hr>
+<h2 id="3-validate-the-chains">3. Validate the chains</h2>
+<ul>
+<li><strong>Migration → Redirect Chain Check…</strong> flags redirects that point at another page being killed (a redirect to a redirect, or to a 404). Repoint these to a live destination.</li>
+<li>The <strong>Pre-Handoff Check</strong> includes this same chain check (see <strong>Pre-flight &amp; Hand-off</strong>).</li>
+</ul>
+<hr>
+<h2 id="4-export-the-map">4. Export the map</h2>
+<ul>
+<li><strong>Migration → Export Redirect Map (CSV)…</strong> writes the redirect rules as CSV for the engineering team.</li>
+<li><strong>Reports → Redirect Map Report…</strong> is the human-readable version — three sections: <strong>Kill</strong> redirects, <strong>URL-changed</strong> redirects, and <strong>intentional 404s</strong>.</li>
+</ul>
+<hr>
+<h2 id="quick-checklist-for-redirects-ready">Quick checklist for &quot;redirects ready&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Every Kill / URL-changed page has a destination (or an intentional <strong>404</strong>)</li>
+<li><input disabled="" type="checkbox"> <strong>Re-derive from sitemap</strong> run after the tree was finalized</li>
+<li><input disabled="" type="checkbox"> <strong>Redirect Chain Check</strong> is clean — no redirects into Kill/404 pages</li>
+<li><input disabled="" type="checkbox"> Intentional 404s are marked, not left blank</li>
+<li><input disabled="" type="checkbox"> Redirect map <strong>exported</strong> (CSV for engineering, report for the client)</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Producing the Outputs</strong> — the report catalog. See also the <strong>Consolidate</strong> walkthrough.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transmission — Process Walkthroughs</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="transmission--process-walkthroughs">Transmission — Process Walkthroughs</h1>
+<p>Task-oriented guides to the real lifecycle of a content audit. Each is mental-model-first, with numbered steps using exact UI labels, and ends with a self-check. Read them in order the first time; revisit individually after.</p>
+<p>Every label, menu path, and shortcut here is verified against the 2.4.1 source — not memory.</p>
+<h2 id="reading-path-the-audit-lifecycle">Reading path (the audit lifecycle)</h2>
+<p><strong>A. Set up &amp; orient</strong></p>
+<ol>
+<li><a href="01-getting-started.html">Getting Started</a> — install, open a file, what gets added, save &amp; round-trip</li>
+<li><a href="02-project-setup.html">Project Setup</a> — Project Settings vs App Settings; what travels with the file</li>
+</ol>
+<p><strong>B. The core audit</strong>
+3. <a href="03-running-the-audit-pass.html">Running the Audit Pass</a> — the field-bar clusters, KKE keys (1–5), the embedded browser
+4. <a href="04-finding-the-work.html">Finding the Work</a> — search scopes, filters, saved filters, Global Search
+5. <a href="05-bulk-operations.html">Bulk Operations</a> — multi-select + the Multi-bar, batch assess
+6. <a href="06-tagging-grouping-glossary.html">Tagging, Grouping &amp; the Glossary</a> — Group vs Primary vs Tags; the glossary</p>
+<p><strong>C. Classify for migration</strong>
+7. <a href="07-content-types-crosswalk.html">Content Types &amp; the Crosswalk</a> — Content Type → Renders as → Target; the registry
+8. <a href="08-suggested-kke.html">Suggested_KKE</a> — rubrics, AI, GA; how the sources combine
+9. <a href="09-consolidate.html">Consolidate</a> — the picker, candidates, dead-target warnings
+10. <a href="10-non-200-triage.html">Non-200 Triage</a> — clearing redirects/404s/errors in one sweep</p>
+<p><strong>D. Collaborate &amp; review</strong>
+11. <a href="11-sme-review.html">SME Review</a> — export → fill → import → resolve
+12. <a href="12-multi-auditor-merge.html">Multi-auditor Merge</a> — combining parallel audits</p>
+<p><strong>E. Architect the future site</strong>
+13. <a href="13-sitemap-ia.html">Sitemap &amp; IA</a> — build the sitemap, place pages, references, phases
+14. <a href="14-build-direction.html">Build &amp; Direction</a> — Target Specs, build metadata, Builder/Writer/Migrator</p>
+<p><strong>F. Ship it</strong>
+15. <a href="15-redirects.html">Redirects</a> — the editor, resolution priority, the <code>404</code> sentinel, chain check
+16. <a href="16-producing-the-outputs.html">Producing the Outputs</a> — the report catalog: what each is for
+17. <a href="17-migration-tracker.html">Migration Tracker Hand-off</a> — the multi-sheet engineering workbook
+18. <a href="18-preflight-handoff.html">Pre-flight &amp; Hand-off</a> — the Pre-Handoff Check + change log</p>
+<p><strong>G. Power features</strong>
+19. <a href="19-templates.html">Templates</a> — audit templates + report templates
+20. <a href="20-component-inventory.html">Component Inventory</a> — tagging components, the library, the report</p>
+<hr>
+<p><em>Full reference: <a href="../user-guide.html">the User Guide</a>. Architecture: <code>CLAUDE.md</code>. Design rationale: <code>CONTENT_TYPE_MODEL.md</code>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

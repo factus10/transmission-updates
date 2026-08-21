@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Non-200 Triage Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="non-200-triage-walkthrough">Non-200 Triage Walkthrough</h1>
+<p>How to clear out the redirects, 404s, and server errors in a crawl in one sweep — so broken and non-canonical URLs don&#39;t clutter the real content audit.</p>
+<blockquote>
+<p>Prerequisite: a file open with an HTTP <strong>Status Code</strong> column (standard in Screaming Frog exports).</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>A crawl is full of non-200 URLs: 3xx redirects, 4xx not-founds, 5xx errors. Most of these aren&#39;t content decisions — they&#39;re cleanup.</li>
+<li>Triage groups them <strong>by status code</strong> and lets you set a sensible default KKE for each whole group at once, rather than one row at a time.</li>
+<li>The app pre-fills smart defaults (3xx → Kill, 404 → Kill, 5xx → Exclude, …); you adjust, then <strong>Apply</strong>.</li>
+</ul>
+<hr>
+<h2 id="1-open-triage">1. Open triage</h2>
+<ul>
+<li><strong>Project → Triage Non-200 Pages…</strong>, or accept the <strong>auto-offer</strong> that appears when a freshly opened file contains non-200 rows.</li>
+</ul>
+<p>The dialog shows a table: one row per status code, with its label (e.g. &quot;301 — Moved Permanently&quot;), the page count, and a <strong>KKE action</strong> dropdown pre-set to the recommended default.</p>
+<hr>
+<h2 id="2-set-actions-and-apply">2. Set actions and apply</h2>
+<ol>
+<li>Review each code group&#39;s pre-filled action; change any that need a different call.</li>
+<li>Leave a group&#39;s action <strong>blank</strong> to skip it.</li>
+<li><strong>Apply</strong> batch-sets KKE for every row in each group that has an action selected.</li>
+</ol>
+<blockquote>
+<p>Defaults are a starting point, not a verdict. A 301 that points somewhere you&#39;re keeping might be <strong>Keep</strong>, not <strong>Kill</strong> — adjust per group.</p>
+</blockquote>
+<hr>
+<h2 id="3-spot-them-in-the-sidebar-afterward">3. Spot them in the sidebar afterward</h2>
+<p>Non-200 rows carry a <strong>status-code badge</strong> in the sidebar: amber for <strong>3xx</strong>, red for <strong>4xx / 5xx</strong>. Use it to eyeball what&#39;s left, and the KKE filter to confirm nothing slipped through unreviewed.</p>
+<hr>
+<h2 id="quick-checklist-for-triaged">Quick checklist for &quot;triaged&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Ran triage (manually or via the auto-offer)</li>
+<li><input disabled="" type="checkbox"> Each code group given a deliberate action (or intentionally skipped)</li>
+<li><input disabled="" type="checkbox"> <strong>Applied</strong> — non-200 rows now carry KKE calls</li>
+<li><input disabled="" type="checkbox"> Sidebar shows no unexpected red/amber badges left unreviewed</li>
+<li><input disabled="" type="checkbox"> Saved (<strong>Cmd+S</strong>)</li>
+</ul>
+<hr>
+<p><em>See also: the <strong>Redirects</strong> walkthrough (turning Kills into redirect rules) and <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

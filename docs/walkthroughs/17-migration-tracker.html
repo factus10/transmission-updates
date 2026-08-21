@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Migration Tracker Hand-off Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="migration-tracker-hand-off-walkthrough">Migration Tracker Hand-off Walkthrough</h1>
+<p>How to package the whole audit into one multi-sheet workbook the migration team can execute against — the single artifact that carries decisions, build metadata, redirects, and the kill list.</p>
+<blockquote>
+<p>Prerequisite: KKE calls, sitemap placement, and (ideally) build metadata in place. Run the <strong>Pre-Handoff Check</strong> first.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>The Migration Tracker is <strong>the engineering deliverable</strong>: a single <code>.xlsx</code> with four purpose-built sheets, each answering one team&#39;s question.</li>
+<li>It&#39;s generated from current state — re-export anytime as the audit evolves.</li>
+<li>Each sheet is pre-tuned (frozen header row, sized columns) to be worked in directly.</li>
+</ul>
+<hr>
+<h2 id="1-export-it">1. Export it</h2>
+<p><strong>Migration → Migration Tracker…</strong> opens the export dialog with sheet/option toggles. Choose what to include (e.g. whether Kill/Exclude rows appear in Source Pages, whether phased nodes are included), then export. Default filename: <code>{project-slug}-migration-tracker-YYYY-MM-DD.xlsx</code>.</p>
+<hr>
+<h2 id="2-what-each-sheet-carries">2. What each sheet carries</h2>
+<ul>
+<li><strong>Sitemap Plan</strong> — one row per sitemap node: sort, number, breadcrumb, label, URL, <strong>Page Status</strong>, <strong>Build Pattern</strong>, <strong>Builder / Writer</strong>, build guidance, writer brief, migration notes, source-page count, net-new flag, phase, in-menu, external URL. The build team&#39;s master plan.</li>
+<li><strong>Source Pages</strong> — audit rows joined to their sitemap node: KKE / Final KKE / Suggested KKE, Content Type, Group, Primary Tag, and the target breadcrumb / path / pattern / status. The &quot;where does each old page go&quot; map.</li>
+<li><strong>Redirects</strong> — Kill rows + non-Kill URL changes; intentional <code>404</code>s surface as &quot;(404) — intentional deindex&quot;.</li>
+<li><strong>Archive</strong> — Kill rows with their notes and tags, for client reference (what was removed and why).</li>
+</ul>
+<hr>
+<h2 id="3-when-to-re-export">3. When to re-export</h2>
+<p>Re-run after any meaningful change — new placements, build-metadata edits, redirect changes. The tracker is a snapshot, not a live link; hand off the latest export.</p>
+<hr>
+<h2 id="quick-checklist-for-tracker-ready">Quick checklist for &quot;tracker ready&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Pre-Handoff Check</strong> clean before exporting</li>
+<li><input disabled="" type="checkbox"> Sheet/option toggles set for this hand-off (Kill inclusion, phased nodes)</li>
+<li><input disabled="" type="checkbox"> <strong>Sitemap Plan</strong> carries the build metadata the team needs</li>
+<li><input disabled="" type="checkbox"> <strong>Redirects</strong> sheet matches the Redirect Map</li>
+<li><input disabled="" type="checkbox"> Exported with a clear, dated filename</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Pre-flight &amp; Hand-off</strong> — the final validation pass. See also the <strong>Build &amp; Direction</strong> and <strong>Redirects</strong> walkthroughs.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

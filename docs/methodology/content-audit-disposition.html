@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Audit Disposition (CAD) — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<hr>
+<h2 id="title-content-audit-disposition-cad-status-working-last-reviewed-2026-04-28">title: Content Audit Disposition (CAD)
+status: working
+last-reviewed: 2026-04-28</h2>
+<h1 id="content-audit-disposition-cad">Content Audit Disposition (CAD)</h1>
+<p>The proposed framework that decompresses <a href="the-five-dimensions.html">KKE&#39;s five dimensions</a> into separate columns. CAD is what a future revision of our methodology should look like once we&#39;re ready to break with single-column KKE.</p>
+<blockquote>
+<p><strong>Status:</strong> this is a proposal, not yet implemented. The audit tool today operates on KKE with operational tooling that mitigates KKE&#39;s failure modes (see <a href="patterns.html">Patterns Where KKE Breaks</a>). CAD is the long-term direction.</p>
+</blockquote>
+<h2 id="the-acronym">The acronym</h2>
+<p><strong>CAD — Content Audit Disposition.</strong> &quot;Disposition&quot; is the records-management term for &quot;what we&#39;re doing with this.&quot; The acronym is short, pronounceable, and avoids fanciful naming.</p>
+<h2 id="the-shape">The shape</h2>
+<p>Three independent columns capture the disposition. A fourth captures process state. Authority is expressed by having multiple disposition column-sets stacked.</p>
+<h3 id="column-1--scope">Column 1 — Scope</h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>InScope</code></td>
+<td>Actively being audited</td>
+</tr>
+<tr>
+<td><code>OutOfCrawl</code></td>
+<td>Got crawled but isn&#39;t real content</td>
+</tr>
+<tr>
+<td><code>Deferred</code></td>
+<td>Valid content, not in this audit cycle</td>
+</tr>
+<tr>
+<td><code>OutOfAuthority</code></td>
+<td>Owned by another team / engagement</td>
+</tr>
+<tr>
+<td><code>ComplianceHold</code></td>
+<td>Can&#39;t be touched without legal review</td>
+</tr>
+<tr>
+<td><code>ThirdParty</code></td>
+<td>Aggregated content, not editable by this team</td>
+</tr>
+</tbody></table>
+<h3 id="column-2--content-fate">Column 2 — Content Fate</h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Preserve</code></td>
+<td>Content stays as-is</td>
+</tr>
+<tr>
+<td><code>Improve</code></td>
+<td>Revised in place, retains identity</td>
+</tr>
+<tr>
+<td><code>Replace</code></td>
+<td>Completely rewritten; same role, new content</td>
+</tr>
+<tr>
+<td><code>Merge</code></td>
+<td>Absorbed by another page (target = <code>Consolidate_Into</code>)</td>
+</tr>
+<tr>
+<td><code>Split</code></td>
+<td>Becomes 2+ pages (targets = <code>Split_Into</code>, comma-separated URLs)</td>
+</tr>
+<tr>
+<td><code>Retire</code></td>
+<td>Removed</td>
+</tr>
+</tbody></table>
+<p>Only meaningful when <code>Scope = InScope</code>.</p>
+<h3 id="column-3--url-fate">Column 3 — URL Fate</h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Preserve</code></td>
+<td>URL stays exactly as it is</td>
+</tr>
+<tr>
+<td><code>Move</code></td>
+<td>URL changes via nav reorganization</td>
+</tr>
+<tr>
+<td><code>Redirect</code></td>
+<td>URL retires; redirect destination set</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td>URL retires; deliberate no-redirect</td>
+</tr>
+</tbody></table>
+<p>Only meaningful when <code>Scope = InScope</code>.</p>
+<h3 id="column-4--process-state">Column 4 — Process State</h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Unreviewed</code></td>
+<td>Auditor hasn&#39;t looked yet</td>
+</tr>
+<tr>
+<td><code>InReview</code></td>
+<td>Examined, needs more info</td>
+</tr>
+<tr>
+<td><code>Decided</code></td>
+<td>Auditor confident</td>
+</tr>
+<tr>
+<td><code>PendingSME</code></td>
+<td>Sent for expert review</td>
+</tr>
+<tr>
+<td><code>PendingStakeholder</code></td>
+<td>Sent for business decision</td>
+</tr>
+<tr>
+<td><code>Resolved</code></td>
+<td>Final answer</td>
+</tr>
+</tbody></table>
+<h2 id="mapping-classic-kke-onto-cad">Mapping classic KKE onto CAD</h2>
+<table>
+<thead>
+<tr>
+<th>KKE</th>
+<th>Scope</th>
+<th>ContentFate</th>
+<th>URLFate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Keep</td>
+<td>InScope</td>
+<td>Preserve</td>
+<td>Preserve OR Move</td>
+</tr>
+<tr>
+<td>Kill</td>
+<td>InScope</td>
+<td>Retire</td>
+<td>Redirect OR 404</td>
+</tr>
+<tr>
+<td>Evolve</td>
+<td>InScope</td>
+<td>Improve</td>
+<td>Preserve OR Move</td>
+</tr>
+<tr>
+<td>Consolidate</td>
+<td>InScope</td>
+<td>Merge</td>
+<td>Redirect (to target)</td>
+</tr>
+<tr>
+<td>Exclude (current usage)</td>
+<td>OutOfCrawl OR Deferred OR OutOfAuthority OR ComplianceHold</td>
+<td>(n/a)</td>
+<td>(n/a)</td>
+</tr>
+</tbody></table>
+<p>The five-state KKE shorthand survives as a <strong>derived view</strong> of the underlying disposition. Auditors can think &quot;this is a Kill&quot; while the data captures that more precisely as <code>InScope / Retire / Redirect-to-/general-products</code>.</p>
+<h2 id="authority-becomes-formal">Authority becomes formal</h2>
+<p>Each authority gets its own column-set: <code>Auditor_Disposition</code>, <code>SME_Disposition</code>, <code>GA_Disposition</code>, <code>AI_Disposition</code>. The synthesis (<code>Final_Disposition</code>) is the resolved view.</p>
+<p>When authorities disagree, the disagreement <em>is</em> a signal — surface it in reports rather than flattening it.</p>
+<h2 id="why-this-isnt-already-implemented">Why this isn&#39;t already implemented</h2>
+<p>Three reasons CAD lives as a proposal rather than a shipped feature:</p>
+<ol>
+<li><strong>Backward compatibility.</strong> Real audits are in flight using KKE. A clean break would orphan them. The migration path needs to be a layering, not a replacement.</li>
+<li><strong>Auditor cognitive load.</strong> Three columns instead of one is more to track per page. The folksonomy of KKE is genuinely useful as shorthand. CAD has to coexist with KKE-as-summary, not replace it.</li>
+<li><strong>Tooling readiness.</strong> The current audit tool handles KKE with workarounds. A CAD-native tool would need redesigned UI for the three-column model — picker, filters, reports, the whole stack.</li>
+</ol>
+<h2 id="migration-path">Migration path</h2>
+<p>Non-breaking adoption:</p>
+<ol>
+<li><strong>Layer the new columns alongside KKE.</strong> Add <code>Scope</code>, <code>ContentFate</code>, <code>URLFate</code>, <code>ProcessState</code> as optional audit columns. Keep <code>KKE_Recommendation</code>.</li>
+<li><strong>Auto-derive in both directions.</strong> Tools fill the new columns from KKE values using the mapping table above. KKE is computed from the new columns when those are set. Auditors using KKE alone keep working; auditors who want granularity get it.</li>
+<li><strong>Profile-driven UI.</strong> Project Settings includes a &quot;Disposition mode&quot; toggle. Default for new projects: KKE mode. Advanced projects opt in to CAD mode.</li>
+<li><strong>Reports adapt.</strong> Migration Checklist and similar reports surface whichever level of granularity the project uses.</li>
+</ol>
+<h2 id="what-cad-doesnt-fix">What CAD doesn&#39;t fix</h2>
+<p>CAD addresses the compression problem in the disposition column. It doesn&#39;t address:</p>
+<ul>
+<li><strong>Tagging.</strong> Tags / Groups handle categorization (what is this page about?), not disposition. Orthogonal axis.</li>
+<li><strong>Content quality assessment.</strong> Rubrics and AI evaluation produce disposition recommendations as outputs but live alongside, not inside, the framework.</li>
+<li><strong>IA / Nav decisions.</strong> Where a page sits in the future structure is independent of its disposition.</li>
+<li><strong>Migration mechanics.</strong> Redirect maps, content briefs, URL rewrites are downstream of disposition.</li>
+</ul>
+<p>These are separate concerns documented in their own pages (TBD — see <a href="related-practices-roadmap.html">related practices roadmap</a>).</p>
+<h2 id="open-questions">Open questions</h2>
+<ul>
+<li><strong>Is Process State per-authority or per-row?</strong> A row might be Decided by the auditor but PendingSME — two authorities, two states. Probably needs to be per-authority.</li>
+<li><strong>How do you express &quot;Consolidate plus Split&quot;?</strong> Take page A, merge half its content into B, half into C. Combinations of fates aren&#39;t representable as single-value enums.</li>
+<li><strong>Should &quot;Replace&quot; and &quot;Improve&quot; be on a spectrum?</strong> Or are they categorically different? Maybe a 0–10 &quot;rewrite intensity&quot; alongside the binary.</li>
+<li><strong>Pages that should become navigation-only landing pads?</strong> A high-traffic but thin page might be best repurposed as a nav node. Not Preserve, not Improve — something else.</li>
+<li><strong>Non-page content?</strong> PDFs, images, downloadable assets currently get shoehorned into KKE. May need a parallel framework.</li>
+</ul>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="the-five-dimensions.html">Why KKE Falls Short — The Five Dimensions</a></li>
+<li><a href="patterns.html">Patterns Where KKE Breaks</a></li>
+<li><a href="vocabulary-governance.html">Vocabulary Governance</a> — necessary operational layer</li>
+<li><a href="kke-classic.html">KKE: The Classic Framework</a> — what we use today</li>
+</ul>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

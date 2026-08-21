@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Audit Framework — A Critical Review of KKE — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="index.html">Transmission documentation</a></nav>
+<h1 id="content-audit-framework--a-critical-review-of-kke">Content Audit Framework — A Critical Review of KKE</h1>
+<p>A working document for evolving the Keep / Kill / Evolve / Exclude (and Migrate / Revise / Archive, and similar) framework into something that survives contact with real engagements.</p>
+<hr>
+<h2 id="1-the-heritage-of-kke">1. The Heritage of KKE</h2>
+<p>KKE — Keep, Kill, Evolve, Exclude — comes out of a tradition of triage rubrics for legacy content during site migrations. Add four words to a sticky note and you can train a junior auditor in five minutes. That&#39;s the framework&#39;s strength: brevity. Any auditor can grasp it; clients can grasp it; the deliverable looks legible.</p>
+<p>The framework&#39;s weakness is that &quot;decide what to do with this page&quot; turns out not to be one decision. It&#39;s four or five decisions stacked on top of each other, and a single column flattens them into a label that loses information at every stage of the engagement.</p>
+<p>The sibling frameworks share the same architecture and inherit the same limitations:</p>
+<ul>
+<li><strong>MRA</strong> — Migrate / Revise / Archive (more migration-flavored)</li>
+<li><strong>KKER</strong> — Keep / Kill / Evolve / Replace (replaces &quot;Exclude&quot; with &quot;Replace&quot;)</li>
+<li><strong>CCC</strong> — Cull / Consolidate / Create (more strategic-flavored)</li>
+<li><strong>Triage</strong> — informal but widely used</li>
+</ul>
+<p>All single-column. All conflate.</p>
+<h2 id="2-the-hidden-dimensions">2. The Hidden Dimensions</h2>
+<p>A real audit decision has at minimum five independent dimensions. KKE compresses them into one column. The compression is what causes most of the subtleties we&#39;ve hit during development.</p>
+<h3 id="21-scope--is-this-page-in-this-audit-at-all">2.1 Scope — Is this page in this audit at all?</h3>
+<ul>
+<li><strong>In scope</strong> — actively being audited</li>
+<li><strong>Out of crawl scope</strong> — page got crawled but shouldn&#39;t have been; not real content (search results, admin URLs, JSON feeds, infinite-scroll variants, sitemap fragments)</li>
+<li><strong>Deferred</strong> — valid content, not in this audit cycle (post-launch, next phase, future redesign)</li>
+<li><strong>Out of authority</strong> — owned by another team/department/engagement, not yours to decide</li>
+<li><strong>Compliance hold</strong> — can&#39;t be touched without legal review</li>
+<li><strong>Third-party / aggregated</strong> — content sourced from another system, not editable by this team</li>
+</ul>
+<p>KKE collapses all of these into &quot;Exclude.&quot; That&#39;s why the Post Launch problem keeps coming up. These look the same in the data but have very different implications:</p>
+<ul>
+<li>Out-of-crawl-scope items should arguably be <strong>deleted</strong> from the audit spreadsheet entirely, not preserved as Excludes.</li>
+<li>Deferred items should ship to the client as <strong>&quot;we know about these, they&#39;re queued for next cycle&quot;</strong> — not &quot;excluded&quot; in any disposition sense.</li>
+<li>Compliance holds need <strong>annotation visible in reports</strong> so the migration team doesn&#39;t try to redirect a page they can&#39;t legally touch.</li>
+</ul>
+<h3 id="22-content-fate--what-happens-to-the-content-of-this-page">2.2 Content Fate — What happens to the content of this page?</h3>
+<ul>
+<li><strong>Preserve</strong> — content stays as-is (Keep)</li>
+<li><strong>Improve</strong> — content is revised in place, retains identity (Evolve)</li>
+<li><strong>Replace</strong> — content is completely rewritten; new content, same role</li>
+<li><strong>Merge into</strong> — content is absorbed by another page (Consolidate)</li>
+<li><strong>Split into</strong> — content becomes 2+ pages</li>
+<li><strong>Retire</strong> — content is removed (Kill)</li>
+</ul>
+<p>Six values, not four. The two missing from KKE are <strong>Replace</strong> and <strong>Split</strong>:</p>
+<ul>
+<li><strong>Replace</strong> matters because &quot;improve in place&quot; (Evolve) is different from &quot;throw it out and write fresh.&quot; A page that&#39;s stylistically dated but topically fine is Evolve. A page whose entire premise is wrong but whose URL is valuable is Replace. The migration team needs to know which.</li>
+<li><strong>Split</strong> matters because the inverse of Consolidate happens too. One page doing three jobs (about the team + about the services + about the history, all on /about) should become three pages. Currently auditors note this in the Notes field and hope someone reads it.</li>
+</ul>
+<h3 id="23-url-fate--what-happens-to-the-url">2.3 URL Fate — What happens to the URL?</h3>
+<ul>
+<li><strong>Preserve</strong> — URL stays exactly as it is</li>
+<li><strong>Move</strong> — URL changes via sitemap reorganization (the page is Keep but lives at a new path)</li>
+<li><strong>Redirect</strong> — URL retires, redirect points elsewhere</li>
+<li><strong>404</strong> — URL retires, no redirect (deliberate, e.g. for thin or noisy URLs)</li>
+</ul>
+<p>URL fate is <strong>mostly independent</strong> of content fate:</p>
+<ul>
+<li>A Keep page can get a new URL because the sitemap reorganized. Same content, different address.</li>
+<li>A Kill page can have no redirect (intentional 404 for low-value or duplicate URLs).</li>
+<li>A Consolidate page always redirects (to the target).</li>
+<li>An Evolve page can keep its URL or move it.</li>
+</ul>
+<p>KKE&#39;s single column tangles these. The current app fixes part of this by having a separate <code>Redirect_Destination</code> column — but that fix is implicit in the data model, not in the framework&#39;s vocabulary.</p>
+<h3 id="24-confidence--process-state--where-is-this-decision-in-the-workflow">2.4 Confidence / Process State — Where is this decision in the workflow?</h3>
+<ul>
+<li><strong>Unreviewed</strong> — haven&#39;t looked yet</li>
+<li><strong>Looked at, undecided</strong> — examined, more research needed</li>
+<li><strong>Decided</strong> — auditor is confident</li>
+<li><strong>Pending SME</strong> — sent for expert review</li>
+<li><strong>Pending stakeholder</strong> — sent for business decision</li>
+<li><strong>Resolved</strong> — final answer</li>
+</ul>
+<p>KKE has implicit &quot;Unreviewed&quot; (blank cell) and &quot;Decided&quot; (cell filled in). The middle states are real — auditors absolutely encounter pages they need more info on — but there&#39;s no clean place to put them. They get parked in Notes, or with the Flag bookmark, or in a Tag. None of those communicate &quot;I looked at this and don&#39;t have enough information yet.&quot;</p>
+<p>The current <code>Final_KKE</code> column hints at the workflow dimension: it&#39;s a separate column because the resolution is a separate moment from the initial recommendation. But that pattern stops at SME — it doesn&#39;t generalize to &quot;pending stakeholder&quot; or &quot;needs research.&quot;</p>
+<h3 id="25-authority--whose-decision-is-this">2.5 Authority — Whose decision is this?</h3>
+<p>The app&#39;s evolution makes this dimension extremely visible:</p>
+<ul>
+<li><code>KKE_Recommendation</code> — auditor&#39;s call</li>
+<li><code>SME_Decision</code> — domain expert&#39;s call</li>
+<li><code>GA_KKE_Recommendation</code> — analytics-derived</li>
+<li><code>AI KKE</code> — AI&#39;s pattern-match against rubric</li>
+<li><code>Final_KKE</code> — the synthesis</li>
+</ul>
+<p>Each authority has different weight on different pages. A page with high traffic and strong engagement should weight Analytics heavily. A page about regulated medical content should weight SME heavily. A purely promotional page should weight Auditor + Stakeholder.</p>
+<p>KKE-as-originally-conceived assumed one authority per page — the auditor. The current app has effectively built a parallel system of authority-stamped recommendations. That should be acknowledged in the framework, not treated as an exception.</p>
+<h4 id="authority-requires-governance">Authority requires governance</h4>
+<p>Once you accept that an audit has multiple authorities producing recommendations, you also have to accept that authority-stamped vocabularies degrade without active management. SMEs invent their own labels (<code>Change: Consolidate</code>, <code>Change: Post-Launch</code>, <code>Evolve - Post</code>). Multiple auditors over multiple cycles introduce subtle variants (<code>Post Launch</code> vs <code>Post-Launch</code>). Imports from other tools bring legacy values that don&#39;t match the current vocabulary.</p>
+<p>A framework that treats authority as a real dimension has to provide for <strong>governance tooling</strong>: a way to detect rogue values, normalize typos, merge variants, and enforce a defined vocabulary. Otherwise &quot;multiple authorities&quot; silently becomes &quot;vocabulary drift,&quot; which silently becomes &quot;the data column says one thing, the report says another, the migration team trusts neither.&quot;</p>
+<p>The audit app&#39;s Custom KKE merge / rogue value detection / undefined-values cleanup are operational implementations of this need. Any future framework based on these dimensions has to design the governance layer up front — not bolt it on after a typo causes a downstream report to ship wrong.</p>
+<h2 id="3-patterns-where-kke-breaks-down-real-examples">3. Patterns Where KKE Breaks Down (Real Examples)</h2>
+<h3 id="pattern-a-the-post-launch-problem">Pattern A: The Post-Launch Problem</h3>
+<p>Mid-audit, the client de-scopes a section. Pages are valid content, just not in this cycle. KKE says: mark them Exclude. But now they&#39;re indistinguishable from genuine crawl noise. The client report says &quot;we&#39;re excluding 200 pages&quot; without telling anyone <em>why</em>. The migration team can&#39;t tell what to defer vs. what to drop.</p>
+<p><strong>Underlying issue:</strong> Scope and Content Fate are different dimensions; KKE collapses them.</p>
+<h3 id="pattern-b-the-implicit-consolidate">Pattern B: The Implicit Consolidate</h3>
+<p>For years, auditors used &quot;assign N pages to one sitemap node&quot; as a covert <em>these should merge</em> signal. The data didn&#39;t say it; the human reading the audit had to infer it from page counts. We added Consolidate as an explicit KKE state to fix this.</p>
+<p><strong>Lesson:</strong> Any pattern auditors are communicating with implicit conventions is a missing first-class concept. There are probably others.</p>
+<h3 id="pattern-c-keep-but-moved">Pattern C: Keep But Moved</h3>
+<p>High-quality page; its URL is changing because the sitemap is being reorganized. KKE = Keep. <code>Redirect_Destination</code> = the new URL. Two pieces of information about one page in two columns. The KKE column alone doesn&#39;t tell the migration team &quot;this URL is changing.&quot;</p>
+<p><strong>Underlying issue:</strong> Content Fate (preserve) and URL Fate (move) are independent.</p>
+<h3 id="pattern-d-the-half-decision">Pattern D: The Half-Decision</h3>
+<p>Auditor reviews a page, can&#39;t decide between Keep and Evolve, wants to flag for stakeholder input. Currently: leaves blank (looks Unreviewed) or sets Flagged + Notes. Neither is a clean &quot;needs a decision from someone else&quot; state.</p>
+<p><strong>Underlying issue:</strong> Process state is a missing dimension.</p>
+<h3 id="pattern-e-the-split">Pattern E: The Split</h3>
+<p>One page is doing three jobs. Decision: split into three pages. KKE has no value for this. The auditor adds a Note. The migration team has to read every Note hoping to catch it.</p>
+<p><strong>Underlying issue:</strong> Content Fate is missing the Split value.</p>
+<h3 id="pattern-f-cross-engagement-orphan">Pattern F: Cross-Engagement Orphan</h3>
+<p>Audit covers Marketing&#39;s site. /support is owned by Customer Service, not part of this engagement. Marketing wants the audit to acknowledge those pages but not decide on them. KKE: not Keep, not Evolve, not Kill, not really Exclude. Currently auditors fudge it.</p>
+<p><strong>Underlying issue:</strong> Scope has more values than &quot;in&quot; and &quot;out.&quot;</p>
+<h3 id="pattern-g-multiple-authorities-disagree">Pattern G: Multiple Authorities Disagree</h3>
+<p>Page has KKE=Keep (auditor likes it), GA_KKE=Kill (no traffic), SME_Decision=Change:Evolve (subject expert says it&#39;s outdated). Three authorities, three answers. The single <code>Final_KKE</code> column makes the auditor pick one as if the disagreement didn&#39;t matter. It does matter — the disagreement is itself a signal.</p>
+<p><strong>Underlying issue:</strong> Authority is a dimension; KKE assumes a single authority.</p>
+<h3 id="pattern-h-replace-vs-evolve">Pattern H: Replace vs Evolve</h3>
+<p>Page is well-trafficked but its premise is wrong (e.g. lists 2018 pricing structure, hasn&#39;t been updated, content team needs to start over). Currently: Evolve. But &quot;improve&quot; implies iteration, not throwing it out. The migration team estimates the work as &quot;minor revision.&quot; It&#39;s actually &quot;rewrite from scratch.&quot;</p>
+<p><strong>Underlying issue:</strong> Content Fate is missing Replace.</p>
+<h2 id="4-a-proposed-framework">4. A Proposed Framework</h2>
+<h3 id="41-three-columns-instead-of-one">4.1 Three columns instead of one</h3>
+<p>Replace <code>KKE_Recommendation</code> with three independent columns:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Scope</strong></td>
+<td>InScope / OutOfCrawl / Deferred / OutOfAuthority / ComplianceHold / ThirdParty</td>
+</tr>
+<tr>
+<td><strong>ContentFate</strong></td>
+<td>Preserve / Improve / Replace / Merge / Split / Retire</td>
+</tr>
+<tr>
+<td><strong>URLFate</strong></td>
+<td>Preserve / Move / Redirect / 404</td>
+</tr>
+</tbody></table>
+<p>The original KKE values become well-known combinations of the three:</p>
+<table>
+<thead>
+<tr>
+<th>KKE</th>
+<th>Scope</th>
+<th>ContentFate</th>
+<th>URLFate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Keep</td>
+<td>InScope</td>
+<td>Preserve</td>
+<td>Preserve or Move</td>
+</tr>
+<tr>
+<td>Kill</td>
+<td>InScope</td>
+<td>Retire</td>
+<td>Redirect or 404</td>
+</tr>
+<tr>
+<td>Evolve</td>
+<td>InScope</td>
+<td>Improve</td>
+<td>Preserve or Move</td>
+</tr>
+<tr>
+<td>Consolidate</td>
+<td>InScope</td>
+<td>Merge</td>
+<td>Redirect (to target)</td>
+</tr>
+<tr>
+<td>Exclude (current usage)</td>
+<td>OutOfCrawl</td>
+<td>(n/a)</td>
+<td>(n/a)</td>
+</tr>
+</tbody></table>
+<p>The new vocabulary doesn&#39;t replace shorthand for the common cases — auditors still say &quot;this is a Kill&quot; — but when something doesn&#39;t fit (Pattern A, F, G, H), the framework has language for it.</p>
+<h3 id="42-add-a-process-state-column">4.2 Add a Process State column</h3>
+<p>Independent of disposition. Tracks where the decision is in the workflow:</p>
+<p><strong>ProcessState</strong>: Unreviewed / InReview / Decided / PendingSME / PendingStakeholder / Resolved</p>
+<p>This replaces the current implicit-blank-vs-filled treatment with explicit states, and gives auditors a place for Pattern D.</p>
+<h3 id="43-authority-becomes-formal">4.3 Authority becomes formal</h3>
+<p>The current pattern of multiple recommendation columns (KKE / SME / GA / AI / Final) is correct — make it the framework, not an exception.</p>
+<p>Each authority is a recommendation column with the same disposition shape (Scope + ContentFate + URLFate). The synthesis column (currently <code>Final_KKE</code>) is the auditor&#39;s resolved view.</p>
+<p>When authorities disagree, that disagreement is a signal, not a bug. Surface it explicitly.</p>
+<h3 id="44-naming-the-framework">4.4 Naming the framework</h3>
+<p>Brand-friendly options:</p>
+<ul>
+<li><strong>CAD</strong> — Content Audit Disposition. Clean acronym; &quot;disposition&quot; is the records-management term for &quot;what we&#39;re doing with this.&quot; Sounds like a noun, which the current term (&quot;KKE recommendation&quot;) strains to be.</li>
+<li><strong>Three Fates</strong> — Scope, Content, URL. Memorable, mythological, easy to teach. Slight risk of sounding fanciful.</li>
+<li><strong>CALM</strong> — Content Audit Lifecycle Map. Has the lifecycle angle but is somewhat redundant.</li>
+<li><strong>Audit Disposition</strong> — Plain English. Boring but accurate.</li>
+<li><strong>Just don&#39;t acronym it.</strong> Call it the &quot;audit disposition&quot; and let the columns speak for themselves. Frameworks that avoid an acronym sometimes age better — they don&#39;t get pigeonholed.</li>
+</ul>
+<p>For the methodology itself (the process, not the framework):</p>
+<ul>
+<li><strong>Content Lifecycle Audit</strong> — adds the lifecycle angle to &quot;content audit&quot;</li>
+<li><strong>Content Disposition Audit</strong> — emphasizes the deliverable</li>
+<li><strong>Strategic Content Audit</strong> — competitive positioning</li>
+<li>Or just <strong>Content Audit</strong> — let the methodology branding live in process docs, not the name</li>
+</ul>
+<p>My pick: <strong>CAD (Content Audit Disposition)</strong> for the framework, <strong>Content Audit</strong> for the engagement type. Don&#39;t try to brand the methodology with a clever name — the value is in the framework, not the label.</p>
+<h3 id="45-what-to-keep-from-kke">4.5 What to keep from KKE</h3>
+<p>KKE&#39;s brevity is genuinely valuable. The five-state vocabulary (Keep / Kill / Evolve / Consolidate / Exclude) works well for the <em>common cases</em> and the <strong>client-facing summary</strong>. Keep it as a folksonomy, computed from the underlying disposition columns:</p>
+<ul>
+<li>Keep = Scope:InScope + ContentFate:Preserve</li>
+<li>Kill = Scope:InScope + ContentFate:Retire</li>
+<li>Evolve = Scope:InScope + ContentFate:Improve</li>
+<li>Consolidate = Scope:InScope + ContentFate:Merge</li>
+<li>Exclude = Scope ≠ InScope (with a sub-reason)</li>
+</ul>
+<p>Pages whose disposition doesn&#39;t map cleanly onto KKE get a &quot;see disposition columns&quot; indicator. The framework gracefully degrades to KKE when that&#39;s all the audience needs.</p>
+<h2 id="5-migration-path-for-existing-audits">5. Migration Path for Existing Audits</h2>
+<p>The audit tool has real audits in flight. A clean break would orphan them.</p>
+<ol>
+<li><strong>Layer the new columns alongside KKE.</strong> Add <code>Scope</code>, <code>ContentFate</code>, <code>URLFate</code>, <code>ProcessState</code> as new audit columns. Preserve <code>KKE_Recommendation</code> for backward compatibility.</li>
+<li><strong>Auto-derive in both directions.</strong> The app can fill the new columns from existing KKE values using the table in §4.1, and compute KKE from the new columns. Auditors using KKE alone keep working; auditors who want more granularity get more granularity.</li>
+<li><strong>Profile-driven UI.</strong> Project Settings includes a &quot;Disposition mode&quot; toggle. Default for new projects: simple KKE mode. Advanced projects opt in to the three-column mode.</li>
+<li><strong>Reports adapt.</strong> Migration Checklist and similar reports surface whichever level of granularity the project uses.</li>
+</ol>
+<p>This is a non-breaking evolution. Old audits work unchanged; new audits can use whichever framework fits.</p>
+<h2 id="6-what-this-document-doesnt-cover">6. What This Document Doesn&#39;t Cover</h2>
+<ul>
+<li><strong>Tagging.</strong> Tags / Groups / Primary Tag handle dimensions of <em>categorization</em> (what is this page about?) rather than <em>disposition</em> (what should we do with it?). The two are orthogonal and the current vocabulary serves them fine.</li>
+<li><strong>Content quality.</strong> Rubrics handle &quot;is this page good?&quot; — separate from disposition.</li>
+<li><strong>Migration mechanics.</strong> Redirect maps, URL changes, content briefs are downstream of disposition. The framework provides inputs to those processes; it isn&#39;t those processes.</li>
+<li><strong>Information architecture.</strong> Sitemap assignments are a parallel concern. A page can have any disposition independent of where it fits (or doesn&#39;t) in the future IA.</li>
+</ul>
+<h2 id="7-open-questions">7. Open Questions</h2>
+<p>These don&#39;t have clean answers yet:</p>
+<ul>
+<li><strong>Is Confidence per-authority or per-row?</strong> A row might be Decided by the auditor but Pending SME — two authorities, two confidence levels. Probably needs to be per-authority.</li>
+<li><strong>How do you express &quot;consolidate plus split&quot;?</strong> &quot;Take page A, merge half its content into B, half into C.&quot; Combinations of fates aren&#39;t currently representable.</li>
+<li><strong>Should &quot;Replace&quot; and &quot;Improve&quot; be on a spectrum?</strong> Or are they categorically different? Maybe a 0–10 &quot;rewrite intensity&quot; alongside a binary in-place / replaced.</li>
+<li><strong>What about pages that should become navigation-only nodes?</strong> A page with great traffic but thin content might be best repurposed as a nav landing pad. Not Keep, not Evolve, not Kill — something else.</li>
+<li><strong>How does the framework handle non-page content?</strong> PDFs, images, downloadable assets. Currently shoehorned into KKE. Probably need a parallel framework for non-page assets.</li>
+</ul>
+<p>These are the next round of subtleties. They&#39;ll surface when this framework hits its own contact with reality.</p>
+<h2 id="8-postscript-operational-tooling-vs-conceptual-fix">8. Postscript: Operational Tooling vs. Conceptual Fix</h2>
+<p>The audit app this framework grew out of has accumulated tooling that <em>mitigates</em> most of the patterns in §3 without changing the underlying conceptual model. This is worth being honest about: the framework critiques KKE; the tooling patches KKE. The two complement each other but they&#39;re not the same thing.</p>
+<p>Examples of operational tooling that addresses §3 patterns without resolving them:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Tooling that mitigates it</th>
+<th>What&#39;s still unresolved</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>A — Post-Launch problem</strong></td>
+<td>Filter bar in Consolidation Candidates can exclude rows by KKE state or Group. Custom KKE merge cleans up typo variants.</td>
+<td>The KKE column still can&#39;t natively distinguish &quot;out of crawl scope&quot; from &quot;deferred.&quot; Reports that group by KKE still mis-categorize.</td>
+</tr>
+<tr>
+<td><strong>B — Implicit Consolidate</strong></td>
+<td>Consolidate is now a first-class KKE state with a target picker, redirect chasing, and a Consolidation Candidates workflow modal.</td>
+<td>Largely <em>resolved</em> by tooling — but only because the framework recognized Consolidate as a missing concept and the tooling implemented it. This is the exception that proves the rule: when conceptual gaps are addressed, tooling can fully close them.</td>
+</tr>
+<tr>
+<td><strong>C — Keep but moved</strong></td>
+<td>Computed Path + Redirect_Destination columns capture the URL change separately from KKE.</td>
+<td>The KKE column doesn&#39;t reflect the URL change. A reader looking at &quot;Keep&quot; can&#39;t tell that the URL is moving without checking other columns.</td>
+</tr>
+<tr>
+<td><strong>D — The half-decision</strong></td>
+<td>Notes field, Flagged bookmark, &quot;Pending Final KKE&quot; filter.</td>
+<td>No clean &quot;needs decision from someone&quot; state. Auditors still park decisions in Notes and hope someone reads them.</td>
+</tr>
+<tr>
+<td><strong>E — The split</strong></td>
+<td>None. Auditors note it in Notes.</td>
+<td>No data structure for &quot;this page becomes 2+ pages.&quot;</td>
+</tr>
+<tr>
+<td><strong>F — Cross-engagement orphan</strong></td>
+<td>Custom KKE states + Group filtering.</td>
+<td>The vocabulary still treats them as Excludes for downstream tooling that doesn&#39;t know about custom states.</td>
+</tr>
+<tr>
+<td><strong>G — Multiple authorities disagree</strong></td>
+<td>Separate columns per authority + SME conflict resolution UI. The framework <em>codified</em> this pattern.</td>
+<td>Final_KKE flattens disagreements. Reports rarely surface authority-level conflict as a signal in its own right.</td>
+</tr>
+<tr>
+<td><strong>H — Replace vs Evolve</strong></td>
+<td>None. Auditors lump both into Evolve.</td>
+<td>Same.</td>
+</tr>
+<tr>
+<td><strong>2.5 — Vocabulary governance</strong></td>
+<td>Custom KKE merge, rogue-value detection, whitespace-tolerant matching, change log.</td>
+<td>Largely <em>resolved</em> operationally. The conceptual point — that authority-stamped vocabularies need governance — is now built into the tool.</td>
+</tr>
+</tbody></table>
+<p><strong>What this teaches:</strong></p>
+<ol>
+<li><strong>Tooling can close conceptual gaps when the gap is recognized.</strong> Pattern B (Consolidate) and §2.5 (governance) went from &quot;problem&quot; to &quot;mostly solved&quot; via deliberate tooling. The pattern: name the missing concept, then build the workflow.</li>
+<li><strong>Tooling can mask conceptual gaps without closing them.</strong> Patterns A, C, D, E, F, G, H still have the underlying compression problem — the tooling makes them survivable in practice without changing the data model. A future audit using this tool will hit the same patterns, and the tool will require the same workarounds.</li>
+<li><strong>The conceptual fix matters more than the tooling fix.</strong> A clean three-column disposition (Scope / ContentFate / URLFate) plus a Confidence column would render most of §3&#39;s patterns moot. The tooling would still exist, but as utilities rather than band-aids.</li>
+</ol>
+<p>The framework remains the long-term goal. The tooling is the bridge from where the methodology is now to where it should be. Both are real; neither replaces the other.</p>
+<hr>
+<p><em>This document is a snapshot. Like KKE itself, it should be revised as the next layer of subtleties emerges.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

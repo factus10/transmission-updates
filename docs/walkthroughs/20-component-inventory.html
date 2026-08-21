@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Component Inventory Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="component-inventory-walkthrough">Component Inventory Walkthrough</h1>
+<p>How to catalog the UI components that appear across the site — hero banners, card grids, accordions — so the rebuild team knows what design-system pieces they actually need.</p>
+<blockquote>
+<p>Prerequisite: a file is open. Turn on <strong>Show Components cluster</strong> (App Settings, or the <strong>Components</strong> quick-chip above the audit bar).</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>A <strong>component</strong> is a UI building block on a page (distinct from its <em>content type</em>). One page can carry several.</li>
+<li>You tag each page with the components it uses (stored in <code>Design_Patterns</code>, comma-separated — same mechanic as Tags).</li>
+<li>The component <strong>library</strong> is a shared, app-level vocabulary (57 built-in defaults across 12 categories), so names stay consistent. The <strong>Component Inventory report</strong> then turns those tags into a frequency-and-reuse picture.</li>
+</ul>
+<hr>
+<h2 id="1-tag-components-on-pages">1. Tag components on pages</h2>
+<p>In the <strong>Components</strong> cluster of the audit bar:</p>
+<ol>
+<li><strong>+ Add component</strong> opens the picker — entries grouped by category, with a complexity badge (Low / Medium / High); already-selected ones are highlighted.</li>
+<li>Pick the components on the current page. Type a name with no match to get a <strong>Create &quot;…&quot;</strong> option.</li>
+</ol>
+<blockquote>
+<p>Tag what&#39;s <em>structurally</em> on the page, not every styled element. The goal is &quot;which reusable blocks does the rebuild need,&quot; not a pixel inventory.</p>
+</blockquote>
+<hr>
+<h2 id="2-curate-the-library">2. Curate the library</h2>
+<p><strong>Project → Component Library…</strong> opens the two-pane editor. Each entry has a name, category, complexity, description, design-system URL, aliases, and notes. <strong>Seed defaults</strong> adds the 57 built-ins (skipping any that already exist by name). The library lives in your app prefs (global), so it carries across files; per-project additions in the file&#39;s sheet merge in on open.</p>
+<hr>
+<h2 id="3-run-the-report">3. Run the report</h2>
+<p><strong>Reports → Component Inventory…</strong> produces:</p>
+<ul>
+<li>a per-component <strong>frequency table</strong> with a KKE breakdown,</li>
+<li>a <strong>one-off flag</strong> for components appearing on ≤2 pages (candidates to drop or consolidate),</li>
+<li>the <strong>top co-occurring pairs</strong> (components that tend to appear together).</li>
+</ul>
+<p>This tells the design-system team what to build first (high-frequency), what to question (one-offs), and what bundles naturally.</p>
+<hr>
+<h2 id="quick-checklist-for-component-inventory-done">Quick checklist for &quot;component inventory done&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Components</strong> cluster enabled and used while auditing</li>
+<li><input disabled="" type="checkbox"> Components tagged from a <strong>consistent library</strong> (not freeform names)</li>
+<li><input disabled="" type="checkbox"> Library curated / seeded as needed</li>
+<li><input disabled="" type="checkbox"> <strong>Component Inventory report</strong> generated and exported</li>
+<li><input disabled="" type="checkbox"> One-offs reviewed (drop, consolidate, or justify)</li>
+</ul>
+<hr>
+<p><em>See also: the <strong>Tagging, Grouping &amp; Glossary</strong> walkthrough (same chip mechanic) and <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

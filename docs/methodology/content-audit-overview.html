@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Audit Overview — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<hr>
+<h2 id="title-content-audit-overview-status-working-last-reviewed-2026-04-28">title: Content Audit Overview
+status: working
+last-reviewed: 2026-04-28</h2>
+<h1 id="content-audit-overview">Content Audit Overview</h1>
+<p>A content audit is a systematic review of every page on a site to decide what stays, what changes, what merges, and what goes — and to capture the rationale and downstream actions for each decision.</p>
+<h2 id="why-we-do-them">Why we do them</h2>
+<p>Most audits get commissioned for one of three reasons:</p>
+<ol>
+<li><strong>Migration</strong> — the site is moving to a new platform, IA, or design system. Without an audit, the migration carries forward years of accumulated content debt.</li>
+<li><strong>Performance</strong> — traffic is declining or stagnant. The site has too many pages diluting topic authority and crawl budget.</li>
+<li><strong>Editorial reset</strong> — content has drifted from strategy. The audit re-grounds the site around current goals.</li>
+</ol>
+<p>The work is similar in all three cases. The deliverables differ.</p>
+<h2 id="what-an-audit-produces">What an audit produces</h2>
+<p>A finished audit produces (at minimum):</p>
+<ul>
+<li><strong>Per-page disposition</strong> — a recommendation for each URL (keep, kill, evolve, consolidate, defer, etc.)</li>
+<li><strong>Rationale</strong> — why we made that call (notes, tags, rubric outputs)</li>
+<li><strong>Downstream actions</strong> — redirect maps, content briefs, IA assignments</li>
+<li><strong>Reports</strong> — summaries by section, by recommendation, by content owner</li>
+</ul>
+<h2 id="how-an-audit-fits-in-an-engagement">How an audit fits in an engagement</h2>
+<pre><code>┌─ Discovery ──────┐  ┌─ Audit ─────────┐  ┌─ Plan ──────────┐  ┌─ Build ──────┐
+│ Stakeholder      │  │ Crawl + GA      │  │ IA finalized    │  │ Content      │
+│ interviews       │─►│ Per-page review │─►│ Migration plan  │─►│ produced /   │
+│ Goals defined    │  │ SME review      │  │ Redirect map    │  │ migrated     │
+│ Rubric drafted   │  │ Conflict resol. │  │ Content briefs  │  │ Site ships   │
+└──────────────────┘  └─────────────────┘  └─────────────────┘  └──────────────┘
+</code></pre>
+<p>The audit sits between Discovery (what should the site become?) and Plan (how do we get there?). It produces the data layer the Plan phase consumes.</p>
+<h2 id="the-decision-the-audit-is-trying-to-capture">The decision the audit is trying to capture</h2>
+<p>For every page, an auditor is implicitly answering five questions:</p>
+<ol>
+<li><strong>Scope</strong> — Is this page in this audit at all?</li>
+<li><strong>Content fate</strong> — What should happen to the content of this page?</li>
+<li><strong>URL fate</strong> — What should happen to this URL?</li>
+<li><strong>Confidence</strong> — Are we sure, or do we need more input?</li>
+<li><strong>Authority</strong> — Who&#39;s making this call (auditor / SME / analytics / AI)?</li>
+</ol>
+<p>The classic <a href="kke-classic.html">KKE framework</a> compresses these into a single column. Most of the <a href="patterns.html">patterns we hit</a> trace back to that compression.</p>
+<p>The proposed <a href="content-audit-disposition.html">Content Audit Disposition (CAD)</a> framework decompresses them into separate columns.</p>
+<h2 id="what-an-audit-doesnt-produce">What an audit doesn&#39;t produce</h2>
+<ul>
+<li><strong>The new IA.</strong> That&#39;s an output of the Plan phase, informed by the audit but not produced by it.</li>
+<li><strong>The new content.</strong> Content briefs come out of the audit; the writing happens in Build.</li>
+<li><strong>The strategy.</strong> The audit assumes a strategy exists and tests pages against it. If you don&#39;t have a strategy, you&#39;re not ready for an audit.</li>
+</ul>
+<h2 id="practices-that-feed-the-audit">Practices that feed the audit</h2>
+<ul>
+<li><strong>Rubrics</strong> — the criteria each page is evaluated against. (Page TBD — see <a href="related-practices-roadmap.html">related practices roadmap</a>.)</li>
+<li><strong>SME review workflow</strong> — how subject matter experts validate auditor recommendations. (Page TBD.)</li>
+<li><strong>Nav and IA decisions</strong> — how pages map to the future site structure. (Page TBD.)</li>
+<li><strong>Analytics-informed scoring</strong> — how GA4 data refines recommendations. (Page TBD.)</li>
+<li><strong>AI-assisted assessment</strong> — how AI evaluates content against rubrics. (Page TBD.)</li>
+</ul>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="kke-classic.html">KKE: The Classic Framework</a></li>
+<li><a href="the-five-dimensions.html">Why KKE Falls Short — The Five Dimensions</a></li>
+<li><a href="patterns.html">Patterns Where KKE Breaks</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+</ul>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

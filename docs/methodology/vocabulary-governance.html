@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vocabulary Governance — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<hr>
+<h2 id="title-vocabulary-governance-status-working-last-reviewed-2026-04-28">title: Vocabulary Governance
+status: working
+last-reviewed: 2026-04-28</h2>
+<h1 id="vocabulary-governance">Vocabulary Governance</h1>
+<p>The operational layer that any multi-authority audit framework requires. Without it, controlled vocabularies degrade silently into noise.</p>
+<h2 id="the-problem">The problem</h2>
+<p>Audit data is produced by multiple authorities — auditors, SMEs, analytics tools, AI assistance, prior-engagement legacy data — and consumed by tools and humans downstream (migration teams, content writers, redirect implementers, dashboards). When the producers and consumers don&#39;t agree on the vocabulary, downstream output is wrong.</p>
+<p>Common failure modes:</p>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Looks like</th>
+<th>Caused by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Typo variants</strong></td>
+<td><code>Post Launch</code> and <code>Post-Launch</code> both appearing in the data</td>
+<td>Different SMEs / auditors, no validation, free text</td>
+</tr>
+<tr>
+<td><strong>Whitespace drift</strong></td>
+<td><code>Post-Launch</code> and <code>Post-Launch </code> (trailing space) treated as different</td>
+<td>Excel paste, manual entry, copy from email</td>
+</tr>
+<tr>
+<td><strong>Case drift</strong></td>
+<td><code>POST LAUNCH</code>, <code>Post-Launch</code>, <code>post-launch</code></td>
+<td>Different SMEs, no normalization step</td>
+</tr>
+<tr>
+<td><strong>SME extensions</strong></td>
+<td><code>Change: Consolidate-with-X</code>, <code>Change: Defer to Phase 2</code></td>
+<td>SMEs writing prose where the dropdown should constrain</td>
+</tr>
+<tr>
+<td><strong>Legacy import</strong></td>
+<td><code>Migrate</code>, <code>Archive</code> from a prior MRA-framework audit imported into a KKE workflow</td>
+<td>Mid-engagement framework changes, multi-vendor history</td>
+</tr>
+</tbody></table>
+<p>Each failure mode is invisible until a downstream consumer (a report, a redirect map, a count) trips on it. By then it&#39;s already in the deliverable.</p>
+<h2 id="what-governance-looks-like">What governance looks like</h2>
+<p>Active management of the vocabulary throughout the audit lifecycle. Three responsibilities:</p>
+<h3 id="1-detection">1. Detection</h3>
+<p>Surface mismatches automatically:</p>
+<ul>
+<li><strong>Rogue value detection</strong> — flag any KKE value present in row data that isn&#39;t in the defined custom states or built-ins</li>
+<li><strong>Whitespace tolerance for matching</strong> — <code>Post Launch</code> and <code>Post Launch </code> should match the same defined state for purposes of counting</li>
+<li><strong>Case awareness</strong> — <code>POST LAUNCH</code> vs <code>Post-Launch</code> is intentionally different (so users can normalize) but should be obvious in the UI</li>
+</ul>
+<h3 id="2-normalization">2. Normalization</h3>
+<p>Provide tools to merge / rename / consolidate:</p>
+<ul>
+<li><strong>Merge tooling</strong> — pick a source value, pick a target, rewrite every row using the source. Update KKE_Recommendation, Final_KKE, and SME_Decision (<code>Change: &lt;source&gt;</code> → <code>Change: &lt;target&gt;</code>).</li>
+<li><strong>Bulk rename</strong> — change a state&#39;s label, every reference updates</li>
+<li><strong>Per-row reassignment</strong> — for cases where the same source value should split across multiple targets depending on context</li>
+</ul>
+<h3 id="3-audit-trail">3. Audit trail</h3>
+<p>Every normalization step is logged:</p>
+<ul>
+<li>Timestamp</li>
+<li>Field changed</li>
+<li>Old value</li>
+<li>New value</li>
+<li>Operator (auditor / system / merge action)</li>
+</ul>
+<p>The change log is itself a structural sheet that travels with the file. Reviewers and downstream consumers can audit the audit.</p>
+<h2 id="how-its-currently-implemented">How it&#39;s currently implemented</h2>
+<p>In the audit tool today:</p>
+<ul>
+<li><strong>Custom KKE merge</strong> (Project Settings) — pick a custom state, click Merge, choose target. Rewrites KKE_Recommendation, Final_KKE, and SME_Decision values; logs every cell change to the <code>KKE_ChangeLog</code> sheet.</li>
+<li><strong>Rogue value cleanup</strong> — Project Settings shows a separate sub-section listing every KKE value present in row data that isn&#39;t built-in or in your custom states. Each gets a Merge button.</li>
+<li><strong>Whitespace-tolerant matching</strong> — built into the rogue detection so trailing spaces don&#39;t create false rogues.</li>
+<li><strong>Change log</strong> — every KKE / Final_KKE / SME_Decision change is logged with timestamp, row, URL, field, old value, new value. Persists across sessions in the <code>KKE_ChangeLog</code> sheet.</li>
+</ul>
+<h2 id="what-governance-still-doesnt-cover">What governance still doesn&#39;t cover</h2>
+<ul>
+<li><strong>Multi-authority disagreement as a class</strong> — when GA says Kill and SME says Evolve, that&#39;s not a vocabulary problem, but the absence of a clear escalation path means it gets resolved invisibly via Final_KKE.</li>
+<li><strong>Cross-engagement vocabulary</strong> — if Engagement A used <code>Defer</code> and Engagement B uses <code>Post Launch</code>, there&#39;s no shared canonical vocabulary that survives across projects.</li>
+<li><strong>Validation at entry time</strong> — currently we detect rogues after they&#39;re in the data. Stricter validation (constrain SMEs to defined values via dropdown only) would prevent the problem upstream, but at the cost of SME flexibility.</li>
+</ul>
+<h2 id="lessons-for-the-framework">Lessons for the framework</h2>
+<p>This page exists because <a href="the-five-dimensions.html#5-authority--whose-decision-is-this">Authority</a> is a real dimension. The moment you accept that, you accept that producers and consumers can disagree on vocabulary, and the framework owes you tooling to manage that.</p>
+<p>The <a href="content-audit-disposition.html">proposed CAD framework</a> treats Authority as a first-class column-set rather than as an exception. A faithful CAD implementation has to design vocabulary governance up front — not bolt it on after a typo causes a downstream report to ship wrong.</p>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="the-five-dimensions.html#5-authority--whose-decision-is-this">Why KKE Falls Short — Authority</a></li>
+<li><a href="content-audit-disposition.html">Content Audit Disposition (CAD)</a></li>
+<li><a href="patterns.html#g-multiple-authorities-disagree">Patterns Where KKE Breaks — Pattern G</a></li>
+</ul>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

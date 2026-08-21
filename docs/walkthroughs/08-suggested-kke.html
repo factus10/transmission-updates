@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggested_KKE Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="suggested_kke-walkthrough">Suggested_KKE Walkthrough</h1>
+<p>How to get the app to <em>propose</em> a Keep/Kill/Evolve call so you confirm rather than start from scratch — combining rubric logic, AI judgment, and analytics into one suggestion.</p>
+<blockquote>
+<p>Prerequisite: a file is open. AI assessment needs a <strong>Claude API key</strong> (App Settings); GA needs analytics columns in your data.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<p><strong>Suggested_KKE</strong> is a thin <strong>orchestrator</strong> over up to three independent sources:</p>
+<ul>
+<li><strong>Rubric</strong> — deterministic rules you write (a small DSL over field values + content checks).</li>
+<li><strong>AI</strong> — Claude&#39;s judgment on the page, written into the assessment result.</li>
+<li><strong>GA</strong> — a composite score from analytics metrics (sessions, engagement, …).</li>
+</ul>
+<p>Each source produces its own recommendation; the orchestrator combines them by <strong>weighted vote</strong> into one <strong>Suggested_KKE</strong>, and records the per-source breakdown. <strong>It never touches your human KKE call</strong> — suggestions sit alongside for you to confirm or override.</p>
+<hr>
+<h2 id="1-set-up-the-sources">1. Set up the sources</h2>
+<p>All three are configured from <strong>Project Settings → Suggestions</strong>:</p>
+<ul>
+<li><strong>GA Analytics</strong> — map your analytics columns (sessions, engagement rate, …), set metric weights and Keep/Evolve thresholds.</li>
+<li><strong>Rubric</strong> — point at your rubrics folder (App Settings → Rubrics folder) and run the batch.</li>
+<li><strong>Source weights</strong> — how much each source counts (GA / Rubric, 0–5), with <strong>Save weights &amp; recompute</strong>.</li>
+</ul>
+<hr>
+<h2 id="2-generate-suggestions">2. Generate suggestions</h2>
+<ul>
+<li><strong>Rubric across a set:</strong> filter to the rows you want, then <strong>Project → Run Rubric on filtered rows…</strong> (or <strong>Assess</strong> on a single page).</li>
+<li><strong>AI for the backlog:</strong> <strong>Project → AI Suggest for Unreviewed…</strong> generates a suggestion for every <strong>unreviewed</strong> row via Claude (≈1s/row, spends credits; <strong>Esc</strong> aborts). It writes only the assessment result — your KKE column is untouched.</li>
+<li><strong>GA:</strong> <strong>Project → Refresh GA KKE</strong> recomputes the analytics recommendation.</li>
+</ul>
+<p>Each of these automatically rolls its output into <strong>Suggested_KKE</strong> via the orchestrator. To re-run the combine step alone: <strong>Project → Recompute Suggested KKE</strong>.</p>
+<hr>
+<h2 id="3-read-and-act-on-suggestions">3. Read and act on suggestions</h2>
+<p>In the <strong>Decide</strong> cluster, the <strong>Suggested_KKE badge</strong> shows the winning rec (e.g. &quot;GA: Kill&quot; / &quot;Rubric: Evolve&quot;). Click it for a <strong>popover</strong> listing every source, its rec, and the winner.</p>
+<p>When sources <strong>disagree</strong>, the badge gets a dashed amber border + <strong>⚠</strong> and the popover highlights the conflict. Two sidebar special filters surface these:</p>
+<ul>
+<li><strong>Suggested disagrees</strong> — the sources didn&#39;t agree internally.</li>
+<li><strong>Suggested ≠ your call</strong> — the suggestion differs from the KKE you set.</li>
+</ul>
+<blockquote>
+<p>Workflow: confirm the easy agreements fast, then filter to <strong>Suggested ≠ your call</strong> and <strong>Suggested disagrees</strong> to spend your judgment only where it matters.</p>
+</blockquote>
+<hr>
+<h2 id="quick-checklist-for-suggestions-working">Quick checklist for &quot;suggestions working&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> At least one source configured (rubric / AI / GA)</li>
+<li><input disabled="" type="checkbox"> <strong>Source weights</strong> reflect how much you trust each</li>
+<li><input disabled="" type="checkbox"> Suggestions generated (batch rubric / AI unreviewed / GA refresh)</li>
+<li><input disabled="" type="checkbox"> Reviewed <strong>disagreements</strong> and <strong>mismatches</strong> via the sidebar filters</li>
+<li><input disabled="" type="checkbox"> Human <strong>KKE</strong> confirmed where it counts (suggestions are inputs, not decisions)</li>
+</ul>
+<hr>
+<p><em>See also: the <em>Rubric DSL</em> reference, the <strong>Content Types &amp; Crosswalk</strong> walkthrough, and <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

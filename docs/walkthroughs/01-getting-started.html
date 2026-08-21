@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting Started Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="getting-started-walkthrough">Getting Started Walkthrough</h1>
+<p>How to install the app, open your first crawl export, and understand what the file you&#39;re editing actually is. Do this once; everything else builds on it.</p>
+<blockquote>
+<p>Prerequisite: a spreadsheet with a <strong>URL column</strong> — ideally a <strong>Screaming Frog</strong> <code>.xlsx</code> crawl export, but any <code>.xlsx</code>/<code>.csv</code> with a URL column works.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>The app is a <strong>viewer and editor for your spreadsheet</strong> — it doesn&#39;t own a database. Your <code>.xlsx</code> <em>is</em> the project.</li>
+<li>On open, it <strong>injects its audit columns</strong> (KKE_Recommendation, Tags, Notes, …) if they aren&#39;t already there, and adds a handful of <strong>structural sheets</strong> (Sitemap, KKE_Settings, etc.) to hold project state.</li>
+<li>Everything you do saves <strong>back into that same file</strong>. Hand the file to a colleague with the app and they see exactly your state — decisions, sitemap, settings, change log.</li>
+<li>So: <strong>one file = one project</strong>, fully portable.</li>
+</ul>
+<hr>
+<h2 id="1-install--first-run">1. Install &amp; first run</h2>
+<ol>
+<li>Download the <code>.dmg</code>, drag the app to <strong>Applications</strong>.</li>
+<li>It&#39;s signed and notarized, so it opens normally — no right-click or security override needed.</li>
+<li>On first launch you get a <strong>Welcome</strong> dialog (also under <strong>Help → Getting Started</strong>). From it you can <strong>Open a file</strong>, view <strong>Keyboard shortcuts</strong>, or <strong>Take a quick tour</strong> (a 5-step spotlight tour, also under <strong>Help → Product Tour</strong>).</li>
+</ol>
+<hr>
+<h2 id="2-open-a-crawl-export">2. Open a crawl export</h2>
+<ol>
+<li><strong>File → Open…</strong> (<strong>Cmd+O</strong>), or the <strong>Open a file</strong> button on the empty state.</li>
+<li>The app reads the first <strong>data</strong> sheet (structural sheets are skipped). If the file has <strong>more than one data sheet</strong>, a <strong>sheet picker</strong> appears in the titlebar — switch sheets there.</li>
+<li><strong>URL detection:</strong> it auto-detects the URL column by header name (<code>Address</code>, <code>URL</code>, <code>Link</code>, …; <code>Address</code> is the Screaming Frog default). If it can&#39;t find one, a <strong>column picker</strong> asks you to choose which column holds the URL.</li>
+</ol>
+<blockquote>
+<p>Single-sheet model: the app audits <strong>one data sheet at a time</strong>. Pick the right one if your export bundles several.</p>
+</blockquote>
+<hr>
+<h2 id="3-what-got-added-to-your-file">3. What got added to your file</h2>
+<p>On open, the app ensures these exist (and adds them if missing):</p>
+<ul>
+<li><strong>Audit columns</strong> — KKE_Recommendation lands first; Tags, Notes, Group, Primary Tag sit right after the URL column; the rest (SME, migration, CMS, Design_Patterns…) are appended. See the <em>Audit Columns</em> reference.</li>
+<li><strong>Structural sheets</strong> (hidden from the data-sheet picker), each carrying part of the project:<ul>
+<li><strong>Sitemap</strong> — the future-state sitemap.</li>
+<li><strong>KKE_Settings</strong> — project settings, saved filters, computed-column config.</li>
+<li><strong>KKE_ChangeLog</strong> — the audit trail of decision changes.</li>
+<li><strong>KKE_Glossary</strong>, <strong>ContentTypeRegistry</strong>, <strong>PatternLibrary</strong> (Target Spec Library), <strong>DesignPatternLibrary</strong> (Component Library).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-the-five-views">4. The five views</h2>
+<p>A persistent <strong>tab strip</strong> below the titlebar (mirrored in the <strong>View</strong> menu) switches between the app&#39;s five views — always one click away:</p>
+<ul>
+<li><strong>Audit</strong> (<strong>Cmd+1</strong>) — the default: sidebar row list + the embedded browser and field bar. Where you make each Keep/Kill/Evolve call.</li>
+<li><strong>Table</strong> (<strong>Cmd+T</strong>) — a full-width spreadsheet of every row and column, with inline editing.</li>
+<li><strong>Sitemap</strong> (<strong>Cmd+Shift+T</strong>) — the drag-and-drop editor for the future-state sitemap.</li>
+<li><strong>Redirects</strong> (<strong>Cmd+Shift+R</strong>) — every Kill or URL-changed page with an editable destination.</li>
+<li><strong>Menus</strong> (<strong>Cmd+Shift+M</strong>) — build independent navigation menus that reference your sitemap pages.</li>
+</ul>
+<blockquote>
+<p>You can build navigation right from the <strong>Audit</strong> view without switching tabs: the audit bar&#39;s <strong>Sitemap</strong> button places the current page on the sitemap (and, if the sitemap is still empty, offers a quick form to create its first node), and the <strong>Menu</strong> button drops the page into one of your menus.</p>
+</blockquote>
+<hr>
+<h2 id="5-seed-banners">5. Seed banners</h2>
+<p>The first time a project could use a starter library, a one-time <strong>seed banner</strong> offers defaults — accept or dismiss:</p>
+<ul>
+<li><strong>Content Type Registry</strong> — ~20 common content types with default classifications (<strong>Seed defaults</strong>).</li>
+<li><strong>Target Spec Library</strong> — 12 curated page-template/content-model specs (offered once a sitemap exists).</li>
+<li><strong>Component Library</strong> — 57 built-in UI components (self-seeds globally on first run; also re-seedable from the editor).</li>
+</ul>
+<p>Seeding only stages the data — <strong>save</strong> to commit it to the file.</p>
+<hr>
+<h2 id="6-save--round-trip">6. Save &amp; round-trip</h2>
+<ol>
+<li><strong>File → Save</strong> (<strong>Cmd+S</strong>). The titlebar shows the dirty state; a toast confirms the write.</li>
+<li>On save the app resolves redirect destinations, writes all audit + structural sheets, and appends this session&#39;s changes to <strong>KKE_ChangeLog</strong>.</li>
+<li>Reopen the file (it&#39;s also in <strong>File → Open Recent</strong>) and everything is exactly as you left it.</li>
+</ol>
+<blockquote>
+<p>Data ownership: the file is the single source of truth and is <strong>portable</strong> — no cloud, no separate database. Back it up like any document. Per-<em>user</em> preferences (below) live outside the file and don&#39;t travel with it.</p>
+</blockquote>
+<hr>
+<h2 id="quick-checklist-for-ready-to-audit">Quick checklist for &quot;ready to audit&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> App opens past the Gatekeeper prompt</li>
+<li><input disabled="" type="checkbox"> Crawl export opened; the <strong>right data sheet</strong> is selected</li>
+<li><input disabled="" type="checkbox"> URL column detected (or picked) — rows load a page in the browser when selected</li>
+<li><input disabled="" type="checkbox"> Audit columns present; structural sheets created</li>
+<li><input disabled="" type="checkbox"> Seed banners accepted or dismissed deliberately</li>
+<li><input disabled="" type="checkbox"> First <strong>Save</strong> succeeded and the file reopens with state intact</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Project Setup</strong> — configure identity, KKE states, suggestion sources, and the migration vocabularies. See also <a href="../user-guide.html">the User Guide</a> and the <em>Audit Columns</em> reference.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

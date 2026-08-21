@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Migration Track — Baseline Definitions — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="migration-track--baseline-definitions">Migration Track — Baseline Definitions</h1>
+<p>Migration Track answers a different question than KKE: <strong>how does this page move into the new system?</strong> Where KKE is a content-quality call (owned by content strategists), Migration Track is a delivery call (owned by technical architects, developers, and the content team executing the migration). The two correlate but don&#39;t determine each other.</p>
+<p>Six tracks: <strong>Scripted</strong>, <strong>Migrate Records</strong>, <strong>Configure</strong>, <strong>Manual Rebuild</strong>, <strong>Merge</strong>, <strong>Kill/Redirect</strong>. Plus blank (not yet decided).</p>
+<hr>
+<h2 id="scripted">Scripted</h2>
+<p><strong>Scripted = &quot;A migration script can move this page into the new CMS without human intervention.&quot;</strong></p>
+<p>Scripted is the default for content that&#39;s structured well enough to extract from the source system, transform predictably, and load into the new CMS as a page. The technical team writes the script; the script runs; the page appears in the new system in the right shape, with the right content, in the right place.</p>
+<h3 id="when-to-choose-scripted">When to choose Scripted</h3>
+<ul>
+<li>The page exists in the source CMS as a discrete unit (a node, a post, a page record)</li>
+<li>Its layout maps cleanly to a known component pattern in the new CMS</li>
+<li>The content fields (title, body, hero image, metadata) line up with target fields, or can be transformed with predictable rules</li>
+<li>Multiple pages share the same shape — the script will handle this and 50 others like it</li>
+<li>Edge cases are rare enough that a few manual fix-ups post-script are acceptable</li>
+</ul>
+<h3 id="when-not-to-choose-scripted">When <em>not</em> to choose Scripted</h3>
+<ul>
+<li>Layout is unique or complex enough that a generic script will produce broken output → <strong>Manual Rebuild</strong></li>
+<li>Content lives as structured records (faculty, events, articles), not pages → <strong>Migrate Records</strong></li>
+<li>The page is system-generated and the new CMS will regenerate it from data → <strong>Configure</strong></li>
+<li>The page should fold into another → <strong>Merge</strong></li>
+<li>The page isn&#39;t moving forward → <strong>Kill/Redirect</strong></li>
+</ul>
+<h3 id="what-scripted-commits-the-project-to">What Scripted commits the project to</h3>
+<ul>
+<li>A migration script written, tested, and run by the technical team</li>
+<li>A spot-check pass after the script runs — verify it actually produced the right output for this page</li>
+<li>A fallback plan if the script fails for this row specifically (most common: demote to Manual Rebuild)</li>
+</ul>
+<h3 id="authoring-rule">Authoring rule</h3>
+<p>Scripted is the <em>cheapest</em> track per page but the <em>most expensive</em> to set up. The threshold is &quot;are there enough pages of this shape to justify writing a script?&quot; If this is a one-off, it&#39;s probably Manual Rebuild even if the layout is technically simple.</p>
+<hr>
+<h2 id="migrate-records">Migrate Records</h2>
+<p><strong>Migrate Records = &quot;This is structured content (a record), and the new CMS will store it as a content-type entry, not a page.&quot;</strong></p>
+<p>Migrate Records applies to content that&#39;s <em>about</em> something — a faculty member, an event, a press release, a course — where the source system stored it as a content object and the new CMS will too, but the storage mechanics are different enough that a page-migration script doesn&#39;t apply. The migration extracts records from the source database (or via the CMS API), transforms field-by-field, and loads them as new content-type entries.</p>
+<h3 id="when-to-choose-migrate-records">When to choose Migrate Records</h3>
+<ul>
+<li>The content has a content-type identity in the source system: faculty bio, event listing, news article, course catalog entry, alumni spotlight</li>
+<li>The new CMS will model it as a content type with structured fields, not as freeform pages</li>
+<li>The mapping is record-to-record, not page-to-page</li>
+<li>URL is generated from the content type&#39;s slug pattern, not authored as a path</li>
+</ul>
+<h3 id="when-not-to-choose-migrate-records">When <em>not</em> to choose Migrate Records</h3>
+<ul>
+<li>The content is a freeform page that happens to be about a topic → <strong>Scripted</strong></li>
+<li>The new CMS will <em>generate</em> the listing/index pages dynamically from these records — only the records themselves are Migrate Records; the listing pages are <strong>Configure</strong></li>
+<li>The records are too inconsistent or messy to map cleanly → <strong>Manual Rebuild</strong></li>
+<li>The content is being retired → <strong>Kill/Redirect</strong></li>
+</ul>
+<h3 id="what-migrate-records-commits-the-project-to">What Migrate Records commits the project to</h3>
+<ul>
+<li>A content-type schema in the new CMS (defined by the engineering team in coordination with content strategy)</li>
+<li>An ETL pipeline (extract from source, transform fields, load as new entries)</li>
+<li>A validation pass — record counts match, required fields populated, relationships preserved</li>
+<li>URL handling: confirm the new CMS&#39;s URL pattern preserves or redirects from the old paths</li>
+</ul>
+<h3 id="authoring-rule-1">Authoring rule</h3>
+<p>If you find yourself asking &quot;is this a page or a record?&quot; — look at how the content is <em>authored</em> in the source system. If editors create it through a form with structured fields, it&#39;s Migrate Records. If they author free-form HTML or use a page builder, it&#39;s Scripted (or Manual Rebuild).</p>
+<hr>
+<h2 id="configure">Configure</h2>
+<p><strong>Configure = &quot;The new CMS will generate this page automatically once the underlying data and templates are in place.&quot;</strong></p>
+<p>Configure applies to pages that aren&#39;t really <em>content</em> in the migration sense — they&#39;re system-generated views over content that lives elsewhere. Listing pages, tag archives, search results, faceted browse pages, automatically-paginated indexes, &quot;recent news&quot; landing pages. Nothing migrates <em>to</em> these URLs because nothing lived <em>on</em> them in the first place — the source CMS generated them, and the new CMS will too, once configured correctly.</p>
+<h3 id="when-to-choose-configure">When to choose Configure</h3>
+<ul>
+<li>The page is a list, index, archive, or browse view rendered from underlying records</li>
+<li>The page&#39;s content changes whenever the underlying records change</li>
+<li>The source CMS doesn&#39;t store this page&#39;s body as authored content — it computes it</li>
+<li>The new CMS has a templating system that will produce the equivalent view from migrated content-type entries</li>
+</ul>
+<h3 id="when-not-to-choose-configure">When <em>not</em> to choose Configure</h3>
+<ul>
+<li>The page has authored content (intro paragraph, custom hero, curated callouts) that needs to migrate even if the listing portion is generated → <strong>Manual Rebuild</strong> (or Scripted if the authored portion fits a pattern)</li>
+<li>The page is a one-off landing that <em>looks</em> like a hub but is actually authored → <strong>Scripted</strong> or <strong>Manual Rebuild</strong></li>
+<li>Underlying records aren&#39;t migrating → <strong>Kill/Redirect</strong></li>
+</ul>
+<h3 id="what-configure-commits-the-project-to">What Configure commits the project to</h3>
+<ul>
+<li>Template work in the new CMS (engineering)</li>
+<li>Configuration: which records appear, how they&#39;re sorted, faceting/filtering, pagination</li>
+<li>Verification that the generated page produces equivalent or better output than the source</li>
+<li>URL preservation: the new generated URL should match the old, or a redirect should be in place</li>
+</ul>
+<h3 id="authoring-rule-2">Authoring rule</h3>
+<p>If a page has zero hand-authored content — no body, no intro, no curated copy — it&#39;s Configure. The moment authored content shows up, you&#39;re either splitting it (the authored shell is Scripted/Manual Rebuild; the generated list inside is a Configure component) or the whole thing becomes Manual Rebuild.</p>
+<hr>
+<h2 id="manual-rebuild">Manual Rebuild</h2>
+<p><strong>Manual Rebuild = &quot;A human builds this page in the new CMS, by hand, in the new authoring tools.&quot;</strong></p>
+<p>Manual Rebuild is the catch-all for pages that don&#39;t fit a script-migrated mold. The reasons vary — content needs revision (Evolve), the layout is unique enough that scripting it isn&#39;t worth the effort, the source data is too messy to transform reliably, the new CMS uses such different building blocks that there&#39;s no clean automated path. The commonality: someone sits in the new CMS and creates the page from scratch (or from a substantially edited version of the source).</p>
+<h3 id="when-to-choose-manual-rebuild">When to choose Manual Rebuild</h3>
+<ul>
+<li>KKE is <strong>Evolve</strong> — content is changing as part of the migration, so manual work is happening anyway</li>
+<li>Layout is unique, complex, or component-heavy in ways the migration script can&#39;t handle reliably</li>
+<li>Source content is inconsistent enough that scripting it would produce more cleanup than just rebuilding</li>
+<li>New CMS components are different enough that &quot;scripted migration&quot; would mean dumping content into a rich-text field — defeating the point of the new system</li>
+<li>One-off pages where script overhead exceeds rebuild effort</li>
+</ul>
+<h3 id="when-not-to-choose-manual-rebuild">When <em>not</em> to choose Manual Rebuild</h3>
+<ul>
+<li>Content is fine and layout is standard → <strong>Scripted</strong></li>
+<li>Content is structured records → <strong>Migrate Records</strong></li>
+<li>Page is system-generated → <strong>Configure</strong></li>
+<li>The &quot;rebuild&quot; is really folding into another page → <strong>Merge</strong></li>
+</ul>
+<h3 id="what-manual-rebuild-commits-the-project-to">What Manual Rebuild commits the project to</h3>
+<ul>
+<li>A human&#39;s time, in the new CMS, with the source content available for reference</li>
+<li>A clear ownership question: who does the rebuild — content team, agency, vendor, internal staff?</li>
+<li>A schedule: rebuilds bottleneck on people, not on machines. They can&#39;t all happen the day before launch.</li>
+<li>Documentation of what &quot;done&quot; looks like, especially when KKE = Evolve and the rebuild is also a content revision</li>
+</ul>
+<h3 id="authoring-rule-3">Authoring rule</h3>
+<p>Manual Rebuild is the most expensive track per page. If you find yourself classifying a large share of the inventory as Manual Rebuild, pause: either the new CMS is a poor fit, or the migration scripts haven&#39;t been adequately scoped, or the team is hedging because nobody&#39;s confident in the automated paths. Investigate before accepting it.</p>
+<hr>
+<h2 id="merge">Merge</h2>
+<p><strong>Merge = &quot;This page&#39;s content (or what&#39;s worth keeping of it) gets folded into another page during migration.&quot;</strong></p>
+<p>Merge is the delivery counterpart to KKE = Consolidate. The page itself doesn&#39;t migrate; instead, a human takes its content (selectively, often heavily edited) and incorporates it into the target page. The source URL redirects to the target. From the new system&#39;s perspective, the source page never existed.</p>
+<h3 id="when-to-choose-merge">When to choose Merge</h3>
+<ul>
+<li>KKE is <strong>Consolidate</strong> — the content decision has already been made; Merge is the delivery realization</li>
+<li>The target page exists in the inventory and is itself migrating (Keep, Evolve, or being newly built)</li>
+<li>A human will do the merging — either the content team, the agency, or the client</li>
+</ul>
+<h3 id="when-not-to-choose-merge">When <em>not</em> to choose Merge</h3>
+<ul>
+<li>The source page should fold in but no target is named → not ready for Merge; resolve the KKE decision first</li>
+<li>The source page should disappear without folding anywhere → <strong>Kill/Redirect</strong></li>
+<li>The source page is fine on its own → <strong>Scripted</strong> / <strong>Manual Rebuild</strong></li>
+</ul>
+<h3 id="what-merge-commits-the-project-to">What Merge commits the project to</h3>
+<ul>
+<li>Editorial work on the target page (read both sources, decide what&#39;s worth keeping, integrate cleanly)</li>
+<li>A redirect from source URL to target URL</li>
+<li>A track decision <em>for the target</em> — if absorbing this content meaningfully changes the target page, the target is probably <strong>Manual Rebuild</strong> even if it would otherwise be Scripted</li>
+<li>Awareness that consolidate chains are valid but expensive — A merges into B which merges into C means the editor working on B is doing two merges, then C&#39;s editor inherits all three</li>
+</ul>
+<h3 id="authoring-rule-4">Authoring rule</h3>
+<p>Merge is editorial work disguised as migration work. Budget accordingly. A Merge of two pages takes longer than a Manual Rebuild of one because the editor has to reconcile two voices, two structures, and two ideas of what the page is for.</p>
+<hr>
+<h2 id="killredirect">Kill/Redirect</h2>
+<p><strong>Kill/Redirect = &quot;This page does not exist in the new system. The URL either redirects somewhere or returns a 404.&quot;</strong></p>
+<p>Kill/Redirect is the delivery counterpart to KKE = Kill. No content migrates. The only deliverable is a redirect rule (or an explicit decision to let the URL 404). All editorial work on this page stops at the audit; the rest is engineering.</p>
+<h3 id="when-to-choose-killredirect">When to choose Kill/Redirect</h3>
+<ul>
+<li>KKE is <strong>Kill</strong></li>
+<li>KKE is <strong>Exclude</strong> <em>only when</em> the page nonetheless needs a redirect rule written by this project (rare; usually Exclude pages are out of scope for redirects too)</li>
+</ul>
+<h3 id="when-not-to-choose-killredirect">When <em>not</em> to choose Kill/Redirect</h3>
+<ul>
+<li>The page is moving forward in any form → any other track</li>
+<li>The page is consolidating into another → <strong>Merge</strong></li>
+<li>KKE is Exclude and the project has no responsibility for the URL → leave Migration Track blank</li>
+</ul>
+<h3 id="what-killredirect-commits-the-project-to">What Kill/Redirect commits the project to</h3>
+<ul>
+<li>A redirect destination — either a URL or the literal sentinel <code>404</code> (intentional deindex)</li>
+<li>Inclusion in the redirect manifest delivered to engineering</li>
+<li>Inclusion in the SEO handoff: which URLs are being redirected (and where), which are being let to 404</li>
+<li>An archive plan if the source content has historical value</li>
+</ul>
+<h3 id="authoring-rule-5">Authoring rule</h3>
+<p>Kill/Redirect is the simplest track to <em>execute</em> but the easiest to get wrong by default. A confused redirect that points users to a tangentially-related page is worse than a 404. When the destination would be a stretch, prefer 404 — and document the choice in Notes so SEO and engineering see the intent.</p>
+<hr>
+<h2 id="cross-cutting-principles">Cross-cutting principles</h2>
+<p><strong>Migration Track is owned by the technical architect, not the content strategist.</strong> The strategist&#39;s KKE call drives a <em>suggested</em> default Migration Track, but the architect makes the final call based on what scripts can actually handle, what the new CMS supports, and what the project budget allows.</p>
+<p><strong>The KKE → Migration Track suggestion table:</strong></p>
+<table>
+<thead>
+<tr>
+<th>KKE</th>
+<th>Content Nature</th>
+<th>Default Migration Track</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Keep</td>
+<td>Page</td>
+<td>Scripted</td>
+</tr>
+<tr>
+<td>Keep</td>
+<td>Content Object</td>
+<td>Migrate Records</td>
+</tr>
+<tr>
+<td>Keep</td>
+<td>Generated</td>
+<td>Configure</td>
+</tr>
+<tr>
+<td>Evolve</td>
+<td>(any)</td>
+<td>Manual Rebuild</td>
+</tr>
+<tr>
+<td>Consolidate</td>
+<td>(any)</td>
+<td>Merge</td>
+</tr>
+<tr>
+<td>Kill</td>
+<td>(any)</td>
+<td>Kill/Redirect</td>
+</tr>
+<tr>
+<td>Exclude</td>
+<td>(any)</td>
+<td>(blank — usually no track)</td>
+</tr>
+</tbody></table>
+<p>This is a <em>suggestion</em>, not a determination. Override freely with Notes explaining why.</p>
+<p><strong>Migration Track timing differs by track.</strong> Configure can happen any time after the underlying records are migrated. Scripted and Migrate Records run in batches. Manual Rebuild and Merge are bottlenecked on people and have to be scheduled. Kill/Redirect is a single deliverable at launch. Don&#39;t assume a uniform timeline.</p>
+<p><strong>The &quot;I gave up and dumped it in a rich text field&quot; outcome.</strong> When a Scripted migration fails on a page and the script falls back to dumping raw HTML into a rich-text field, that&#39;s a <em>failed Scripted</em> outcome that should be reclassified as <strong>Manual Rebuild</strong> post-launch (the content is technically there, but the build quality is unacceptable). Phase 3+ tooling will track this via a <code>Migration_Status</code> field populated from the technical team&#39;s success/failure list.</p>
+<p><strong>Notes carry the <em>why</em>, especially on overrides.</strong> Default tracks are easy. Overrides need explanation: &quot;Suggested Scripted, switched to Manual Rebuild because layout uses a custom widget the new CMS can&#39;t replicate&quot; is the kind of note that prevents re-litigation later.</p>
+<p><strong>Blank means &quot;not yet assigned.&quot;</strong> Migration Track is hidden by default in the audit UI; it gets reviewed during the technical-architecture phase. Don&#39;t pre-populate it during the content audit unless you&#39;re confident; let the architect&#39;s pass do the assignment with appropriate context.</p>
+<hr>
+<p><em>Companion document to the KKE Rubric Baseline. Same structure, different layer.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transmission — Quick Start</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="index.html">Transmission documentation</a></nav>
+<h1 id="transmission--quick-start">Transmission — Quick Start</h1>
+<blockquote>
+<p><strong>Running a real engagement, not just trying the tool?</strong> Read
+<strong><a href="running-an-audit.html">Running an Audit</a></strong> instead — it&#39;s the opinionated
+order to do things in, and the order now matters. This page is the
+five-minute tour of the core loop.</p>
+</blockquote>
+<p><strong>Your first content audit in about 10 minutes.</strong> This is the short version; the full manual is <a href="user-guide.html">the User Guide</a>.</p>
+<blockquote>
+<p>KKE = <strong>Keep · Kill · Evolve</strong> (+ <strong>Consolidate</strong> and <strong>Exclude</strong>). For every page on a site, you make one call.</p>
+</blockquote>
+<hr>
+<h2 id="1-open-your-crawl--·--1-min">1. Open your crawl  ·  1 min</h2>
+<ul>
+<li><strong>Cmd+O</strong> (or the <strong>Open a file</strong> button on the welcome screen) and pick a Screaming Frog <code>.xlsx</code> export — or any spreadsheet with a URL column.</li>
+<li>The app auto-detects the URL column and adds its own audit columns (KKE, Tags, Notes, etc.). Your original columns are untouched.</li>
+<li>First launch shows a <strong>Welcome</strong> dialog. Take the <strong>Product Tour</strong> (5 steps) if you want the guided version, or press <strong>?</strong> anytime for the keyboard cheat-sheet.</li>
+</ul>
+<h2 id="2-make-the-call-fast--·--the-core-loop">2. Make the call, fast  ·  the core loop</h2>
+<ol>
+<li><p>Click a row → the page loads in the built-in browser, with its metadata above it.</p>
+</li>
+<li><p>Press a number to decide:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1</strong></td>
+<td>Keep</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Kill</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Evolve</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Consolidate (pick a target page to merge into)</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Exclude (out of scope)</td>
+</tr>
+<tr>
+<td><strong>0</strong></td>
+<td>Clear</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>With <strong>auto-advance</strong> on (default), you jump to the next page automatically.</p>
+</li>
+<li><p>Press <strong>]</strong> anytime to skip to the next page that still needs a decision.</p>
+</li>
+<li><p>Add a <strong>Note</strong> (the Snippets menu has reusable rationales), <strong>Tags</strong>, or a <strong>Group</strong> as needed.</p>
+</li>
+</ol>
+<p>Everything <strong>auto-saves</strong> 2 seconds after you stop — watch the title bar: <em>● Unsaved → ⟳ Saving… → ✓ All changes saved.</em> Or <strong>Cmd+S</strong> to save now.</p>
+<h2 id="3-filter--batch--·--dont-decide-one-by-one-when-you-dont-have-to">3. Filter &amp; batch  ·  don&#39;t decide one-by-one when you don&#39;t have to</h2>
+<ul>
+<li><strong>Search</strong> + <strong>scope</strong> (All / URL / Title) at the top of the sidebar.</li>
+<li><strong>KKE filter</strong> (multi-check), <strong>Group filter</strong>, and <strong>+ Field filter</strong> (any column: contains / equals / is-blank…).</li>
+<li>Select rows (Cmd+click / Shift+click) <strong>or</strong> just narrow with filters, then use the <strong>action bar at the bottom of the sidebar</strong> to set KKE / Published / Page Type / Theme / Group / tags on <em>all</em> of them at once.</li>
+<li>Example: filter Status Code = 404 → action bar → Set KKE → Kill → Apply.</li>
+</ul>
+<blockquote>
+<p>Starting from a CMS export with thousands of pages? <strong>Project → Triage Non-200 Pages</strong> batch-assigns by status code, and <strong>Project → AI Suggest for Unreviewed</strong> can pre-fill a <code>Suggested_KKE</code> for every undecided page (needs a Claude API key; never overwrites your call).</p>
+</blockquote>
+<h2 id="4-plan-the-migration--·--optional-when-youre-replatforming">4. Plan the migration  ·  optional, when you&#39;re replatforming</h2>
+<ul>
+<li><strong>Sitemap</strong> (Cmd+Shift+T): drag-and-drop the future-state IA; assign Keep/Evolve pages to nodes. You can also seed the very first node straight from the audit bar&#39;s <strong>Sitemap</strong> button.</li>
+<li><strong>Menus</strong> (Cmd+Shift+M): build independent navigation menus that reference your sitemap pages; the audit bar&#39;s <strong>Menu</strong> button drops the current page into a menu without leaving the audit.</li>
+<li><strong>Redirects</strong> (Cmd+Shift+R): every Kill or URL-changed page, with an editable destination.</li>
+<li><strong>Consolidate</strong>: point near-duplicate pages at the survivor; the redirect follows the target automatically.</li>
+</ul>
+<h2 id="5-check--hand-off--·--before-you-ship">5. Check &amp; hand off  ·  before you ship</h2>
+<ol>
+<li><strong>Migration → Pre-Handoff Check</strong> — one report flags everything that isn&#39;t ready: unreviewed pages, consolidate targets that don&#39;t exist (or point at a Kill page), redirect chains, duplicate nav IDs, empty sitemap nodes. Fix what it finds.</li>
+<li><strong>Reports</strong> menu — Executive Summary, Content Inventory, SME Review Status, Sitemap Coverage, Migration Checklist, and more (export each as PDF or Word-compatible HTML).</li>
+<li><strong>File → Export… (Cmd+Shift+E)</strong> — filtered rows, audit decisions (CSV/JSON), redirect map (CSV), or the multi-sheet Migration Tracker for engineering.</li>
+</ol>
+<hr>
+<h2 id="the-shortcuts-worth-memorizing">The shortcuts worth memorizing</h2>
+<p><code>1</code>–<code>5</code> set KKE · <code>0</code> clears · <code>]</code> next unreviewed · <code>F</code> flag · <code>j</code>/<code>k</code> or arrows move · <code>Cmd+F</code> global search · <code>Cmd+S</code> save · <code>?</code> all shortcuts.</p>
+<h2 id="bringing-in-a-subject-matter-expert">Bringing in a subject-matter expert?</h2>
+<p><code>SME → Export for SME Review</code> → they fill in decisions in Excel → <code>SME → Import SME Decisions</code> → <code>SME → Compare KKE vs SME</code> (side-by-side) → <code>Resolve Conflicts</code> to finalize.</p>
+<hr>
+<p><em>Two settings homes:</em> <strong>App Settings</strong> (⚙, per-user, all files) vs <strong>Project Settings</strong> (Project menu, saved in this file). <em>Stuck?</em> Press <strong>?</strong> for shortcuts or <strong>Help → Product Tour</strong> for the walkthrough.</p>
+
+<footer>Transmission — content audit and migration platform. <a href="../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

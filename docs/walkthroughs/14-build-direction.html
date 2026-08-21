@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build & Direction Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="build--direction-walkthrough">Build &amp; Direction Walkthrough</h1>
+<p>How to turn a placed sitemap into <strong>work three people can pick up and execute</strong> — the builder who constructs each page, the writer who fills it, and the migrator who maps the old content in. This is where the sitemap stops being a map and becomes a delivery plan.</p>
+<blockquote>
+<p>Prerequisite: the future-state sitemap exists and your Keep/Evolve pages are placed on it (<strong>need placement = 0</strong>). See the <strong>Sitemap &amp; IA</strong> walkthrough.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>Every build node carries direction for <strong>three roles</strong>: <strong>Builder</strong> (constructs the page), <strong>Writer</strong> (writes the content), <strong>Migrator</strong> (maps source content into the new CMS).</li>
+<li>Direction lives at <strong>two levels</strong>. Type-level defaults sit on the <strong>Target Spec</strong> in the <strong>Target Spec Library</strong> — write the guidance <em>once per spec</em> and every node on that spec inherits it. Node-level briefs override or extend, page by page.</li>
+<li>A <strong>Target Spec</strong> is either a <strong>Page Template</strong> (a full page layout) or a <strong>Content Model</strong> (an embeddable fragment / data shape, with a field schema).</li>
+<li>You don&#39;t need a brief on every page. Write one reference brief per spec (or on one representative node) and let the rest follow — the reports handle this gracefully, with no &quot;missing brief&quot; nagging.</li>
+</ul>
+<p>Open the tree with <strong>Cmd+Shift+T</strong>. The <strong>status tallies</strong> in the stats line (&quot;5 built · 3 in progress&quot;) are your build dashboard.</p>
+<hr>
+<h2 id="1-build-the-target-spec-library">1. Build the Target Spec Library</h2>
+<p>A <strong>Target Spec</strong> is what a node is built from. It&#39;s the backbone of every brief.</p>
+<ol>
+<li><strong>Project → Target Spec Library…</strong></li>
+<li>Seed the <strong>12 defaults</strong>, then edit. For each spec set:<ul>
+<li><strong>Kind</strong> — <strong>Page Template</strong> (full page layout) or <strong>Content Model</strong> (embeddable fragment / data shape).</li>
+<li><strong>Description</strong></li>
+<li><strong>Build guidance default</strong> — the standard build notes for this spec (for the <strong>Builder</strong>).</li>
+<li><strong>Writer brief default</strong> — the standard content brief (for the <strong>Writer</strong>).</li>
+<li><strong>Migration mapping default</strong> — the source → target field map and migration gotchas (for the <strong>Migrator</strong>). Applies even to scripted content.</li>
+<li><strong>Fields</strong> — the field schema; shown in the editor only for <strong>Content Models</strong>.</li>
+<li><strong>Default Migration Track</strong> · <strong>Notes</strong>.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Gotcha: specs are matched by <strong>exact name</strong>. Reports group by spec name, so a typo splits a group. Keep names consistent.</p>
+</blockquote>
+<hr>
+<h2 id="2-annotate-each-node-with-build-metadata">2. Annotate each node with build metadata</h2>
+<p>Open a node&#39;s editor (double-click the label, or <strong>✎</strong>). Below <strong>Migration notes</strong> are three sections matching the three roles:</p>
+<p><strong>Build</strong> (blue pill — <em>for the person constructing this page</em>):</p>
+<ul>
+<li><strong>Pattern</strong> — pick a spec from the Target Spec Library (or type a new name to add it). On selection, any <strong>blank</strong> Build guidance / Writer brief is filled from that spec&#39;s defaults. If a field already has content, a <strong>Keep / Append / Replace</strong> diff dialog opens per field — it never silently clobbers what you wrote.</li>
+<li><strong>Page status</strong> — Not Started / In Progress / Built / In Review / Published / Blocked (manage the list in Project Settings → Migration).</li>
+<li><strong>Builder</strong> — pick from the assignee list (or add inline via <strong>+ New…</strong>).</li>
+<li><strong>Build guidance</strong> — markdown; specific build instructions for this page.</li>
+</ul>
+<p><strong>Write</strong> (violet pill — <em>for the content writer; especially important for net-new pages</em>):</p>
+<ul>
+<li><strong>Writer</strong> — assignee.</li>
+<li><strong>Writer brief</strong> — markdown; audience, purpose, key messages, voice.</li>
+</ul>
+<p><strong>Migrate</strong> (amber pill — <em>for the person mapping source content in</em>):</p>
+<ul>
+<li><strong>Migrator</strong> — assignee. There&#39;s no per-node migrate brief: the source→target field mapping lives on the spec&#39;s <strong>Migration mapping</strong> (add per-page exceptions in <strong>Migration notes</strong> above).</li>
+</ul>
+<p>Use the editor&#39;s <strong>← / →</strong> arrows to move through nodes without closing it.</p>
+<blockquote>
+<p>Efficient pattern: set the same <strong>Pattern</strong> (and a <strong>Status</strong> + <strong>Builder/Writer/Migrator</strong>) on all similar pages, but write <strong>one</strong> brief per spec. The Migration Direction Brief shows that one as the reference and lists the rest under it.</p>
+</blockquote>
+<hr>
+<h2 id="3-manage-the-controlled-vocabularies">3. Manage the controlled vocabularies</h2>
+<p><strong>Project Settings → Migration</strong> tab owns the two libraries used across all nodes:</p>
+<ul>
+<li><strong>Page Statuses</strong> — color, rename (cascades to nodes), reorder, delete (cascade-clears the status off affected nodes). Seeded with 6 defaults.</li>
+<li><strong>Assignees</strong> — one shared pool for <strong>Builder / Writer / Migrator</strong>. Usage counts show <code>{build, write, migrate}</code> per name; rename/delete cascade across all three node fields.</li>
+</ul>
+<p>Both are also addable on the fly via <strong>+ New…</strong> inside the node editor.</p>
+<hr>
+<h2 id="4-handle-fragment-nodes">4. Handle Fragment nodes</h2>
+<p>Set a node&#39;s <strong>Node type</strong> to <strong>Fragment / shared content</strong> for content that&#39;s embedded rather than navigated to (a shared CTA block, a stats module). Fragments:</p>
+<ul>
+<li>keep a computed path as a repository location, but have <strong>no menu entry, breadcrumb, or redirect</strong>;</li>
+<li>are excluded from hub / empty / net-new counts and get their own stats tally;</li>
+<li>render with a <strong>FRAG</strong> badge in the tree.</li>
+</ul>
+<p>A row whose <strong>Renders as</strong> = <strong>Fragment (embeddable)</strong> (stored as <code>Content Object</code>) is treated the same way downstream — skipped in redirect resolution and sitemap-coverage checks.</p>
+<hr>
+<h2 id="5-read-the-build-dashboard-and-filter-the-work">5. Read the build dashboard and filter the work</h2>
+<p>The stats line appends <strong>status tallies</strong> once any node has a status:</p>
+<p><code>… · 5 built · 3 in progress · 2 blocked · …</code></p>
+<p><strong>Filter the tree</strong> with the toolbar <strong>Build:</strong> dropdown:</p>
+<ul>
+<li><strong>By status</strong> — has any / none.</li>
+<li><strong>By assignee</strong> — has any / none (per-person filtering matches branches and auto-expands).</li>
+<li><strong>By pattern</strong> — has / no pattern.</li>
+<li><strong>By guidance</strong> — has build guidance or writer brief / none.</li>
+</ul>
+<p><strong>Row indicators</strong> (positive-only — blank rows stay clean): colored <strong>status pill</strong>, letter circles <strong>P</strong> (pattern) / <strong>G</strong> (build guidance) / <strong>W</strong> (writer brief), and <strong>🔧</strong> builder / <strong>✎</strong> writer assignee chips.</p>
+<hr>
+<h2 id="6-produce-the-per-person-worklists">6. Produce the per-person worklists</h2>
+<p><strong>Reports → Migration Direction Brief…</strong></p>
+<ol>
+<li>Pick <strong>Role</strong> — <strong>Writer</strong>, <strong>Builder</strong>, or <strong>Migrator</strong>.</li>
+<li>Pick <strong>Person</strong> (the shared assignee pool).</li>
+<li>Optionally pick a <strong>Template</strong> — custom Markdown templates live in <strong>Documents → Transmission → templates</strong>; <strong>Built-in default</strong> needs no setup.</li>
+<li><strong>Generate</strong>, then export <strong>PDF / HTML</strong>.</li>
+</ol>
+<p>The output groups that person&#39;s pages <strong>by pattern / target spec</strong>, leads each group with the reference direction (the spec-level default + any page-specific briefs), and lists the rest as followers. The Migrator role reads the spec&#39;s <strong>Migration mapping</strong> as its type-level reference.</p>
+<hr>
+<h2 id="7-hand-off">7. Hand off</h2>
+<p>Once nodes are annotated:</p>
+<ul>
+<li><strong>Migration → Migration Tracker…</strong> — the multi-sheet xlsx (Sitemap Plan with all build metadata, Source Pages, Redirects, Archive). See the <strong>Migration Tracker</strong> walkthrough for what each sheet carries.</li>
+<li><strong>Migration → Pre-Handoff Check…</strong> — runs every validation at once (unreviewed pages, bad consolidate targets, redirect chains, duplicate sitemap IDs, empty sitemap leaves). Fix what it flags, re-run, then export. See the <strong>Pre-flight &amp; hand-off</strong> walkthrough.</li>
+</ul>
+<hr>
+<h2 id="quick-checklist-for-good-direction">Quick checklist for &quot;good direction&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Every build node has a <strong>Pattern</strong>, and each pattern/spec has a default brief (or one reference page does)</li>
+<li><input disabled="" type="checkbox"> <strong>Builder / Writer / Migrator</strong> assigned wherever work is owned</li>
+<li><input disabled="" type="checkbox"> <strong>Page status</strong> reflects reality (the tallies match where the build actually is)</li>
+<li><input disabled="" type="checkbox"> Content Models have a <strong>field schema</strong>; every spec has a <strong>Migration mapping</strong> for the migrator</li>
+<li><input disabled="" type="checkbox"> Fragments are typed as <strong>Fragment</strong>, not left as standard pages</li>
+<li><input disabled="" type="checkbox"> Generated the <strong>Migration Direction Brief</strong> for each role/person</li>
+<li><input disabled="" type="checkbox"> <strong>Pre-Handoff Check</strong> is clean before exporting the <strong>Migration Tracker</strong></li>
+</ul>
+<hr>
+<p><em>See also: the <strong>Sitemap &amp; IA</strong> walkthrough (building and placing the sitemap), <a href="../user-guide.html">the User Guide</a>, and <code>CONTENT_TYPE_MODEL.md</code> (why the three roles and two levels exist).</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

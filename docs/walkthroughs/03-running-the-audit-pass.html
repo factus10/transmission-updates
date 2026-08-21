@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Running the Audit Pass Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="running-the-audit-pass-walkthrough">Running the Audit Pass Walkthrough</h1>
+<p>The core loop: look at a page, make the call, move on. This is where you&#39;ll spend most of your time, so the goal is to make each decision in seconds without touching the mouse.</p>
+<blockquote>
+<p>Prerequisite: a file is open with rows loading in the browser (see <strong>Getting Started</strong>).</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>One row = one existing page. Selecting it loads the page in the <strong>embedded browser</strong> and fills the <strong>field bar</strong> above it.</li>
+<li>The field bar is organized into <strong>clusters</strong> — <strong>Decide</strong>, <strong>Classify</strong>, and (when enabled) <strong>Migrate</strong>, <strong>Components</strong>, <strong>CMS</strong>. You&#39;ll live in <strong>Decide</strong>.</li>
+<li>The whole loop is keyboard-driven: <strong>arrow keys</strong> to move between rows, <strong>1–5</strong> to set the KKE call, and with <strong>auto-advance</strong> on you&#39;re carried to the next page automatically. You rarely click.</li>
+</ul>
+<hr>
+<h2 id="1-make-the-call">1. Make the call</h2>
+<p>With a row selected, the <strong>Decide</strong> cluster shows the <strong>KKE</strong> buttons. Set the recommendation by keyboard:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Call</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1</strong></td>
+<td>Keep</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Kill</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Evolve</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Consolidate</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Exclude</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Auto-advance</strong> (App Settings): after you set a call, focus jumps to the next row. Just keep pressing 1–5 as you read down the list.</li>
+<li><strong><code>]</code></strong> jumps to the <strong>next unreviewed</strong> row — the fastest way to chew through a backlog.</li>
+<li><strong>Consolidate</strong> (4) opens the consolidate picker — see the <strong>Consolidate</strong> walkthrough.</li>
+</ul>
+<blockquote>
+<p>Keep your eyes on the browser, your hand on 1–5. A clean pass is: read → press → read → press.</p>
+</blockquote>
+<hr>
+<h2 id="2-record-rationale-and-flag-follow-ups">2. Record rationale and flag follow-ups</h2>
+<ul>
+<li><strong>Notes</strong> (Decide cluster) opens a popover for rationale; a dot indicator shows when a row has notes.</li>
+<li><strong>F</strong> flags / unflags the current row (★). Flagged rows are filterable later (the <strong>Flagged</strong> special filter) — use it to mark &quot;come back to this.&quot;</li>
+<li><strong>Assess</strong> runs the rubric against the current page (see <strong>Suggested_KKE</strong>).</li>
+</ul>
+<hr>
+<h2 id="3-classify-as-you-go-optional">3. Classify as you go (optional)</h2>
+<p>The <strong>Classify</strong> cluster carries descriptive metadata — fill what&#39;s useful while the page is in front of you:</p>
+<ul>
+<li><strong>Content Type</strong> — the page&#39;s current-CMS type (the key into the migration crosswalk). A <strong>→</strong> hint shows the mapped target type.</li>
+<li><strong>Theme</strong>, <strong>Published</strong> (Published / Unpublished / Draft / 404 / Missing), <strong>Group</strong>, <strong>Primary</strong> tag, and free <strong>Tags</strong>.</li>
+</ul>
+<blockquote>
+<p>Don&#39;t over-classify on the first pass. Set Content Type and KKE; leave the rest for batch operations or a second sweep.</p>
+</blockquote>
+<hr>
+<h2 id="4-drive-the-embedded-browser">4. Drive the embedded browser</h2>
+<p>The <strong>webview toolbar</strong> below the field bar gives you:</p>
+<ul>
+<li><strong>← → ↺</strong> — back / forward / reload, and the live <strong>URL</strong>.</li>
+<li><strong>Viewport switcher</strong> — <strong>Auto</strong> (fill space) · <strong>SM</strong> 390×844 · <strong>MD</strong> 768×1024 · <strong>LG</strong> 1280×800 · <strong>XL</strong> 1920×1080. No scaling — it sets a real viewport so you can judge responsive behavior.</li>
+<li><strong>◫</strong> side-by-side compare · <strong>📷</strong> capture screenshot · <strong>⇊</strong> extract page content · <strong>🔗</strong> check page links · <strong>↗</strong> open in your system browser.</li>
+</ul>
+<blockquote>
+<p>Pages that won&#39;t render (auth walls, blocked embeds) are still auditable from the metadata in the field bar — you don&#39;t need the page to load to make a call.</p>
+</blockquote>
+<hr>
+<h2 id="quick-checklist-for-a-clean-pass">Quick checklist for &quot;a clean pass&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Every page you intend to review has a <strong>KKE</strong> call (no unreviewed rows left — check with <code>]</code>)</li>
+<li><input disabled="" type="checkbox"> Rationale captured in <strong>Notes</strong> where the call isn&#39;t obvious</li>
+<li><input disabled="" type="checkbox"> <strong>Content Type</strong> set where it&#39;ll drive migration classification</li>
+<li><input disabled="" type="checkbox"> Tricky pages <strong>flagged (F)</strong> for a second look</li>
+<li><input disabled="" type="checkbox"> Saved (<strong>Cmd+S</strong>) — calls and the change log persist to the file</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Finding the Work</strong> — search, filters, and saved filters to slice the list. See also the <em>Keyboard Shortcuts</em> reference.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-flight & Hand-off Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="pre-flight--hand-off-walkthrough">Pre-flight &amp; Hand-off Walkthrough</h1>
+<p>The final pass before you ship: one command that runs every validation, plus the change log that proves what was decided. Do this last, every time.</p>
+<blockquote>
+<p>Prerequisite: the audit, sitemap, and redirects are substantially complete.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<ul>
+<li>The <strong>Pre-Handoff Check</strong> rolls every validation the app knows how to do into a single pass/issue report — so you don&#39;t have to remember to run six separate checks.</li>
+<li>It&#39;s a <strong>gate, not a fix</strong>: it tells you what&#39;s wrong and how to fix each, with a sample of offending rows. Fix, re-run, repeat until clean.</li>
+<li>The <strong>change log</strong> is your audit trail — every decision change, captured automatically, written to the file on save.</li>
+</ul>
+<hr>
+<h2 id="1-run-the-pre-handoff-check">1. Run the Pre-Handoff Check</h2>
+<p><strong>Migration → Pre-Handoff Check…</strong> runs all of these at once and reports &quot;<strong>Ready for handoff</strong>&quot; or &quot;<strong>N issues across M checks</strong>&quot;:</p>
+<ol>
+<li><strong>Every page has a KKE decision</strong> — no unreviewed rows.</li>
+<li><strong>Consolidate pages point to a target</strong> — no dangling consolidations.</li>
+<li><strong>Consolidate targets are live</strong> — none point at a Kill/Exclude page.</li>
+<li><strong>No redirect chains</strong> — no Kill redirecting into another Kill/404.</li>
+<li><strong>No duplicate nav IDs</strong> — <em>(nav-tree files only)</em>.</li>
+<li><strong>No empty nav leaves</strong> — <em>(nav-tree files only)</em>.</li>
+</ol>
+<p>Each failing check lists a sample of the offending pages and a one-line fix (which filter to use, which editor to open). Nav checks are skipped automatically if the file has no Sitemap sheet.</p>
+<blockquote>
+<p>Work top-down: clear unreviewed pages first (they cascade into the other checks), then consolidations, then redirects, then nav. Re-run after each batch.</p>
+</blockquote>
+<hr>
+<h2 id="2-export-the-check-optional">2. Export the check (optional)</h2>
+<p>The Pre-Handoff Check is itself a report — export it to <strong>PDF / HTML</strong> as evidence the audit passed its gate, to attach to the hand-off.</p>
+<hr>
+<h2 id="3-the-change-log">3. The change log</h2>
+<p>Every change to a decision field (KKE, SME Decision, Final KKE, and auto-filled classifications) is logged to <strong><code>_sessionChangeLog</code></strong> during the session and appended to the <strong>KKE_ChangeLog</strong> sheet on <strong>Save</strong> — timestamp, row, URL, field, old value, new value. It accumulates across sessions, so the file carries a complete history of how the inventory was decided.</p>
+<hr>
+<h2 id="quick-checklist-for-ready-to-hand-off">Quick checklist for &quot;ready to hand off&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Pre-Handoff Check</strong> reports <strong>Ready for handoff</strong> (0 issues)</li>
+<li><input disabled="" type="checkbox"> All six checks pass (or nav checks legitimately N/A)</li>
+<li><input disabled="" type="checkbox"> Check report exported as evidence if the process requires it</li>
+<li><input disabled="" type="checkbox"> Final <strong>Save</strong> — change log written to the file</li>
+<li><input disabled="" type="checkbox"> Outputs generated: reports, <strong>Redirect Map</strong>, <strong>Migration Tracker</strong></li>
+</ul>
+<hr>
+<p><em>This is the end of the lifecycle. See also: <strong>Producing the Outputs</strong>, <strong>Migration Tracker</strong>, and <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

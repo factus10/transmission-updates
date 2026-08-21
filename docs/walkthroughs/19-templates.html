@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Templates Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="templates-walkthrough">Templates Walkthrough</h1>
+<p>How to reuse setup across projects and shape your reports — two distinct template systems that save you from reconfiguring every engagement.</p>
+<blockquote>
+<p>Prerequisite: a file is open (for audit templates) and/or you want to customize a report&#39;s output (for report templates).</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<p>Two unrelated &quot;template&quot; features:</p>
+<ul>
+<li><strong>Audit templates</strong> (<code>.kke-template.json</code>) — a portable snapshot of your <em>setup</em>: field config, vocabularies, KKE states, column mapping, identity. Save once, apply to every new client file so you don&#39;t reconfigure from scratch.</li>
+<li><strong>Report templates</strong> (Markdown + Mustache) — files that control how a report <em>renders</em>. Currently they style the <strong>Migration Direction Brief</strong>.</li>
+</ul>
+<hr>
+<h2 id="1-audit-templates--save-your-setup">1. Audit templates — save your setup</h2>
+<ol>
+<li>Configure a file the way you like it (visible fields, tag/group libraries, sidebar columns, custom KKE states, column mapping, identity, saved filters).</li>
+<li><strong>File → Save Audit Template…</strong>, name it. It writes a <code>.kke-template.json</code> capturing all of the above.</li>
+<li>On a new project: <strong>File → Load Audit Template…</strong> and pick the file — your setup is applied in one step.</li>
+</ol>
+<blockquote>
+<p>Audit templates carry <em>configuration</em>, not page data. They&#39;re how you standardize a team&#39;s audit conventions across many clients.</p>
+</blockquote>
+<hr>
+<h2 id="2-report-templates--shape-the-direction-brief">2. Report templates — shape the Direction Brief</h2>
+<p>Custom report templates are <strong>Markdown files with Mustache placeholders</strong>, rendered to HTML.</p>
+<ol>
+<li>Open the templates folder: in the <strong>Migration Direction Brief</strong> dialog → <strong>Templates folder</strong> (or it lives at <strong>Documents → Transmission → templates</strong>).</li>
+<li>The folder ships with <strong><code>FIELDS-*.md</code></strong> reference files documenting every available placeholder for that report type. A template declares which report it&#39;s for via frontmatter (<code>appliesTo: assignee-brief</code>).</li>
+<li>Write/edit a <code>.md</code> template using <code>{{field}}</code> for values and <code>{{#section}}…{{/section}}</code> to repeat lists.</li>
+<li>In the Migration Direction Brief dialog, pick your template from the <strong>Template</strong> dropdown (or <strong>Built-in default</strong>, which needs no setup), then <strong>Generate</strong>.</li>
+</ol>
+<blockquote>
+<p>Placeholders available to a template are exactly what its matching <code>FIELDS-*.md</code> lists — start there rather than guessing field names.</p>
+</blockquote>
+<hr>
+<h2 id="quick-checklist-for-templates-working">Quick checklist for &quot;templates working&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> A reusable <strong>audit template</strong> saved for your standard setup</li>
+<li><input disabled="" type="checkbox"> New projects bootstrapped via <strong>Load Audit Template</strong></li>
+<li><input disabled="" type="checkbox"> Custom report template (if any) declares the right <code>appliesTo</code></li>
+<li><input disabled="" type="checkbox"> Placeholders match the report&#39;s <code>FIELDS-*.md</code></li>
+<li><input disabled="" type="checkbox"> Template selected in the report dialog before <strong>Generate</strong></li>
+</ul>
+<hr>
+<p><em>See also: the <strong>Build &amp; Direction</strong> walkthrough (the Migration Direction Brief) and <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

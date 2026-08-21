@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk Operations Walkthrough — Transmission</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f5; --fg: #1a1a1a; --muted: #6b7280; --border: #e2e2e2;
+    --code-bg: #eceef1; --link: #2563eb; --quote: #dfe3e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #f0f0f0; --muted: #9ca3af; --border: #333; --code-bg: #2a2a2a; --link: #6ea8fe; --quote: #2f2f2f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 96px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  nav.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 28px; }
+  nav.crumbs a { color: var(--muted); }
+  h1 { font-size: 26px; margin: 0 0 18px; line-height: 1.25; }
+  h2 { font-size: 20px; margin: 38px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 26px 0 6px; }
+  h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 20px 0 6px; }
+  p, li { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  code { background: var(--code-bg); border-radius: 4px; padding: 1px 5px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { margin: 14px 0; padding: 2px 16px; border-left: 3px solid var(--quote); color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: var(--code-bg); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: var(--link); }
+  img { max-width: 100%; }
+  .index-section { margin: 30px 0 0; }
+  .index-section h2 { margin-bottom: 12px; }
+  .index-list { list-style: none; padding: 0; }
+  .index-list li { margin: 10px 0; }
+  .index-list .blurb { color: var(--muted); display: block; font-size: 14px; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
+<h1 id="bulk-operations-walkthrough">Bulk Operations Walkthrough</h1>
+<p>How to apply one decision to many pages at once. Once you can filter (see <strong>Finding the Work</strong>), bulk operations are what turn a 4,000-row crawl into an afternoon&#39;s work instead of a week&#39;s.</p>
+<blockquote>
+<p>Prerequisite: a file is open, and you can narrow the list with filters.</p>
+</blockquote>
+<hr>
+<h2 id="0-the-mental-model">0. The mental model</h2>
+<p>The <strong>Multi-bar</strong> at the bottom of the sidebar acts on a target set, chosen by one simple rule:</p>
+<ul>
+<li>If you&#39;ve <strong>multi-selected</strong> rows, the target is your selection.</li>
+<li>Otherwise, if a <strong>filter is narrowing</strong> the list, the target is the <strong>filtered rows</strong>.</li>
+</ul>
+<p>The bar&#39;s label tells you which — <em>&quot;Apply to N selected:&quot;</em> vs <em>&quot;Apply to N filtered:&quot;</em> — so you always know what you&#39;re about to change.</p>
+<hr>
+<h2 id="1-select-rows-or-just-filter">1. Select rows (or just filter)</h2>
+<p>Two ways to define the target:</p>
+<ul>
+<li><strong>Filter only</strong> — narrow with search / KKE / field filters (see <strong>Finding the Work</strong>) and let the Multi-bar act on the whole filtered list. Fastest for &quot;everything matching X.&quot;</li>
+<li><strong>Multi-select</strong> — <strong>Cmd+click</strong> toggles individual rows; <strong>Shift+click</strong> selects a range. Use this when you want a hand-picked subset of what&#39;s on screen.</li>
+</ul>
+<blockquote>
+<p>Multi-select beats filter when the rule is in your head, not in the data (&quot;these five, not those two&quot;). Filter beats multi-select when the rule is expressible (&quot;all 404s&quot;).</p>
+</blockquote>
+<hr>
+<h2 id="2-apply-an-action">2. Apply an action</h2>
+<p>In the <strong>Multi-bar</strong>:</p>
+<ol>
+<li>Pick an <strong>Action…</strong>: <strong>Set KKE</strong>, <strong>Set Published Status</strong>, <strong>Set Content Type</strong>, <strong>Set Content Theme</strong>, <strong>Set Group</strong>, <strong>Set Primary Tag</strong>, or <strong>Add Tag</strong>.</li>
+<li>Pick the <strong>value</strong> (the second dropdown populates from your libraries).</li>
+<li><strong>Apply</strong>.</li>
+</ol>
+<p><strong>Clear selection</strong> drops the multi-selection (returning the target to &quot;filtered&quot;).</p>
+<blockquote>
+<p>Gotcha: bulk-setting KKE to <strong>Kill</strong> on pages that already have a sitemap assignment or redirect triggers a <strong>cleanup prompt</strong> — choose whether to clear those too, so you don&#39;t leave orphaned redirects.</p>
+</blockquote>
+<hr>
+<h2 id="3-batch-assess-rubric-→-suggested_kke">3. Batch assess (rubric → Suggested_KKE)</h2>
+<p>To score many pages at once rather than set a call by hand:</p>
+<ul>
+<li><strong>Project → Run Rubric on filtered rows…</strong> runs the rubric across the filtered set and feeds <strong>Suggested_KKE</strong> (see the <strong>Suggested_KKE</strong> walkthrough). This produces <em>suggestions</em>, not final calls — you still confirm.</li>
+</ul>
+<hr>
+<h2 id="quick-checklist-for-good-bulk-ops">Quick checklist for &quot;good bulk ops&quot;</h2>
+<ul>
+<li><input disabled="" type="checkbox"> The Multi-bar label confirms the right target (<strong>selected</strong> vs <strong>filtered</strong>) before you Apply</li>
+<li><input disabled="" type="checkbox"> Filter narrowed correctly — spot-check a couple of rows first</li>
+<li><input disabled="" type="checkbox"> Kill-cleanup prompt handled (redirects / nav cleared where intended)</li>
+<li><input disabled="" type="checkbox"> Used <strong>batch assess</strong> for scoring, hand-set KKE only where judgment is needed</li>
+<li><input disabled="" type="checkbox"> Saved (<strong>Cmd+S</strong>)</li>
+</ul>
+<hr>
+<p><em>Next: <strong>Tagging, Grouping &amp; the Glossary</strong> — the vocabulary layer. See also <a href="../user-guide.html">the User Guide</a>.</em></p>
+
+<footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
+</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
-  "version": "2.16.1",
-  "publishedAt": "2026-08-13",
-  "notes": "The Visual Sitemap and Treemap now open noticeably faster on large audits — about a third quicker on a 13,000-page project, and more than that on the largest ones. Nothing about what they draw changes; the same diagram is just assembled with less work.",
+  "version": "2.17.0",
+  "publishedAt": "2026-08-21",
+  "notes": "The Visual Sitemap no longer opens on an empty screen. On a very large tree — the kind Create Sitemap from Audit produces from a site whose URLs carry no hierarchy — fit-to-screen refused to zoom out far enough and then pushed every card off the edge of the window, so the diagram looked as though it had never been built. It now zooms out as far as it needs to and always lands on the tree. Alongside that, a new shape check tells you *before* you open the diagram when a sitemap is too big to draw: it reports the section count, the exact size and the zoom it would open at, names what's driving it — sections holding a single page, crawl artifacts like /tag and /wp-content, branches too wide to lay out — and shows what each repair would actually buy before you commit to it. Create Sitemap from Audit now predicts the tree before it builds it, grouping sitemap sections is undoable in one step, and Help → Online Documentation opens the full manual, the walkthroughs and the method pages in your browser.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

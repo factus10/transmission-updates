@@ -1,7 +1,7 @@
 {
-  "version": "2.17.1",
-  "publishedAt": "2026-08-21",
-  "notes": "Two small fixes to the What's New window. It no longer opens on an empty \"Unreleased\" section — it starts on the newest release — and it now fetches the changelog fresh each time, so it can't show you the previous release's notes right after telling you a new version is available.",
+  "version": "2.18.0",
+  "publishedAt": "2026-09-02",
+  "notes": "Reports now count content pages rather than crawled URLs — inherited redirects and dead links were being counted as pages to migrate, overstating both your inventory and the share recommended for removal. If you have already sent a client an Executive Summary, it is worth regenerating. Inherited 301s also keep their destinations current, re-deriving on every save instead of freezing at the old site's answer, so a redirect follows its target when that page moves or is consolidated. Also: permanent row deletion, greater-than and less-than field filters, and fixes to filter chips that could not be dismissed and the Triage Non-200 dialog.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

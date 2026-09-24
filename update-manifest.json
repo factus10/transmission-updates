@@ -1,7 +1,7 @@
 {
-  "version": "2.18.0",
-  "publishedAt": "2026-09-02",
-  "notes": "Reports now count content pages rather than crawled URLs — inherited redirects and dead links were being counted as pages to migrate, overstating both your inventory and the share recommended for removal. If you have already sent a client an Executive Summary, it is worth regenerating. Inherited 301s also keep their destinations current, re-deriving on every save instead of freezing at the old site's answer, so a redirect follows its target when that page moves or is consolidated. Also: permanent row deletion, greater-than and less-than field filters, and fixes to filter chips that could not be dismissed and the Triage Non-200 dialog.",
+  "version": "2.18.1",
+  "publishedAt": "2026-09-24",
+  "notes": "If you have exported a redirect map, export it again after updating. News posts, events, profiles and other records set to \"Content Object\" were being treated as fragments with no URL, which left them out of redirects, redirect exports and sitemap-placement checks. They now count as records with their own pages, and existing projects are repaired when you open them. Also: Site Domain now accepts only a single URL, and redirects for Kill and Consolidate pages now update when the Site Domain or their destination page changes.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

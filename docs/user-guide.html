@@ -401,6 +401,14 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <li><strong>Title</strong> — match only the page title; handy when you know the name but not the URL.</li>
 </ul>
 <p>The placeholder text changes to show the active scope, and the scope sticks as you refine your search — it only changes when you pick a different one. Click <strong>✕</strong> to clear.</p>
+<h3 id="sort-in-site-order">Sort in site order</h3>
+<p>A crawl lists pages in whatever order the spider found them, and even an A–Z sort mixes sections together. For a site that&#39;s all over the place, click <strong>Site order</strong> in the sidebar&#39;s Address header to review it section by section:</p>
+<ul>
+<li><strong>Pages placed in the sitemap</strong> come first, in sitemap order: the order you see in the Sitemap editor.</li>
+<li><strong>Unplaced pages</strong> follow, grouped by site and then by URL path. Each section&#39;s landing page sits directly above everything under it: <code>/about</code>, then <code>/about/history</code> and <code>/about/team</code>, then <code>/about-us</code>. A plain A–Z sort would put <code>/about-us</code> in the middle of the About section. Numbers sort as numbers (<code>page/2</code> before <code>page/10</code>), and a page comes before its <code>?query</code> variants.</li>
+<li>URLs are <strong>indented by level</strong>, so sections read as sections.</li>
+</ul>
+<p>Click <strong>Site order</strong> again to turn it off, or click the Address header to go back to A–Z / Z–A. Site order works together with every filter, and it&#39;s remembered like the other sort settings.</p>
 <h3 id="filter-by-kke-status">Filter by KKE status</h3>
 <p>Click the <strong>KKE filter</strong> to open a checkbox list. Check as many as you like and they combine with OR — so <strong>Keep + Evolve</strong> shows everything you&#39;re keeping. Alongside the five calls, the list includes useful <strong>special filters</strong>:</p>
 <ul>
@@ -638,7 +646,9 @@ Alumni	Secondary	Graduates staying connected
 <li><strong>Serves no priority audience</strong> — reviewed, and everything it serves is off-strategy.</li>
 </ul>
 <p><strong>4. Two tools for the long tail.</strong> Bulk passes get you most of the way; these two get you the rest.</p>
-<p><strong>Fill Audiences from Section…</strong> (<code>Project</code> menu) spreads audiences you have <em>already</em> tagged in a section onto that section&#39;s untagged pages. It invents nothing — it only propagates a decision you made yourself somewhere else in the same section, and it only fills blanks. The dialog shows every section it can act on, what it would apply, the agreement behind it, and how many pages it would fill; untick any you disagree with. A section needs at least three tagged pages, with an audience appearing on at least half of them, before it&#39;s allowed to speak for the rest — so tag a handful by hand first, then run this. The whole fill is one <strong>Cmd+Z</strong>.</p>
+<p><strong>Set audiences on the sitemap.</strong> If your IA already says who each section is for, say it once, on the section. Every sitemap node&#39;s editor has an <strong>Audience</strong> section: tick the audiences the branch is for. A node with none set inherits from its nearest ancestor, so tagging <em>Academics</em> covers everything beneath it, and a child that sets its own (say <em>Faculty pages</em> → Faculty) overrides that for its own branch. Only nodes that set audiences themselves show a 👥 chip in the tree, so you can see where each setting lives.</p>
+<p>Node audiences fill <strong>untagged</strong> pages placed under them. They never overwrite a page you&#39;ve tagged, and they skip Kill/Exclude pages and out-of-scope sites, the same rules as the other fill tools. When you save a node with new audiences, you&#39;re asked before its branch is filled, with the page count. When you assign a single page from the audit bar, it&#39;s filled right away and a toast tells you so. Either way, one <strong>Cmd+Z</strong> undoes it. <em>— None</em> can&#39;t be set on a node: &quot;serves nobody&quot; is a call about a page, not a section. The Visual Sitemap and Treemap can color by <strong>Audience (sitemap)</strong>, so a whole branch shows the audience it inherits.</p>
+<p><strong>Fill Audiences from Section…</strong> (<code>Project</code> menu) spreads audiences you have <em>already</em> tagged in a section onto that section&#39;s untagged pages. It invents nothing — it only propagates a decision you made yourself somewhere else in the same section, and it only fills blanks. If any untagged pages sit under sitemap nodes with audiences, it offers to fill those from the sitemap first, since the sitemap is a decision and section agreement is only an inference. The dialog shows every section it can act on, what it would apply, the agreement behind it, and how many pages it would fill; untick any you disagree with. A section needs at least three tagged pages, with an audience appearing on at least half of them, before it&#39;s allowed to speak for the rest — so tag a handful by hand first, then run this. The whole fill is one <strong>Cmd+Z</strong>.</p>
 <blockquote>
 <p><strong>— None is never inherited.</strong> Spreading &quot;serves nobody&quot; onto pages no one has looked at would turn an unreviewed blank into a Kill vote. If a page genuinely serves no one, that stays a call you make.</p>
 </blockquote>
@@ -666,7 +676,7 @@ Alumni	Secondary	Graduates staying connected
 <li><input disabled="" type="checkbox"> Every Keep/Evolve page is tagged, or on the <strong>Needs audience</strong> worklist</li>
 <li><input disabled="" type="checkbox"> No AI suggestions are left sitting unreviewed (<strong>Audience suggested by AI</strong> filter is empty)</li>
 <li><input disabled="" type="checkbox"> Pages that genuinely serve nobody are tagged <strong>— None</strong>, not left blank</li>
-<li><input disabled="" type="checkbox"> You&#39;ve reviewed the <strong>Audience Debt</strong> report before signing off the redirect map</li>
+<li><input disabled="" type="checkbox"> You&#39;ve reviewed the <strong>Risks</strong> in Audience Coverage before signing off the redirect map</li>
 <li><input disabled="" type="checkbox"> If a JTBD workshop was run, <strong>Jobs Coverage</strong> has been read and its unserved jobs are in the net-new brief</li>
 </ul>
 <hr>
@@ -852,6 +862,13 @@ Alumni	Secondary	Graduates staying connected
 <ul>
 <li><strong>Consolidate (no target)</strong> — marked Consolidate but no target chosen yet. You don&#39;t have to remember to check: when there are any, a red <strong>&quot;⚠ N Consolidate: no target&quot;</strong> chip appears in the sidebar toolbar next to the row count, and clicking it applies this filter. It&#39;s there because a Consolidate with no target is the one call that isn&#39;t a finished decision — it says the page goes away without saying where its content and its redirect go — and it&#39;s the shape an SME import routinely leaves behind.</li>
 <li><strong>Consolidate (dead target)</strong> — the target is missing or is itself Kill/Exclude (the source shows an amber dot).</li>
+</ul>
+<h3 id="when-the-client-changes-a-consolidation">When the client changes a consolidation</h3>
+<p>SME review is where consolidation decisions get revisited most. The client knows which pages overlap in ways a crawl can&#39;t show, and may have a different idea of where the content belongs. Their <strong>Final KKE</strong> always wins: whether a page consolidates follows the Final KKE, not your recommendation.</p>
+<ul>
+<li>The KKE buttons still show <strong>your</strong> recommendation. When the Final KKE differs, a <strong>Final</strong> chip appears beside the buttons. Click it to pick a target (for a Consolidate) or to open the Final dropdown. In the sidebar, your KKE badge is struck through when a Final overrides it.</li>
+<li>Setting a page&#39;s Final KKE to <strong>Consolidate</strong> opens the target picker. If you had already picked a target, it&#39;s kept. Changing a Final <em>away</em> from Consolidate offers to clear the old target, or you can keep it (inactive) in case the decision changes back.</li>
+<li><strong>SME → Review Consolidations…</strong> lists every consolidation the client touched: pages they asked to consolidate that you didn&#39;t, pages you consolidated that they kept, and pages where you both said Consolidate but the SME left notes. For each one you can choose or change the target, confirm it&#39;s right, or clear an unused target. A reviewed page leaves the list until its decision or target changes again. The app offers this review after an SME import or a Resolve Conflicts session. The <strong>Consolidate (client changed — review)</strong> filter finds the same pages.</li>
 </ul>
 <h3 id="quick-self-check-8">Quick self-check</h3>
 <ul>
@@ -1040,6 +1057,8 @@ Alumni	Secondary	Graduates staying connected
 <p><strong>Opening it anyway is always offered</strong>, and is sometimes the right call: &quot;this site has 548 top-level sections and no information architecture&quot; is a finding worth showing a client, and it&#39;s more convincing as a picture than a number.</p>
 </li>
 <li><p><strong>Smart layout</strong> — each branch lays out <strong>horizontally</strong> (children fan sideways below the parent) or <strong>vertically</strong> (children stack below-and-indented) automatically. Two toolbar dropdowns decide which, whichever fires first: <strong>Vertical from depth</strong> (go vertical at this depth) and <strong>or if children ≥</strong> (go vertical for any node with this many children). Right-click any node with children to <strong>force horizontal / force vertical</strong> or clear the override; nodes you&#39;ve overridden show a dashed outline.</p>
+</li>
+<li><p><strong>Parent position</strong> (Settings → Layout) — <strong>Centered over children</strong> (the default), or <strong>Left-aligned</strong>, where each parent sits over its first child. The root anchors the top-left corner and the tree grows out to the right, which reads more like an outline on a wide, shallow site. <strong>Fit</strong> keeps a left-aligned tree against the left edge. Carries into the HTML, PDF, PNG and Miro exports.</p>
 </li>
 <li><p><strong>Settings</strong> (button → panel, three tabs):</p>
 <ul>
@@ -1355,7 +1374,7 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="export-the-map">Export the map</h3>
 <ul>
 <li><strong>Migration → Export Redirect Map (CSV)…</strong> writes the rules as CSV for engineering.</li>
-<li><strong>Reports → Redirect Map Report…</strong> is the human-readable version, split into Kill redirects, URL-changed redirects, and intentional 404s.</li>
+<li><strong>Reports → Redirect Map Report…</strong> is the human-readable version. It is built from the same rules as the CSV, so the two always agree. It lists the pages that <strong>still need a destination</strong> first, then redirects for removed pages, consolidated pages and pages whose URL changes, then intentional 404s. It also warns about redirect chains, and splits the rules by source site on a merger. Long lists stop at 200 rows. Deploy from the CSV or the Migration Tracker, not from the report.</li>
 </ul>
 <h3 id="quick-self-check-14">Quick self-check</h3>
 <ul>
@@ -1386,13 +1405,20 @@ Alumni	Secondary	Graduates staying connected
 <p>A 5xx still counts as content — a broken page is a page, and it&#39;s work you&#39;ll be doing. Nothing is hidden: the non-content rows are named, counted, and still in the audit. <strong>By Section</strong> counts content pages too, so it adds up to the content total rather than to the crawl. If a section is missing entirely, check whether its site is marked out of scope — those rows are excluded from every figure in the report, and the banner at the top says how many.</p>
 <p>To see the rows behind the numbers, use the sidebar&#39;s <strong>Existing redirect (3xx — not content)</strong> or <strong>Not content (3xx or 4xx)</strong> filters.</p>
 </li>
-<li><p><strong>Content Inventory by Section</strong> — the full inventory grouped by section, with KKE distribution, sample pages, and notes counts. Your detailed appendix.</p>
+<li><p><strong>Content Inventory by Section</strong> — content pages by section. One ranked table shows every section&#39;s size and the share of each decision. Then a closer look at the ten largest sections: KKE distribution, a few sample pages, and notes counts. Your detailed appendix. Its section counts are the same as the Executive Summary&#39;s By Section.</p>
 </li>
 <li><p><strong>SME Review Status</strong> — where expert review stands: overall completion plus a per-Content-Owner table (assigned, reviewed, %, approved vs changed, unresolved conflicts) and a conflict list.</p>
 </li>
-<li><p><strong>Audience Coverage</strong> — per audience in priority order: how many pages serve them, how many treat them as the <em>primary</em> audience, what you&#39;re doing to that content, and which sections it lives in. Flags any Primary-tier audience with almost nothing aimed at it — usually the most actionable finding in the set. Ends with the pages nobody has reviewed for audience yet.</p>
+<li><p><strong>Audience Coverage</strong> — per audience in priority order: how many pages serve them, how many treat them as the <em>primary</em> audience, what you&#39;re doing to that content, and which sections it lives in. Flags any Primary-tier audience with almost nothing aimed at it, usually the most actionable finding in the set. A <strong>Risks</strong> section (formerly the separate Audience Debt report) counts:</p>
+<ul>
+<li>pages serving only non-priority audiences</li>
+<li>pages reviewed as serving no audience</li>
+<li>Primary-audience pages marked <strong>Kill</strong> (re-read these before signing off the redirect map)</li>
+<li><strong>detail</strong> pages serving four or more audiences</li>
+</ul>
+<p>Only detail pages count toward that last one. A landing page serving four or more audiences is normal: a program landing page can rightly serve prospective undergraduates, graduate students, executive-education seekers and certificate seekers at once. So a page is only counted when nothing sits beneath it in the sitemap or its URL path, and even then it&#39;s worth a look, not a defect. The page-by-page lists are in the audit-team appendix.</p>
 </li>
-<li><p><strong>Audience × Section Matrix</strong> — sections down, audiences across, cells shaded by share. The single most persuasive artifact here: it makes &quot;this entire section is written for the wrong people&quot; visible in one glance, and it argues IA changes rather than page-by-page ones.</p>
+<li><p><strong>Audience × Section Matrix</strong> — sections down, audiences across. Each cell is shaded by its share of the section&#39;s <em>tagged</em> pages, and an <strong>Untagged</strong> column shows what&#39;s left to tag. The 40 largest sections are shown. The single most persuasive artifact here: it makes &quot;this entire section is written for the wrong people&quot; visible in one glance, and it argues IA changes rather than page-by-page ones.</p>
 </li>
 <li><p><strong>Site Consolidation Overview</strong> — for audits merging several sites: what each source site contributes (pages, disposition mix, audiences served, how much of it duplicates another site, how many redirect rules retiring it needs). A site that is mostly overlap and serves no audience the others don&#39;t is a candidate to retire wholesale rather than migrate page by page.</p>
 </li>
@@ -1400,25 +1426,25 @@ Alumni	Secondary	Graduates staying connected
 </li>
 <li><p><strong>Jobs Coverage</strong> — per job: how many pages serve it, what you&#39;re doing to them, and the page you&#39;d send someone to. Leads with the jobs <strong>nothing answers</strong> — the strongest brief for net-new content, since each traces back to the client&#39;s own workshop.</p>
 </li>
-<li><p><strong>Audience Debt</strong> — three worklists that translate straight into scope: pages serving only non-priority audiences (carrying cost, no return), priority-audience pages marked <strong>Kill</strong> (re-read these before signing off the redirect map), and pages tagged with four or more audiences (usually doing several jobs at once and needing a split).</p>
-</li>
 </ul>
 <h3 id="for-information-architecture">For information architecture</h3>
 <ul>
 <li><strong>Menu Report</strong> — one section card per menu with its item hierarchy, page-count badges on page references, <code>↗</code> on links, <code>≡</code> on headers, and a red <strong>missing</strong> badge on broken references. Also available as <strong>Menus → Report</strong>. A tight hand-off doc for colleagues and clients.</li>
-<li><strong>Sitemap Coverage Report</strong> — the gap-finder: empty leaf nodes, hub nodes, overloaded nodes (5+ pages), and path mismatches.</li>
+<li><strong>Sitemap Coverage Report</strong> — the gap-finder. It lists kept pages that still need a place, net-new nodes, empty nodes, crowded nodes (more than 5 pages) and URLs that change. Its net-new and empty counts use the same definitions as the Sitemap tree&#39;s NEW and ○ badges.</li>
 <li><strong>Content Type Crosswalk</strong> — one row per current type → renders → target type → target spec → migration track, with page volume and KKE breakdown, flagging any type with no crosswalk.</li>
 <li><strong>Component Inventory</strong> — the UI-component picture (see <a href="#20-component-inventory">Component Inventory</a>).</li>
 </ul>
 <h3 id="for-the-build-and-engineering-team">For the build and engineering team</h3>
 <ul>
 <li><strong>Migration Direction Brief</strong> — per-person worklists for the Writer, Builder, or Migrator, grouped by spec and led by the reference direction (supports custom templates — see <a href="#19-templates">Templates</a>).</li>
-<li><strong>Migration Checklist</strong> — the comprehensive hand-off: what to retain, remove, update, and redirect, plus URL changes and net-new pages, with full tables.</li>
-<li><strong>Net New Content Brief</strong> — every sitemap node that needs brand-new content written.</li>
-<li><strong>Redirect Map Report</strong> — totals, intentional 404s, chain warnings, and full tables by type.</li>
+<li><strong>Migration Checklist</strong> — the migration on one page: a ready / not-ready headline, what happens to the pages (every decision, custom states included), redirect totals, and new pages to write. It points you to the Redirect Map Report for the rules and the Pre-Handoff Check for the blockers, rather than repeating them. The list of pages to update is in the audit-team appendix.</li>
+<li><strong>Net New Content Brief</strong> — the hand-off to writers, grouped by writer and then by section. It lists section landing pages whose sub-pages exist, new pages nothing on the current site maps to, and placeholder pages still to be written. Each shows its status, template and writer brief, and it flags pages with no writer or no brief. It ends with the jobs no page answers.</li>
+<li><strong>Build Status</strong> — the weekly progress view. It shows every page of the new site by <strong>Page Status</strong>, broken down by section and by person (builder, writer, migrator), with the blocked pages listed. Pages with no status yet are in the audit-team appendix. It leaves out headers, phased nodes, external links and aliases.</li>
+<li><strong>Redirect Map Report</strong> — the same rules as the redirect CSV. It gives totals by type, the pages that still need a destination, chain warnings, a per-site split, and tables capped at 200 rows.</li>
 </ul>
 <h3 id="export-them">Export them</h3>
 <p>Every report preview has <strong>PDF</strong> and <strong>HTML</strong> buttons. Choose HTML when the client wants to drop it into Word or a doc; PDF for a fixed deliverable.</p>
+<p>Most reports open with <strong>Key findings</strong> and <strong>Next steps</strong>: what the numbers below mean, and what to do about them. Some also end with a marked <strong>For the audit team</strong> appendix of page-by-page working lists, such as untagged pages or pages still needing a place. The appendix is left out of exports unless you tick <strong>Include audit-team appendix in export</strong> next to the export buttons. It starts unticked every time, so the default export is the client version.</p>
 <h3 id="send-the-sitemap-to-miro">Send the sitemap to Miro</h3>
 <p>A PDF is something a client reads. A Miro board is something a client can <em>work on</em> — which is what you want when the sitemap is going into a workshop and people will be moving boxes around and arguing about where things belong. <strong>Export to Miro</strong> puts the Visual Sitemap onto a Miro board as real, editable Miro shapes, not a flat picture.</p>
 <h4 id="connect-to-miro-one-time">Connect to Miro (one time)</h4>
@@ -1485,7 +1511,8 @@ Alumni	Secondary	Graduates staying connected
 </ul>
 <h3 id="going-deeper-6">Going deeper</h3>
 <p>The <strong>Reports</strong> menu holds everything above. The separate <strong>Migration</strong> menu is reserved for export and validation <em>tools</em> rather than reports — Pre-Handoff Check, Migration Tracker, Export Redirect Map (CSV), and Redirect Chain Check.</p>
-<p>For a live progress view rather than a formal report, open the <strong>Progress Dashboard</strong> with <strong>Cmd+P</strong> (or <strong>View → Audit Progress</strong>): client and project, total and percent reviewed, the KKE breakdown as a stacked bar, flagged/tagged/noted counts, a by-group breakdown, and SME stats — exportable to PDF or HTML with a client/project/date header, like every other report.</p>
+<p>For a live progress view rather than a formal report, open the <strong>Progress Dashboard</strong> with <strong>Cmd+P</strong> (or <strong>View → Audit Progress</strong>): client and project, total and percent reviewed, the KKE breakdown as a stacked bar, flagged/tagged/noted counts, a by-group breakdown, and SME stats. It exports to PDF or HTML using the same layout as every other report: the content-page split, SME review, and a by-section table with each decision&#39;s share.</p>
+<p>Every report&#39;s header shows the client and project, the date it was generated, and, when the crawl export includes Screaming Frog&#39;s <strong>Crawl Timestamp</strong> column, the dates the site was crawled. The crawl date is the real &quot;as of&quot; date for the page data; your decisions are always current.</p>
 <p>It counts every row you&#39;re actually auditing, including redirects and error URLs — a 3xx still needs triaging, so it&#39;s still work — with the content split shown beneath the total. <strong>Pages on sites you&#39;ve marked out of scope are left out</strong>, so a retired property can&#39;t hold your completion percentage below 100% forever; a note at the top says how many rows that was and which sites. The Executive Summary counts the same rows but reports only content pages, which is why its total is the smaller of the two.</p>
 <hr>
 <h2 id="17-migration-tracker-hand-off">17. Migration Tracker Hand-off</h2>

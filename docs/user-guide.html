@@ -1501,6 +1501,33 @@ Alumni	Secondary	Graduates staying connected
 <li><strong>Corner radius becomes square-or-rounded.</strong> Miro has no radius setting, so whatever specific radius you set in the Layout tab arrives as simply &quot;rounded&quot;.</li>
 <li><strong>Inner padding is app-only.</strong> Miro centres shape text itself and offers no padding control.</li>
 </ul>
+<h3 id="ask-the-audit-a-question-mcp-server">Ask the audit a question (MCP server)</h3>
+<p>The reports above answer a fixed set of questions. An audit raises plenty that aren&#39;t on the list — <em>how many Keep pages under <code>/news</code> have no audience? Which sections did the SME overturn most? What did we decide about the PDFs on the careers subdomain?</em> — and until now the honest answer was &quot;export to Excel and pivot.&quot;</p>
+<p>Transmission ships a small <strong>MCP server</strong> (Model Context Protocol — the standard AI assistants use to talk to tools) that lets Claude Desktop, Claude Code or any other MCP client <strong>read</strong> a <code>.transmission</code> project and answer those questions directly, with real numbers. It&#39;s a developer preview: it works, it&#39;s tested, and it needs a one-time terminal setup.</p>
+<p><strong>What it can do</strong></p>
+<ul>
+<li>Count pages grouped by any column — sections, decisions, audiences, tags, source sites, status codes — with filters, so <em>&quot;Kill pages by section, content pages only&quot;</em> is one question.</li>
+<li>List matching pages with the columns you choose, or pull one page&#39;s full record with its change history.</li>
+<li>Walk the sitemap with page counts per node, list redirects with who wrote each one, read the audit trail, and read the project&#39;s libraries (audiences, jobs, sites, the content-type crosswalk, the glossary).</li>
+<li>Apply your <strong>saved filters</strong> by name, so the AI sees the same worklists you do.</li>
+</ul>
+<p>It also sends the model the conventions that matter — blank means <em>unreviewed</em>, Kill vs Exclude, content pages vs crawled URLs, the <code>404</code> sentinel — so an untouched crawl doesn&#39;t get reported back as a finished audit.</p>
+<p><strong>What it deliberately can&#39;t do</strong></p>
+<ul>
+<li><strong>Change anything.</strong> It opens the project read-only and never touches the file. Writes are planned as <em>proposals</em> you&#39;d accept or reject in the app — the same contract Suggested_KKE and the AI audience suggestions already follow.</li>
+<li>Read <code>.xlsx</code> files. Use <strong>File → Save As Project…</strong> first.</li>
+<li>Compute the handful of filters only the app can (duplicates, URL variants, redirect review, cross-site duplicates). A saved filter that uses one is refused by name rather than run half-applied.</li>
+</ul>
+<p><strong>Set it up</strong></p>
+<p>You need <strong>Node 22.13 or newer</strong> installed (it uses Node&#39;s built-in SQLite; nothing else to install) and a copy of the Transmission source, which contains <code>mcp/server.js</code>.</p>
+<p>For Claude Code:</p>
+<pre><code class="language-bash">claude mcp add transmission -- node /path/to/transmission/mcp/server.js
+</code></pre>
+<p>For Claude Desktop, add to <code>claude_desktop_config.json</code>:</p>
+<pre><code class="language-json">{ &quot;mcpServers&quot;: { &quot;transmission&quot;: { &quot;command&quot;: &quot;node&quot;, &quot;args&quot;: [&quot;/path/to/transmission/mcp/server.js&quot;] } } }
+</code></pre>
+<p>Then, in a conversation: <em>&quot;Open the project at /path/to/audit.transmission and give me an overview.&quot;</em> You can keep working in the app while it&#39;s connected — the server notices each autosave and answers from the current state.</p>
+<p><strong>A note on client data.</strong> The server hands crawl and audit data to whichever model your assistant is connected to. Treat it like any other tool that can read the client&#39;s project file, and check the engagement&#39;s data terms before connecting one.</p>
 <h3 id="quick-self-check-15">Quick self-check</h3>
 <ul>
 <li><input disabled="" type="checkbox"> <strong>Executive Summary</strong> ready for the client readout</li>
@@ -1932,6 +1959,7 @@ npm run build      # build universal .dmg (output in dist/)
 <li><strong>Miro: collapsed sections can&#39;t be unfolded on the board</strong> — Miro has no collapse behaviour for shapes. Only Miro <em>mind maps</em> collapse, and those are text-only with no colour, so using them would lose all the colour coding. Collapsed sections export as a stacked block instead, which shows that something is folded away but can&#39;t be opened.</li>
 <li><strong>Miro: corner radius exports as square-vs-rounded only</strong> — Miro has no radius setting, so a specific radius value in the app arrives as simply &quot;rounded&quot;.</li>
 <li><strong>Miro: inner padding is app-only</strong> — Miro centres shape text itself and has no padding control.</li>
+<li><strong>MCP server is read-only and needs Node 22.13+</strong> — it can answer questions about a project but cannot change it; proposals-based writes are planned. It reads <code>.transmission</code> projects only, not spreadsheets.</li>
 <li><strong>Miro: one team per connection</strong> — a Miro token is scoped to a single team; working across teams means connecting once per team.</li>
 <li><strong>New sitemap card defaults apply to new projects only</strong> — existing projects keep the card height and colour rules they already saved. Changing them is a one-click job in the Visual Sitemap&#39;s <strong>Layout</strong> / <strong>Colors</strong> tabs.</li>
 </ul>

@@ -96,6 +96,14 @@
 <p>The <strong>Migration Direction Brief</strong> can be styled with custom Markdown templates — see the <strong>Templates</strong> walkthrough.</p>
 </blockquote>
 <hr>
+<h2 id="5-questions-no-report-answers-mcp-server">5. Questions no report answers (MCP server)</h2>
+<ul>
+<li>The <strong>MCP server</strong> (<code>mcp/server.js</code> in the Transmission source; developer preview) lets Claude Desktop / Claude Code <strong>read</strong> a <code>.transmission</code> project and answer ad hoc questions with real counts — grouped by any column, filtered, using your saved filters by name.</li>
+<li><strong>Read-only.</strong> It never changes the file and is safe to use while the app is open. Spreadsheets aren&#39;t supported: Save As Project first.</li>
+<li>Needs <strong>Node 22.13+</strong>: <code>claude mcp add transmission -- node /path/to/transmission/mcp/server.js</code>. Full setup in <a href="../user-guide.html#16-producing-the-outputs">the User Guide §16</a>.</li>
+<li>It hands project data to the connected model — check the engagement&#39;s data terms first.</li>
+</ul>
+<hr>
 <h2 id="quick-checklist-for-outputs-produced">Quick checklist for &quot;outputs produced&quot;</h2>
 <ul>
 <li><input disabled="" type="checkbox"> <strong>Executive Summary</strong> for the client readout</li>

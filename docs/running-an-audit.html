@@ -225,6 +225,7 @@
 </ul>
 <p><strong>Diagrams</strong> (from the Sitemap toolbar, see step 5) — <strong>Visual Sitemap</strong> as interactive HTML for the client, PDF for the deck, or a <strong>Miro</strong> board; <strong>Treemap</strong> for the where-is-the-content picture. <strong>Menus → Export…</strong> hands the navigation to the build team as Excel or JSON.</p>
 <p><strong>Migration menu</strong> — <code>Pre-Handoff Check…</code> runs every pre-flight check at once; run it before you ship anything. <code>Migration Tracker…</code> is the engineering hand-off. <code>Export Redirect Map (CSV)…</code> is the redirect config itself, split per source domain when there&#39;s more than one.</p>
+<p><strong>Questions no report answers</strong> — the MCP server (<code>mcp/server.js</code>, developer preview) lets Claude Desktop or Claude Code read the project and answer ad hoc questions with real counts: <em>Kill pages by section, content only; which sections the SME overturned; what serves the Alumni audience</em>. Read-only, safe beside the open app, and it carries the conventions above (blank = unreviewed, Kill vs Exclude, content vs crawled URLs) so the answers are read the way the reports are. Setup in the User Guide §16.</p>
 <p><strong>File → Package for Handoff…</strong> zips the project with a README for the receiving team. <strong>File → Export…</strong> covers everything else — filtered rows, audit decisions, or a client-facing column subset via export profiles.</p>
 <hr>
 <h2 id="what-you-can-skip">What you can skip</h2>
@@ -278,6 +279,10 @@
 <tr>
 <td>Build planning (step 7)</td>
 <td>You&#39;re not staffing or sequencing the build</td>
+</tr>
+<tr>
+<td>MCP server</td>
+<td>Nobody needs answers beyond what the reports give, or the engagement&#39;s data terms don&#39;t allow the project file near a model</td>
 </tr>
 </tbody></table>
 <hr>

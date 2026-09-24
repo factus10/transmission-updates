@@ -1,7 +1,7 @@
 {
-  "version": "2.18.1",
+  "version": "2.19.0",
   "publishedAt": "2026-09-24",
-  "notes": "If you have exported a redirect map, export it again after updating. News posts, events, profiles and other records set to \"Content Object\" were being treated as fragments with no URL, which left them out of redirects, redirect exports and sitemap-placement checks. They now count as records with their own pages, and existing projects are repaired when you open them. Also: Site Domain now accepts only a single URL, and redirects for Kill and Consolidate pages now update when the Site Domain or their destination page changes.",
+  "notes": "If your project has been through SME review, regenerate any reports and export your redirect map again. A client's Final KKE was not always respected: pages they chose to keep could still be treated as consolidated and given a redirect, and several reports counted your recommendation instead of their decision. The Redirect Map Report now uses exactly the rules the redirect CSV does. New: a Build Status report, SME → Review Consolidations, a Site order sort, audiences on sitemap nodes, and a left-aligned sitemap layout.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

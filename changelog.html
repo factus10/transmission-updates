@@ -46,8 +46,103 @@
 <p>All notable changes to Transmission are documented here. The format follows
 <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and the project uses
 major-version codenames drawn from The Smiths.</p>
-<h2 id="2181--please-please-please-let-me-get-what-i-want">[2.18.1] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
+<h2 id="2190--please-please-please-let-me-get-what-i-want">[2.19.0] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li><p><strong>SME → Review Consolidations….</strong> Clients often have their own view of which pages overlap and where the content belongs. This list collects every consolidation their Final KKE changed: pages they asked to consolidate that you didn&#39;t, pages you consolidated that they kept (their old target is still stored), and pages where you both agreed but the SME left notes. That last group is where &quot;merge it into X instead&quot; usually gets written. For each page you can choose or change the target, confirm it, or clear the target nobody uses anymore. A page leaves the list once you&#39;ve reviewed it, and comes back if the decision or target changes later. The app offers the review after an SME import or a Resolve session, and the <strong>Consolidate (client changed — review)</strong> sidebar filter finds the same pages.</p>
+</li>
+<li><p><strong>Site order in the sidebar.</strong> A <strong>Site order</strong> button in the Address header sorts the list the way the site is organized, not the order the crawler found it. Pages placed in the sitemap come first, in sitemap order. Unplaced pages follow, grouped by site and then by URL path, with each section&#39;s landing page directly above its children and every URL indented by level. The path comparison goes one segment at a time, so <code>/about-us</code> no longer sorts into the middle of <code>/about/…</code>, and <code>page/10</code> comes after <code>page/2</code>.</p>
+</li>
+<li><p><strong>Left-aligned Visual Sitemap.</strong> Settings → Layout → <strong>Parent position</strong> can put each parent at the left edge of its children instead of centered over them. The root anchors the top-left corner and the tree grows to the right. Fit keeps it against the left edge, and the setting carries into every export, Miro included.</p>
+</li>
+<li><p><strong>Audiences on the sitemap.</strong> When your IA already says who each section is for, you can now say it once, on the section. The sitemap node editor has an <strong>Audience</strong> section. A node with none set inherits from its nearest ancestor, so tagging <em>Academics</em> covers its whole branch, and a child can override it for its own branch. Node audiences fill <strong>untagged</strong> pages placed under them. Pages you&#39;ve tagged are never overwritten, and Kill/Exclude pages and out-of-scope sites are skipped. Saving a node asks before filling its branch and shows the page count. Assigning a single page from the audit bar fills it right away. Either way, one Cmd+Z undoes it. <strong>Fill Audiences from Section</strong> now offers the sitemap as the first source. The tree shows which nodes set audiences, and the Visual Sitemap and Treemap can color by the inherited value. Stored in a new <code>Node_Audiences</code> column on the Sitemap sheet.</p>
+</li>
+<li><p><strong>Build Status report</strong> (Reports → Build Status…). The weekly progress view of the new site. It shows every page by Page Status, broken down by section and by person (builder, writer, migrator), with blocked pages listed. Until now this only existed inside the Migration Tracker spreadsheet.</p>
+</li>
+<li><p><strong>Key findings and next steps.</strong> Most reports now open with what the numbers mean and what to do about them. This covers the Executive Summary, Content Inventory, SME Review Status, Sitemap Coverage, Audience Coverage, Site Consolidation, the Migration Checklist, the Net New Brief, Build Status and the Redirect Map.</p>
+</li>
+<li><p><strong>An audit-team appendix, left out of client exports.</strong> Page-by-page working lists (untagged pages, pages still needing a place, pages to update, pages with no build status) move to a marked <strong>For the audit team</strong> section at the end of the report. Exports leave it out unless you tick <strong>Include audit-team appendix in export</strong>.</p>
+</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li><p><strong>Every report has the same header.</strong> It shows client · project, the date the report was generated, and the dates the site was crawled (read from Screaming Frog&#39;s <strong>Crawl Timestamp</strong> column when the export has it). The local file name is gone from exported reports. The in-app preview now shows the same header as the exported file.</p>
+</li>
+<li><p><strong>Section counts agree everywhere.</strong> The Executive Summary&#39;s By Section, Content Inventory and the progress dashboard now read one shared tally.</p>
+<ul>
+<li>By Section is now a table showing each decision&#39;s share per section.</li>
+<li>Content Inventory is now one ranked table of every section, plus a closer look at the ten largest. It used to produce one block per section, which ran to hundreds of pages on a large site.</li>
+</ul>
+</li>
+<li><p><strong>The Audit Progress export uses the standard report layout.</strong> It gains the content / redirect split, the SME review figures, and a by-section table, all of which the dashboard already showed.</p>
+</li>
+<li><p><strong>Long tables are capped.</strong> The Audience × Section Matrix shows the 40 largest sections, and SME Review Status shows the 30 owners furthest from done. The rest are rolled into one row, so totals still add up.</p>
+</li>
+<li><p><strong>Audience × Section Matrix shading is clearer.</strong> Cells are shaded by their share of the section&#39;s <em>tagged</em> pages, and a new <strong>Untagged</strong> column shows what&#39;s left. A mostly-untagged section used to look pale everywhere, so the shading tracked tagging progress rather than who the section serves.</p>
+</li>
+<li><p><strong>The Menu Report export</strong> shows the same header details and out-of-scope notice as every other report.</p>
+</li>
+<li><p><strong>Audience Debt is now part of Audience Coverage</strong>, as a <strong>Risks</strong> section, so there&#39;s one audience report instead of two with the same preamble. The Audience Debt menu item is gone.</p>
+</li>
+<li><p><strong>Serving four or more audiences is no longer flagged on landing pages.</strong> A program landing page can rightly serve prospective undergraduates, graduate students, executive-education seekers and certificate seekers at once. Only detail pages count: pages with nothing beneath them in the sitemap or URL path. They&#39;re described as worth a look, not as a defect.</p>
+</li>
+<li><p><strong>The Migration Checklist is one page.</strong> It gives a ready / not-ready headline, what happens to the pages, redirect totals and pages to write. It points to the Redirect Map Report and the Pre-Handoff Check instead of repeating their tables.</p>
+</li>
+<li><p><strong>The Net New Content Brief is a hand-off to writers.</strong> It&#39;s grouped by writer and section, and each page shows its status, template and writer brief. Besides section landing pages, it now lists new pages nothing on the current site maps to, and placeholder pages still to be written. Before, it only listed landing pages, so the pages a sitemap plans from scratch never appeared.</p>
+</li>
+</ul>
 <h3 id="fixed">Fixed</h3>
+<ul>
+<li><p><strong>A client&#39;s Final KKE now decides whether a page consolidates.</strong> If you recommended Consolidate and the client&#39;s Final KKE said Keep, the page was still treated as consolidating. It kept its target, it kept the redirect that merges it into another page, and it stayed in the consolidate worklists. Every other part of the app already put Final KKE first; consolidation now does too. The reverse case works as well: a client Final of Consolidate over your Keep now counts as a consolidation, and the audit bar asks where it should go.</p>
+</li>
+<li><p><strong>The audit bar shows when the client overrode your call.</strong> The KKE buttons show your recommendation, and nothing showed that a Final KKE had replaced it unless you had turned on the SME fields. A <strong>Final</strong> chip now appears next to the buttons whenever the two differ. Click it to pick the target (for a Consolidate) or to open the Final dropdown. In the sidebar, the KKE badge is struck through when a Final overrides it, and a consolidate flag the client overrode is shown as inactive.</p>
+</li>
+<li><p><strong>The Consolidate button&#39;s status dot is back.</strong> The red dot (no target) and the amber dot (target is being killed) inside the Consolidate button disappeared as soon as a file opened, because the buttons were rebuilt without them. Both show again.</p>
+</li>
+<li><p><strong>Visual Sitemap connector and card settings now stick.</strong> Line color, line weight (uniform or by content volume), base and max width, corner radius, and padding were never sent back from the diagram to the project. They reset every time the sitemap reopened, and the PDF, PNG, HTML and Miro exports drew the default grey uniform lines whatever the Layout tab showed.</p>
+</li>
+<li><p><strong>The Redirect Map Report now matches the redirect CSV.</strong> The report derived its own rules, and they could differ from the file you deploy:</p>
+<ul>
+<li>It read your recommendation instead of the client&#39;s Final KKE.</li>
+<li>It took destinations from the sitemap path, ignoring redirects you typed or inherited.</li>
+<li>It dropped consolidated pages.</li>
+</ul>
+<p>The report and the Migration Checklist now use the same rules as the CSV and the Migration Tracker, so all four agree. The report lists pages that <strong>still need a destination</strong> first, and splits rules by source site on a merger. Long lists stop at 200 rows with a pointer to the full CSV, so the PDF is no longer hundreds of pages.</p>
+</li>
+<li><p><strong>Consolidated pages with no destination are flagged.</strong> A Consolidate page with nowhere to redirect used to disappear from every redirect list. It now ships as <code>(TBD)</code> like a Kill with no destination. The <strong>Pre-Handoff Check</strong> has a new check for both.</p>
+</li>
+<li><p><strong>Reports count the client&#39;s decision.</strong> The progress dashboard, its PDF, the Executive Summary, SME Review Status, Component Inventory, the redirect chain check and the Pre-Handoff Check counted your recommendation even after an SME had set a Final KKE. They now count the Final KKE. SME percentages can no longer go over 100%.</p>
+</li>
+<li><p><strong>Reports agree on what counts.</strong></p>
+<ul>
+<li>Audience reports, Content Inventory, Site Consolidation and Cross-Site Duplicates now count content pages. Existing redirects and dead URLs are no longer counted, so their totals match the Executive Summary.</li>
+<li>Reports that said out-of-scope sites were excluded now actually exclude them. That covers the Menu Report, Sitemap Coverage, Net New Brief, Audience Debt, redirect chains, Pre-Handoff and the Migration Direction Brief.</li>
+</ul>
+</li>
+<li><p><strong>One definition of &quot;net new&quot;.</strong> The Sitemap tree, its stats bar, the Net New Brief, Sitemap Coverage, the Migration Checklist and the Migration Tracker each counted net-new and empty pages differently. They now all match the tree&#39;s NEW and ○ badges. As a result, the stats bar&#39;s &quot;empty&quot; count now includes empty branches, not just empty leaves.</p>
+</li>
+<li><p><strong>Executive Summary.</strong></p>
+<ul>
+<li>Findings now cover every decision, Consolidate and custom states included, each with its percentage.</li>
+<li>The orphan-page count only counts content pages being kept.</li>
+<li>By Section adds up to the page total.</li>
+</ul>
+</li>
+<li><p><strong>Smaller fixes:</strong></p>
+<ul>
+<li>The progress dashboard&#39;s bar segments are filled in again.</li>
+<li>Report previews in the app are styled like the exported file.</li>
+<li>Sitemap Coverage uses the standard report layout, and no longer shows the previous report&#39;s title.</li>
+<li>The Migration Checklist no longer lists URL changes twice, and counts Consolidate on its own line.</li>
+<li>Site Consolidation shows pages that belong to no site.</li>
+<li>Cross-Site Duplicates names the fields it actually matched.</li>
+<li>SME Review Status lists conflicts with URL and SME notes, grouped by owner.</li>
+<li>The Menu Report export no longer carries a hard-coded agency name or an &quot;Internal — not for client distribution&quot; badge. Its header shows the client and project names, and it no longer needs Google Fonts.</li>
+</ul>
+</li>
+</ul>
+<h2 id="2181--please-please-please-let-me-get-what-i-want">[2.18.1] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
+<h3 id="fixed-1">Fixed</h3>
 <ul>
 <li><strong>News posts, events and profiles are no longer treated as fragments.</strong> The Renders as value <code>Content Object</code> did double duty. The built-in Content Type Registry uses it for records like news posts, events and faculty profiles, which have their own pages. But the dropdown labeled it &quot;Fragment (embeddable)&quot;, and the app treated every such row as having no URL. Those pages were left out of redirects, redirect exports, sitemap-placement checks and Sitemap Coverage (614 rows on one real audit). Renders as now has separate <strong>Record (own page)</strong> and <strong>Fragment (embeddable, no URL)</strong> options, and only Fragment is skipped. Existing projects are repaired once when opened: <code>Content Object</code> rows the crawl reached at a URL become records, and rows the crawl never reached keep their fragment treatment. A notice gives the counts.</li>
 <li><strong>Site Domain only accepts one URL.</strong> On a merger it&#39;s natural to type both source sites into Site Domain, but every redirect is built by putting a page&#39;s path after that value, so every destination came out as <code>https://a.edu; https://b.edu/about</code>. That isn&#39;t a URL. The field now rejects anything that isn&#39;t a single URL and shows why. Opening a project whose saved Site Domain is malformed shows a warning. When you correct it, redirects built on the old value are rewritten to the new one.</li>
@@ -55,7 +150,7 @@ major-version codenames drawn from The Smiths.</p>
 <li><strong>Multi-paragraph dialogs no longer run together.</strong> A modal body with more than one paragraph rendered as a single block — most visibly the update dialog, where &quot;Transmission vX is available&quot; ran straight into the release note beneath it. The global CSS reset zeroes every margin and nothing restored it for dialog text.</li>
 </ul>
 <h2 id="2180--please-please-please-let-me-get-what-i-want">[2.18.0] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="added">Added</h3>
+<h3 id="added-1">Added</h3>
 <ul>
 <li><p><strong>Inherited redirects carry forward instead of freezing.</strong> A 3xx in a crawl is a redirect rule the live site already has, and Triage Non-200 copies its destination in. That copy was recorded as a hand-typed value, which meant the redirect resolver would never revisit it — so a rule written on day one still pointed at its target&#39;s <strong>old</strong> URL on day ninety, after you&#39;d moved that page in the sitemap. On a replatform that ships redirects to URLs which won&#39;t exist.</p>
 <p>Those destinations now re-derive on every save, the way sitemap-derived redirects already did. If the page an inherited redirect points at moves, is consolidated into another page, or is retired to a 404, the rule follows it. A chain on the live site (A → B → C) collapses to a single hop, so no rule lands on a URL that is itself being retired. Redirects you typed by hand are still never touched — that contract is unchanged; only the machine-copied ones were ever affected.</p>
@@ -75,19 +170,19 @@ major-version codenames drawn from The Smiths.</p>
 <li><p><strong>Field filters can compare numerically — <code>is greater than</code> and <code>is less than</code>.</strong> A crawl is full of numeric columns (word count, status code, response time, inlinks, GA sessions) and until now the only way to filter one was <code>contains</code>, which can&#39;t express &quot;under 300 words.&quot; The two new operators compare as numbers whenever both the cell and your value are numeric — comma-grouped values like <code>1,234</code> included — so <code>900</code> doesn&#39;t sort above <code>1,000</code> the way a text comparison would. Given anything non-numeric they fall back to comparing character by character in ASCII order, usable for text if you know that ordering. Blank cells match neither direction: blank means <em>unreviewed</em> in this app, not zero.</p>
 </li>
 </ul>
-<h3 id="fixed-1">Fixed</h3>
+<h3 id="fixed-2">Fixed</h3>
 <ul>
 <li><strong>A second field filter can be removed again.</strong> Stacked filter chips were squeezed by the buttons beside them until the × was clipped off the pill — leaving the filter hiding your rows with no way to dismiss it. Chips now take a row of their own, long field names and values truncate instead of the button, and the × is always hittable.</li>
 <li><strong>Triage Non-200 Pages is no longer stuck behind its own dim overlay.</strong> The dialog was being placed alongside the backdrop rather than inside it, so it painted underneath — the screen dimmed and the dialog was unreachable in the corner.</li>
 </ul>
 <h2 id="2171--please-please-please-let-me-get-what-i-want">[2.17.1] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="fixed-2">Fixed</h3>
+<h3 id="fixed-3">Fixed</h3>
 <ul>
 <li><strong>What&#39;s New always shows the current changelog.</strong> The window could render a copy up to ten minutes old — which is exactly the wrong ten minutes, since you reach it from a prompt that has just told you a new version exists, and the cached page describes the <em>previous</em> release. It now fetches fresh every time you open it.</li>
 <li><strong>The changelog page opens on the newest release.</strong> It used to lead with an empty &quot;Unreleased&quot; section, which read as though something had failed to load. (This one was already live before this release — the page is generated and published separately from the app.)</li>
 </ul>
 <h2 id="2170--please-please-please-let-me-get-what-i-want">[2.17.0] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="added-1">Added</h3>
+<h3 id="added-2">Added</h3>
 <ul>
 <li><p><strong>Sitemap shape check.</strong> A sitemap can be structurally perfect and still be undrawable, and the app used to discover that for you only by rendering a wall of specks. The check names what&#39;s driving the size and shows what fixing it would buy — <em>before</em> you commit to the fix.</p>
 <p>It reports how many top-level sections you have, the exact size the diagram will be, and the zoom it will open at (measured with the real layout engine, so the numbers are the ones you&#39;ll get). Then it groups the causes: <strong>top-level sections holding a single page</strong> — the signature of a flat site with no hierarchy in its URLs; <strong>crawl artifacts</strong> like <code>/tag</code>, <code>/category</code> and <code>/wp-content</code> that are CMS plumbing rather than parts of the site; and <strong>sections too wide to lay out</strong>. Each can be repaired in place — moved under one section, removed (the pages stay in the audit, just unplaced), or marked collapsed.</p>
@@ -100,62 +195,62 @@ major-version codenames drawn from The Smiths.</p>
 <li><p><strong>Help → Online Documentation</strong> opens the full documentation in your browser — the User Guide, the engagement sequence, one-page walkthroughs for every stage of an audit, and the method pages behind them. The in-app <strong>Transmission Help</strong> window is unchanged and still the fastest way to check one thing; this is the long-form set, and it&#39;s public, so it can be sent to a client or a colleague who doesn&#39;t have the app.</p>
 </li>
 </ul>
-<h3 id="fixed-3">Fixed</h3>
+<h3 id="fixed-4">Fixed</h3>
 <ul>
 <li><strong>The Visual Sitemap no longer opens on an empty screen.</strong> A very large tree — the kind &quot;Create Sitemap from Audit&quot; produces from a flat site, where every page sits at the URL root and becomes its own top-level section — laid out tens of thousands of pixels wide and over a hundred thousand tall. Fit-to-screen refused to zoom out past 10% and then centred the canvas, which on a canvas ten times wider than the window pushed every card off the left edge: on a real 1,755-node audit, <strong>none</strong> of the 1,755 cards were on screen, so the diagram looked as though it had never been built. Fit now zooms out as far as it needs to, and only centres an axis when the content actually fits it, so you always land on the diagram. Scrolling out reaches the same zoom Fit uses, rather than stopping above it.</li>
 </ul>
 <h2 id="2161--please-please-please-let-me-get-what-i-want">[2.16.1] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-1">Changed</h3>
 <ul>
 <li><strong>The Visual Sitemap and Treemap open faster on large audits.</strong> Both views summarize every audit row against the node it&#39;s placed on before they can draw — the step that decides what a section &quot;mostly is&quot; for color-by-field rules. That summary is now about a third quicker: roughly 24ms → 15ms on a 13,000-page audit, and 83ms → 59ms on a 40,000-page one. Nothing about what&#39;s drawn changes; it&#39;s the same summary, computed with less overhead. (The connector volume-weighting added in 2.16.0 was measured at the same time and left alone — at well under a millisecond it was never the delay.)</li>
 </ul>
 <h2 id="2160--please-please-please-let-me-get-what-i-want">[2.16.0] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="added-2">Added</h3>
+<h3 id="added-3">Added</h3>
 <ul>
 <li><strong>Sitemap connector color and weight.</strong> The Visual Sitemap&#39;s <strong>Settings → Layout</strong> tab has a new <strong>Connectors</strong> section. <strong>Line color</strong> replaces the fixed grey — pick one color for every line (per-line rainbows are a Miro job, not this app&#39;s). <strong>Line weight</strong> can now be <strong>By content volume</strong>: each line&#39;s thickness reflects how many pages sit beneath it, so a section carrying 200 pages draws as a thick trunk and a 4-page corner draws thin. A parent&#39;s shared run carries its whole branch and each drop carries that child&#39;s share, like a trunk splitting into branches. The scale is compressed on purpose, so small sections stay legible next to a huge one. Both settings save with the project and carry into the HTML, PDF, PNG <strong>and Miro</strong> exports — they&#39;re sitemap settings, not export settings.</li>
 </ul>
-<h3 id="changed-1">Changed</h3>
+<h3 id="changed-2">Changed</h3>
 <ul>
 <li><strong>The Miro export&#39;s Connector thickness now defaults to &quot;Match sitemap&quot;</strong>, so a volume-weighted sitemap exports volume-weighted lines. The old fixed choices (Thin/Medium/Heavy/Extra heavy) remain as a per-board override. If you&#39;ve already set a thickness for a project it&#39;s untouched; a project that never set one now exports at 2 rather than 1, because that&#39;s what the app&#39;s own 1.5px line rounds to and &quot;match&quot; should mean match.</li>
 </ul>
 <h2 id="2150--please-please-please-let-me-get-what-i-want">[2.15.0] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="added-3">Added</h3>
+<h3 id="added-4">Added</h3>
 <ul>
 <li><strong>Connector thickness for the Miro sitemap export.</strong> The Appearance section of <strong>Export to Miro</strong> now sets how heavy the lines <em>between</em> boxes are — Thin (the default, and what exports drew before) · Medium · Heavy · Extra heavy — alongside the connector style and card border controls that were already there. It&#39;s remembered per project like the rest. The widths are whole numbers on purpose: Miro&#39;s thickness slider only stops on whole numbers, and an in-between value renders as a barely-visible hairline.</li>
 <li><strong>Delete a scratch Miro board straight from the export toast.</strong> The export dialog nudges you toward <em>create a new board</em> — review it, then tidy up — and there was no way to do the tidying, so throwaway boards piled up in your Miro team. When an export creates a board, the &quot;Exported N pages…&quot; toast now carries a <strong>Delete board</strong> button. It only appears for boards that export just created (never one you picked, which may have other work on it), it asks for confirmation first, and Miro moves the board to your team&#39;s trash so it can be restored. Ignoring it is always fine — the toast simply lapses, and it waits longer than usual and holds while you hover, since the export opens the board in your browser and you&#39;ll be looking elsewhere.</li>
 </ul>
 <h2 id="2141--please-please-please-let-me-get-what-i-want">[2.14.1] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="fixed-4">Fixed</h3>
+<h3 id="fixed-5">Fixed</h3>
 <ul>
 <li><strong>Redirect loops now actually clear.</strong> The Redirect Health Check would report a page redirecting to itself, you&#39;d tick the group and hit <strong>Fix selected</strong>, and the loop would be back the moment the file next auto-saved. The check and the redirect resolver disagreed about what a loop is: the resolver, walking a consolidation chain that circles back on itself, gives up and returns the last URL it saw — which is the page&#39;s own URL — and nothing stopped it writing that. So the check cleared the loop and the very next save derived it straight back. On a two-page consolidation cycle the &quot;fix&quot; made things <em>worse</em>, turning one loop into two. Both halves now share one definition of a self-redirect, a derived destination that lands back on its own page is treated as no destination at all, and loops already sitting in a file heal themselves on the next save without the health check being run at all. A redirect you typed by hand is still never touched, and <code>404</code> still means a deliberate deindex.</li>
 <li><strong>A cross-site redirect is no longer mistaken for a loop.</strong> On a consolidation, <code>alpha.edu/about</code> → <code>beta.edu/about</code> was read as a page redirecting to itself, because only the URL path was compared. Hosts are now compared too, whenever both sides carry one.</li>
 </ul>
 <h2 id="2140--please-please-please-let-me-get-what-i-want">[2.14.0] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="added-4">Added</h3>
+<h3 id="added-5">Added</h3>
 <ul>
 <li><strong>Export PNG</strong> — every visualization (Visual Sitemap, Treemap, Content Flow) now exports a plain image alongside HTML and PDF, for slides and documents that can&#39;t place a PDF. The image is the whole diagram at the size it lays out at, not a screenshot of what happens to be on screen, rendered at 2× where it fits so text stays crisp.</li>
 <li><strong>Recolor the Treemap.</strong> Open the <strong>Legend</strong> and every entry has a color well: change <strong>Keep</strong>, or a section, or a Page Status, and every box in that category follows. <strong>Right-click any box</strong> to override just that one — useful for calling out a single section in a client deck. <strong>Reset colors</strong> puts everything back. Your palette saves with the project, per coloring mode (the colors you chose for the section view don&#39;t disturb the KKE view), and carries into the HTML, PDF, PNG and Miro exports.</li>
 <li><strong>Export the Treemap and Content Flow to Miro</strong>, the way the Visual Sitemap already could — same board picker, same &quot;export again to the last board&quot;, same optional color key. The Treemap goes across as its own rectangle packing. The Content Flow becomes blocks and weighted connectors, since Miro has no ribbon: the reading survives (what exists, how big, what connects to what, in what color), but band thickness is Miro&#39;s 1–24 stroke scale rather than the exact proportion drawn on screen.</li>
 <li><strong>A &quot;Consolidate: no target&quot; chip in the sidebar</strong>, showing how many pages are marked Consolidate without a page to consolidate <em>into</em> — the one KKE value that isn&#39;t a finished decision, since it says the page goes away without saying where its content and its redirect go. Click it to filter to exactly those. It appears only when there are any. (The same filter has always been available under the KKE filter dropdown, and the Pre-Handoff Check has always counted them; this puts the number where you&#39;ll see it.)</li>
 </ul>
-<h3 id="changed-2">Changed</h3>
+<h3 id="changed-3">Changed</h3>
 <ul>
 <li><strong>Consolidating now nudges the target page to Evolve.</strong> Merging another page&#39;s content into a page is work, and Evolve is how this audit says there&#39;s work to do here — so choosing a target marked <strong>Keep</strong> (which claims the page is unchanged) or <strong>Kill/Exclude</strong> (a destination that is itself being removed) now asks whether to set it to Evolve. You can decline; the consolidation stands either way.</li>
 <li><strong>A page can no longer consolidate into itself</strong>, or into a page that consolidates back into it. Either one is a redirect loop and a page whose content never lands anywhere.</li>
 <li><strong>Releases are published by a script now</strong> (<code>npm run release:publish</code>), instead of four commands run by hand. It verifies the signed artifacts before uploading anything, uploads each asset on its own, checks every byte count against the local file, and confirms that <code>releases/latest</code> actually resolves to the new version on both repos before the update manifest — the thing that tells running copies an update exists — is published. Developer-facing only; nothing changes in the app.</li>
 </ul>
-<h3 id="fixed-5">Fixed</h3>
+<h3 id="fixed-6">Fixed</h3>
 <ul>
 <li><strong>Content Flow exports now match what you&#39;re looking at.</strong> Switching the left column, the shape, or the coloring and then exporting produced the view the diagram <em>opened</em> with, not the one on screen — so a PDF could show a completely different reading than the one you meant to hand over. The exported HTML also opens on that view now, with its toggles set to match.</li>
 </ul>
 <h2 id="2131--please-please-please-let-me-get-what-i-want">[2.13.1] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="fixed-6">Fixed</h3>
+<h3 id="fixed-7">Fixed</h3>
 <ul>
 <li><strong>The legend opens in front of the diagram again</strong> in Content Flow and the Treemap. It was being clipped to a sliver at the bottom edge of the toolbar, so it read as hidden behind the visualization.</li>
 <li><strong>Content Flow&#39;s toolbar buttons stopped responding after switching the left column.</strong> Legend, Fit and the export buttons were re-registered every time the axis changed, so a second click cancelled the first — the legend in particular would open and immediately close, appearing to do nothing.</li>
 </ul>
 <h2 id="2130--please-please-please-let-me-get-what-i-want">[2.13.0] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="added-5">Added</h3>
+<h3 id="added-6">Added</h3>
 <ul>
 <li><p><strong><code>npm test</code></strong> — the project now has automated tests, using Node&#39;s built-in runner, with no new dependencies (this is a signed, notarized universal binary; its dependency budget is not spent on a test framework). 32 tests cover the Content Flow&#39;s host-side logic. See <code>docs/dev/TESTING.md</code>.</p>
 </li>
@@ -167,11 +262,11 @@ major-version codenames drawn from The Smiths.</p>
 </li>
 </ul>
 <h2 id="2120--please-please-please-let-me-get-what-i-want">[2.12.0] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="added-6">Added</h3>
+<h3 id="added-7">Added</h3>
 <ul>
 <li><strong>Migration → Redirect Health Check…</strong> — finds redirects that no longer agree with your sitemap and repairs them in one undoable step. Redirects are derived from the sitemap, but the app cannot tell a destination <em>it</em> wrote from one <em>you</em> typed, so once a value exists on a Keep or Evolve page it is never revisited — reorganize the tree, or build a sitemap and delete it, and the old destinations quietly survive to contradict the new tree. The check sorts what it finds into groups, each listing every affected page: pages <strong>redirecting to themselves</strong> (a loop), Keep/Evolve pages <strong>carrying a redirect while not on the sitemap at all</strong> (they aren&#39;t moving, so they need none — usually the largest group and the one nothing else finds), destinations that <strong>disagree with the page&#39;s sitemap node</strong>, and pages <strong>placed where they already live</strong>. Tick the groups to repair; the whole fix is a single <strong>Cmd+Z</strong>. Anything whose destination still resolves to a real node in your sitemap is reported but <em>never</em> changed automatically, since that may well be a deliberate choice. Blank destinations, intentional <strong>404</strong>s, and out-of-scope sites are left alone. A per-class count also appears in the Pre-Handoff Check.</li>
 </ul>
-<h3 id="changed-3">Changed</h3>
+<h3 id="changed-4">Changed</h3>
 <ul>
 <li><strong>Create Sitemap from Audit now asks what the tree is for.</strong> <em>Where pages are going</em> (the default, and what the tool has always assumed) or <em>where pages are today</em> — a snapshot to show a client. Pick the snapshot and it says plainly that a snapshot belongs in <strong>a copy</strong> of the project, with a <strong>Save a copy first…</strong> button that makes one and switches you to it. Placing pages writes where they&#39;re going and Transmission derives redirects from that, which is right for a tree describing the future and meaningless for one describing the present.</li>
 <li><strong>Redirects you didn&#39;t write now follow the sitemap on their own.</strong> Previously a destination on a Keep or Evolve page was never revisited once it existed — so reorganizing the tree, or building a sitemap and deleting it, left the old destinations behind to contradict the new tree. Now a redirect <strong>Transmission derived</strong> is kept current: it follows the page&#39;s node when the tree moves, and is cleared when the page stops moving (taken off the sitemap, or placed where it already lives). A destination <strong>you</strong> typed or picked is never touched — including on Kill pages, where a hand-set destination that happened to match the project default could previously be overwritten. Clearing a page&#39;s sitemap assignment now also clears the redirect that was derived from it (the Kill/Consolidate cleanup prompt still asks separately and honors your answer).</li>
@@ -180,7 +275,7 @@ major-version codenames drawn from The Smiths.</p>
 <li><strong>A collapsed section in the Visual Sitemap now tells you how much it&#39;s hiding.</strong> Folding a branch used to hide the answer along with the pages — the card kept reporting its own assigned page count, which is rarely the number you want from a box you just closed. A collapsed card now reads <em>&quot;6 pages hidden&quot;</em>: the sub-pages folded away underneath it. The <strong>Counts</strong> dropdown in the sitemap toolbar (where the <strong>Page counts</strong> checkbox used to be) picks what that line reports — <strong>Hidden sub-pages (collapsed only)</strong>, the new default, which leaves expanded cards clean; <strong>Sub-pages on every branch</strong>, for sizing sections at a glance; <strong>Assigned audit pages</strong>, the original per-node tally, unchanged for anyone who works that way; or <strong>None</strong>. Your choice saves with the project and carries into the HTML, PDF, and Miro exports. If you had page counts switched off, they stay off.</li>
 </ul>
 <h2 id="2111--please-please-please-let-me-get-what-i-want">[2.11.1] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="fixed-7">Fixed</h3>
+<h3 id="fixed-8">Fixed</h3>
 <ul>
 <li><strong>Coloring a sitemap section no longer applies the color to a different one.</strong> In the Visual Sitemap&#39;s color rules, choosing a section under <strong>Top-level section</strong> could save the rule against another section — usually the level above — and reopening the rule showed a third one, as though the choice hadn&#39;t committed. It had: the list was offering the wrong values behind the right names. On a sitemap whose sections all sit beneath a single top node, every entry in that list quietly carried the same value, the root&#39;s. Sections now identify themselves correctly, so the section you pick is the section that gets colored, and it still reads correctly when you reopen the rule.</li>
 <li><strong>Color by top-level section now has more than one section to offer.</strong> On a sitemap built under a single root page, the entire tree counted as one section — so coloring by section colored everything alike, in the <strong>Visual Sitemap</strong> and the <strong>Treemap</strong> both. The sections beneath a lone root are now treated as the sections, which is what they look like on screen anyway.</li>
@@ -188,7 +283,7 @@ major-version codenames drawn from The Smiths.</p>
 </ul>
 <p><strong>If you already have a section color rule</strong> in a sitemap with a single root page, it was matching the whole tree. It now matches just that root, so re-point it at the section you actually meant.</p>
 <h2 id="2110--please-please-please-let-me-get-what-i-want">[2.11.0] — &quot;Please, Please, Please, Let Me Get What I Want&quot;</h2>
-<h3 id="added-7">Added</h3>
+<h3 id="added-8">Added</h3>
 <ul>
 <li><strong>Audience tagging at crawl scale.</strong> Tagging audiences was affordable on a section and unaffordable on a site, and a column that stays 4% full makes every report built on it worthless. Two tools close that gap, and they are deliberately trusted differently.<ul>
 <li><strong>Project → Fill Audiences from Section…</strong> spreads audiences you have <em>already</em> tagged in a section onto that section&#39;s untagged pages. It costs nothing, needs no API key, and invents nothing — it only propagates a decision you made yourself elsewhere in the same section. The dialog shows every section it can act on, what it would apply, the agreement behind it, and how many pages it would fill; untick any you disagree with. A section needs at least three tagged pages, with an audience appearing on half of them, before it may speak for the rest, and only blank cells are filled. The whole fill is one <strong>Cmd+Z</strong>. <em>— None (no target audience)</em> is never inherited: spreading &quot;serves nobody&quot; onto pages no one has looked at would turn an unreviewed blank into a Kill vote.</li>
@@ -198,12 +293,12 @@ major-version codenames drawn from The Smiths.</p>
 </ul>
 </li>
 </ul>
-<h3 id="changed-4">Changed</h3>
+<h3 id="changed-5">Changed</h3>
 <ul>
 <li><strong>AI assessment now runs on current Claude models.</strong> The rubric assessment path was pinned to a model retired long ago; both it and the new audience suggestion run through one shared, up-to-date call path with proper error reporting (a rejected key or a declined request now says so instead of failing as a parse error).</li>
 </ul>
 <h2 id="2100--how-soon-is-now">[2.10.0] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-8">Added</h3>
+<h3 id="added-9">Added</h3>
 <ul>
 <li><strong>Jobs to be done — the other half of the discovery workshop.</strong> Audiences answer <em>who</em> a page is for; jobs answer <em>what people came to do</em>. A per-project <strong>Jobs</strong> library (Project Settings → Audience) holds the JTBD output: a short label, the full statement in the workshop&#39;s own words, and which audiences have it (blank for a job anyone might have).<ul>
 <li>A <strong>Jobs served</strong> field appears in the Audience cluster once the library has entries — the picker puts jobs belonging to <em>this page&#39;s</em> audiences at the top, so you&#39;re choosing from a few rather than scrolling all of them. Bulk-tag with <strong>Add Job</strong>; <strong>Needs a job</strong> is the worklist filter.</li>
@@ -220,7 +315,7 @@ major-version codenames drawn from The Smiths.</p>
 </ul>
 </li>
 </ul>
-<h3 id="fixed-8">Fixed</h3>
+<h3 id="fixed-9">Fixed</h3>
 <ul>
 <li><strong>The Duplicates filter no longer counts content you&#39;ve already dispositioned.</strong> Pages marked Kill or Exclude are left out of duplicate detection, so the filter is a worklist of duplicate content still needing a decision rather than a list that includes everything already dealt with.</li>
 <li><strong>Triage is undoable.</strong> Bulk triage actions now push a single undo entry covering every row they touched — one Cmd+Z, not one per page. Non-200 triage gained this too.</li>
@@ -229,7 +324,7 @@ major-version codenames drawn from The Smiths.</p>
 <li><strong>Non-Latin URL slugs are readable again.</strong> A section or auto-derived sitemap bucket taken from an encoded slug showed as <code>%E4%BA%A7%E5%93%81%E7%BA%BF</code> instead of <code>产品线</code>.</li>
 <li><strong>The Net New Content Brief no longer stalls on large sites.</strong> It re-scanned every audit row once for every node beneath every net-new section, so cost grew with pages × sitemap nodes. On a 6,000-page crawl with a 6,000-node sitemap that worked out to roughly 24 seconds of scanning; it now indexes rows by sitemap node once and produces the same report in well under a tenth of a second.</li>
 </ul>
-<h3 id="added-9">Added</h3>
+<h3 id="added-10">Added</h3>
 <ul>
 <li><strong>Audience tagging — the audience prioritization workshop is now a real input to the audit.</strong> Until now that ranking lived in a deck and never touched a row, so Keep/Kill/Evolve got argued on traffic and quality alone. A page can have respectable traffic, pass every rubric rule, and still serve nobody the client decided to invest in — that finding was previously unreachable.<ul>
 <li>Two new columns: <strong><code>Audiences</code></strong> (a chip input for every audience a page does real work for) and <strong><code>Primary_Audience</code></strong> (who it&#39;s mainly for — fills itself in when only one audience is tagged).</li>
@@ -252,22 +347,22 @@ major-version codenames drawn from The Smiths.</p>
 <li><strong>Color the Visual Sitemap and Treemap by Primary Audience</strong>, using each audience&#39;s own color. Audience columns also flow into the Migration Tracker&#39;s Source Pages sheet and the SME export — SMEs are frequently the only people who know who actually reads a page.</li>
 </ul>
 <h2 id="299--how-soon-is-now">[2.9.9] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="changed-5">Changed</h3>
+<h3 id="changed-6">Changed</h3>
 <ul>
 <li><strong>The synthetic &quot;site root&quot; box in the Visual Sitemap is now off by default.</strong> Sitemaps show your own top-level nodes as the roots, with no extra wrapper box above them. Turn it back on per project in Project Settings → Identity (&quot;Show a site root box in the Visual Sitemap&quot;) — and that choice now sticks. Note this affects existing projects: any that relied on the old default will no longer show the wrapper box until you re-enable it.</li>
 <li><strong>Turning off Page counts now gives a fully label-only Miro export.</strong> Previously the &quot;N pages&quot; tallies were dropped but collapsed sections kept a &quot;+N&quot; marker; now both are suppressed, so each exported card shows just the node&#39;s text. (Turn off <strong>Page counts</strong> in the sitemap toolbar before exporting.)</li>
 </ul>
-<h3 id="fixed-9">Fixed</h3>
+<h3 id="fixed-10">Fixed</h3>
 <ul>
 <li><strong>The &quot;Show a site root box&quot; setting is now preserved for .xlsx projects.</strong> Unchecking it and reopening the spreadsheet silently reverted it — boolean project settings weren&#39;t surviving the spreadsheet round-trip (a stored &quot;off&quot; read back as the text &quot;FALSE&quot; and was ignored). Booleans now round-trip correctly. (.transmission projects were already fine.)</li>
 </ul>
 <h2 id="298--how-soon-is-now">[2.9.8] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="changed-6">Changed</h3>
+<h3 id="changed-7">Changed</h3>
 <ul>
 <li><strong>The Visual Sitemap&#39;s Page counts toggle now applies to the Miro export.</strong> Turning <strong>Page counts</strong> off and exporting to Miro produces label-only cards, matching the in-app view and the HTML/PDF exports. Collapsed sections still carry their &quot;+N hidden&quot; marker — on a static board that&#39;s the only cue that content is folded beneath a card.</li>
 </ul>
 <h2 id="297--how-soon-is-now">[2.9.7] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-10">Added</h3>
+<h3 id="added-11">Added</h3>
 <ul>
 <li><strong>Hide page counts in the Visual Sitemap.</strong> A new <strong>Page counts</strong> toggle in the sitemap toolbar (next to <strong>Numbers</strong>) hides the per-card &quot;N pages&quot; tally so you can read the tree by its labels alone. The choice is remembered per project and rides along into the interactive HTML and PDF exports.</li>
 </ul>
@@ -275,19 +370,19 @@ major-version codenames drawn from The Smiths.</p>
 <p>The Miro sitemap export becomes usable against a real work account — where a
 login can see thousands of boards — and you can now control how the exported
 board looks.</p>
-<h3 id="added-11">Added</h3>
+<h3 id="added-12">Added</h3>
 <ul>
 <li><strong>Find any Miro board, however many you have.</strong> Exporting to Miro used to offer a fixed list of your 50 most-recent boards, which is unusable on a work account with thousands. The export dialog now <strong>searches your boards by name</strong> (the search runs on Miro&#39;s side, so it reaches every board, not just a recent handful), lets you <strong>paste a board link or ID</strong> to land on one exact board, and — once you&#39;ve exported a project — offers a one-click <strong>&quot;Export again to <em>that board</em>&quot;</strong>. That last one is remembered by the board&#39;s Miro <strong>ID</strong>, not its name, so it still finds the board after you rename it (a board created &quot;Untitled&quot; and named later resolves to its real name).</li>
 <li><strong>Control the look of the exported board.</strong> A new <strong>Appearance</strong> section in the export dialog sets the <strong>connector style</strong> (right-angle, curved, or straight), the <strong>card corners</strong> (rounded or square), the <strong>border thickness</strong>, and whether to include a <strong>color key</strong> — a legend, built from your color rules, that tells a client what each color means. Every choice is remembered per project.</li>
 <li><strong>Including collapsed sections is now opt-in.</strong> The &quot;Include them&quot; option defaults off, so collapsed sections export as a compact stacked block unless you ask for the whole tree.</li>
 </ul>
-<h3 id="fixed-10">Fixed</h3>
+<h3 id="fixed-11">Fixed</h3>
 <ul>
 <li><strong>The Miro export no longer fails with &quot;invalid parameters&quot; on long page names.</strong> An attempt to shrink long labels to fit the card sent Miro a font size below its minimum, which it rejects outright — so any sitemap with a long page title failed to export entirely. Labels are kept in full at a readable size and Miro fits them to the card.</li>
 <li><strong>Connectors route around the cards, not through them.</strong> In a vertical column, connector lines now run down the gutter beside the stack (matching the app&#39;s own sitemap) instead of straight through the boxes between a parent and its lower children.</li>
 <li><strong>Card borders export at a visible weight.</strong> A fractional border width rendered hair-thin on the board and left Miro&#39;s own thickness slider without a handle; it&#39;s now a clean whole number.</li>
 </ul>
-<h3 id="changed-7">Changed</h3>
+<h3 id="changed-8">Changed</h3>
 <ul>
 <li><strong>The export dialog&#39;s controls are tidier.</strong> The Appearance dropdowns sit in an aligned grid and are styled to match the rest of the app in both light and dark themes.</li>
 <li><strong>The Visual Sitemap toolbar wraps instead of scrolling.</strong> On a narrow window it flows its controls onto a second row rather than hiding the export buttons off the right edge.</li>
@@ -295,7 +390,7 @@ board looks.</p>
 </ul>
 <h2 id="282--how-soon-is-now">[2.8.2] — &quot;How Soon Is Now?&quot;</h2>
 <p>Three Visual Sitemap interaction fixes.</p>
-<h3 id="fixed-11">Fixed</h3>
+<h3 id="fixed-12">Fixed</h3>
 <ul>
 <li><strong>Collapsing a branch is now the +/− button only.</strong> Collapse/expand was bound to the whole card, so an errant click while reaching for right-click → <strong>Set color</strong> would hide the entire subtree you were trying to colour. Only the +/− toggles now; the card body does nothing. The +/− is a little larger with its own hover state.</li>
 <li><strong>The node colour picker no longer closes the moment you drag a slider.</strong> Right-click → <strong>Set color</strong> opens the OS colour panel; adjusting it used to tear the menu (and the panel with it) down on the first change. It now previews live, stays open while you fine-tune, and commits when you dismiss the panel.</li>
@@ -303,14 +398,14 @@ board looks.</p>
 </ul>
 <h2 id="281--how-soon-is-now">[2.8.1] — &quot;How Soon Is Now?&quot;</h2>
 <p>A packaging fix for 2.8.0.</p>
-<h3 id="fixed-12">Fixed</h3>
+<h3 id="fixed-13">Fixed</h3>
 <ul>
 <li><strong>2.8.0 crashed on launch</strong> with &quot;Cannot find module &#39;./miro&#39;.&quot; The packaged build&#39;s file allowlist named each top-level source file individually, and the new <code>miro.js</code> module (added for the Miro export) wasn&#39;t on the list, so it was left out of the app bundle — the app ran correctly in development, where files load straight from disk, but not once packaged. The allowlist now includes every top-level module, so this class of omission can&#39;t recur. No behaviour changes; if 2.8.0 launched for you, nothing else is different.</li>
 </ul>
 <h2 id="280--how-soon-is-now">[2.8.0] — &quot;How Soon Is Now?&quot;</h2>
 <p>The Visual Sitemap can now be pushed to a Miro board as real, editable shapes, and
 the colour rules behind it were rebuilt to encode anything in your audit.</p>
-<h3 id="added-12">Added</h3>
+<h3 id="added-13">Added</h3>
 <ul>
 <li><strong>Export the Visual Sitemap to Miro.</strong> The sitemap toolbar gains <strong>Export to Miro</strong> alongside Export HTML and Export PDF. It creates a frame, one Miro shape per page positioned exactly where it sits in the app, and a connector for every parent→child link — carrying the colours and line styles from your colour rules. These are real Miro items, not a flat picture, so a client can move them around in a workshop. About 400 pages plus 400 connectors takes roughly a minute, with a progress bar and a Cancel button; Miro&#39;s own rate limits are the floor there, not the export.</li>
 <li><strong>One-click Miro connection.</strong> App Settings → Miro → <strong>Connect to Miro</strong> opens your browser, you authorise Transmission and choose which Miro team to connect, and you&#39;re done. The token is stored encrypted in the OS keychain — deliberately not in the ordinary preferences file — and is never readable by the app&#39;s interface layer. An <strong>Advanced</strong> option remains for anyone who would rather paste a token from their own Miro app, which also covers the case where the connection service is unreachable.</li>
@@ -321,39 +416,39 @@ the colour rules behind it were rebuilt to encode anything in your audit.</p>
 <li><strong>Line style per rule</strong> (solid, dashed, dotted), plus <strong>corner radius</strong> and <strong>inner padding</strong> in the Layout tab.</li>
 <li><strong>Collapsed sections are surfaced, not silently dropped.</strong> Exporting with sections collapsed used to omit those pages without saying so. The export dialog now reports how many pages are hidden and offers to include them (on by default); sections left collapsed export as a stacked block labelled with either the hidden page count or a &quot;+&quot;.</li>
 </ul>
-<h3 id="fixed-13">Fixed</h3>
+<h3 id="fixed-14">Fixed</h3>
 <ul>
 <li><strong>Long page names no longer spill outside their card in the Visual Sitemap.</strong> Cards had no overflow boundary, so a name too tall for the box escaped it instead of clipping. Names now clip cleanly, the full name is available on hover, and the default card height fits a two-line name alongside the number and page count.</li>
 </ul>
-<h3 id="changed-8">Changed</h3>
+<h3 id="changed-9">Changed</h3>
 <ul>
 <li>The nav sitemap now defaults to colouring <strong>by depth</strong>. Colouring by top-level section keys on the tree&#39;s top-level children, so a site whose pages all hang off a single root node came out effectively one colour. Depth always has something to say. Either can be chosen in Settings → Colors.</li>
 </ul>
 <h2 id="272--how-soon-is-now">[2.7.2] — &quot;How Soon Is Now?&quot;</h2>
 <p>Two Sitemap-editor undo/redo correctness fixes.</p>
-<h3 id="fixed-14">Fixed</h3>
+<h3 id="fixed-15">Fixed</h3>
 <ul>
 <li><strong>Undoing a Sitemap-node deletion now fully restores the rest of the tree.</strong> Deleting a node renumbers the nodes that come after it; undoing brought the deleted node back but left the pages assigned to those renumbered nodes showing stale sort positions, paths, and breadcrumbs. Undo now re-syncs every affected page, so it&#39;s a true round-trip.</li>
 <li><strong>Redoing a node deletion now repeats what the delete actually did with its pages.</strong> If you deleted a node and sent its pages to the parent (or to another node), then undid, redoing had <em>cleared</em> those pages instead of re-sending them. Redo now reapplies the original choice — and safely falls back to clearing only if the chosen destination no longer exists.</li>
 </ul>
 <h2 id="271--how-soon-is-now">[2.7.1] — &quot;How Soon Is Now?&quot;</h2>
 <p>A small follow-up to 2.7.0 with three Sitemap-editor fixes.</p>
-<h3 id="fixed-15">Fixed</h3>
+<h3 id="fixed-16">Fixed</h3>
 <ul>
 <li><strong>The bulk-delete confirmation now reports the real number of nodes it will remove.</strong> It had counted only the top-level branches in your selection, so deleting a whole nested selection could say &quot;Delete 20 nodes&quot; while ~1,500 actually disappeared. The count now includes the selected branches and everything beneath them (with a note explaining the difference), matching the page count shown beside it.</li>
 <li><strong>The &quot;select all&quot; checkbox in the Sitemap editor no longer stays checked after the selection is cleared</strong> — for example, right after a bulk delete has emptied it.</li>
 </ul>
-<h3 id="changed-9">Changed</h3>
+<h3 id="changed-10">Changed</h3>
 <ul>
 <li><strong>&quot;Delete selected&quot; is much faster on large sitemaps.</strong> It used to recompute the entire tree and re-cascade to every row once <em>per deleted node</em>; it now does that once for the whole batch. On a ~580-node / 4,000-row sitemap, deleting 200 nodes dropped from about 1.9 s to ~70 ms, with byte-identical results.</li>
 </ul>
 <h2 id="270--how-soon-is-now">[2.7.0] — &quot;How Soon Is Now?&quot;</h2>
 <p>A correctness, performance, and polish release from a codebase-wide review sweep — two dozen fixes across the reports, exports, audit bar, and sitemap tools, plus one restored feature. Every change was verified in the running app.</p>
-<h3 id="added-13">Added</h3>
+<h3 id="added-14">Added</h3>
 <ul>
 <li><strong>The redirect indicator is back in the audit bar.</strong> When the selected page has a redirect destination, a small amber badge in the <strong>Decide</strong> cluster shows where it points (<code>↪ /new-path</code>, full URL on hover) — click it to open that page in the Redirect Editor, or the <strong>×</strong> to clear the destination. An intentional <code>404</code> shows as a <code>404</code> badge. This per-page affordance had been lost when the Redirects button moved to the view switcher; the sidebar&#39;s <strong>R</strong> dot only told you <em>that</em> a page redirected, not where.</li>
 </ul>
-<h3 id="fixed-16">Fixed</h3>
+<h3 id="fixed-17">Fixed</h3>
 <ul>
 <li><strong>Reports no longer drop &quot;rogue&quot; KKE values.</strong> A page whose KKE is a typo, or a custom state that was later removed, was silently omitted from the Progress dashboard&#39;s reviewed count and from the Content Inventory report&#39;s per-section tallies — so a section&#39;s bar could visibly under-total against its own page count, and the dashboard could disagree with the sidebar&#39;s own reviewed percentage. Both now count every decision under its own label.</li>
 <li><strong>Client-facing exports no longer leak internal columns.</strong> The <strong>Client Export</strong> and <strong>Filtered Rows</strong> exports were including <code>_</code>-prefixed engine columns — the internal consolidation-target ID, raw AI-assessment output — in spreadsheets meant for clients. They now exclude them, matching every other surface.</li>
@@ -370,7 +465,7 @@ the colour rules behind it were rebuilt to encode anything in your audit.</p>
 <li><strong>The SME split-by-owner export matches the single-file export.</strong> Both now share one builder, so they can&#39;t drift — the multi-file copy had picked up terser validation messages.</li>
 <li><strong>Smaller fixes:</strong> a no-match filter no longer strands a giant empty scroll region under the &quot;no rows&quot; message; canceling a progress-report PDF export no longer shows a spurious &quot;failed&quot; error, and that export window no longer leaks on a failed render.</li>
 </ul>
-<h3 id="changed-10">Changed</h3>
+<h3 id="changed-11">Changed</h3>
 <ul>
 <li><strong>Noticeably faster on large crawls.</strong> Several operations that scaled poorly were re-worked and measured at the app&#39;s ~4,000-row / ~500-node design target:<ul>
 <li>Bulk <strong>Assign to Sitemap</strong> no longer freezes for several seconds while computing suggested destinations — on 1,000 unplaced pages, roughly seven seconds down to a few milliseconds. This was worst exactly when the sitemap was still empty, which is when you&#39;d use it.</li>
@@ -381,12 +476,12 @@ the colour rules behind it were rebuilt to encode anything in your audit.</p>
 </li>
 </ul>
 <h2 id="264--how-soon-is-now">[2.6.4] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-14">Added</h3>
+<h3 id="added-15">Added</h3>
 <ul>
 <li><strong>KKE gate + placement modes for bulk sitemap assignment.</strong> The sidebar&#39;s &quot;Assign to Sitemap&quot; bulk action now defaults to Keep/Evolve pages only (mirroring Create Sitemap from Audit), with an &quot;include Kill/Exclude/unreviewed pages too&quot; opt-in for building a full current-state snapshot — plus one batched confirmation before sweeping in Consolidate pages, since those merge into another page&#39;s URL rather than getting their own. A new placement choice lets you preserve each page&#39;s URL structure as nested sections instead of always flattening into direct children.</li>
 <li><strong>Bulk multi-select and delete in the Sitemap editor, with undo.</strong> Every tree row now has a checkbox (plain click, shift-click range-select, select-all, and a new &quot;Select Empty Branches&quot; shortcut for finding dead sections after later killing/consolidating pages). Bulk delete covers the whole selection in one confirmation, and — like every other sitemap edit — a single Cmd+Z reverses the entire batch. Single-node delete (the tree row&#39;s ✕, the node editor&#39;s own Delete button, and the &quot;clear assignment + delete now-empty node&quot; flow) is now undoable too, having been folded into the same shared delete path.</li>
 </ul>
-<h3 id="fixed-17">Fixed</h3>
+<h3 id="fixed-18">Fixed</h3>
 <ul>
 <li><strong>Filter state could leak between files on open.</strong> The &quot;Unclassified&quot; toolbar button, the KKE filter, and the group filter could all inherit stale state from whichever file was previously open, occasionally leaving a filter showing &quot;active&quot; with nothing actually filtered.</li>
 <li><strong>Sidebar page thumbnails could silently never appear.</strong> The hover-preview cache was keyed by the webview&#39;s resolved URL after a page finished loading, but looked up by the row&#39;s declared crawl Address — any redirect, trailing-slash normalization, or protocol upgrade (common in Screaming Frog exports) meant the thumbnail was cached under a key the lookup never checked.</li>
@@ -409,7 +504,7 @@ the colour rules behind it were rebuilt to encode anything in your audit.</p>
 <li><strong>Undoing a KKE decision didn&#39;t record the reversal in the audit trail</strong>, so the exported change log could permanently disagree with the actual data after a Cmd+Z.</li>
 </ul>
 <h2 id="263--how-soon-is-now">[2.6.3] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="fixed-18">Fixed</h3>
+<h3 id="fixed-19">Fixed</h3>
 <ul>
 <li><strong>Redirect destinations could disagree between the Redirect Editor and the exported CSV.</strong> Redirect resolution was implemented three separate times and had drifted: the editor&#39;s live preview did a one-hop lookup instead of following full Consolidate chains and didn&#39;t carry through the <code>404</code> sentinel, and the CSV export had no Consolidate handling at all (silently dropping consolidation redirects) while shipping literal <code>404,301</code> rows for intentional deindexes. All three now share one resolver, and SME-resolved Kill/Consolidate decisions (<code>Final_KKE</code>) are correctly picked up everywhere a redirect is derived.</li>
 <li><strong>Batch AI/rubric assessment silently overwrote human KKE decisions with no audit trail or undo.</strong> Running a batch Assess now only writes to the AI&#39;s own suggestion field, matching how the equivalent &quot;AI Suggest for Unreviewed&quot; already behaved — your own KKE calls are never silently replaced. The per-row &quot;Accept suggestion&quot; button also now logs the change and supports Undo like every other KKE edit.</li>
@@ -422,12 +517,12 @@ the colour rules behind it were rebuilt to encode anything in your audit.</p>
 <li><strong>Zeroing out a Suggested_KKE source&#39;s weight (to disable it) didn&#39;t actually disable it.</strong> A weight of exactly 0 was silently treated as the default weight instead — so a disabled source could still win a tied disagreement.</li>
 <li><strong>A sitemap section that&#39;s also itself a page could disappear from the Treemap.</strong> A node that&#39;s both a container (has sub-pages) and directly assigned its own page — the normal shape for a section landing page — now gets its own visible box for its own page(s), instead of that page&#39;s share of the section being silently absorbed into its children&#39;s boxes.</li>
 </ul>
-<h3 id="changed-11">Changed</h3>
+<h3 id="changed-12">Changed</h3>
 <ul>
 <li><strong>Faster autosave on large <code>.transmission</code> projects.</strong> Autosave now only rewrites rows that actually changed instead of the entire table on every save — most noticeable on multi-thousand-row projects, where a single-cell edit no longer re-writes the whole inventory.</li>
 </ul>
 <h2 id="262--how-soon-is-now">[2.6.2] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-15">Added</h3>
+<h3 id="added-16">Added</h3>
 <ul>
 <li><strong>Suggested destination in bulk sitemap assignment.</strong> The Multi-bar&#39;s
 Assign to Sitemap… dialog now offers a one-click <strong>Suggested</strong> node when
@@ -438,7 +533,7 @@ picker uses, extended to the whole batch, with a count of how many pages
 agree.</li>
 </ul>
 <h2 id="261--how-soon-is-now">[2.6.1] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="fixed-19">Fixed</h3>
+<h3 id="fixed-20">Fixed</h3>
 <ul>
 <li><strong>Sidebar row list could get stuck truncated after using a full-width
 view.</strong> The virtual-scrolled row list sizes itself off the sidebar
@@ -452,7 +547,7 @@ while hidden and always repaints fresh the moment the Audit view is shown
 again.</li>
 </ul>
 <h2 id="260--how-soon-is-now">[2.6.0] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-16">Added</h3>
+<h3 id="added-17">Added</h3>
 <ul>
 <li><strong>&quot;External link&quot; Visual Sitemap color rule.</strong> A new color-rule condition
 matches nodes that point off-site (a nav node with an external URL, or a
@@ -501,13 +596,13 @@ audit and migration tracker like any other page. The banner also points
 at the Build section&#39;s Page Status field for tracking &quot;Not Started&quot; →
 &quot;In Progress&quot; before it&#39;s promoted.</li>
 </ul>
-<h3 id="changed-12">Changed</h3>
+<h3 id="changed-13">Changed</h3>
 <ul>
 <li>The Menus view&#39;s item toolbar (<strong>+ Page / + Link / + Header / Duplicate
 menu / Delete menu</strong>) now stays pinned to the top of the panel while
 scrolling a long menu.</li>
 </ul>
-<h3 id="fixed-20">Fixed</h3>
+<h3 id="fixed-21">Fixed</h3>
 <ul>
 <li><strong>SME Review workflow only recognized the exact <code>Change: X</code> format.</strong> A
 bare status value with no prefix (e.g. an SME just typing <code>Kill</code> instead of
@@ -537,7 +632,7 @@ making one item appear to float unattached. Node ids in this diagram are
 now namespaced per menu.</li>
 </ul>
 <h2 id="253--how-soon-is-now">[2.5.3] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-17">Added</h3>
+<h3 id="added-18">Added</h3>
 <ul>
 <li><strong>Duplicate Consolidate-destination guard.</strong> Setting a page to Keep/Evolve
 when another page already targets the same Sitemap node now offers to
@@ -553,14 +648,14 @@ testing a different mega-menu structure) without touching the original.
 The copy is selected immediately and pre-picked in the Export dialog&#39;s
 &quot;just this menu&quot; scope.</li>
 </ul>
-<h3 id="changed-13">Changed</h3>
+<h3 id="changed-14">Changed</h3>
 <ul>
 <li><strong>Nav → Sitemap rename finished</strong> across the UI, exports, and docs — the
 remaining <code>Nav_*</code> audit/export columns are renamed to <code>Sitemap_*</code> for
 clients (e.g. <code>Sitemap_Destination</code>, <code>Sitemap_ID</code>, <code>Sitemap_SortID</code>).</li>
 </ul>
 <h2 id="252--how-soon-is-now">[2.5.2] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-18">Added</h3>
+<h3 id="added-19">Added</h3>
 <ul>
 <li><strong>Visual Sitemap site-root toggle</strong> — a &quot;Show a site root box in the Visual
 Sitemap&quot; setting (Project Settings → Identity) suppresses the synthetic
@@ -568,7 +663,7 @@ site-root box; when off, the sitemap&#39;s own top-level node(s) become the
 root(s) instead, so single- and multi-section sites both lay out cleanly.</li>
 </ul>
 <h2 id="251--how-soon-is-now">[2.5.1] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="added-19">Added</h3>
+<h3 id="added-20">Added</h3>
 <ul>
 <li><strong><code>Page_Breadcrumb</code> audit column</strong> — the derived on-page breadcrumb for a
 row&#39;s assigned sitemap node, honoring the breadcrumb-parent override axis
@@ -579,7 +674,7 @@ physical IA label chain). Read-only; shown in Table View by default.</li>
 <p>A &quot;content cockpit&quot; release: the Visual Sitemap is rewritten from the ground
 up as a self-contained engine, consolidation gets a sturdier data model, and
 the audit bar gains direct sitemap assignment and dark mode.</p>
-<h3 id="added-20">Added</h3>
+<h3 id="added-21">Added</h3>
 <ul>
 <li><strong>Visual Sitemap rewritten as a self-contained engine.</strong> The
 D3-in-a-hidden-window renderer is retired; one portable engine
@@ -597,14 +692,14 @@ URL override.</li>
 or Consolidated away.</li>
 <li><strong>Dark mode</strong> for the app chrome.</li>
 </ul>
-<h3 id="changed-14">Changed</h3>
+<h3 id="changed-15">Changed</h3>
 <ul>
 <li>The Sitemap is reframed as <strong>content organization</strong>, decoupled from URL and
 breadcrumb; pages can now be assigned to a sitemap node directly from the
 audit bar.</li>
 </ul>
 <h2 id="241--how-soon-is-now">[2.4.1] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="changed-15">Changed</h3>
+<h3 id="changed-16">Changed</h3>
 <ul>
 <li><strong>The nav &quot;IA Report&quot; became the Menu Report.</strong> The polished section-card +
 tree report is now fed by the independent <strong>menus</strong> rather than <code>inMenu</code>-filtered
@@ -617,7 +712,7 @@ This retires the lingering <code>inMenu</code>-vs-report question.</li>
 <h2 id="240--how-soon-is-now">[2.4.0] — &quot;How Soon Is Now?&quot;</h2>
 <p>A visualization-focused release: the sitemaps gain layouts, palettes, and
 collapse, and the Nav Tree sitemap is reframed as the content-IA &quot;Visual Sitemap.&quot;</p>
-<h3 id="added-21">Added</h3>
+<h3 id="added-22">Added</h3>
 <ul>
 <li><strong>Sitemap layouts</strong> (both sitemaps) — <strong>Outline</strong>, <strong>Top-down tree</strong>, and
 <strong>Mega columns</strong> (sections fan into side-by-side columns, items stacked beneath).</li>
@@ -630,7 +725,7 @@ single box with a &quot;has more underneath&quot; stack, and a <strong>Levels</s
 the visible depth — built for large (1000+ node) trees.</li>
 <li><strong>Seed from content tree</strong> (Menus) reworked into a pick-a-branch + depth dialog.</li>
 </ul>
-<h3 id="changed-16">Changed</h3>
+<h3 id="changed-17">Changed</h3>
 <ul>
 <li>The <strong>Nav Tree → Sitemap</strong> is now the <strong>Visual Sitemap</strong> of the content IA:
 retitled, the &quot;Menu items only&quot; toggle removed, and the border now encodes
@@ -638,7 +733,7 @@ build phase (solid = current build, dashed = phased).</li>
 <li>The legacy per-node <strong>In-menu</strong> controls (checkbox, Set/Clear Menu, node-editor
 toggle) are <strong>repurposed to Collapse</strong>. <code>inMenu</code> data still round-trips.</li>
 </ul>
-<h3 id="fixed-21">Fixed</h3>
+<h3 id="fixed-22">Fixed</h3>
 <ul>
 <li>Per-menu sitemap rendered every card with the last menu&#39;s tree (concurrent
 renders clobbered a shared temp file) — temp files are now unique per call.</li>
@@ -646,7 +741,7 @@ renders clobbered a shared temp file) — temp files are now unique per call.</l
 <h2 id="230--how-soon-is-now">[2.3.0] — &quot;How Soon Is Now?&quot;</h2>
 <p>Decouples the navigation tree&#39;s four overloaded jobs into independent axes and
 builds out an independent menu subsystem.</p>
-<h3 id="added-22">Added</h3>
+<h3 id="added-23">Added</h3>
 <ul>
 <li><strong>URL override</strong> (<code>Url_Path</code>) — a nav node can publish at an address independent
 of its place in the menu; the override re-roots its sub-pages too. Containment and
@@ -668,7 +763,7 @@ re-pick / remove.</li>
 <li><strong>Per-menu sitemap</strong> — each menu rendered as a box-tree (items colored by kind), with
 zoom/pan and per-menu SVG download.</li>
 </ul>
-<h3 id="changed-17">Changed</h3>
+<h3 id="changed-18">Changed</h3>
 <ul>
 <li><strong>Nav node editor</strong> reorganized into labeled, color-pilled sections (Context /
 Identity / Addressing &amp; breadcrumb / Notes / Build / Write / Migrate) for scannability.</li>
@@ -681,7 +776,7 @@ one clean indicator style.</li>
 hides the sidebar). Assign pages via the audit-bar <strong>Nav</strong> button.</li>
 </ul>
 <h2 id="220--how-soon-is-now">[2.2.0] — &quot;How Soon Is Now?&quot;</h2>
-<h3 id="changed-18">Changed</h3>
+<h3 id="changed-19">Changed</h3>
 <ul>
 <li><strong>Renamed</strong> the product from &quot;KKE Audit Tool&quot; to <strong>Transmission</strong> (a Joy Division
 song; version codenames remain Smiths titles). The <strong>KKE</strong> methodology and all
@@ -696,7 +791,7 @@ stub. Untouched stubs aren&#39;t persisted.</li>
 lifecycle-spined manual; a set of terse <code>walkthroughs/</code> added as standalone
 checklists; <code>help.html</code> restructured to match. All docs moved under <code>docs/</code>.</li>
 </ul>
-<h3 id="added-23">Added</h3>
+<h3 id="added-24">Added</h3>
 <ul>
 <li><strong>Report template engine</strong> (Markdown + Mustache) for the Migration Direction Brief.</li>
 <li><strong>Migration Direction Brief</strong> report covering three roles — Writer, Builder, and

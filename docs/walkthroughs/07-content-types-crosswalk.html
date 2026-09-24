@@ -59,7 +59,7 @@
 <p>Three linked attributes describe a page&#39;s migration shape:</p>
 <ul>
 <li><strong>Content Type</strong> — what the page <em>is</em> in the current CMS (Article, Faculty Profile, Landing Page…). This is the <strong>key</strong>.</li>
-<li><strong>Renders as</strong> — how it will <em>surface</em> in the new CMS: <strong>Page</strong>, <strong>Fragment (embeddable)</strong>, or <strong>Generated</strong>.</li>
+<li><strong>Renders as</strong> — how it will <em>surface</em> in the new CMS: <strong>Page</strong>, <strong>Record (own page)</strong> (a structured entry such as a news post that still has its URL), <strong>Fragment (embeddable, no URL)</strong>, or <strong>Generated</strong>.</li>
 <li><strong>Target Content Type</strong> — what it maps <em>to</em> in the new system.</li>
 </ul>
 <p>The <strong>Content Type Registry</strong> is the <strong>crosswalk</strong> that connects them. Define the mapping <strong>once per content type</strong> there, and every page of that type inherits its defaults — non-destructively, so your hand-entered values are never overwritten.</p>
@@ -85,7 +85,7 @@
 </tr>
 <tr>
 <td><strong>Renders as</strong></td>
-<td>default Page / Fragment (embeddable) / Generated</td>
+<td>default Page / Record / Fragment / Generated</td>
 </tr>
 <tr>
 <td><strong>Target Content Type</strong></td>
@@ -113,7 +113,7 @@
 <li>The <strong>Migrate</strong> cluster shows <strong>Renders as</strong> and <strong>Track</strong>, plus a <strong>ghost suggestion</strong> next to Track when it&#39;s blank (derived from KKE + Renders as) — click to accept.</li>
 </ul>
 <blockquote>
-<p><strong>Renders as = Fragment (embeddable)</strong> (stored <code>Content Object</code>) marks content with no public URL — it&#39;s skipped in redirects and sitemap coverage downstream.</p>
+<p><strong>Renders as = Fragment (embeddable, no URL)</strong> marks content with no public URL — it&#39;s skipped in redirects and sitemap coverage downstream. A news post, event or profile migrated as a structured record is <strong>Record</strong>, not Fragment: it still has a page and needs a redirect.</p>
 </blockquote>
 <hr>
 <h2 id="4-verify-coverage">4. Verify coverage</h2>

@@ -210,7 +210,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <h4 id="identity">Identity</h4>
 <ul>
 <li><strong>Client name</strong> and <strong>Project name</strong> — shown in the progress dashboard and on exported reports.</li>
-<li><strong>Site domain</strong> — the canonical domain for redirect and navigation paths. It overrides the domain auto-detected from your URLs. If you change it later, Transmission offers to rewrite any existing redirects that used the old domain.</li>
+<li><strong>Site domain</strong> — the canonical domain for redirect and navigation paths: <strong>one</strong> URL, the domain the new site will live on (e.g. <code>https://business.example.edu</code>, optionally with a path). On a consolidation, don&#39;t list the source sites here — every redirect is built by putting a page&#39;s path after this value, so <code>https://a.edu; https://b.edu</code> produces destinations like <code>https://a.edu; https://b.edu/about</code>. The field refuses anything that isn&#39;t a single URL, and Transmission warns on open if a saved value isn&#39;t usable. It overrides the domain auto-detected from your URLs. If you change it later, existing redirects built on the old value are rewritten to the new one when you leave the field.</li>
 <li><strong>Default redirect destination</strong> — the fallback for Kill pages that don&#39;t have their own redirect. Change it and Transmission offers to update existing destinations that matched the old value (including blank ones).</li>
 </ul>
 <h4 id="kke-states">KKE States</h4>
@@ -416,9 +416,10 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p>For anything the built-in filters don&#39;t cover, click <strong>+ Field filter</strong> and build your own:</p>
 <ol>
 <li>Pick a <strong>field</strong> (any column in your spreadsheet).</li>
-<li>Pick an <strong>operator</strong>: <code>is blank</code>, <code>is not blank</code>, <code>contains</code>, <code>doesn&#39;t contain</code>, <code>equals</code>, <code>doesn&#39;t equal</code>, <code>starts with</code>, or <code>ends with</code>.</li>
+<li>Pick an <strong>operator</strong>: <code>is blank</code>, <code>is not blank</code>, <code>contains</code>, <code>doesn&#39;t contain</code>, <code>equals</code>, <code>doesn&#39;t equal</code>, <code>starts with</code>, <code>ends with</code>, <code>is greater than</code>, or <code>is less than</code>.</li>
 <li>Enter a <strong>value</strong> and click <strong>Apply</strong>.</li>
 </ol>
+<p><code>is greater than</code> and <code>is less than</code> are for the numeric columns a crawl is full of — word count, status code, response time, inlinks, GA sessions. They compare as <strong>numbers</strong> whenever both the cell and your value are numeric (<code>1,234</code> is fine), so <code>Word Count is less than 300</code> finds thin pages without <code>900</code> sorting above <code>1,000</code> the way a text comparison would. Give either side something non-numeric and they fall back to comparing character by character in ASCII order — usable for text if you know that ordering, where uppercase sorts before lowercase. Blank cells match neither direction: blank means <em>unreviewed</em>, not zero.</p>
 <p>Each filter becomes a removable chip, and you can stack several (they AND together). The <strong>Unclassified</strong> button is a one-click shortcut for the common case <code>Content Nature is blank</code>.</p>
 <h3 id="save-a-filter-for-next-time">Save a filter for next time</h3>
 <p>Built a slice you&#39;ll want again? Open <strong>Saved filters…</strong> and choose <strong>+ Save current filter…</strong>. The saved bundle remembers the search text and scope, the KKE selection, the group, and every field filter — all together. Manage your saved filters in <strong>Project Settings → Saved Filters</strong>.</p>
@@ -465,7 +466,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p>If you&#39;ve both selected rows and applied a filter, your <strong>selection wins</strong>.</p>
 <h3 id="apply-an-action">Apply an action</h3>
 <ol>
-<li>Pick an <strong>Action</strong> — Set KKE, Set Published Status, Set Content Type, Set Content Theme, Set Group, Set Primary Tag, Add Tag, or <strong>Assign to Sitemap…</strong>.</li>
+<li>Pick an <strong>Action</strong> — Set KKE, Set Published Status, Set Content Type, Set Content Theme, Set Group, Set Primary Tag, Add Tag, <strong>Assign to Sitemap…</strong>, or <strong>⚠ Delete rows permanently…</strong>.</li>
 <li>Choose the <strong>value</strong> (every list except <em>Add Tag</em> offers a <code>— Clear</code> option at the top, so bulk-clearing a field is easy).</li>
 <li>Click <strong>Apply</strong>. Every change is written to the audit trail.</li>
 </ol>
@@ -473,6 +474,23 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <blockquote>
 <p><strong>Heads-up:</strong> bulk-setting <strong>Kill</strong> on pages that already have a sitemap assignment or redirect triggers the same cleanup prompt as a single Kill — so you decide whether to clear those too, rather than leaving redirects pointing nowhere.</p>
 </blockquote>
+<h3 id="deleting-rows-for-good">Deleting rows for good</h3>
+<p>Almost nothing in Transmission destroys data — your crawl is preserved column-for-column from import to export. <strong>⚠ Delete rows permanently…</strong> is the exception, and it exists for one narrow case: rows that were never pages. A stray export appended to the file, a merge that doubled a section, a handful of junk lines that arrived with the spreadsheet. Without it the only remedy is Excel, which costs you the audit columns and the change log.</p>
+<p><strong>Use <code>Exclude</code>, not deletion, for anything that is a real URL.</strong> Exclude says &quot;this was in the crawl and isn&#39;t part of my inventory&quot; — it keeps the row, keeps its history, and keeps it out of every report. Deletion says the row should never have existed. If you might want to explain the decision later, you want Exclude.</p>
+<p>Before it does anything, the dialog tells you what the deletion <strong>breaks</strong>:</p>
+<ul>
+<li>pages that <strong>consolidate into</strong> one you&#39;re deleting, which would be left pointing at nothing</li>
+<li>how many of the doomed rows carry a <strong>KKE decision</strong> — reviewed work, as distinct from crawl noise</li>
+<li>how many are <strong>placed on the sitemap</strong>, or carry a <strong>redirect destination</strong> that will drop out of the redirect map</li>
+</ul>
+<p>Then it asks you to type <code>PERMANENTLY DELETE</code>. The Delete button stays greyed out until you do.</p>
+<p>Two things worth knowing before you commit:</p>
+<ul>
+<li><strong>It cannot be undone, and it clears your undo history for the session.</strong> That second part isn&#39;t caution for its own sake — every undo entry refers to a row <em>by position</em>, and removing rows moves everything below them. Keeping the history would mean a later Cmd+Z quietly writing an old value into the wrong page. Dropping it is the safe answer.</li>
+<li><strong>Each deleted row is written to the change log</strong>, with its URL. The removal is part of the audit trail even though the row isn&#39;t.</li>
+</ul>
+<p><strong>There is no close-without-saving escape.</strong> Autosave runs a couple of seconds after any change — sooner on a <code>.transmission</code> project than on a spreadsheet — so a deletion is on disk almost immediately. Don&#39;t rely on quitting to undo it.</p>
+<p>If you do need to recover, a <code>.transmission</code> project writes a backup into the app&#39;s <code>backups</code> folder <strong>each time it is opened</strong>, so the fallback is the state of the project when you opened it this session — everything since is lost. That is a genuinely bad day, which is why the confirmation is what it is. Spreadsheets have no such backup.</p>
 <h3 id="placing-many-pages-on-the-sitemap-at-once">Placing many pages on the sitemap at once</h3>
 <p><strong>Assign to Sitemap…</strong> works differently from the other bulk actions — there&#39;s no value to pick, just <strong>Apply</strong>, which opens a small dialog.</p>
 <p>By default only <strong>Keep</strong> and <strong>Evolve</strong> pages are eligible (checking <code>Final_KKE</code> first if it&#39;s set, otherwise <code>KKE_Recommendation</code> — so an SME override wins). Everything else — Kill, Exclude, unreviewed, and Consolidate — is left off the sitemap unless you check <strong>Include Kill / Exclude / unreviewed pages too</strong>. This matters most when building a <strong>current-state sitemap</strong> for a client conversation (see below) — that&#39;s the one routine case where you <em>do</em> want everything represented, killed pages included. Even with that box checked, Consolidate pages get one more speed bump: if any are in the batch, a follow-up prompt asks you to confirm including them, since a Consolidate page is being merged into another page&#39;s URL rather than getting a destination of its own — easy to sweep in by accident.</p>
@@ -512,6 +530,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <h3 id="quick-self-check-4">Quick self-check</h3>
 <ul>
 <li><input disabled="" type="checkbox"> The Multi-bar&#39;s label confirms the right target (<strong>selected</strong> vs <strong>filtered</strong>) before you Apply</li>
+<li><input disabled="" type="checkbox"> Anything you&#39;re tempted to delete is genuinely not a page — a real URL you aren&#39;t auditing is an <code>Exclude</code></li>
 <li><input disabled="" type="checkbox"> You&#39;ve spot-checked a couple of rows in the filtered set</li>
 <li><input disabled="" type="checkbox"> Any Kill-cleanup prompt was handled the way you intended</li>
 <li><input disabled="" type="checkbox"> You used batch scoring for <em>suggestions</em>, and set KKE by hand where judgment matters</li>
@@ -661,7 +680,7 @@ Alumni	Secondary	Graduates staying connected
 <p>Migration asks two genuinely different things about a page, and Transmission keeps them apart on purpose:</p>
 <ul>
 <li><strong>What is it?</strong> Its <strong>Content Type</strong> — the data shape (Article, Faculty Profile, Landing Page). Every page has a <em>current</em> type and maps to a <em>target</em> (new-CMS) type. This is the <strong>key</strong> everything else hangs off.</li>
-<li><strong>How does it render?</strong> Its <strong>Renders as</strong> value — a <strong>Page</strong> (its own URL and breadcrumb), a <strong>Fragment (embeddable)</strong> (no URL of its own; dropped into pages via components, like an AEM experience fragment), or <strong>Generated</strong> (a template drawn over a feed or query).</li>
+<li><strong>How does it render?</strong> Its <strong>Renders as</strong> value — a <strong>Page</strong> (its own URL and breadcrumb), a <strong>Record (own page)</strong> (a structured entry, like a news post, event or profile, that still has its own URL), a <strong>Fragment (embeddable, no URL)</strong> (no URL of its own; dropped into pages via components, like an AEM experience fragment), or <strong>Generated</strong> (a template drawn over a feed or query).</li>
 </ul>
 <p>The <strong>Content Type Registry</strong> is the crosswalk that ties them together. Define the mapping <strong>once per content type</strong>, and every page of that type inherits it — without ever overwriting something you set by hand.</p>
 <h3 id="set-the-content-type-as-you-audit">Set the Content Type as you audit</h3>
@@ -673,7 +692,7 @@ Alumni	Secondary	Graduates staying connected
 <p>Open <strong>Project → Content Type Registry…</strong>. Each row maps one current content type to its targets:</p>
 <ul>
 <li><strong>Content Type</strong> (current) — the key</li>
-<li><strong>Renders as</strong> — Page / Fragment (embeddable) / Generated</li>
+<li><strong>Renders as</strong> — Page / Record (own page) / Fragment (embeddable, no URL) / Generated</li>
 <li><strong>Target Content Type</strong> — what it becomes in the new CMS</li>
 <li><strong>→ Target Spec</strong> — the spec it&#39;s built from (see <a href="#14-build--direction">Build &amp; Direction</a>)</li>
 <li><strong>Migration Track</strong> — its default delivery track</li>
@@ -703,7 +722,7 @@ Alumni	Secondary	Graduates staying connected
 <p><strong>Why the registry is per-project.</strong> Different CMSs name things differently — a WordPress &quot;post&quot; isn&#39;t a Drupal &quot;article&quot; isn&#39;t a HubSpot &quot;blog post.&quot; So each project keeps its own crosswalk, codifying that client&#39;s conventions. (The Content Type <em>vocabulary</em> in the dropdown is global and shared across your projects; the <em>crosswalk</em> is per-project. That&#39;s the two-tier design the sync above bridges.) A seeding banner on first open offers <strong>Seed defaults</strong>, <strong>Open editor</strong>, or <strong>Don&#39;t ask again</strong>; the data lives in the <code>ContentTypeRegistry</code> sheet.</p>
 <p><strong>The Migrate cluster fields.</strong> These appear once you turn on <strong>Show Migration fields</strong>:</p>
 <ul>
-<li><strong>Renders as</strong> (stored as <code>Content_Nature</code>) — <strong>Page</strong> (a hand-authored standalone), <strong>Content Object</strong> (a record like an article or bio, shown in the UI as &quot;Fragment (embeddable)&quot;), or <strong>Generated</strong> (a system-rendered view over records). This is a <em>delivery</em> concern, not a quality one — a page can be Keep and any of the three.</li>
+<li><strong>Renders as</strong> (stored as <code>Content_Nature</code>) — <strong>Page</strong> (a hand-authored standalone), <strong>Record</strong> (stored as <code>Content Object</code>: a structured entry like an article, event or bio that still has its own page), <strong>Fragment</strong> (stored as <code>Fragment</code>: embedded into other pages, no URL of its own, so it gets no redirect and needs no sitemap placement), or <strong>Generated</strong> (a system-rendered view over records). Don&#39;t confuse Record with Fragment: a news post migrated as a record is still a page people link to, and it needs a redirect like any other page. This is a <em>delivery</em> concern, not a quality one — a page can be Keep and any of the three.</li>
 <li><strong>Migration Track</strong> — Scripted, Migrate Records, Configure, Manual Rebuild, Merge, or Kill/Redirect. The technical architect owns this call; the registry and the ghost suggestion just give it a head start.</li>
 </ul>
 <p><strong>Fragments have no public URL.</strong> In the Sitemap editor you can set a node&#39;s <strong>Node type → Fragment / shared content</strong>. A Fragment keeps a computed path as a repository location but has no menu entry, breadcrumb, or redirect; it shows a <code>FRAG</code> badge and sits outside the net-new/empty counts. Anything that renders as a Fragment is automatically left out of the redirect plan (no URL to redirect) and the needs-placement check (a fragment has no sitemap home by design — that&#39;s correct, not a gap).</p>
@@ -1255,14 +1274,70 @@ Alumni	Secondary	Graduates staying connected
 <p>Open it from the <strong>Redirects</strong> tab or <strong>Cmd+Shift+R</strong>. It lists every page that needs a redirect — Kill pages and URL-changed pages — each showing its KKE badge, its title (click to jump to that row in the audit view), the current URL, an editable destination, and a sitemap picker. Fragments are left out automatically, since they have no public URL.</p>
 <h3 id="set-destinations-efficiently">Set destinations efficiently</h3>
 <ul>
-<li><strong>Re-derive from sitemap</strong> recomputes destinations from current sitemap paths for every row with a sitemap assignment (it skips any explicit <code>404</code>). Run it after you&#39;ve reorganized the sitemap.</li>
+<li><strong>Re-derive from sitemap</strong> recomputes destinations from current sitemap paths for every row with a sitemap assignment, plus unplaced Kill/Consolidate rows whose destination the app derived (from a consolidation target or an inherited 3xx). It skips any explicit <code>404</code> and any destination you typed or picked yourself. Run it after you&#39;ve reorganized the sitemap or changed the Site Domain.</li>
 <li>The per-row <strong>sitemap picker</strong> points a single redirect at a specific node.</li>
 <li>The <strong>404 toggle</strong> marks a row as an intentional 404.</li>
 <li><strong>Find/Replace</strong> opens a bar that <em>filters the list</em> to matching destinations (exact-match optional) and can <strong>Replace All</strong> across them — ideal for domain or path-prefix sweeps.</li>
 </ul>
 <p>Destinations also resolve automatically on <strong>Save</strong>, so the editor is for review and overrides, not a prerequisite for a correct export.</p>
 <h3 id="validate-the-chains">Validate the chains</h3>
-<p><strong>Migration → Redirect Chain Check…</strong> flags any redirect that points at another page being killed (a redirect into a redirect, or into a 404). Repoint those to a live destination. The same check runs as part of the <a href="#18-pre-flight--hand-off">Pre-flight check</a>.</p>
+<p><strong>Migration → Redirect Chain Check…</strong> covers two things: redirects that point at another page being killed (repoint those to a live destination), and every <strong>inherited redirect</strong> in the crawl. The same check runs as part of the <a href="#18-pre-flight--hand-off">Pre-flight check</a>.</p>
+<h3 id="inherited-redirects--the-3xx-rows-in-your-crawl">Inherited redirects — the 3xx rows in your crawl</h3>
+<p>A 3xx URL isn&#39;t a page, it&#39;s a redirect rule the live site already has. Triage sets those to <code>Kill</code> and copies in the destination the crawl recorded — and from then on <strong>the app re-derives that destination on every save</strong>. That matters more than it sounds: if <code>/old-nursing</code> currently redirects to <code>/programs/nursing</code>, and you later move that page to <code>/academics/nursing</code> in your sitemap, the inherited rule follows it. You don&#39;t have to go back and fix redirects every time the tree changes. The same applies if the target gets consolidated into another page, or is retired to a 404. A chain on the live site (A → B → C) collapses to a single hop, so no rule you ship lands on a URL that is itself being retired.</p>
+<p>Your own typed destinations are never touched by any of this — a redirect you set by hand stays exactly as you left it.</p>
+<p>What the app <strong>can&#39;t</strong> decide for you gets grouped in the report, and the sidebar&#39;s <strong>Inherited redirect needs review</strong> filter is the worklist:</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>No destination recorded</strong></td>
+<td>The crawl found a 3xx but captured no target.</td>
+<td>Give it a destination, or let it 404.</td>
+</tr>
+<tr>
+<td><strong>Redirects to itself</strong></td>
+<td>The rule resolves back to its own URL.</td>
+<td>Always wrong — repoint or retire.</td>
+</tr>
+<tr>
+<td><strong>Destination is a dead URL (4xx)</strong></td>
+<td>It redirects to a page that&#39;s already gone.</td>
+<td>Retire it (destination <code>404</code>) or repoint.</td>
+</tr>
+<tr>
+<td><strong>Destination has no KKE decision yet</strong></td>
+<td>It points at a page in your audit that nobody has ruled on. If that page turns out to be Kill, this rule points at nothing.</td>
+<td>Decide those pages. The redirects re-derive themselves afterwards — you don&#39;t come back here.</td>
+</tr>
+<tr>
+<td><strong>Destination is being retired with nowhere to go</strong></td>
+<td>It points at a page marked Kill with no redirect of its own, or Consolidate with no target picked.</td>
+<td>Finish the destination page&#39;s decision, or repoint the rule.</td>
+</tr>
+<tr>
+<td><strong>Destination not in this crawl</strong></td>
+<td>The target is on a site you&#39;re migrating but wasn&#39;t crawled, so the app can&#39;t confirm it survives.</td>
+<td>Widen the crawl, or confirm by hand.</td>
+</tr>
+<tr>
+<td><strong>Destination is on an out-of-scope site</strong></td>
+<td>Nobody is maintaining the thing it points at.</td>
+<td>Confirm you still want to send traffic there.</td>
+</tr>
+<tr>
+<td><strong>Destination is off-site</strong></td>
+<td>Points at another domain entirely.</td>
+<td>Nothing to resolve — carried forward verbatim. Listed so you can confirm it.</td>
+</tr>
+</tbody></table>
+<p>That &quot;not in this crawl&quot; versus &quot;off-site&quot; split is the one worth reading carefully. Both are destinations the app can&#39;t resolve to a row, but one is a gap in your data and the other is completely normal.</p>
+<p><strong>Why &quot;no KKE decision&quot; and not &quot;not placed on the sitemap&quot;?</strong> Because plenty of migrations keep every URL exactly as it is — the new CMS re-uses the existing paths and nobody builds a sitemap at all. In that project <em>nothing</em> is placed, so a placement-based warning would fire on every single row and mean nothing. Whether a page is placed depends on how you work; whether it has been decided does not. So the check asks the question that holds either way: <strong>is there a page here that we&#39;ve committed to keeping?</strong></p>
+<p>This is also the one group you can clear without touching a single redirect. Decide the destination pages and the rules re-derive themselves on the next save.</p>
 <h3 id="check-the-redirects-still-agree-with-the-sitemap">Check the redirects still agree with the sitemap</h3>
 <p><strong>Migration → Redirect Health Check…</strong> answers a different question: not &quot;does this destination work&quot; but &quot;does it still match where the sitemap says the page is going&quot;. Redirects are derived from the sitemap, but the app can&#39;t tell a destination <em>it</em> wrote from one <em>you</em> typed — so once a value exists on a Keep or Evolve page it is never revisited. Reorganize the tree, or build a sitemap and delete it, and the old destinations quietly survive.</p>
 <p>It sorts what it finds into groups, each with the full list of affected pages:</p>
@@ -1286,7 +1361,7 @@ Alumni	Secondary	Graduates staying connected
 <ul>
 <li><input disabled="" type="checkbox"> Every Kill / URL-changed page has a destination (or an intentional <strong>404</strong>)</li>
 <li><input disabled="" type="checkbox"> You ran <strong>Re-derive from sitemap</strong> after the tree was finalized</li>
-<li><input disabled="" type="checkbox"> The <strong>Redirect Chain Check</strong> is clean — no redirects into Kill/404 pages</li>
+<li><input disabled="" type="checkbox"> The <strong>Redirect Chain Check</strong> is clean — no redirects into Kill/404 pages, and no inherited redirect left in an actionable group</li>
 <li><input disabled="" type="checkbox"> The <strong>Redirect Health Check</strong> is clean — no loops, orphans, or destinations that contradict the sitemap</li>
 <li><input disabled="" type="checkbox"> Intentional 404s are marked, not left blank</li>
 <li><input disabled="" type="checkbox"> The redirect map is exported</li>
@@ -1306,15 +1381,27 @@ Alumni	Secondary	Graduates staying connected
 <p>Reports are read-only views, generated on demand from the current file — run them as often as you like. Every one exports to <strong>PDF</strong> or <strong>HTML</strong> (and the HTML opens cleanly in Word). They fall into three audiences, which is also how the Reports menu is grouped.</p>
 <h3 id="for-stakeholders">For stakeholders</h3>
 <ul>
-<li><strong>Executive Summary</strong> — the top-line story: total pages, the KKE distribution, auto-generated key findings, SME status, and a section breakdown. Lead a client readout with this.</li>
-<li><strong>Content Inventory by Section</strong> — the full inventory grouped by section, with KKE distribution, sample pages, and notes counts. Your detailed appendix.</li>
-<li><strong>SME Review Status</strong> — where expert review stands: overall completion plus a per-Content-Owner table (assigned, reviewed, %, approved vs changed, unresolved conflicts) and a conflict list.</li>
-<li><strong>Audience Coverage</strong> — per audience in priority order: how many pages serve them, how many treat them as the <em>primary</em> audience, what you&#39;re doing to that content, and which sections it lives in. Flags any Primary-tier audience with almost nothing aimed at it — usually the most actionable finding in the set. Ends with the pages nobody has reviewed for audience yet.</li>
-<li><strong>Audience × Section Matrix</strong> — sections down, audiences across, cells shaded by share. The single most persuasive artifact here: it makes &quot;this entire section is written for the wrong people&quot; visible in one glance, and it argues IA changes rather than page-by-page ones.</li>
-<li><strong>Site Consolidation Overview</strong> — for audits merging several sites: what each source site contributes (pages, disposition mix, audiences served, how much of it duplicates another site, how many redirect rules retiring it needs). A site that is mostly overlap and serves no audience the others don&#39;t is a candidate to retire wholesale rather than migrate page by page.</li>
-<li><strong>Cross-Site Duplicate Overlap</strong> — pages whose title, H1 and meta description are identical across two or more source sites. Each set collapses to one surviving page: pick the master, mark the rest <strong>Consolidate</strong> pointing at it, and the redirect map writes itself. Exact-match only, so treat it as a floor rather than a ceiling.</li>
-<li><strong>Jobs Coverage</strong> — per job: how many pages serve it, what you&#39;re doing to them, and the page you&#39;d send someone to. Leads with the jobs <strong>nothing answers</strong> — the strongest brief for net-new content, since each traces back to the client&#39;s own workshop.</li>
-<li><strong>Audience Debt</strong> — three worklists that translate straight into scope: pages serving only non-priority audiences (carrying cost, no return), priority-audience pages marked <strong>Kill</strong> (re-read these before signing off the redirect map), and pages tagged with four or more audiences (usually doing several jobs at once and needing a split).</li>
+<li><p><strong>Executive Summary</strong> — the top-line story: the content inventory, the KKE distribution, auto-generated key findings, SME status, and a section breakdown. Lead a client readout with this.</p>
+<p><strong>It counts content pages, not crawled URLs, and the difference is usually large.</strong> A crawl lists every URL that <em>responded</em> — including every inherited 301 and every dead link. Reporting those as pages invites the one question you don&#39;t want mid-readout: <em>&quot;we&#39;re really migrating twelve thousand pages?&quot;</em> So the Overview leads with <code>URLs crawled</code>, breaks out <strong>existing redirects (3xx)</strong> and <strong>not found / gone (4xx)</strong>, and then gives <strong>content pages audited</strong> — and every figure below it, including the Kill percentage, is over content pages only. On a real higher-ed crawl that moved the headline &quot;recommended for removal&quot; figure from 66% to 31%; the first number was mostly redirects.</p>
+<p>A 5xx still counts as content — a broken page is a page, and it&#39;s work you&#39;ll be doing. Nothing is hidden: the non-content rows are named, counted, and still in the audit. <strong>By Section</strong> counts content pages too, so it adds up to the content total rather than to the crawl. If a section is missing entirely, check whether its site is marked out of scope — those rows are excluded from every figure in the report, and the banner at the top says how many.</p>
+<p>To see the rows behind the numbers, use the sidebar&#39;s <strong>Existing redirect (3xx — not content)</strong> or <strong>Not content (3xx or 4xx)</strong> filters.</p>
+</li>
+<li><p><strong>Content Inventory by Section</strong> — the full inventory grouped by section, with KKE distribution, sample pages, and notes counts. Your detailed appendix.</p>
+</li>
+<li><p><strong>SME Review Status</strong> — where expert review stands: overall completion plus a per-Content-Owner table (assigned, reviewed, %, approved vs changed, unresolved conflicts) and a conflict list.</p>
+</li>
+<li><p><strong>Audience Coverage</strong> — per audience in priority order: how many pages serve them, how many treat them as the <em>primary</em> audience, what you&#39;re doing to that content, and which sections it lives in. Flags any Primary-tier audience with almost nothing aimed at it — usually the most actionable finding in the set. Ends with the pages nobody has reviewed for audience yet.</p>
+</li>
+<li><p><strong>Audience × Section Matrix</strong> — sections down, audiences across, cells shaded by share. The single most persuasive artifact here: it makes &quot;this entire section is written for the wrong people&quot; visible in one glance, and it argues IA changes rather than page-by-page ones.</p>
+</li>
+<li><p><strong>Site Consolidation Overview</strong> — for audits merging several sites: what each source site contributes (pages, disposition mix, audiences served, how much of it duplicates another site, how many redirect rules retiring it needs). A site that is mostly overlap and serves no audience the others don&#39;t is a candidate to retire wholesale rather than migrate page by page.</p>
+</li>
+<li><p><strong>Cross-Site Duplicate Overlap</strong> — pages whose title, H1 and meta description are identical across two or more source sites. Each set collapses to one surviving page: pick the master, mark the rest <strong>Consolidate</strong> pointing at it, and the redirect map writes itself. Exact-match only, so treat it as a floor rather than a ceiling.</p>
+</li>
+<li><p><strong>Jobs Coverage</strong> — per job: how many pages serve it, what you&#39;re doing to them, and the page you&#39;d send someone to. Leads with the jobs <strong>nothing answers</strong> — the strongest brief for net-new content, since each traces back to the client&#39;s own workshop.</p>
+</li>
+<li><p><strong>Audience Debt</strong> — three worklists that translate straight into scope: pages serving only non-priority audiences (carrying cost, no return), priority-audience pages marked <strong>Kill</strong> (re-read these before signing off the redirect map), and pages tagged with four or more audiences (usually doing several jobs at once and needing a split).</p>
+</li>
 </ul>
 <h3 id="for-information-architecture">For information architecture</h3>
 <ul>
@@ -1399,6 +1486,7 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="going-deeper-6">Going deeper</h3>
 <p>The <strong>Reports</strong> menu holds everything above. The separate <strong>Migration</strong> menu is reserved for export and validation <em>tools</em> rather than reports — Pre-Handoff Check, Migration Tracker, Export Redirect Map (CSV), and Redirect Chain Check.</p>
 <p>For a live progress view rather than a formal report, open the <strong>Progress Dashboard</strong> with <strong>Cmd+P</strong> (or <strong>View → Audit Progress</strong>): client and project, total and percent reviewed, the KKE breakdown as a stacked bar, flagged/tagged/noted counts, a by-group breakdown, and SME stats — exportable to PDF or HTML with a client/project/date header, like every other report.</p>
+<p>It counts every row you&#39;re actually auditing, including redirects and error URLs — a 3xx still needs triaging, so it&#39;s still work — with the content split shown beneath the total. <strong>Pages on sites you&#39;ve marked out of scope are left out</strong>, so a retired property can&#39;t hold your completion percentage below 100% forever; a note at the top says how many rows that was and which sites. The Executive Summary counts the same rows but reports only content pages, which is why its total is the smaller of the two.</p>
 <hr>
 <h2 id="17-migration-tracker-hand-off">17. Migration Tracker Hand-off</h2>
 <p><em>By the end of this section you&#39;ll have packaged the whole audit into a single workbook your migration team can execute against.</em></p>
@@ -1595,7 +1683,7 @@ Alumni	Secondary	Graduates staying connected
 </tr>
 <tr>
 <td><strong>Content_Nature</strong></td>
-<td>UI &quot;Renders as&quot;: Page / Content Object (Fragment) / Generated</td>
+<td>UI &quot;Renders as&quot;: Page / Content Object (Record) / Fragment / Generated</td>
 </tr>
 <tr>
 <td><strong>Migration_Track</strong></td>

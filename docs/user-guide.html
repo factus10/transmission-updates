@@ -1527,15 +1527,25 @@ Alumni	Secondary	Graduates staying connected
 <li>Read <code>.xlsx</code> files. Use <strong>File → Save As Project…</strong> first.</li>
 <li>Compute the handful of filters only the app can (duplicates, URL variants, redirect review, cross-site duplicates). A saved filter that uses one is refused by name rather than run half-applied.</li>
 </ul>
+<p><strong>Four skills come with it (Claude Code only).</strong> Skills are instructions the assistant follows for a kind of task; these encode the audit method from <em>Running an Audit</em>, so the model asks the right questions in the right order and reads the answers the way the reports do. None of them change the project.</p>
+<ul>
+<li><strong><code>/audit-status</code></strong> — where the audit stands: progress both ways (auditor vs client), what moved and by whom, what&#39;s still owed before handoff. For Monday check-ins and client status emails.</li>
+<li><strong><code>/section-review /news</code></strong> — go through a section with you: its patterns, the exceptions worth a human minute, and a proposed-decision worksheet with reasons written in your own audit vocabulary. You confirm, then apply in the app — in bulk with the Multi-bar on a filtered list.</li>
+<li><strong><code>/decision-consistency</code></strong> — before an SME export or handoff: pages whose decision contradicts their neighbours or their data (a Keep that returns 404, a Consolidate with no target, a Kill in a priority-audience section with real traffic), each with the evidence and phrased as a question, not a verdict.</li>
+<li><strong><code>ask-the-audit</code></strong> — the discipline behind any ad hoc question: aggregate before listing, content pages for client numbers, and every figure quoted with the sidebar filter that reproduces it.</li>
+</ul>
 <p><strong>Set it up</strong></p>
 <p>You need <strong>Node 22.13 or newer</strong> installed (it uses Node&#39;s built-in SQLite; nothing else to install) and a copy of the Transmission source, which contains <code>mcp/server.js</code>.</p>
-<p>For Claude Code:</p>
+<p>For Claude Code, install it as a plugin — that wires the server <em>and</em> the skills in one step:</p>
+<pre><code class="language-bash">claude plugin install transmission --plugin-dir /path/to/transmission/mcp
+</code></pre>
+<p>Or, server only:</p>
 <pre><code class="language-bash">claude mcp add transmission -- node /path/to/transmission/mcp/server.js
 </code></pre>
 <p>For Claude Desktop, add to <code>claude_desktop_config.json</code>:</p>
 <pre><code class="language-json">{ &quot;mcpServers&quot;: { &quot;transmission&quot;: { &quot;command&quot;: &quot;node&quot;, &quot;args&quot;: [&quot;/path/to/transmission/mcp/server.js&quot;] } } }
 </code></pre>
-<p>Then, in a conversation: <em>&quot;Open the project at /path/to/audit.transmission and give me an overview.&quot;</em> You can keep working in the app while it&#39;s connected — the server notices each autosave and answers from the current state.</p>
+<p>Then, in a conversation: <em>&quot;Open the project at /path/to/audit.transmission and give me an overview.&quot;</em> To try it without client data, <code>node mcp/sample/make-sample-project.js</code> writes a fictional 314-page university audit with a few problems planted for the skills to find. You can keep working in the app while it&#39;s connected — the server notices each autosave and answers from the current state.</p>
 <p><strong>A note on client data.</strong> The server hands crawl and audit data to whichever model your assistant is connected to. Treat it like any other tool that can read the client&#39;s project file, and check the engagement&#39;s data terms before connecting one.</p>
 <h3 id="quick-self-check-15">Quick self-check</h3>
 <ul>

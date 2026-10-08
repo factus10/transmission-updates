@@ -1,7 +1,7 @@
 {
-  "version": "2.19.1",
-  "publishedAt": "2026-10-06",
-  "notes": "If your Visual Sitemap has ever opened as an empty white box, update: large sitemaps now draw. A long flat list such as a news archive or staff directory opens collapsed with a count of the pages it holds, and a node can be hidden from the diagram while staying in the sitemap for mapping. The Visual Sitemap also gains zoom controls with a one-click 100%.",
+  "version": "2.20.0",
+  "publishedAt": "2026-10-08",
+  "notes": "Claude can now help with the audit from inside Transmission. A new ✦ button opens a Claude Code session on the current project — in the Claude app, with the audit skills loaded — and anything Claude suggests comes back as proposals you accept or reject in the app, logged with the reason and undoable in one step. Nothing is written to the audit until you say so. Project files move to a newer format on first open; everyone sharing a project should update together.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

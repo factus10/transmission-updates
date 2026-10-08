@@ -1521,9 +1521,13 @@ Alumni	Secondary	Graduates staying connected
 <li>Apply your <strong>saved filters</strong> by name, so the AI sees the same worklists you do.</li>
 </ul>
 <p>It also sends the model the conventions that matter — blank means <em>unreviewed</em>, Kill vs Exclude, content pages vs crawled URLs, the <code>404</code> sentinel — so an untouched crawl doesn&#39;t get reported back as a finished audit.</p>
+<p><strong>How changes come back: proposals</strong></p>
+<p>Claude never edits the audit. When you ask it to — typically after confirming a <code>/section-review</code> worksheet — it <strong>queues proposals</strong>: one per page, with the field, the value and a one-line reason. They land inside your project file, and the app notices the next time its window is active: the <strong>✦</strong> button in the title bar shows a count, and a <strong>Proposals</strong> button appears in the sidebar.</p>
+<p><strong>Review Proposals</strong> (either button, or Project → Review Proposals…) groups them by what is being proposed, so a hundred &quot;Kill — archival news&quot; rows are one decision. Each group shows how many pages, what they currently hold, and who proposed it; ▸ opens the pages with each one&#39;s current value and reason. Tick the groups you agree with and <strong>Accept selected</strong>: the values are written exactly as if you had made the edits — through the same paths, into the change log (with a second <code>(proposal accepted)</code> entry carrying the source and reason), and as one <code>Cmd+Z</code>. Accepting a Kill offers the same sitemap/redirect cleanup as any other Kill. <strong>Reject selected</strong> records the refusal so it isn&#39;t proposed again; unticked groups stay queued.</p>
+<p>What a proposal may touch is deliberately narrow: the decision, notes, tags, group, content type and theme, renders-as, migration track, published status, audiences, primary audience and jobs. Tags, audiences and jobs are <em>added</em> to a page, never removed; a note is appended under what&#39;s there. <code>Final_KKE</code>, sitemap placement, redirects and consolidation targets cannot be proposed — those are set in the app, by you. Proposals need a <code>.transmission</code> project (they live in the file), and the file moves to a newer format the first time this version opens it; older builds of Transmission will ask you to update before opening it.</p>
 <p><strong>What it deliberately can&#39;t do</strong></p>
 <ul>
-<li><strong>Change anything.</strong> It opens the project read-only and never touches the file. Writes are planned as <em>proposals</em> you&#39;d accept or reject in the app — the same contract Suggested_KKE and the AI audience suggestions already follow.</li>
+<li><strong>Change anything directly.</strong> It opens the project read-only; the one write it has is the proposals queue above, and nothing in it is applied until you accept it — the same contract Suggested_KKE and the AI audience suggestions already follow.</li>
 <li>Read <code>.xlsx</code> files. Use <strong>File → Save As Project…</strong> first.</li>
 <li>Compute the handful of filters only the app can (duplicates, URL variants, redirect review, cross-site duplicates). A saved filter that uses one is refused by name rather than run half-applied.</li>
 </ul>
@@ -1534,10 +1538,12 @@ Alumni	Secondary	Graduates staying connected
 <li><strong><code>/decision-consistency</code></strong> — before an SME export or handoff: pages whose decision contradicts their neighbours or their data (a Keep that returns 404, a Consolidate with no target, a Kill in a priority-audience section with real traffic), each with the evidence and phrased as a question, not a verdict.</li>
 <li><strong><code>ask-the-audit</code></strong> — the discipline behind any ad hoc question: aggregate before listing, content pages for client numbers, and every figure quoted with the sidebar filter that reproduces it.</li>
 </ul>
-<p><strong>Set it up</strong></p>
+<p><strong>The quick way: ✦ → Open in Claude Code</strong></p>
+<p>With a <code>.transmission</code> project open, click <strong>✦</strong> in the title bar (or Project → Open in Claude Code…) and choose <strong>Open in Claude</strong>. A new Claude Code session opens in the Claude desktop app — or in Terminal, if the app isn&#39;t installed or you&#39;d rather — with this project connected and the skills loaded. The plugin ships inside Transmission and registers itself with Claude Code the first time (a few seconds), so the only thing you need installed is <a href="https://claude.com/claude-code">Claude</a> itself (and Node 22.13 or newer, which it uses). The dialog tells you if anything is missing. Transmission also notes which project it has open, so a session you start by hand in Claude connects to it without being told. Keep Transmission open while you work: Claude sees each autosave within a couple of seconds, and its proposals show up in the same dialog.</p>
+<p><strong>Setting it up by hand</strong> (if you&#39;d rather register it once)</p>
 <p>You need <strong>Node 22.13 or newer</strong> installed (it uses Node&#39;s built-in SQLite; nothing else to install) and a copy of the Transmission source, which contains <code>mcp/server.js</code>.</p>
 <p>For Claude Code, install it as a plugin — that wires the server <em>and</em> the skills in one step:</p>
-<pre><code class="language-bash">claude plugin install transmission --plugin-dir /path/to/transmission/mcp
+<pre><code class="language-bash">claude plugin install transmission --marketplace /path/to/transmission/mcp -y
 </code></pre>
 <p>Or, server only:</p>
 <pre><code class="language-bash">claude mcp add transmission -- node /path/to/transmission/mcp/server.js
@@ -1978,7 +1984,7 @@ npm run build      # build universal .dmg (output in dist/)
 <li><strong>Miro: collapsed sections can&#39;t be unfolded on the board</strong> — Miro has no collapse behaviour for shapes. Only Miro <em>mind maps</em> collapse, and those are text-only with no colour, so using them would lose all the colour coding. Collapsed sections export as a stacked block instead, which shows that something is folded away but can&#39;t be opened.</li>
 <li><strong>Miro: corner radius exports as square-vs-rounded only</strong> — Miro has no radius setting, so a specific radius value in the app arrives as simply &quot;rounded&quot;.</li>
 <li><strong>Miro: inner padding is app-only</strong> — Miro centres shape text itself and has no padding control.</li>
-<li><strong>MCP server is read-only and needs Node 22.13+</strong> — it can answer questions about a project but cannot change it; proposals-based writes are planned. It reads <code>.transmission</code> projects only, not spreadsheets.</li>
+<li><strong>MCP server needs Node 22.13+ and a <code>.transmission</code> project</strong> — it reads the project and can queue <em>proposals</em>, which you accept or reject in the app; it never writes the audit itself. Spreadsheets aren&#39;t supported. Claude Code only for the skills and the ✦ launch button; Claude Desktop gets the server alone.</li>
 <li><strong>Miro: one team per connection</strong> — a Miro token is scoped to a single team; working across teams means connecting once per team.</li>
 <li><strong>New sitemap card defaults apply to new projects only</strong> — existing projects keep the card height and colour rules they already saved. Changing them is a one-click job in the Visual Sitemap&#39;s <strong>Layout</strong> / <strong>Colors</strong> tabs.</li>
 </ul>

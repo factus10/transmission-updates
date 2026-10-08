@@ -99,7 +99,8 @@
 <h2 id="5-questions-no-report-answers-mcp-server">5. Questions no report answers (MCP server)</h2>
 <ul>
 <li>The <strong>MCP server</strong> (<code>mcp/server.js</code> in the Transmission source; developer preview) lets Claude Desktop / Claude Code <strong>read</strong> a <code>.transmission</code> project and answer ad hoc questions with real counts — grouped by any column, filtered, using your saved filters by name.</li>
-<li>Installed as a plugin it brings four skills: <code>/audit-status</code>, <code>/section-review &lt;section&gt;</code>, <code>/decision-consistency</code>, and <code>ask-the-audit</code> for anything else. They propose; you apply in the app.</li>
+<li>Start it with <strong>✦ → Open in Claude</strong> in the title bar (opens the Claude app, or Terminal). Four skills: <code>/audit-status</code>, <code>/section-review &lt;section&gt;</code>, <code>/decision-consistency</code>, and <code>ask-the-audit</code> for anything else.</li>
+<li>Changes come back as <strong>proposals</strong> — the ✦ count and sidebar <strong>Proposals</strong> button show them; <strong>Review Proposals</strong> groups them, <strong>Accept</strong> writes them (logged, one <code>Cmd+Z</code>), <strong>Reject</strong> records the refusal. Nothing is written until you accept.</li>
 <li><strong>Read-only.</strong> It never changes the file and is safe to use while the app is open. Spreadsheets aren&#39;t supported: Save As Project first.</li>
 <li>Needs <strong>Node 22.13+</strong>: <code>claude mcp add transmission -- node /path/to/transmission/mcp/server.js</code>. Full setup in <a href="../user-guide.html#16-producing-the-outputs">the User Guide §16</a>.</li>
 <li>It hands project data to the connected model — check the engagement&#39;s data terms first.</li>

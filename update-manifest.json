@@ -1,7 +1,7 @@
 {
-  "version": "2.20.0",
+  "version": "2.21.0",
   "publishedAt": "2026-10-08",
-  "notes": "Claude can now help with the audit from inside Transmission. A new ✦ button opens a Claude Code session on the current project — in the Claude app, with the audit skills loaded — and anything Claude suggests comes back as proposals you accept or reject in the app, logged with the reason and undoable in one step. Nothing is written to the audit until you say so. Project files move to a newer format on first open; everyone sharing a project should update together.",
+  "notes": "Open in Claude now works with just the Claude app: the ✦ button installs Transmission as a Claude extension, with no command-line tools or Node to set up, and the audit playbooks (status, section review, consistency check) are in the chat's + menu. Transmission also moves to a current Electron, so the page preview renders modern sites properly and gets security fixes again, and links that open a new window go to your browser again.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

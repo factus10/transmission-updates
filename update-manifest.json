@@ -1,7 +1,7 @@
 {
-  "version": "2.21.0",
-  "publishedAt": "2026-10-08",
-  "notes": "Open in Claude now works with just the Claude app: the ✦ button installs Transmission as a Claude extension, with no command-line tools or Node to set up, and the audit playbooks (status, section review, consistency check) are in the chat's + menu. Transmission also moves to a current Electron, so the page preview renders modern sites properly and gets security fixes again, and links that open a new window go to your browser again.",
+  "version": "2.21.1",
+  "publishedAt": "2026-10-15",
+  "notes": "Fixes Open in Claude: in 2.21.0 the Transmission extension installed in the Claude app, but chats couldn't connect to it. After updating, click ✦ → Open in Claude once and accept Claude's offer to update the extension.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

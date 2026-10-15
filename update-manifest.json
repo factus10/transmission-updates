@@ -1,7 +1,7 @@
 {
-  "version": "2.21.1",
+  "version": "2.22.0",
   "publishedAt": "2026-10-15",
-  "notes": "Fixes Open in Claude: in 2.21.0 the Transmission extension installed in the Claude app, but chats couldn't connect to it. After updating, click ✦ → Open in Claude once and accept Claude's offer to update the extension.",
+  "notes": "Rubrics now live inside the project, so everyone on an engagement applies the same rules: Project → Rubrics… copies yours in. A new Consolidate rubric describes patterns that only show up across pages, like a thin page whose content belongs on its parent, and the new Rubric sweep in Claude (the chat's + menu) applies them across the whole audit: it reads the candidate pages and proposes what should merge into what, for you to accept or reject in Transmission.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

@@ -1,7 +1,7 @@
 {
-  "version": "2.22.0",
+  "version": "2.22.1",
   "publishedAt": "2026-10-15",
-  "notes": "Rubrics now live inside the project, so everyone on an engagement applies the same rules: Project → Rubrics… copies yours in. A new Consolidate rubric describes patterns that only show up across pages, like a thin page whose content belongs on its parent, and the new Rubric sweep in Claude (the chat's + menu) applies them across the whole audit: it reads the candidate pages and proposes what should merge into what, for you to accept or reject in Transmission.",
+  "notes": "The audit playbooks now come as Claude skills: download the transmission-skill zip files from this release and upload each in Claude → Settings → Capabilities → Skills, and Claude will use them on its own when a question calls for one. Help explains the steps.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

@@ -1,7 +1,7 @@
 {
-  "version": "2.22.1",
-  "publishedAt": "2026-10-15",
-  "notes": "The audit playbooks now come as Claude skills: download the transmission-skill zip files from this release and upload each in Claude → Settings → Capabilities → Skills, and Claude will use them on its own when a question calls for one. Help explains the steps.",
+  "version": "2.23.0",
+  "publishedAt": "2026-11-03",
+  "notes": "The decisions are now Migrate, Revise and Archive (formerly Keep, Evolve and Kill; Consolidate and Exclude are unchanged), and the number-key shortcuts follow the new order: 1 Migrate, 2 Revise, 3 Archive. Existing projects, and SME worksheets that come back in the old words, are translated automatically when you open or import them, and the SME export can still use the old wording for a client who expects it.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

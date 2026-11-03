@@ -57,7 +57,7 @@
 <hr>
 <h2 id="0-the-mental-model">0. The mental model</h2>
 <ul>
-<li>Filters are <strong>stackable and AND-ed</strong>: text search <strong>and</strong> KKE status <strong>and</strong> group <strong>and</strong> any field filters all apply together. Narrow from broad to specific.</li>
+<li>Filters are <strong>stackable and AND-ed</strong>: text search <strong>and</strong> MRA status <strong>and</strong> group <strong>and</strong> any field filters all apply together. Narrow from broad to specific.</li>
 <li>The sidebar list always reflects the current filter — and the <strong>Multi-bar</strong> at the bottom acts on exactly that filtered set (see <strong>Bulk Operations</strong>).</li>
 <li>Save a filter combination once and recall it later, so recurring slices (&quot;unreviewed thin content&quot;) are one click.</li>
 </ul>
@@ -71,12 +71,12 @@
 </ul>
 <p>The placeholder updates to reflect the scope. <strong>✕</strong> clears it.</p>
 <hr>
-<h2 id="2-filter-by-kke-status">2. Filter by KKE status</h2>
-<p>The <strong>KKE filter</strong> (toolbar row 2) is a <strong>checkbox dropdown</strong> — check <strong>multiple</strong> statuses and they&#39;re OR-ed together (e.g. <strong>Keep + Evolve</strong>). The button label reflects your selection. Beyond the literal statuses, it includes <strong>special filters</strong>:</p>
+<h2 id="2-filter-by-mra-status">2. Filter by MRA status</h2>
+<p>The <strong>MRA filter</strong> (toolbar row 2) is a <strong>checkbox dropdown</strong> — check <strong>multiple</strong> statuses and they&#39;re OR-ed together (e.g. <strong>Migrate + Revise</strong>). The button label reflects your selection. Beyond the literal statuses, it includes <strong>special filters</strong>:</p>
 <ul>
-<li><strong>Unreviewed</strong> — no KKE call yet.</li>
+<li><strong>Unreviewed</strong> — no MRA call yet.</li>
 <li><strong>Flagged</strong> — rows you marked with <strong>F</strong>.</li>
-<li><strong>Duplicates</strong>, <strong>SME conflicts / pending</strong>, <strong>Consolidate (no target)</strong> / <strong>Consolidate → Kill/Exclude target</strong>, <strong>Shared sitemap node (2+ pages)</strong>, <strong>Needs placement</strong>, <strong>Suggested disagrees</strong>, <strong>Suggested ≠ your call</strong>.</li>
+<li><strong>Duplicates</strong>, <strong>SME conflicts / pending</strong>, <strong>Consolidate (no target)</strong> / <strong>Consolidate → Archive/Exclude target</strong>, <strong>Shared sitemap node (2+ pages)</strong>, <strong>Needs placement</strong>, <strong>Suggested disagrees</strong>, <strong>Suggested ≠ your call</strong>.</li>
 </ul>
 <p>Use the <strong>Group</strong> dropdown alongside it to scope to one content group.</p>
 <hr>
@@ -87,14 +87,14 @@
 <li><strong>Apply</strong>. Active filters show as removable <strong>chips</strong>; add as many as you need (they AND together).</li>
 </ol>
 <blockquote>
-<p>Common move: KKE = <strong>Keep + Evolve</strong>, then <strong>+ Field filter</strong> <code>Sitemap_ID is blank</code> to find pages that still need a nav home. The <strong>Unclassified</strong> button is a one-click shortcut for <code>Content Nature is blank</code>.</p>
+<p>Common move: MRA = <strong>Migrate + Revise</strong>, then <strong>+ Field filter</strong> <code>Sitemap_ID is blank</code> to find pages that still need a nav home. The <strong>Unclassified</strong> button is a one-click shortcut for <code>Content Nature is blank</code>.</p>
 </blockquote>
 <hr>
 <h2 id="4-save-and-recall-filters">4. Save and recall filters</h2>
 <p>Once you&#39;ve built a useful combination:</p>
 <ol>
 <li>Open <strong>Saved filters…</strong> → <strong>+ Save current filter…</strong>, name it.</li>
-<li>The bundle stores text, scope, KKE selection, group, <strong>and</strong> field filters — they all travel together.</li>
+<li>The bundle stores text, scope, MRA selection, group, <strong>and</strong> field filters — they all travel together.</li>
 <li>Recall any time from the dropdown; manage them in <strong>Project Settings → Saved Filters</strong>. (Saved filters persist with the file.)</li>
 </ol>
 <hr>
@@ -108,7 +108,7 @@
 <h2 id="quick-checklist-for-finding-the-work">Quick checklist for &quot;finding the work&quot;</h2>
 <ul>
 <li><input disabled="" type="checkbox"> Search <strong>scope</strong> set to match what you&#39;re looking for (URL vs Title vs All)</li>
-<li><input disabled="" type="checkbox"> KKE filter using <strong>multi-check</strong> where you mean &quot;either&quot; (Keep + Evolve)</li>
+<li><input disabled="" type="checkbox"> MRA filter using <strong>multi-check</strong> where you mean &quot;either&quot; (Migrate + Revise)</li>
 <li><input disabled="" type="checkbox"> Field filters layered for precise slices (e.g. <code>Sitemap_ID is blank</code>)</li>
 <li><input disabled="" type="checkbox"> Recurring slices saved as <strong>named filters</strong></li>
 <li><input disabled="" type="checkbox"> <strong>Cmd+F</strong> for one-off lookups, sidebar filters for work sets</li>

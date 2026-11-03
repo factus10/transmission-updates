@@ -69,12 +69,13 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <li><strong>Hunting for one specific fact?</strong> Jump to the <a href="#reference-appendix">reference appendix</a>: Audit Columns, Keyboard Shortcuts, the rubric language, Structural Sheets, and more.</li>
 </ul>
 <blockquote>
-<p><strong>A quick word on terminology.</strong> Throughout this guide, <strong>KKE</strong> is the core call you make on every existing page — <strong>Keep · Kill · Evolve · Consolidate · Exclude</strong>. If you&#39;ve run content audits before, you may know this as a <em>content inventory</em> or a <em>rationalization</em>; the idea is the same.</p>
+<p><strong>A quick word on terminology.</strong> Throughout this guide, <strong>MRA</strong> is the core call you make on every existing page — <strong>Migrate · Revise · Archive · Consolidate · Exclude</strong>. If you&#39;ve run content audits before, you may know this as a <em>content inventory</em> or a <em>rationalization</em>; the idea is the same.</p>
+<p>Earlier versions of Transmission called these calls <strong>Keep / Kill / Evolve</strong> (KKE). The meanings are unchanged: <strong>Migrate</strong> was Keep, <strong>Revise</strong> was Evolve, and <strong>Archive</strong> was Kill — an Archived page is retired and owes a redirect. Consolidate and Exclude kept their names. Files that use the old column names and values open fine and are saved as MRA. Worksheets that come back in the old words (an SME review sent out before the rename, a second auditor&#39;s file, an old audit template) are translated as they&#39;re read: &quot;Change: Kill&quot; becomes Archive, and a bare &quot;Keep&quot; next to a Migrate recommendation counts as agreement. The import tells you how many decisions it re-worded. If a client&#39;s project began before the rename, tick <strong>Use Keep / Kill / Evolve wording</strong> in the SME export dialog to send that one worksheet in the words they know; it imports back as MRA either way.</p>
 </blockquote>
 <h3 id="the-lifecycle-at-a-glance">The lifecycle at a glance</h3>
 <ul>
 <li><strong>A. Set up &amp; orient</strong> — install, open a file, configure the project</li>
-<li><strong>B. The core audit</strong> — make KKE calls, find the work, act in bulk, tag and group</li>
+<li><strong>B. The core audit</strong> — make MRA calls, find the work, act in bulk, tag and group</li>
 <li><strong>C. Classify for migration</strong> — content types, AI and analytics suggestions, consolidation, non-200 triage</li>
 <li><strong>D. Collaborate &amp; review</strong> — SME review, merging parallel auditors</li>
 <li><strong>E. Architect the future site</strong> — navigation and information architecture, then build direction</li>
@@ -90,7 +91,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 </blockquote>
 <h3 id="the-big-idea-your-spreadsheet-is-the-project">The big idea: your spreadsheet <em>is</em> the project</h3>
 <p>Transmission isn&#39;t a database that swallows your data and keeps it somewhere private. It&#39;s a workspace that reads and writes <strong>your spreadsheet directly</strong>. When you open a crawl export, the app adds the columns and helper sheets it needs, and from then on every decision you make is written straight back into that same <code>.xlsx</code>.</p>
-<p>That has one wonderfully freeing consequence: <strong>one file is the whole project.</strong> Hand it to a colleague who also has Transmission and they see exactly what you see — your Keep/Kill/Evolve calls, the sitemap, project settings, even the full change history. There&#39;s nothing else to sync or export. Back up the file and you&#39;ve backed up everything.</p>
+<p>That has one wonderfully freeing consequence: <strong>one file is the whole project.</strong> Hand it to a colleague who also has Transmission and they see exactly what you see — your Migrate/Revise/Archive calls, the sitemap, project settings, even the full change history. There&#39;s nothing else to sync or export. Back up the file and you&#39;ve backed up everything.</p>
 <blockquote>
 <p>If you&#39;ve run content audits before, you may know this pattern as a <em>content inventory</em> or a <em>rationalization</em> spreadsheet. Transmission keeps that familiar single-file deliverable — it just gives you a far better cockpit for filling it in.</p>
 </blockquote>
@@ -127,14 +128,14 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <h3 id="what-is-added">What Is Added</h3>
 <p>The first time you open a file, Transmission quietly prepares it for auditing. You don&#39;t have to do anything — but it&#39;s worth knowing what appeared, so nothing looks mysterious later. It adds two kinds of things.</p>
 <h4 id="audit-columns">Audit columns</h4>
-<p>These are the fields you&#39;ll fill in as you work. <code>KKE_Recommendation</code> comes first; Tags, Notes, Group, and Primary Tag sit just after your URL column; and the rest (SME review, migration, CMS links, and components) are appended at the end. The complete list, with what each one is for, lives in the <a href="#audit-columns">Audit Columns reference</a>.</p>
+<p>These are the fields you&#39;ll fill in as you work. <code>MRA_Recommendation</code> comes first; Tags, Notes, Group, and Primary Tag sit just after your URL column; and the rest (SME review, migration, CMS links, and components) are appended at the end. The complete list, with what each one is for, lives in the <a href="#audit-columns">Audit Columns reference</a>.</p>
 <h4 id="structural-sheets">Structural sheets</h4>
 <p>These behind-the-scenes sheets hold project state and travel with the file:</p>
 <ul>
 <li><strong>Sitemap</strong> — your future-state sitemap</li>
-<li><strong>KKE_Settings</strong> — project settings, saved filters, and computed-column configuration</li>
-<li><strong>KKE_ChangeLog</strong> — an automatic history of every decision change</li>
-<li><strong>KKE_Glossary</strong> — your definitions for tags and groups</li>
+<li><strong>MRA_Settings</strong> — project settings, saved filters, and computed-column configuration</li>
+<li><strong>MRA_ChangeLog</strong> — an automatic history of every decision change</li>
+<li><strong>MRA_Glossary</strong> — your definitions for tags and groups</li>
 <li><strong>ContentTypeRegistry</strong> — the content-type → target crosswalk</li>
 <li><strong>PatternLibrary</strong> — the Target Spec Library</li>
 <li><strong>DesignPatternLibrary</strong> — the Component Library</li>
@@ -165,7 +166,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <ul>
 <li><strong>Source / New CMS links.</strong> The <strong>CMS</strong> cluster in the audit bar has two link fields. Paste the admin/edit URL for a page in your old CMS and your new one, and the <strong>↗</strong> button jumps straight there. A small dot on the sidebar row shows what&#39;s filled in (◐ source only · ◑ new only · ⊜ both) — handy for inspecting structure during the audit and confirming migrated pages afterward.</li>
 <li><strong>&quot;Let it 404.&quot;</strong> Sometimes the right call for a dead page is <em>no</em> redirect at all. Setting a page&#39;s redirect destination to the literal value <strong><code>404</code></strong> tells your engineers to let that URL die honestly — which is different from leaving it blank (that means &quot;still to be decided&quot;). More on this in <a href="#15-redirects">Redirects</a>.</li>
-<li><strong>The redirect badge.</strong> Once a page has a redirect destination, a small amber badge appears in the audit bar&#39;s <strong>Decide</strong> cluster showing where it points (<code>↪ /team</code>, full URL on hover) — so you can see it without leaving the audit view. Click the badge to jump to that page in the Redirect Editor, or the <strong>×</strong> to clear the destination. An intentional <code>404</code> shows as a <code>404</code> badge. (It reflects a <em>resolved</em> destination — the same value the sidebar&#39;s <strong>R</strong> dot marks — so it appears once the destination is set or after a save resolves it, not the instant you mark a page Kill.)</li>
+<li><strong>The redirect badge.</strong> Once a page has a redirect destination, a small amber badge appears in the audit bar&#39;s <strong>Decide</strong> cluster showing where it points (<code>↪ /team</code>, full URL on hover) — so you can see it without leaving the audit view. Click the badge to jump to that page in the Redirect Editor, or the <strong>×</strong> to clear the destination. An intentional <code>404</code> shows as a <code>404</code> badge. (It reflects a <em>resolved</em> destination — the same value the sidebar&#39;s <strong>R</strong> dot marks — so it appears once the destination is set or after a save resolves it, not the instant you mark a page Archive.)</li>
 </ul>
 <h3 id="quick-self-check">Quick self-check</h3>
 <p>You&#39;re ready to start auditing when:</p>
@@ -188,7 +189,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p>Anything client-specific lives here, saved inside the spreadsheet itself. Hand the file to another auditor and they inherit all of it:</p>
 <ul>
 <li>Site domain</li>
-<li>Custom KKE states</li>
+<li>Custom decision states</li>
 <li>Suggestion weights</li>
 <li>Page statuses and assignees</li>
 <li>Saved filters</li>
@@ -211,17 +212,17 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <ul>
 <li><strong>Client name</strong> and <strong>Project name</strong> — shown in the progress dashboard and on exported reports.</li>
 <li><strong>Site domain</strong> — the canonical domain for redirect and navigation paths: <strong>one</strong> URL, the domain the new site will live on (e.g. <code>https://business.example.edu</code>, optionally with a path). On a consolidation, don&#39;t list the source sites here — every redirect is built by putting a page&#39;s path after this value, so <code>https://a.edu; https://b.edu</code> produces destinations like <code>https://a.edu; https://b.edu/about</code>. The field refuses anything that isn&#39;t a single URL, and Transmission warns on open if a saved value isn&#39;t usable. It overrides the domain auto-detected from your URLs. If you change it later, existing redirects built on the old value are rewritten to the new one when you leave the field.</li>
-<li><strong>Default redirect destination</strong> — the fallback for Kill pages that don&#39;t have their own redirect. Change it and Transmission offers to update existing destinations that matched the old value (including blank ones).</li>
+<li><strong>Default redirect destination</strong> — the fallback for Archive pages that don&#39;t have their own redirect. Change it and Transmission offers to update existing destinations that matched the old value (including blank ones).</li>
 </ul>
-<h4 id="kke-states">KKE States</h4>
-<p>Beyond the five built-in calls (Keep, Kill, Evolve, Consolidate, Exclude), you can define your own states here, each with a color. Custom states are saved <strong>both</strong> in the file (so they travel) <strong>and</strong> in your app preferences (so new files inherit them). Each one shows how many rows currently use it.</p>
+<h4 id="decision-states">Decision states</h4>
+<p>Beyond the five built-in calls (Migrate, Revise, Archive, Consolidate, Exclude), you can define your own states here, each with a color. Custom states are saved <strong>both</strong> in the file (so they travel) <strong>and</strong> in your app preferences (so new files inherit them). Each one shows how many rows currently use it.</p>
 <p>This tab is also where you tidy up messy values:</p>
 <ul>
-<li><strong>Merge a state.</strong> Every state has a <strong>Merge…</strong> button that reassigns all its rows to another target. Targets are grouped into built-in states, your other custom states, and <em>undefined values found in the data</em> (typos like <code>POST LAUNCH</code>). Before committing, the dialog previews exactly how many <code>KKE_Recommendation</code>, <code>Final_KKE</code>, and <code>SME_Decision: Change: …</code> cells will change. Use it to fix typos from SMEs or earlier auditors, fold two redundant states into one, or retire a custom state into a built-in one.</li>
-<li><strong>Undefined values in data.</strong> A sub-list shows KKE values sitting in the data that aren&#39;t built-in or custom — usually typos or legacy values. Each has its own <strong>Merge…</strong>. Whitespace is forgiven (<code>Post Launch</code> and <code>Post Launch </code> match), but case matters (<code>POST LAUNCH</code> and <code>Post Launch</code> are listed separately, in case you want to normalize one into the other).</li>
+<li><strong>Merge a state.</strong> Every state has a <strong>Merge…</strong> button that reassigns all its rows to another target. Targets are grouped into built-in states, your other custom states, and <em>undefined values found in the data</em> (typos like <code>POST LAUNCH</code>). Before committing, the dialog previews exactly how many <code>MRA_Recommendation</code>, <code>Final_MRA</code>, and <code>SME_Decision: Change: …</code> cells will change. Use it to fix typos from SMEs or earlier auditors, fold two redundant states into one, or retire a custom state into a built-in one.</li>
+<li><strong>Undefined values in data.</strong> A sub-list shows MRA values sitting in the data that aren&#39;t built-in or custom — usually typos or legacy values. Each has its own <strong>Merge…</strong>. Whitespace is forgiven (<code>Post Launch</code> and <code>Post Launch </code> match), but case matters (<code>POST LAUNCH</code> and <code>Post Launch</code> are listed separately, in case you want to normalize one into the other).</li>
 </ul>
 <h4 id="suggestions">Suggestions</h4>
-<p>This tab tunes <strong>Suggested_KKE</strong>, the unified recommendation that blends analytics and rubric scoring (covered fully in <a href="#8-suggested_kke">Suggested_KKE</a>):</p>
+<p>This tab tunes <strong>Suggested_MRA</strong>, the unified recommendation that blends analytics and rubric scoring (covered fully in <a href="#8-suggested_mra">Suggested_MRA</a>):</p>
 <ul>
 <li><strong>GA Analytics source</strong> — <strong>Configure…</strong> opens the column-mapping, weights, and thresholds dialog; <strong>Re-run GA</strong> refreshes the scores after your data changes.</li>
 <li><strong>Rubric source</strong> — runs the rubric across your filtered rows.</li>
@@ -236,22 +237,22 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 </ul>
 <p>Both lists can also be added to on the fly with <strong>+ New…</strong> wherever they appear.</p>
 <h4 id="saved-filters">Saved Filters</h4>
-<p>A list of your named filter bundles, each with <strong>Apply</strong> and <strong>Delete</strong>. A bundle captures the search text, KKE filter, group filter, and any field filters together — see <a href="#4-finding-the-work">Finding the Work</a> for how to create them.</p>
+<p>A list of your named filter bundles, each with <strong>Apply</strong> and <strong>Delete</strong>. A bundle captures the search text, MRA filter, group filter, and any field filters together — see <a href="#4-finding-the-work">Finding the Work</a> for how to create them.</p>
 <blockquote>
-<p><strong>Where this is stored:</strong> every project setting is saved in the file&#39;s <code>KKE_Settings</code> sheet, and the libraries these tabs reference live in their own structural sheets (the Target Spec Library in <code>PatternLibrary</code>, the content-type crosswalk in <code>ContentTypeRegistry</code>, the glossary in <code>KKE_Glossary</code>). It all rides along with the spreadsheet.</p>
+<p><strong>Where this is stored:</strong> every project setting is saved in the file&#39;s <code>MRA_Settings</code> sheet, and the libraries these tabs reference live in their own structural sheets (the Target Spec Library in <code>PatternLibrary</code>, the content-type crosswalk in <code>ContentTypeRegistry</code>, the glossary in <code>MRA_Glossary</code>). It all rides along with the spreadsheet.</p>
 </blockquote>
 <h3 id="set-your-personal-preferences">Set your personal preferences</h3>
 <p>Open App Settings from the <strong>⚙</strong> button (or <strong>Transmission → Preferences…</strong>, <strong>Cmd+,</strong> — under <strong>File</strong> on Windows and Linux); the subtitle confirms it applies to you across all files.</p>
 <ul>
 <li><strong>Appearance</strong> — a <strong>System / Light / Dark</strong> segmented toggle at the top of the dialog. <strong>System</strong> (the default) follows your macOS appearance; <strong>Light</strong> and <strong>Dark</strong> pin the app regardless of the OS. This is a per-user preference. <em>(The embedded browser always renders crawled pages as designed — it is never dark-mode-adapted — so the pages you review look exactly as they do live.)</em></li>
-<li><strong>Auto-advance</strong> — jump to the next row after you set a KKE call (on by default).</li>
-<li><strong>Show SME fields</strong> — reveal the SME Decision / Final KKE / Content Owner controls (also toggled by the <strong>SME</strong> chip above the audit bar).</li>
+<li><strong>Auto-advance</strong> — jump to the next row after you set an MRA call (on by default).</li>
+<li><strong>Show SME fields</strong> — reveal the SME Decision / Final MRA / Content Owner controls (also toggled by the <strong>SME</strong> chip above the audit bar).</li>
 <li><strong>Show Migration fields</strong> — reveal Content Nature / Migration Track (also the <strong>MIGRATE</strong> chip).</li>
 <li><strong>Show Components cluster</strong> — reveal the component-tagging cluster (also the <strong>Components</strong> chip).</li>
 <li><strong>Rubrics folder</strong> — where your rubric files live; <strong>Browse…</strong> to point at it, <strong>Edit…</strong> to open them in-app.</li>
 <li><strong>Claude API key</strong> — optional; enables AI assessment and is stored locally on your machine.</li>
 <li><strong>Sidebar columns</strong> — extra columns to show in the row list.</li>
-<li><strong>Column mapping</strong> — tell Transmission which columns hold KKE / Tags / Notes / Group / Primary when your file uses non-standard names (saved per file).</li>
+<li><strong>Column mapping</strong> — tell Transmission which columns hold MRA / Tags / Notes / Group / Primary when your file uses non-standard names (saved per file).</li>
 </ul>
 <blockquote>
 <p><strong>Tip:</strong> two more preferences live outside this dialog and stick automatically — whether blank metadata fields are hidden (the <strong>⊘ / ◉</strong> icon in the field bar) and which audit-bar clusters you&#39;ve collapsed. App preferences are stored at <code>~/Library/Application Support/Transmission/prefs.json</code>; the full list is in the <a href="#preferences-persisted">appendix</a>.</p>
@@ -270,8 +271,8 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p>Your project is set up when:</p>
 <ul>
 <li><input disabled="" type="checkbox"> <strong>Identity</strong> is filled in — at least the <strong>Site domain</strong>, since redirects and sitemap paths depend on it</li>
-<li><input disabled="" type="checkbox"> Any <strong>custom KKE states</strong> this engagement needs are defined</li>
-<li><input disabled="" type="checkbox"> <strong>Suggestion sources</strong> are configured, if you&#39;ll use Suggested_KKE</li>
+<li><input disabled="" type="checkbox"> Any <strong>custom decision states</strong> this engagement needs are defined</li>
+<li><input disabled="" type="checkbox"> <strong>Suggestion sources</strong> are configured, if you&#39;ll use Suggested_MRA</li>
 <li><input disabled="" type="checkbox"> <strong>Migration</strong> vocabularies are seeded, if you&#39;ll reach the build phase</li>
 <li><input disabled="" type="checkbox"> <strong>App Settings</strong> reflect how you like to work</li>
 </ul>
@@ -289,7 +290,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p>One row equals one existing page. Click a row and Transmission loads that page in the built-in browser, then fills the <strong>field bar</strong> above it with everything it knows about the page. You make a call, and — with auto-advance on — the app moves you to the next row. Read, decide, repeat.</p>
 <p>Almost everything here is keyboard-driven, so you can keep one hand on the number keys and your eyes on the page.</p>
 <h3 id="make-the-call">Make the call</h3>
-<p>With a row selected, press a number key to record your KKE decision:</p>
+<p>With a row selected, press a number key to record your MRA decision:</p>
 <table>
 <thead>
 <tr>
@@ -299,15 +300,15 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 </thead>
 <tbody><tr>
 <td><strong>1</strong></td>
-<td>Keep</td>
+<td>Migrate</td>
 </tr>
 <tr>
 <td><strong>2</strong></td>
-<td>Kill</td>
+<td>Archive</td>
 </tr>
 <tr>
 <td><strong>3</strong></td>
-<td>Evolve</td>
+<td>Revise</td>
 </tr>
 <tr>
 <td><strong>4</strong></td>
@@ -335,12 +336,12 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <ul>
 <li><strong>Notes</strong> — click <strong>Notes</strong> in the Decide cluster to record <em>why</em> you made a call. A small dot on the button marks the pages that have notes.</li>
 <li><strong>Flag</strong> — press <strong>F</strong> (or click the ★) to flag a page you want to revisit, then filter to flagged pages later.</li>
-<li><strong>Assess</strong> — runs your rubric against the page and suggests a call; more in <a href="#8-suggested_kke">Suggested_KKE</a>.</li>
+<li><strong>Assess</strong> — runs your rubric against the page and suggests a call; more in <a href="#8-suggested_mra">Suggested_MRA</a>.</li>
 </ul>
 <h3 id="classify-as-you-go-optional">Classify as you go (optional)</h3>
 <p>The <strong>Classify</strong> cluster lets you add descriptive metadata without leaving the page: <strong>Content Type</strong>, <strong>Theme</strong>, <strong>Published</strong> status, <strong>Group</strong>, a <strong>Primary Tag</strong>, and free-form <strong>Tags</strong>.</p>
 <blockquote>
-<p><strong>Heads-up:</strong> resist the urge to fill everything in on the first pass. Set the KKE call and — where it matters for migration — the <strong>Content Type</strong>, then handle the rest in bulk later (see <a href="#5-bulk-operations">Bulk Operations</a>).</p>
+<p><strong>Heads-up:</strong> resist the urge to fill everything in on the first pass. Set the MRA call and — where it matters for migration — the <strong>Content Type</strong>, then handle the rest in bulk later (see <a href="#5-bulk-operations">Bulk Operations</a>).</p>
 </blockquote>
 <h3 id="drive-the-built-in-browser">Drive the built-in browser</h3>
 <p>The browser toolbar gives you the usual controls plus a few audit-specific tools:</p>
@@ -361,26 +362,26 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p><strong>The top row</strong> shows metadata pulled from your spreadsheet (Title, Status Code, and so on). Six fields accept inline edits — Title 1, Meta Description 1, H1-1, H1-2, H2-1, and H2-2 — and the rest are read-only. At its right edge sit the <strong>SME</strong>, <strong>MIGRATE</strong>, and <strong>Components</strong> chips (each reveals its matching cluster), the <strong>⊘ / ◉</strong> toggle (hide or show blank metadata fields), and the <strong>⚙</strong> field picker (choose which columns appear).</p>
 <p><strong>The audit bar</strong> below it is a stack of labeled <strong>cluster</strong> cards. Click a cluster&#39;s pill to collapse it to a one-line summary, and click again to expand; your choices stick, per cluster. Here&#39;s what each cluster holds:</p>
 <ul>
-<li><strong>Decide</strong> (blue) — the KKE buttons, the read-only <strong>Suggested_KKE</strong> badge (which shows the recommendation and a ⚠ when its sources disagree), and the <strong>Assess</strong>, <strong>Notes</strong>, <strong>Sitemap</strong>, and <strong>Menu</strong> actions. With SME fields on, it also shows the SME readout and the <strong>Final</strong> call.</li>
+<li><strong>Decide</strong> (blue) — the MRA buttons, the read-only <strong>Suggested_MRA</strong> badge (which shows the recommendation and a ⚠ when its sources disagree), and the <strong>Assess</strong>, <strong>Notes</strong>, <strong>Sitemap</strong>, and <strong>Menu</strong> actions. With SME fields on, it also shows the SME readout and the <strong>Final</strong> call.</li>
 <li><strong>Classify</strong> (slate) — Content Type, Theme, Published, Group, Primary Tag, and Tags (see <a href="#6-tagging-grouping--the-glossary">Tagging, Grouping &amp; the Glossary</a>).</li>
 <li><strong>Migrate</strong> (amber, optional) — Renders as and Migration Track (see <a href="#7-content-types--the-crosswalk">Content Types &amp; the Crosswalk</a>).</li>
 <li><strong>CMS</strong> (green) — Source CMS and New CMS admin links.</li>
 </ul>
 <blockquote>
-<p><strong>Heads-up:</strong> switching a page to <strong>Kill</strong> when it already has a sitemap assignment or a redirect prompts you to clear them, so you never leave an orphaned redirect behind. The same prompt appears for Final KKE, bulk changes, and Table View edits.</p>
+<p><strong>Heads-up:</strong> switching a page to <strong>Archive</strong> when it already has a sitemap assignment or a redirect prompts you to clear them, so you never leave an orphaned redirect behind. The same prompt appears for Final MRA, bulk changes, and Table View edits.</p>
 </blockquote>
 <h3 id="a-few-conveniences-worth-knowing">A few conveniences worth knowing</h3>
 <ul>
 <li><strong>Page thumbnails.</strong> Once you&#39;ve viewed a page, hovering its sidebar row shows a thumbnail preview — a quick way to recognize a page without clicking back into it. Thumbnails live in memory only and never bloat your file.</li>
 <li><strong>Note snippets.</strong> The Notes popover has a <strong>Snippets…</strong> menu for reusable rationale — insert a saved snippet, save the current note as one, or manage the list. Snippets follow you across projects.</li>
-<li><strong>Undo and redo.</strong> <strong>Cmd+Z</strong> and <strong>Cmd+Shift+Z</strong> cover KKE changes and sitemap node deletions — single or bulk (up to 100 actions per session). Tag and note edits aren&#39;t undoable, but they&#39;re always saved.</li>
+<li><strong>Undo and redo.</strong> <strong>Cmd+Z</strong> and <strong>Cmd+Shift+Z</strong> cover MRA changes and sitemap node deletions — single or bulk (up to 100 actions per session). Tag and note edits aren&#39;t undoable, but they&#39;re always saved.</li>
 <li><strong>Build the sitemap without leaving the audit.</strong> The <strong>Sitemap</strong> button places the current page on the sitemap (and if the sitemap is still empty, it offers an inline form — Label prefilled from the title, Slug from the URL — to create its very first node in one click). The <strong>Menu</strong> button adds the page to one of your menus: since menus reference pages that are on the sitemap, it makes sure the page is on the sitemap first, then lets you pick an existing menu, spin up a <strong>+ New menu…</strong>, or (with no menus yet) create your first menu right there. No trip to the Sitemap or Menus view required.</li>
 <li><strong>Clean paste.</strong> When you paste into sitemap labels, slugs, or notes, Transmission strips mojibake, stray HTML entities, and invisible characters — while leaving real accented letters (é, ü, ñ) untouched.</li>
 </ul>
 <h3 id="quick-self-check-2">Quick self-check</h3>
 <p>You&#39;re auditing well when:</p>
 <ul>
-<li><input disabled="" type="checkbox"> Every page you mean to review has a KKE call (press <strong><code>]</code></strong> to confirm none are left)</li>
+<li><input disabled="" type="checkbox"> Every page you mean to review has an MRA call (press <strong><code>]</code></strong> to confirm none are left)</li>
 <li><input disabled="" type="checkbox"> You&#39;ve captured a note wherever the call isn&#39;t self-evident</li>
 <li><input disabled="" type="checkbox"> <strong>Content Type</strong> is set where it&#39;ll feed migration classification</li>
 <li><input disabled="" type="checkbox"> Tricky pages are flagged for a second look</li>
@@ -392,7 +393,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p><strong>In a hurry?</strong> The <a href="walkthroughs/04-finding-the-work.html">Finding the Work walkthrough</a> is the one-page version.</p>
 </blockquote>
 <h3 id="how-filtering-thinks">How filtering thinks</h3>
-<p>Filters <strong>stack</strong>. Text search, KKE status, group, and any field filters all apply together (an AND), and the sidebar always shows exactly what&#39;s left. That matters for the next chapter, too: the <strong>Multi-bar</strong> acts on precisely this filtered set, so narrowing the list <em>is</em> how you choose what to act on in bulk.</p>
+<p>Filters <strong>stack</strong>. Text search, MRA status, group, and any field filters all apply together (an AND), and the sidebar always shows exactly what&#39;s left. That matters for the next chapter, too: the <strong>Multi-bar</strong> acts on precisely this filtered set, so narrowing the list <em>is</em> how you choose what to act on in bulk.</p>
 <h3 id="search-by-text">Search by text</h3>
 <p>The top of the sidebar is a search box with a <strong>scope</strong> selector beside it:</p>
 <ul>
@@ -409,8 +410,8 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <li>URLs are <strong>indented by level</strong>, so sections read as sections.</li>
 </ul>
 <p>Click <strong>Site order</strong> again to turn it off, or click the Address header to go back to A–Z / Z–A. Site order works together with every filter, and it&#39;s remembered like the other sort settings.</p>
-<h3 id="filter-by-kke-status">Filter by KKE status</h3>
-<p>Click the <strong>KKE filter</strong> to open a checkbox list. Check as many as you like and they combine with OR — so <strong>Keep + Evolve</strong> shows everything you&#39;re keeping. Alongside the five calls, the list includes useful <strong>special filters</strong>:</p>
+<h3 id="filter-by-mra-status">Filter by MRA status</h3>
+<p>Click the <strong>MRA filter</strong> to open a checkbox list. Check as many as you like and they combine with OR — so <strong>Migrate + Revise</strong> shows everything you&#39;re keeping. Alongside the five calls, the list includes useful <strong>special filters</strong>:</p>
 <ul>
 <li><strong>Unreviewed</strong> and <strong>Flagged</strong></li>
 <li><strong>Duplicates</strong> (identical Title, H1, or Meta Description)</li>
@@ -430,23 +431,23 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p><code>is greater than</code> and <code>is less than</code> are for the numeric columns a crawl is full of — word count, status code, response time, inlinks, GA sessions. They compare as <strong>numbers</strong> whenever both the cell and your value are numeric (<code>1,234</code> is fine), so <code>Word Count is less than 300</code> finds thin pages without <code>900</code> sorting above <code>1,000</code> the way a text comparison would. Give either side something non-numeric and they fall back to comparing character by character in ASCII order — usable for text if you know that ordering, where uppercase sorts before lowercase. Blank cells match neither direction: blank means <em>unreviewed</em>, not zero.</p>
 <p>Each filter becomes a removable chip, and you can stack several (they AND together). The <strong>Unclassified</strong> button is a one-click shortcut for the common case <code>Content Nature is blank</code>.</p>
 <h3 id="save-a-filter-for-next-time">Save a filter for next time</h3>
-<p>Built a slice you&#39;ll want again? Open <strong>Saved filters…</strong> and choose <strong>+ Save current filter…</strong>. The saved bundle remembers the search text and scope, the KKE selection, the group, and every field filter — all together. Manage your saved filters in <strong>Project Settings → Saved Filters</strong>.</p>
+<p>Built a slice you&#39;ll want again? Open <strong>Saved filters…</strong> and choose <strong>+ Save current filter…</strong>. The saved bundle remembers the search text and scope, the MRA selection, the group, and every field filter — all together. Manage your saved filters in <strong>Project Settings → Saved Filters</strong>.</p>
 <h3 id="find-one-specific-thing-cmdf">Find one specific thing (Cmd+F)</h3>
 <p>When you just want to <em>find</em> a page rather than narrow the list, press <strong>Cmd+F</strong> for a floating search bar. It searches every column across every row, shows a match count, and steps through hits with <strong>◀ / ▶</strong> — clearing the sidebar filters if needed so it can show you the match. Think of it as &quot;find and jump,&quot; distinct from the sidebar&#39;s &quot;narrow the list.&quot;</p>
 <blockquote>
-<p><strong>Good to know — reading the sidebar.</strong> Each row carries a gentle KKE-tinted background (green Keep, red Kill, yellow Evolve, grey Exclude), the URL, a KKE badge, and the flag ★. Two small letters flag structure: <strong>N</strong> (green) means the page is assigned to a sitemap node, and <strong>R</strong> (amber) means it has a redirect. Non-200 pages show a colored status badge (amber for 3xx, red for 4xx/5xx). A <strong>Quick Stats Bar</strong> along the bottom tracks &quot;X/Y reviewed (Z%).&quot;</p>
+<p><strong>Good to know — reading the sidebar.</strong> Each row carries a gentle MRA-tinted background (green Migrate, red Archive, yellow Revise, grey Exclude), the URL, an MRA badge, and the flag ★. Two small letters flag structure: <strong>N</strong> (green) means the page is assigned to a sitemap node, and <strong>R</strong> (amber) means it has a redirect. Non-200 pages show a colored status badge (amber for 3xx, red for 4xx/5xx). A <strong>Quick Stats Bar</strong> along the bottom tracks &quot;X/Y reviewed (Z%).&quot;</p>
 </blockquote>
 <h3 id="quick-self-check-3">Quick self-check</h3>
 <ul>
 <li><input disabled="" type="checkbox"> Your search <strong>scope</strong> matches what you&#39;re hunting for</li>
-<li><input disabled="" type="checkbox"> You&#39;re multi-checking the KKE filter when you mean &quot;either/or&quot;</li>
+<li><input disabled="" type="checkbox"> You&#39;re multi-checking the MRA filter when you mean &quot;either/or&quot;</li>
 <li><input disabled="" type="checkbox"> Field filters are layered for precise slices (e.g. <code>Sitemap_ID is blank</code>)</li>
 <li><input disabled="" type="checkbox"> Slices you&#39;ll reuse are saved as named filters</li>
 <li><input disabled="" type="checkbox"> You reach for <strong>Cmd+F</strong> for one-off lookups</li>
 </ul>
 <h3 id="a-bit-more-to-know">A bit more to know</h3>
 <ul>
-<li><strong>Customizing the sidebar.</strong> By default the list shows your first few columns; change that in <strong>App Settings → Sidebar columns</strong>. The <strong>+</strong> at the right of the column-header strip adds extra comparison columns (SME Decision, Final KKE, Content Owner) as badges; the <strong>×</strong> removes one. Long URLs scroll sideways when you hover, and a small gear by &quot;KKE&quot; opens column mapping.</li>
+<li><strong>Customizing the sidebar.</strong> By default the list shows your first few columns; change that in <strong>App Settings → Sidebar columns</strong>. The <strong>+</strong> at the right of the column-header strip adds extra comparison columns (SME Decision, Final MRA, Content Owner) as badges; the <strong>×</strong> removes one. Long URLs scroll sideways when you hover, and a small gear by &quot;MRA&quot; opens column mapping.</li>
 <li><strong>Adding a page by hand.</strong> Found a page the crawl missed? <strong>New Page</strong> (in the sidebar toolbar) opens a URL + Title dialog, checks for duplicates, and drops the new row in, selected and ready.</li>
 <li><strong>Moving around.</strong> Click a row to select and load it; <strong>Cmd+click</strong> toggles rows for a multi-selection; <strong>Shift+click</strong> selects a range; <strong>↑/↓</strong> or <strong>k/j</strong> step through.</li>
 <li><strong>Clearing out non-200s in bulk</strong> is its own quick workflow — see <a href="#10-non-200-triage">Non-200 Triage</a>.</li>
@@ -467,20 +468,20 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <h3 id="choose-your-target">Choose your target</h3>
 <p>You have two ways to point the Multi-bar at the right pages:</p>
 <ul>
-<li><strong>Filter only.</strong> Narrow the list with search, the KKE filter, or field filters (see <a href="#4-finding-the-work">Finding the Work</a>) and let the Multi-bar act on the whole result. Best when the rule is expressible — &quot;all 404s,&quot; &quot;everything tagged thin-content.&quot;</li>
+<li><strong>Filter only.</strong> Narrow the list with search, the MRA filter, or field filters (see <a href="#4-finding-the-work">Finding the Work</a>) and let the Multi-bar act on the whole result. Best when the rule is expressible — &quot;all 404s,&quot; &quot;everything tagged thin-content.&quot;</li>
 <li><strong>Multi-select.</strong> <strong>Cmd+click</strong> toggles individual rows and <strong>Shift+click</strong> selects a range. Best when the rule is in your head — &quot;these five, not those two.&quot;</li>
 <li><strong>Select all visible.</strong> The checkbox at the left of the column header strip selects every row the current filter shows — then Cmd+click to drop the exceptions and apply. It shows a dash (indeterminate) when only some visible rows are selected, and clicking it again clears the selection.</li>
 </ul>
 <p>If you&#39;ve both selected rows and applied a filter, your <strong>selection wins</strong>.</p>
 <h3 id="apply-an-action">Apply an action</h3>
 <ol>
-<li>Pick an <strong>Action</strong> — Set KKE, Set Published Status, Set Content Type, Set Content Theme, Set Group, Set Primary Tag, Add Tag, <strong>Assign to Sitemap…</strong>, or <strong>⚠ Delete rows permanently…</strong>.</li>
+<li>Pick an <strong>Action</strong> — Set MRA, Set Published Status, Set Content Type, Set Content Theme, Set Group, Set Primary Tag, Add Tag, <strong>Assign to Sitemap…</strong>, or <strong>⚠ Delete rows permanently…</strong>.</li>
 <li>Choose the <strong>value</strong> (every list except <em>Add Tag</em> offers a <code>— Clear</code> option at the top, so bulk-clearing a field is easy).</li>
 <li>Click <strong>Apply</strong>. Every change is written to the audit trail.</li>
 </ol>
 <p><strong>Clear selection</strong> drops your multi-selection and hands the target back to the filter.</p>
 <blockquote>
-<p><strong>Heads-up:</strong> bulk-setting <strong>Kill</strong> on pages that already have a sitemap assignment or redirect triggers the same cleanup prompt as a single Kill — so you decide whether to clear those too, rather than leaving redirects pointing nowhere.</p>
+<p><strong>Heads-up:</strong> bulk-setting <strong>Archive</strong> on pages that already have a sitemap assignment or redirect triggers the same cleanup prompt as a single Archive — so you decide whether to clear those too, rather than leaving redirects pointing nowhere.</p>
 </blockquote>
 <h3 id="deleting-rows-for-good">Deleting rows for good</h3>
 <p>Almost nothing in Transmission destroys data — your crawl is preserved column-for-column from import to export. <strong>⚠ Delete rows permanently…</strong> is the exception, and it exists for one narrow case: rows that were never pages. A stray export appended to the file, a merge that doubled a section, a handful of junk lines that arrived with the spreadsheet. Without it the only remedy is Excel, which costs you the audit columns and the change log.</p>
@@ -488,7 +489,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p>Before it does anything, the dialog tells you what the deletion <strong>breaks</strong>:</p>
 <ul>
 <li>pages that <strong>consolidate into</strong> one you&#39;re deleting, which would be left pointing at nothing</li>
-<li>how many of the doomed rows carry a <strong>KKE decision</strong> — reviewed work, as distinct from crawl noise</li>
+<li>how many of the doomed rows carry an <strong>MRA decision</strong> — reviewed work, as distinct from crawl noise</li>
 <li>how many are <strong>placed on the sitemap</strong>, or carry a <strong>redirect destination</strong> that will drop out of the redirect map</li>
 </ul>
 <p>Then it asks you to type <code>PERMANENTLY DELETE</code>. The Delete button stays greyed out until you do.</p>
@@ -501,7 +502,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p>If you do need to recover, a <code>.transmission</code> project writes a backup into the app&#39;s <code>backups</code> folder <strong>each time it is opened</strong>, so the fallback is the state of the project when you opened it this session — everything since is lost. That is a genuinely bad day, which is why the confirmation is what it is. Spreadsheets have no such backup.</p>
 <h3 id="placing-many-pages-on-the-sitemap-at-once">Placing many pages on the sitemap at once</h3>
 <p><strong>Assign to Sitemap…</strong> works differently from the other bulk actions — there&#39;s no value to pick, just <strong>Apply</strong>, which opens a small dialog.</p>
-<p>By default only <strong>Keep</strong> and <strong>Evolve</strong> pages are eligible (checking <code>Final_KKE</code> first if it&#39;s set, otherwise <code>KKE_Recommendation</code> — so an SME override wins). Everything else — Kill, Exclude, unreviewed, and Consolidate — is left off the sitemap unless you check <strong>Include Kill / Exclude / unreviewed pages too</strong>. This matters most when building a <strong>current-state sitemap</strong> for a client conversation (see below) — that&#39;s the one routine case where you <em>do</em> want everything represented, killed pages included. Even with that box checked, Consolidate pages get one more speed bump: if any are in the batch, a follow-up prompt asks you to confirm including them, since a Consolidate page is being merged into another page&#39;s URL rather than getting a destination of its own — easy to sweep in by accident.</p>
+<p>By default only <strong>Migrate</strong> and <strong>Revise</strong> pages are eligible (checking <code>Final_MRA</code> first if it&#39;s set, otherwise <code>MRA_Recommendation</code> — so an SME override wins). Everything else — Archive, Exclude, unreviewed, and Consolidate — is left off the sitemap unless you check <strong>Include Archive / Exclude / unreviewed pages too</strong>. This matters most when building a <strong>current-state sitemap</strong> for a client conversation (see below) — that&#39;s the one routine case where you <em>do</em> want everything represented, archived pages included. Even with that box checked, Consolidate pages get one more speed bump: if any are in the batch, a follow-up prompt asks you to confirm including them, since a Consolidate page is being merged into another page&#39;s URL rather than getting a destination of its own — easy to sweep in by accident.</p>
 <p>Once you know which pages are going, pick a destination:</p>
 <ul>
 <li><strong>Suggested</strong> — if some of your selected pages already have a <em>sibling</em> page placed on the sitemap (e.g. <code>/about</code> is already assigned and you&#39;re placing <code>/about/leadership</code>), the dialog offers that node up front with a one-click <strong>Use this</strong> — the same auto-suggestion the single-page Sitemap picker uses, extended to the whole batch. It shows how many of your pages agree (e.g. &quot;12 of 15 pages&quot;).</li>
@@ -516,17 +517,17 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <p>Pages already placed on the sitemap are skipped and called out in the confirmation. This is a <em>speed</em> tool, not a precision one: the goal is getting dozens or hundreds of pages onto the sitemap in one action, then reorganizing them into their final structure with the Sitemap editor&#39;s drag-and-drop.</p>
 <blockquote>
 <p><strong>Building a &quot;current state&quot; sitemap for a client conversation? Duplicate the project <em>first</em>.</strong> <code>File → Save As Project…</code> to a dated snapshot name (e.g. <code>project-current-2026-07-15</code>), build the descriptive tree <strong>there</strong>, and export your diagrams from it — then go back to the untouched original for the forward plan. The two files together make the now-vs-future story easy to show a client.</p>
-<p>Do it in this order, not the other way around. Placing a page on a node writes its <code>Computed Path</code>, and on the next save the redirect resolver reads that, sees it differs from the page&#39;s live URL, and writes a <code>Redirect_Destination</code> — correct for a tree describing where pages are <em>going</em>, meaningless for one describing where they already <em>are</em>. Those redirects then outlive the tree: deleting a node clears its pages&#39; sitemap fields but not their redirects, and the resolver won&#39;t revisit an existing value on a Keep/Evolve page. Snapshot-then-duplicate copies that contamination straight into your forward plan. In the snapshot copy, tick <strong>Include Kill / Exclude / unreviewed pages too</strong> so the whole site is represented. See <a href="running-an-audit.html#showing-the-current-state--do-it-in-a-copy">Showing the current state</a> for the reset procedure if it&#39;s already happened in place.</p>
+<p>Do it in this order, not the other way around. Placing a page on a node writes its <code>Computed Path</code>, and on the next save the redirect resolver reads that, sees it differs from the page&#39;s live URL, and writes a <code>Redirect_Destination</code> — correct for a tree describing where pages are <em>going</em>, meaningless for one describing where they already <em>are</em>. Those redirects then outlive the tree: deleting a node clears its pages&#39; sitemap fields but not their redirects, and the resolver won&#39;t revisit an existing value on a Migrate/Revise page. Snapshot-then-duplicate copies that contamination straight into your forward plan. In the snapshot copy, tick <strong>Include Archive / Exclude / unreviewed pages too</strong> so the whole site is represented. See <a href="running-an-audit.html#showing-the-current-state--do-it-in-a-copy">Showing the current state</a> for the reset procedure if it&#39;s already happened in place.</p>
 </blockquote>
 <blockquote>
-<p><strong>Starting from a blank sitemap?</strong> <strong>Project → Create Sitemap from Audit…</strong> goes one step further than Assign to Sitemap — it reads every eligible page&#39;s URL and builds the whole starter tree for you in one pass, no destination to pick. <code>/about/leadership</code> becomes <strong>About → Leadership</strong> automatically. Pick a <strong>Bucket depth</strong> (how many URL segments become nested sections — 2 is a good default; anything deeper folds into one page under the deepest bucket) and whether to include Kill/Exclude/unreviewed pages, then Generate. Safe to run again later, too — it only merges (matching section names it already created), never replaces, so it won&#39;t duplicate work you&#39;ve since reorganized by hand.</p>
+<p><strong>Starting from a blank sitemap?</strong> <strong>Project → Create Sitemap from Audit…</strong> goes one step further than Assign to Sitemap — it reads every eligible page&#39;s URL and builds the whole starter tree for you in one pass, no destination to pick. <code>/about/leadership</code> becomes <strong>About → Leadership</strong> automatically. Pick a <strong>Bucket depth</strong> (how many URL segments become nested sections — 2 is a good default; anything deeper folds into one page under the deepest bucket) and whether to include Archive/Exclude/unreviewed pages, then Generate. Safe to run again later, too — it only merges (matching section names it already created), never replaces, so it won&#39;t duplicate work you&#39;ve since reorganized by hand.</p>
 </blockquote>
 <blockquote>
 <p><strong>Read the prediction before you click Generate.</strong> The dialog tells you how many top-level sections you&#39;re about to create and how many of them will hold a single page. This is worth a look, because the tool can only find the hierarchy your URLs already have — and plenty of sites don&#39;t have one. On a flat CMS where every article lives at <code>/some-long-slug</code>, each of those pages becomes its own top-level section: one real audit produced <strong>548 sections from 1,859 pages</strong>, 461 of them a single page. Note also that <strong>bucket depth won&#39;t change that number</strong> — sections come from the <em>first</em> URL segment, so every depth gives the same count.</p>
-<p>That&#39;s not a failure of the tool, it&#39;s a finding about the site: those URLs carry no information architecture to derive one from. But it does produce a tree too big to draw. When the prediction looks like this, the dialog offers to sweep the single-page sections into one named section (&quot;Unsorted&quot; by default) as part of the same step, so what you end up with is a tree you can actually open and start organizing. You can also spot crawl artifacts here — <code>/tag</code>, <code>/category</code>, <code>/wp-content</code> — which are usually worth triaging to Kill or Exclude <em>before</em> generating, so they never enter the sitemap at all.</p>
+<p>That&#39;s not a failure of the tool, it&#39;s a finding about the site: those URLs carry no information architecture to derive one from. But it does produce a tree too big to draw. When the prediction looks like this, the dialog offers to sweep the single-page sections into one named section (&quot;Unsorted&quot; by default) as part of the same step, so what you end up with is a tree you can actually open and start organizing. You can also spot crawl artifacts here — <code>/tag</code>, <code>/category</code>, <code>/wp-content</code> — which are usually worth triaging to Archive or Exclude <em>before</em> generating, so they never enter the sitemap at all.</p>
 </blockquote>
 <h3 id="score-in-bulk-instead-of-deciding-by-hand">Score in bulk instead of deciding by hand</h3>
-<p>Sometimes you don&#39;t want to <em>set</em> a call across many pages — you want a <em>suggestion</em> to react to. <strong>Project → Run Rubric on filtered rows…</strong> scores the filtered set and feeds the results into <strong>Suggested_KKE</strong> (see <a href="#8-suggested_kke">Suggested_KKE</a>). You still make the final call; the rubric just does the first read.</p>
+<p>Sometimes you don&#39;t want to <em>set</em> a call across many pages — you want a <em>suggestion</em> to react to. <strong>Project → Run Rubric on filtered rows…</strong> scores the filtered set and feeds the results into <strong>Suggested_MRA</strong> (see <a href="#8-suggested_mra">Suggested_MRA</a>). You still make the final call; the rubric just does the first read.</p>
 <blockquote>
 <p><strong>Tip — a few patterns that pay off:</strong></p>
 <ul>
@@ -540,13 +541,13 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <li><input disabled="" type="checkbox"> The Multi-bar&#39;s label confirms the right target (<strong>selected</strong> vs <strong>filtered</strong>) before you Apply</li>
 <li><input disabled="" type="checkbox"> Anything you&#39;re tempted to delete is genuinely not a page — a real URL you aren&#39;t auditing is an <code>Exclude</code></li>
 <li><input disabled="" type="checkbox"> You&#39;ve spot-checked a couple of rows in the filtered set</li>
-<li><input disabled="" type="checkbox"> Any Kill-cleanup prompt was handled the way you intended</li>
-<li><input disabled="" type="checkbox"> You used batch scoring for <em>suggestions</em>, and set KKE by hand where judgment matters</li>
+<li><input disabled="" type="checkbox"> Any Archive-cleanup prompt was handled the way you intended</li>
+<li><input disabled="" type="checkbox"> You used batch scoring for <em>suggestions</em>, and set MRA by hand where judgment matters</li>
 </ul>
 <h3 id="a-bit-more-to-know-1">A bit more to know</h3>
 <ul>
 <li><strong>Batch AI assessment.</strong> The <strong>Batch Assess</strong> button in the assessment popover runs the AI across every filtered row, one at a time, with a running count you can cancel. It&#39;s paced at about one request per second to stay within API limits.</li>
-<li><strong>Finding duplicates.</strong> The KKE filter&#39;s <strong>Duplicates</strong> option surfaces rows that share an identical Title, H1, or Meta Description — prime candidates for consolidation, or a sign of content copied across URLs.</li>
+<li><strong>Finding duplicates.</strong> The MRA filter&#39;s <strong>Duplicates</strong> option surfaces rows that share an identical Title, H1, or Meta Description — prime candidates for consolidation, or a sign of content copied across URLs.</li>
 </ul>
 <hr>
 <h2 id="6-tagging-grouping--the-glossary">6. Tagging, Grouping &amp; the Glossary</h2>
@@ -579,7 +580,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <li><strong>+ Add entry</strong> lets you seed a definition for a term you haven&#39;t applied yet.</li>
 <li>Empty definitions are pruned when you save, so only documented terms persist.</li>
 </ul>
-<p>Your definitions travel with the file (in the <code>KKE_Glossary</code> sheet) and surface as hover tooltips on tag chips and the Group dropdown — gentle reminders right where you&#39;re working.</p>
+<p>Your definitions travel with the file (in the <code>MRA_Glossary</code> sheet) and surface as hover tooltips on tag chips and the Group dropdown — gentle reminders right where you&#39;re working.</p>
 <h3 id="hand-the-glossary-to-the-client">Hand the glossary to the client</h3>
 <p>Click <strong>Export for Word…</strong> in the glossary editor to save a clean, styled <code>.html</code> file (Calibri 11pt, with your client, project, and date in the header). Word opens it directly, so it&#39;s ready to drop into a content-strategy deliverable as the documented key to your tagged inventory.</p>
 <h3 id="quick-self-check-5">Quick self-check</h3>
@@ -607,7 +608,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 <li><strong>Canonical target not in this crawl</strong> — left alone. There&#39;s nothing to consolidate into; the <code>Canonical target not in this crawl</code> filter shows them.</li>
 </ul>
 <blockquote>
-<p><strong>Nothing is hidden.</strong> Every page keeps its row in the sidebar and gets a real, logged KKE decision you can see and change. <strong>Cmd+Z reverses the entire triage in one step.</strong> Pages that already have a decision are skipped unless you say otherwise, and sites you&#39;ve marked out of scope are never touched.</p>
+<p><strong>Nothing is hidden.</strong> Every page keeps its row in the sidebar and gets a real, logged MRA decision you can see and change. <strong>Cmd+Z reverses the entire triage in one step.</strong> Pages that already have a decision are skipped unless you say otherwise, and sites you&#39;ve marked out of scope are never touched.</p>
 </blockquote>
 <p>Two things get noticeably better afterwards: the <strong>Duplicates</strong> filter stops matching most of the site (it now ignores pages you&#39;ve already dispositioned), and your undecided count reflects real content.</p>
 <h3 id="consolidating-several-sites-into-one">Consolidating several sites into one</h3>
@@ -626,7 +627,7 @@ first. It&#39;s short, it&#39;s opinionated, and it explains why the order matte
 </ul>
 <p>Then run <strong>Reports → Site Consolidation Overview</strong> and <strong>Cross-Site Duplicate Overlap</strong> — see <a href="#16-reports-for-clients--stakeholders">Reports</a>.</p>
 <h3 id="audience-who-is-this-page-for">Audience: who is this page for?</h3>
-<p>Most engagements start with an <strong>audience prioritization workshop</strong> — the client ranks who the site is really for. That ranking has traditionally lived in a deck and never touched the audit, so Keep/Kill/Evolve got argued on traffic and quality alone. Audience tagging closes that loop: a page can have respectable traffic, pass every rubric rule, and still serve nobody the organization decided to invest in. That is a finding you can act on, and it is invisible without this.</p>
+<p>Most engagements start with an <strong>audience prioritization workshop</strong> — the client ranks who the site is really for. That ranking has traditionally lived in a deck and never touched the audit, so Migrate/Revise/Archive got argued on traffic and quality alone. Audience tagging closes that loop: a page can have respectable traffic, pass every rubric rule, and still serve nobody the organization decided to invest in. That is a finding you can act on, and it is invisible without this.</p>
 <p><strong>1. Load the workshop output.</strong> <strong>Project → Audience Library…</strong> (or Project Settings → <strong>Audience</strong>) is where the ranking lives. Add audiences one at a time, <strong>Seed starter list…</strong> to begin from a generic set (<strong>Higher education</strong> or <strong>General organization</strong>), or — usually fastest, and always the better answer when you have it — <strong>Paste from workshop…</strong> and drop in the table straight from your spreadsheet, one per line:</p>
 <pre><code>Prospective Undergraduates	Primary	High-school students choosing where to apply
 Alumni	Secondary	Graduates staying connected
@@ -638,29 +639,29 @@ Alumni	Secondary	Graduates staying connected
 <li><strong>Primarily for</strong> — who it&#39;s <em>mainly</em> for. Tag exactly one audience and this fills itself in; tag several and you pick.</li>
 </ul>
 <blockquote>
-<p><strong>A blank audience is not &quot;serves nobody.&quot;</strong> Blank means <em>nobody has looked yet</em>. When you review a page and conclude it genuinely serves no one you care about, tag it <strong>— None (no target audience)</strong>. That distinction is what lets the app argue Kill on the second case without accusing every untouched row of the same thing.</p>
+<p><strong>A blank audience is not &quot;serves nobody.&quot;</strong> Blank means <em>nobody has looked yet</em>. When you review a page and conclude it genuinely serves no one you care about, tag it <strong>— None (no target audience)</strong>. That distinction is what lets the app argue Archive on the second case without accusing every untouched row of the same thing.</p>
 </blockquote>
 <p><strong>3. Tag in bulk — really.</strong> Nobody hand-tags three thousand pages through a chip input, and a column that&#39;s 4% full makes every report below worthless. Filter to a section, select all, and use the Multi-bar&#39;s <strong>Add Audience</strong> / <strong>Remove Audience</strong> / <strong>Set Primary Audience</strong>. A large site is realistically a few dozen bulk passes plus hand-correction. Two filters give you the worklists:</p>
 <ul>
-<li><strong>Needs audience</strong> — Keep/Evolve pages nobody has assessed yet.</li>
+<li><strong>Needs audience</strong> — Migrate/Revise pages nobody has assessed yet.</li>
 <li><strong>Serves no priority audience</strong> — reviewed, and everything it serves is off-strategy.</li>
 </ul>
 <p><strong>4. Two tools for the long tail.</strong> Bulk passes get you most of the way; these two get you the rest.</p>
 <p><strong>Set audiences on the sitemap.</strong> If your IA already says who each section is for, say it once, on the section. Every sitemap node&#39;s editor has an <strong>Audience</strong> section: tick the audiences the branch is for. A node with none set inherits from its nearest ancestor, so tagging <em>Academics</em> covers everything beneath it, and a child that sets its own (say <em>Faculty pages</em> → Faculty) overrides that for its own branch. Only nodes that set audiences themselves show a 👥 chip in the tree, so you can see where each setting lives.</p>
-<p>Node audiences fill <strong>untagged</strong> pages placed under them. They never overwrite a page you&#39;ve tagged, and they skip Kill/Exclude pages and out-of-scope sites, the same rules as the other fill tools. When you save a node with new audiences, you&#39;re asked before its branch is filled, with the page count. When you assign a single page from the audit bar, it&#39;s filled right away and a toast tells you so. Either way, one <strong>Cmd+Z</strong> undoes it. <em>— None</em> can&#39;t be set on a node: &quot;serves nobody&quot; is a call about a page, not a section. The Visual Sitemap and Treemap can color by <strong>Audience (sitemap)</strong>, so a whole branch shows the audience it inherits.</p>
+<p>Node audiences fill <strong>untagged</strong> pages placed under them. They never overwrite a page you&#39;ve tagged, and they skip Archive/Exclude pages and out-of-scope sites, the same rules as the other fill tools. When you save a node with new audiences, you&#39;re asked before its branch is filled, with the page count. When you assign a single page from the audit bar, it&#39;s filled right away and a toast tells you so. Either way, one <strong>Cmd+Z</strong> undoes it. <em>— None</em> can&#39;t be set on a node: &quot;serves nobody&quot; is a call about a page, not a section. The Visual Sitemap and Treemap can color by <strong>Audience (sitemap)</strong>, so a whole branch shows the audience it inherits.</p>
 <p><strong>Fill Audiences from Section…</strong> (<code>Project</code> menu) spreads audiences you have <em>already</em> tagged in a section onto that section&#39;s untagged pages. It invents nothing — it only propagates a decision you made yourself somewhere else in the same section, and it only fills blanks. If any untagged pages sit under sitemap nodes with audiences, it offers to fill those from the sitemap first, since the sitemap is a decision and section agreement is only an inference. The dialog shows every section it can act on, what it would apply, the agreement behind it, and how many pages it would fill; untick any you disagree with. A section needs at least three tagged pages, with an audience appearing on at least half of them, before it&#39;s allowed to speak for the rest — so tag a handful by hand first, then run this. The whole fill is one <strong>Cmd+Z</strong>.</p>
 <blockquote>
-<p><strong>— None is never inherited.</strong> Spreading &quot;serves nobody&quot; onto pages no one has looked at would turn an unreviewed blank into a Kill vote. If a page genuinely serves no one, that stays a call you make.</p>
+<p><strong>— None is never inherited.</strong> Spreading &quot;serves nobody&quot; onto pages no one has looked at would turn an unreviewed blank into an Archive vote. If a page genuinely serves no one, that stays a call you make.</p>
 </blockquote>
 <p><strong>Suggest Audiences with AI…</strong> (<code>Project</code> menu, needs a Claude API key in App Settings) reads each page&#39;s title, H1, meta description, URL and section against <em>your</em> audience library and proposes who it serves. Because it&#39;s tagging against the library, the suggestions are specific to this client rather than generic — which is also why the library has to exist first.</p>
-<p>It <strong>does not write your <code>Audiences</code> column.</strong> Suggestions go into a review queue, exactly as Suggested KKE never touches your KKE call. Review them two ways:</p>
+<p>It <strong>does not write your <code>Audiences</code> column.</strong> Suggestions go into a review queue, exactly as Suggested MRA never touches your MRA call. Review them two ways:</p>
 <ul>
 <li><strong>In bulk</strong> — the review dialog groups every suggestion by the answer, so a few thousand pages become a few dozen decisions. Each group shows sample paths and a confidence reading; accept or decline the whole group. Low-confidence groups are where the metadata was too thin to tell — worth opening a couple of those pages first.</li>
 <li><strong>One at a time</strong> — a page with a pending suggestion shows it inline in the Audience cluster with <strong>Accept</strong> and <strong>Dismiss</strong>, so you can take them as you work through the audit normally. The <strong>Audience suggested by AI</strong> filter is that worklist.</li>
 </ul>
 <p>Pick the scope (everything untagged, or just the current filter — pilot one section before committing) and the model. Requests are billed to your own key, and <strong>Esc</strong> stops a run with everything suggested so far kept. Accepting is one <strong>Cmd+Z</strong>; declining leaves the page blank, which is the honest state — still unreviewed.</p>
-<p><strong>5. It votes on the KKE call.</strong> Once pages are tagged, <strong>Audience</strong> joins GA and Rubric as a source in <a href="#8-suggested_kke">Suggested KKE</a>: serving a Primary audience argues <strong>Keep</strong>, serving only Tertiary/off-target audiences argues <strong>Evolve</strong>, and an explicit <em>— None</em> argues <strong>Kill</strong>. Untagged pages and Secondary-only pages abstain entirely, so an untagged project is completely unaffected. Tune its weight beside the others in Project Settings → <strong>Suggestions</strong>.</p>
-<p>The disagreements are where this earns its keep. <em>GA says Keep, Audience says Kill</em> is a popular page serving nobody strategic — often a legacy hub or an internal page ranking on brand terms. The reverse is under-served priority content, which argues for <strong>promotion</strong>, not removal.</p>
+<p><strong>5. It votes on the MRA call.</strong> Once pages are tagged, <strong>Audience</strong> joins GA and Rubric as a source in <a href="#8-suggested_mra">Suggested MRA</a>: serving a Primary audience argues <strong>Migrate</strong>, serving only Tertiary/off-target audiences argues <strong>Revise</strong>, and an explicit <em>— None</em> argues <strong>Archive</strong>. Untagged pages and Secondary-only pages abstain entirely, so an untagged project is completely unaffected. Tune its weight beside the others in Project Settings → <strong>Suggestions</strong>.</p>
+<p>The disagreements are where this earns its keep. <em>GA says Migrate, Audience says Archive</em> is a popular page serving nobody strategic — often a legacy hub or an internal page ranking on brand terms. The reverse is under-served priority content, which argues for <strong>promotion</strong>, not removal.</p>
 <p><strong>6. See it.</strong> Color the Visual Sitemap or Treemap by <strong>Primary Audience</strong> to see which audience each section actually serves, and run the three audience reports — see <a href="#16-reports-for-clients--stakeholders">Reports</a>.</p>
 <h3 id="jobs-to-be-done">Jobs to be done</h3>
 <p>Audiences answer <em>who</em> a page is for. <strong>Jobs</strong> answer <em>what they came to do</em> — and the two together are what a discovery workshop actually produces.</p>
@@ -669,11 +670,11 @@ Alumni	Secondary	Graduates staying connected
 <blockquote>
 <p><strong>The point isn&#39;t the tagging — it&#39;s the gap.</strong> Run <strong>Reports → Jobs Coverage</strong> and read the top section first: <em>jobs nothing answers</em>. Those are jobs the client told you people come to do, for which the site has no page. That is the strongest brief for net-new content you can write, because every line traces back to something they said themselves rather than to your judgement. The same list is appended to the <strong>Net New Content Brief</strong>, which otherwise only finds gaps in the sitemap you drew.</p>
 </blockquote>
-<p>The report&#39;s <strong>Best page</strong> column is the page you&#39;d send someone to for that job — a Keep outranks an Evolve outranks an unreviewed page. It&#39;s a routing hint, not a quality score.</p>
+<p>The report&#39;s <strong>Best page</strong> column is the page you&#39;d send someone to for that job — a Migrate outranks a Revise outranks an unreviewed page. It&#39;s a routing hint, not a quality score.</p>
 <h3 id="quick-self-check--audience">Quick self-check — audience</h3>
 <ul>
 <li><input disabled="" type="checkbox"> The audience library reflects the workshop, with <strong>real tiers</strong> set</li>
-<li><input disabled="" type="checkbox"> Every Keep/Evolve page is tagged, or on the <strong>Needs audience</strong> worklist</li>
+<li><input disabled="" type="checkbox"> Every Migrate/Revise page is tagged, or on the <strong>Needs audience</strong> worklist</li>
 <li><input disabled="" type="checkbox"> No AI suggestions are left sitting unreviewed (<strong>Audience suggested by AI</strong> filter is empty)</li>
 <li><input disabled="" type="checkbox"> Pages that genuinely serve nobody are tagged <strong>— None</strong>, not left blank</li>
 <li><input disabled="" type="checkbox"> You&#39;ve reviewed the <strong>Risks</strong> in Audience Coverage before signing off the redirect map</li>
@@ -714,7 +715,7 @@ Alumni	Secondary	Graduates staying connected
 </blockquote>
 <h3 id="let-the-defaults-flow">Let the defaults flow</h3>
 <p>When you set or change a page&#39;s Content Type, Transmission fills its <strong>blank</strong> Renders as, Migration Track, and Target Content Type from the matching registry entry — and only the blank ones, so your hand-entered values are safe. Matching is case-insensitive, and falls back to splitting compound names and trying each part.</p>
-<p>In the <strong>Migrate</strong> cluster, the <strong>Track</strong> field shows a dashed ghost suggestion (derived from the KKE call plus Renders as) whenever it&#39;s empty — click it to accept.</p>
+<p>In the <strong>Migrate</strong> cluster, the <strong>Track</strong> field shows a dashed ghost suggestion (derived from the MRA call plus Renders as) whenever it&#39;s empty — click it to accept.</p>
 <h3 id="check-your-coverage">Check your coverage</h3>
 <ul>
 <li>The <strong>Unclassified</strong> button (a shortcut for <code>Content Nature is blank</code>) finds pages still missing a Renders-as value.</li>
@@ -722,7 +723,7 @@ Alumni	Secondary	Graduates staying connected
 </ul>
 <h3 id="quick-self-check-6">Quick self-check</h3>
 <ul>
-<li><input disabled="" type="checkbox"> Every Keep/Evolve page has a <strong>Content Type</strong></li>
+<li><input disabled="" type="checkbox"> Every Migrate/Revise page has a <strong>Content Type</strong></li>
 <li><input disabled="" type="checkbox"> The registry covers every type in use (no &quot;no crosswalk&quot; flags)</li>
 <li><input disabled="" type="checkbox"> <strong>Renders as</strong> is populated (the Unclassified count is down to zero)</li>
 <li><input disabled="" type="checkbox"> <strong>Target Content Type</strong> and <strong>→ Target Spec</strong> are mapped per type</li>
@@ -732,25 +733,25 @@ Alumni	Secondary	Graduates staying connected
 <p><strong>Why the registry is per-project.</strong> Different CMSs name things differently — a WordPress &quot;post&quot; isn&#39;t a Drupal &quot;article&quot; isn&#39;t a HubSpot &quot;blog post.&quot; So each project keeps its own crosswalk, codifying that client&#39;s conventions. (The Content Type <em>vocabulary</em> in the dropdown is global and shared across your projects; the <em>crosswalk</em> is per-project. That&#39;s the two-tier design the sync above bridges.) A seeding banner on first open offers <strong>Seed defaults</strong>, <strong>Open editor</strong>, or <strong>Don&#39;t ask again</strong>; the data lives in the <code>ContentTypeRegistry</code> sheet.</p>
 <p><strong>The Migrate cluster fields.</strong> These appear once you turn on <strong>Show Migration fields</strong>:</p>
 <ul>
-<li><strong>Renders as</strong> (stored as <code>Content_Nature</code>) — <strong>Page</strong> (a hand-authored standalone), <strong>Record</strong> (stored as <code>Content Object</code>: a structured entry like an article, event or bio that still has its own page), <strong>Fragment</strong> (stored as <code>Fragment</code>: embedded into other pages, no URL of its own, so it gets no redirect and needs no sitemap placement), or <strong>Generated</strong> (a system-rendered view over records). Don&#39;t confuse Record with Fragment: a news post migrated as a record is still a page people link to, and it needs a redirect like any other page. This is a <em>delivery</em> concern, not a quality one — a page can be Keep and any of the three.</li>
-<li><strong>Migration Track</strong> — Scripted, Migrate Records, Configure, Manual Rebuild, Merge, or Kill/Redirect. The technical architect owns this call; the registry and the ghost suggestion just give it a head start.</li>
+<li><strong>Renders as</strong> (stored as <code>Content_Nature</code>) — <strong>Page</strong> (a hand-authored standalone), <strong>Record</strong> (stored as <code>Content Object</code>: a structured entry like an article, event or bio that still has its own page), <strong>Fragment</strong> (stored as <code>Fragment</code>: embedded into other pages, no URL of its own, so it gets no redirect and needs no sitemap placement), or <strong>Generated</strong> (a system-rendered view over records). Don&#39;t confuse Record with Fragment: a news post migrated as a record is still a page people link to, and it needs a redirect like any other page. This is a <em>delivery</em> concern, not a quality one — a page can be Migrate and any of the three.</li>
+<li><strong>Migration Track</strong> — Scripted, Migrate Records, Configure, Manual Rebuild, Merge, or Archive/Redirect. The technical architect owns this call; the registry and the ghost suggestion just give it a head start.</li>
 </ul>
 <p><strong>Fragments have no public URL.</strong> In the Sitemap editor you can set a node&#39;s <strong>Node type → Fragment / shared content</strong>. A Fragment keeps a computed path as a repository location but has no menu entry, breadcrumb, or redirect; it shows a <code>FRAG</code> badge and sits outside the net-new/empty counts. Anything that renders as a Fragment is automatically left out of the redirect plan (no URL to redirect) and the needs-placement check (a fragment has no sitemap home by design — that&#39;s correct, not a gap).</p>
 <p><strong>The reports.</strong> The <strong>Content Type Crosswalk</strong> report gives the CMS architect the whole current → target map; the <strong>Migration Direction Brief</strong> turns the per-spec direction into per-person worklists (both in <a href="#16-producing-the-outputs">Producing the Outputs</a>).</p>
 <hr>
-<h2 id="8-suggested_kke">8. Suggested_KKE</h2>
+<h2 id="8-suggested_mra">8. Suggested_MRA</h2>
 <p><em>By the end of this section you&#39;ll have the app proposing a call for each page, so you spend your judgment confirming and correcting rather than starting from a blank row.</em></p>
 <blockquote>
-<p><strong>In a hurry?</strong> The <a href="walkthroughs/08-suggested-kke.html">Suggested_KKE walkthrough</a> is the one-page version, and the rubric language is in the <a href="#rubric-dsl-operators">appendix</a>.</p>
+<p><strong>In a hurry?</strong> The <a href="walkthroughs/08-suggested-kke.html">Suggested_MRA walkthrough</a> is the one-page version, and the rubric language is in the <a href="#rubric-dsl-operators">appendix</a>.</p>
 </blockquote>
-<h3 id="what-suggested_kke-is">What Suggested_KKE is</h3>
-<p><strong>Suggested_KKE</strong> is a single recommendation that blends up to three independent sources:</p>
+<h3 id="what-suggested_mra-is">What Suggested_MRA is</h3>
+<p><strong>Suggested_MRA</strong> is a single recommendation that blends up to three independent sources:</p>
 <ul>
 <li><strong>Rubric</strong> — deterministic rules you write.</li>
 <li><strong>AI</strong> — Claude&#39;s judgment about the page.</li>
 <li><strong>GA</strong> — a composite score from analytics metrics.</li>
 </ul>
-<p>Each source produces its own call; Transmission combines them by a <strong>weighted vote</strong> into one suggestion and records the per-source breakdown behind it. Crucially, it <strong>never touches your human KKE call</strong> — the suggestion sits alongside yours for you to confirm or overrule.</p>
+<p>Each source produces its own call; Transmission combines them by a <strong>weighted vote</strong> into one suggestion and records the per-source breakdown behind it. Crucially, it <strong>never touches your human MRA call</strong> — the suggestion sits alongside yours for you to confirm or overrule.</p>
 <h3 id="set-up-your-sources">Set up your sources</h3>
 <p>All three are configured in <strong>Project Settings → Suggestions</strong>:</p>
 <ul>
@@ -761,12 +762,12 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="generate-suggestions">Generate suggestions</h3>
 <ul>
 <li><strong>From rubrics:</strong> filter to the rows you want, then <strong>Project → Run Rubric on filtered rows…</strong> (or <strong>Assess</strong> a single page).</li>
-<li><strong>From AI:</strong> <strong>Project → AI Suggest for Unreviewed…</strong> runs Claude across every page that still has no call (about a second per row; press <strong>Esc</strong> to stop). It writes only the suggestion — your KKE column is untouched.</li>
-<li><strong>From GA:</strong> <strong>Project → Refresh GA KKE</strong>.</li>
+<li><strong>From AI:</strong> <strong>Project → AI Suggest for Unreviewed…</strong> runs Claude across every page that still has no call (about a second per row; press <strong>Esc</strong> to stop). It writes only the suggestion — your MRA column is untouched.</li>
+<li><strong>From GA:</strong> <strong>Project → Refresh GA MRA</strong>.</li>
 </ul>
-<p>Each of these folds its result into Suggested_KKE automatically. To re-run just the combining step, use <strong>Project → Recompute Suggested KKE</strong>.</p>
+<p>Each of these folds its result into Suggested_MRA automatically. To re-run just the combining step, use <strong>Project → Recompute Suggested MRA</strong>.</p>
 <h3 id="read-and-act-on-them">Read and act on them</h3>
-<p>The <strong>Suggested_KKE badge</strong> in the Decide cluster shows the winning recommendation. Click it for a popover listing every source and how it voted.</p>
+<p>The <strong>Suggested_MRA badge</strong> in the Decide cluster shows the winning recommendation. Click it for a popover listing every source and how it voted.</p>
 <p>When the sources <strong>disagree</strong>, the badge takes on a dashed amber border and a <strong>⚠</strong>. Two sidebar filters help you spend judgment where it counts:</p>
 <ul>
 <li><strong>Suggested disagrees</strong> — the sources didn&#39;t agree with each other.</li>
@@ -781,11 +782,11 @@ Alumni	Secondary	Graduates staying connected
 <li><input disabled="" type="checkbox"> <strong>Source weights</strong> reflect how much you trust each one</li>
 <li><input disabled="" type="checkbox"> Suggestions have been generated across the rows you care about</li>
 <li><input disabled="" type="checkbox"> You&#39;ve reviewed the <strong>disagreements</strong> and <strong>mismatches</strong></li>
-<li><input disabled="" type="checkbox"> Your human <strong>KKE</strong> call is confirmed where it matters</li>
+<li><input disabled="" type="checkbox"> Your human <strong>MRA</strong> call is confirmed where it matters</li>
 </ul>
 <h3 id="going-deeper-1">Going deeper</h3>
 <h4 id="rubrics">Rubrics</h4>
-<p>A rubric is one Markdown document per decision — Keep, Kill, Evolve, Exclude and Consolidate — and lives in two places:</p>
+<p>A rubric is one Markdown document per decision — Migrate, Revise, Archive, Exclude and Consolidate — and lives in two places:</p>
 <ul>
 <li><strong>Your library</strong> — a folder of files on your machine (<strong>App Settings → Rubrics folder</strong>). It&#39;s your starting point, and it only exists on your computer.</li>
 <li><strong>The project</strong> — a copy stored inside the project file, so everyone auditing it applies the same rules, and Claude can read them through the Transmission extension. Open <strong>Project → Rubrics…</strong>, choose <strong>Copy from my library</strong>, adjust anything specific to this client, and <strong>Save</strong>. A project with no rubrics of its own uses your library, as before.</li>
@@ -803,8 +804,8 @@ Alumni	Secondary	Graduates staying connected
 <p>With a Claude API key set, <strong>AI Assess</strong> sends the page&#39;s metadata and your content rules to Claude and returns a recommendation with reasoning — useful for subjective rules a field comparison can&#39;t capture. Results are tracked in <code>_AssessedAt</code> and <code>_AssessmentResult</code>. (The batch version is <strong>AI Suggest for Unreviewed</strong>, above.)</p>
 <h4 id="editing-rubrics">Editing rubrics</h4>
 <p><strong>Project → Rubrics…</strong> opens the editor on this project&#39;s rubrics; <strong>App Settings → Rubrics → Edit</strong> opens it on your library. A switch at the top moves between the two. In the project view, <strong>Copy from my library</strong> replaces the project&#39;s rubrics with your library&#39;s, and <strong>Save to my library</strong> sends the tab you&#39;re on back to your library — useful when a rule you wrote for one client deserves to be your default.</p>
-<h4 id="how-ga-kke-scores-a-page">How GA KKE scores a page</h4>
-<p>GA KKE turns GA4 metrics captured during the crawl into a Keep/Kill/Evolve recommendation — an <em>input</em> to your decision, never a replacement. It blends four metrics into a weighted composite (defaults shown):</p>
+<h4 id="how-ga-mra-scores-a-page">How GA MRA scores a page</h4>
+<p>GA MRA turns GA4 metrics captured during the crawl into a Migrate/Revise/Archive recommendation — an <em>input</em> to your decision, never a replacement. It blends four metrics into a weighted composite (defaults shown):</p>
 <table>
 <thead>
 <tr>
@@ -829,7 +830,7 @@ Alumni	Secondary	Graduates staying connected
 <td>0.15</td>
 </tr>
 </tbody></table>
-<p>Each metric is ranked against the whole site (PERCENTRANK), combined by those weights, and mapped to <strong>Keep</strong> (≥ 0.6), <strong>Evolve</strong> (≥ 0.3), or <strong>Kill</strong>. To set it up: crawl with GA4 connected, open the file, and click <strong>Set up</strong> on the &quot;GA4 data detected&quot; banner; the columns are auto-detected. Pick a weight preset or tune the weights, then <strong>Save &amp; Compute</strong> — it fills the <code>GA_KKE_Recommendation</code> and <code>GA_Score</code> columns. Re-tune anytime in Project Settings → Suggestions, and <strong>File → Refresh GA KKE</strong> recomputes. It never touches <code>KKE_Recommendation</code>, never writes Excel formulas, and never re-runs silently; its config is stored as JSON in <code>KKE_Settings</code>.</p>
+<p>Each metric is ranked against the whole site (PERCENTRANK), combined by those weights, and mapped to <strong>Migrate</strong> (≥ 0.6), <strong>Revise</strong> (≥ 0.3), or <strong>Archive</strong>. To set it up: crawl with GA4 connected, open the file, and click <strong>Set up</strong> on the &quot;GA4 data detected&quot; banner; the columns are auto-detected. Pick a weight preset or tune the weights, then <strong>Save &amp; Compute</strong> — it fills the <code>GA_MRA_Recommendation</code> and <code>GA_Score</code> columns. Re-tune anytime in Project Settings → Suggestions, and <strong>File → Refresh GA MRA</strong> recomputes. It never touches <code>MRA_Recommendation</code>, never writes Excel formulas, and never re-runs silently; its config is stored as JSON in <code>MRA_Settings</code>.</p>
 <hr>
 <h2 id="9-consolidate">9. Consolidate</h2>
 <p><em>By the end of this section you&#39;ll be folding redundant pages into a single strong survivor — with the others pointing at it cleanly, and no broken redirects left behind.</em></p>
@@ -837,20 +838,20 @@ Alumni	Secondary	Graduates staying connected
 <p><strong>In a hurry?</strong> The <a href="walkthroughs/09-consolidate.html">Consolidate walkthrough</a> is the one-page version.</p>
 </blockquote>
 <h3 id="why-consolidate-exists">Why Consolidate exists</h3>
-<p>Most audits frame the decision as Keep / Kill / Evolve, but a huge share of real work is <strong>merging overlapping pages</strong> — three landing pages chasing the same keyword, four near-duplicate blog posts. Kill and Evolve are both wrong for these: Kill throws away the value each page held, and Evolve leaves them competing with each other.</p>
+<p>Most audits frame the decision as Migrate / Revise / Archive, but a huge share of real work is <strong>merging overlapping pages</strong> — three landing pages chasing the same keyword, four near-duplicate blog posts. Archive and Revise are both wrong for these: Archive throws away the value each page held, and Revise leaves them competing with each other.</p>
 <p>Consolidate is the merge option. It concentrates topic authority on one page, ends the keyword cannibalization, gives users a single source of truth, preserves the valuable bits, and leaves fewer pages to migrate. It also writes a clear brief for the content team: <em>&quot;merge /old-a and /old-b into /new-canonical.&quot;</em></p>
 <h3 id="how-it-works">How it works</h3>
-<p>When you consolidate page A into page B, A&#39;s content merges <strong>into</strong> B. A points at its <strong>target</strong> (recorded in <code>Consolidate_Into</code>) and the target survives — usually as <strong>Evolve</strong>, since it&#39;s receiving new content. A consolidated page needs no sitemap placement of its own. On save, Transmission works out A&#39;s redirect by chasing B to wherever it actually lands, and it warns you if a target is <strong>dead</strong> (missing, or itself being killed).</p>
+<p>When you consolidate page A into page B, A&#39;s content merges <strong>into</strong> B. A points at its <strong>target</strong> (recorded in <code>Consolidate_Into</code>) and the target survives — usually as <strong>Revise</strong>, since it&#39;s receiving new content. A consolidated page needs no sitemap placement of its own. On save, Transmission works out A&#39;s redirect by chasing B to wherever it actually lands, and it warns you if a target is <strong>dead</strong> (missing, or itself being archived).</p>
 <h3 id="consolidate-a-single-page">Consolidate a single page</h3>
 <ol>
 <li>Select the source page and press <strong>4</strong> (or click <strong>Consolidate</strong>). The <strong>Consolidate into…</strong> picker opens — a searchable, sortable list of your whole inventory, with the source URL and any SME notes pinned at the top.</li>
 <li>Click a page to select it, then double-click it (or use <strong>Set as target</strong>) to confirm.</li>
 </ol>
 <p>Transmission sets <code>Consolidate_Into</code>, switches the page&#39;s call to Consolidate, and clears its sitemap assignment. To change the target later, click Consolidate again — the current target is highlighted, with a <strong>Go to page →</strong> link that jumps straight to it if you want to check what you&#39;re merging into; <strong>Clear target</strong> removes both the target and the call.</p>
-<p><strong>Transmission will offer to set the target to Evolve.</strong> If the page you picked is marked <strong>Keep</strong>, <strong>Kill</strong>, <strong>Exclude</strong>, or hasn&#39;t been reviewed, a prompt asks whether to move it to Evolve, because that&#39;s the right shape: receiving content <em>is</em> a change, so Keep is no longer true, and a Kill or Exclude target is a destination that&#39;s itself being removed — the merged content would have nowhere to land and neither page would get a working redirect. You can decline if you have a reason; the consolidation stands either way. If the target already has a <strong>Final KKE</strong>, that gets updated too, so the change actually takes effect.</p>
+<p><strong>Transmission will offer to set the target to Revise.</strong> If the page you picked is marked <strong>Migrate</strong>, <strong>Archive</strong>, <strong>Exclude</strong>, or hasn&#39;t been reviewed, a prompt asks whether to move it to Revise, because that&#39;s the right shape: receiving content <em>is</em> a change, so Migrate is no longer true, and an Archive or Exclude target is a destination that&#39;s itself being removed — the merged content would have nowhere to land and neither page would get a working redirect. You can decline if you have a reason; the consolidation stands either way. If the target already has a <strong>Final MRA</strong>, that gets updated too, so the change actually takes effect.</p>
 <p><strong>You can&#39;t consolidate a page into itself</strong>, or into a page that consolidates back into it — either one is a redirect loop plus content that never arrives, so both are refused outright rather than warned about.</p>
 <blockquote>
-<p><strong>Tip:</strong> add a note on the target page about what&#39;s merging in. The Evolve prompt handles the call itself; the note is what tells the content team <em>why</em>.</p>
+<p><strong>Tip:</strong> add a note on the target page about what&#39;s merging in. The Revise prompt handles the call itself; the note is what tells the content team <em>why</em>.</p>
 </blockquote>
 <h3 id="find-consolidation-groups-in-bulk">Find consolidation groups in bulk</h3>
 <p>When several pages already share a sitemap node, they&#39;re often consolidation candidates. <strong>Sitemap → Consolidation Candidates…</strong> opens a workflow built for exactly this:</p>
@@ -859,37 +860,37 @@ Alumni	Secondary	Graduates staying connected
 <li>For each group, select the radio button on the page that should be the <strong>target</strong>.</li>
 <li>Click <strong>Apply</strong>.</li>
 </ol>
-<p>In one click, the target becomes Evolve (preserving a deliberate Keep/Evolve), the rest become Consolidate pointing at it, and their sitemap placement and explicit redirects are cleared. <strong>Skip</strong> defers a group that legitimately shares a node. A counter tracks <em>&quot;X to resolve · Y skipped · Z hidden · N total,&quot;</em> and a filter bar lets you scope by <strong>Include KKE</strong> or <strong>Exclude groups</strong> so you can set a whole section aside without touching individual calls.</p>
+<p>In one click, the target becomes Revise (preserving a deliberate Migrate/Revise), the rest become Consolidate pointing at it, and their sitemap placement and explicit redirects are cleared. <strong>Skip</strong> defers a group that legitimately shares a node. A counter tracks <em>&quot;X to resolve · Y skipped · Z hidden · N total,&quot;</em> and a filter bar lets you scope by <strong>Include MRA</strong> or <strong>Exclude groups</strong> so you can set a whole section aside without touching individual calls.</p>
 <blockquote>
-<p><strong>Why this beats one-at-a-time:</strong> it&#39;s roughly one Apply per group instead of four clicks per page, and it enforces the right shape every time — target = Evolve, the rest = Consolidate pointing at it.</p>
+<p><strong>Why this beats one-at-a-time:</strong> it&#39;s roughly one Apply per group instead of four clicks per page, and it enforces the right shape every time — target = Revise, the rest = Consolidate pointing at it.</p>
 </blockquote>
 <h3 id="catch-duplicates-as-they-happen">Catch duplicates as they happen</h3>
-<p>You don&#39;t have to remember to run Consolidation Candidates to catch a duplicate — Transmission also flags it the moment it happens. If you mark a page <strong>Keep</strong> or <strong>Evolve</strong> (or assign it to a sitemap node) and another <strong>Keep/Evolve</strong> page already sits at that same destination, a <strong>&quot;Did you mean to Consolidate?&quot;</strong> prompt appears naming the other page, with a one-click <strong>Consolidate into it</strong>. Only one page can occupy a given destination, so a second Keep/Evolve landing there is almost always a mistake rather than a deliberate choice — this catches it right away instead of at the sitemap-node level days later.</p>
+<p>You don&#39;t have to remember to run Consolidation Candidates to catch a duplicate — Transmission also flags it the moment it happens. If you mark a page <strong>Migrate</strong> or <strong>Revise</strong> (or assign it to a sitemap node) and another <strong>Migrate/Revise</strong> page already sits at that same destination, a <strong>&quot;Did you mean to Consolidate?&quot;</strong> prompt appears naming the other page, with a one-click <strong>Consolidate into it</strong>. Only one page can occupy a given destination, so a second Migrate/Revise landing there is almost always a mistake rather than a deliberate choice — this catches it right away instead of at the sitemap-node level days later.</p>
 <h3 id="catch-broken-targets">Catch broken targets</h3>
 <p>Two sidebar filters keep consolidations honest — clear both before you ship:</p>
 <ul>
 <li><strong>Consolidate (no target)</strong> — marked Consolidate but no target chosen yet. You don&#39;t have to remember to check: when there are any, a red <strong>&quot;⚠ N Consolidate: no target&quot;</strong> chip appears in the sidebar toolbar next to the row count, and clicking it applies this filter. It&#39;s there because a Consolidate with no target is the one call that isn&#39;t a finished decision — it says the page goes away without saying where its content and its redirect go — and it&#39;s the shape an SME import routinely leaves behind.</li>
-<li><strong>Consolidate (dead target)</strong> — the target is missing or is itself Kill/Exclude (the source shows an amber dot).</li>
+<li><strong>Consolidate (dead target)</strong> — the target is missing or is itself Archive/Exclude (the source shows an amber dot).</li>
 </ul>
 <h3 id="when-the-client-changes-a-consolidation">When the client changes a consolidation</h3>
-<p>SME review is where consolidation decisions get revisited most. The client knows which pages overlap in ways a crawl can&#39;t show, and may have a different idea of where the content belongs. Their <strong>Final KKE</strong> always wins: whether a page consolidates follows the Final KKE, not your recommendation.</p>
+<p>SME review is where consolidation decisions get revisited most. The client knows which pages overlap in ways a crawl can&#39;t show, and may have a different idea of where the content belongs. Their <strong>Final MRA</strong> always wins: whether a page consolidates follows the Final MRA, not your recommendation.</p>
 <ul>
-<li>The KKE buttons still show <strong>your</strong> recommendation. When the Final KKE differs, a <strong>Final</strong> chip appears beside the buttons. Click it to pick a target (for a Consolidate) or to open the Final dropdown. In the sidebar, your KKE badge is struck through when a Final overrides it.</li>
-<li>Setting a page&#39;s Final KKE to <strong>Consolidate</strong> opens the target picker. If you had already picked a target, it&#39;s kept. Changing a Final <em>away</em> from Consolidate offers to clear the old target, or you can keep it (inactive) in case the decision changes back.</li>
+<li>The MRA buttons still show <strong>your</strong> recommendation. When the Final MRA differs, a <strong>Final</strong> chip appears beside the buttons. Click it to pick a target (for a Consolidate) or to open the Final dropdown. In the sidebar, your MRA badge is struck through when a Final overrides it.</li>
+<li>Setting a page&#39;s Final MRA to <strong>Consolidate</strong> opens the target picker. If you had already picked a target, it&#39;s kept. Changing a Final <em>away</em> from Consolidate offers to clear the old target, or you can keep it (inactive) in case the decision changes back.</li>
 <li><strong>SME → Review Consolidations…</strong> lists every consolidation the client touched: pages they asked to consolidate that you didn&#39;t, pages you consolidated that they kept, and pages where you both said Consolidate but the SME left notes. For each one you can choose or change the target, confirm it&#39;s right, or clear an unused target. A reviewed page leaves the list until its decision or target changes again. The app offers this review after an SME import or a Resolve Conflicts session. The <strong>Consolidate (client changed — review)</strong> filter finds the same pages.</li>
 </ul>
 <h3 id="quick-self-check-8">Quick self-check</h3>
 <ul>
 <li><input disabled="" type="checkbox"> Every Consolidate page has a <strong>live</strong> target</li>
 <li><input disabled="" type="checkbox"> No <strong>dead-target</strong> warnings remain</li>
-<li><input disabled="" type="checkbox"> Each target survives as <strong>Keep/Evolve</strong>, not killed</li>
+<li><input disabled="" type="checkbox"> Each target survives as <strong>Migrate/Revise</strong>, not archived</li>
 <li><input disabled="" type="checkbox"> Consolidated pages carry no stray sitemap assignment</li>
 <li><input disabled="" type="checkbox"> Redirects resolve to a real URL (confirm in the <a href="#15-redirects">Redirect Editor</a>)</li>
 </ul>
 <h3 id="going-deeper-2">Going deeper</h3>
 <p><strong>How the redirect is chased.</strong> On save, a Consolidate page&#39;s destination is computed in order: the target&#39;s <em>future</em> computed path if it has a sitemap assignment, then — if the target is itself Consolidate — the final destination down the chain (cycle-safe), then the target&#39;s own explicit redirect, and finally the target&#39;s current URL. It updates automatically whenever the target&#39;s sitemap assignment changes, so you never maintain these by hand.</p>
 <p><strong>Spotting them at a glance.</strong> A Consolidate row takes on an indigo tint and a small <code>C</code> pill once a target is set, and the Consolidate button shows a dot. The <strong>Shared sitemap node (2+ pages)</strong> filter is a lighter-touch alternative to the Candidates workflow — it simply surfaces every page whose <code>Sitemap_ID</code> is shared, for cases you&#39;d rather review one by one.</p>
-<p><strong>When an SME asks for a Consolidate.</strong> SME imports may carry <code>Change: Consolidate</code> (sometimes with a target hinted in their notes). Filter to <strong>Consolidate (no target)</strong>, click each row&#39;s Consolidate button — the picker shows the SME&#39;s notes in a yellow callout — and pick the target. The picker won&#39;t overwrite the SME&#39;s imposed Final KKE; it just fills in the destination.</p>
+<p><strong>When an SME asks for a Consolidate.</strong> SME imports may carry <code>Change: Consolidate</code> (sometimes with a target hinted in their notes). Filter to <strong>Consolidate (no target)</strong>, click each row&#39;s Consolidate button — the picker shows the SME&#39;s notes in a yellow callout — and pick the target. The picker won&#39;t overwrite the SME&#39;s imposed Final MRA; it just fills in the destination.</p>
 <hr>
 <h2 id="10-non-200-triage">10. Non-200 Triage</h2>
 <p><em>By the end of this section you&#39;ll have cleared the redirects, 404s, and server errors out of a crawl in one sweep — so they stop cluttering the real content audit.</em></p>
@@ -901,14 +902,14 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="run-the-triage">Run the triage</h3>
 <ol>
 <li>Open <strong>Project → Triage Non-200 Pages…</strong> — or simply accept the prompt Transmission offers automatically when it spots non-200 rows in a freshly opened file.</li>
-<li>Review the table: one row per status code, showing the code and its label (like &quot;301 — Moved Permanently&quot;), how many pages it covers, and a KKE dropdown pre-set to a sensible default (3xx → Kill, 404 → Kill, 5xx → Exclude, and so on).</li>
+<li>Review the table: one row per status code, showing the code and its label (like &quot;301 — Moved Permanently&quot;), how many pages it covers, and an MRA dropdown pre-set to a sensible default (3xx → Archive, 404 → Archive, 5xx → Exclude, and so on).</li>
 <li>Adjust any group&#39;s call, or leave it <strong>blank</strong> to skip that group.</li>
 <li>Click <strong>Apply</strong> to set the call across every page in each group you chose.</li>
 </ol>
 <h3 id="afterward">Afterward</h3>
 <p>Non-200 pages keep a small <strong>status-code badge</strong> in the sidebar — amber for 3xx, red for 4xx/5xx — so you can eyeball what&#39;s left as you scroll.</p>
 <blockquote>
-<p><strong>Heads-up:</strong> the defaults are a starting point, not a verdict. A 301 that points somewhere you&#39;re keeping might really be <strong>Keep</strong>. And triage only <em>sets</em> a call — it never hides a row. A page showing 404 in the crawl might be a misconfigured live page, a login wall, or one that was simply down during the crawl; it&#39;s still fully clickable and auditable, so you can inspect it, note it, and override the call like any other page.</p>
+<p><strong>Heads-up:</strong> the defaults are a starting point, not a verdict. A 301 that points somewhere you&#39;re keeping might really be <strong>Migrate</strong>. And triage only <em>sets</em> a call — it never hides a row. A page showing 404 in the crawl might be a misconfigured live page, a login wall, or one that was simply down during the crawl; it&#39;s still fully clickable and auditable, so you can inspect it, note it, and override the call like any other page.</p>
 </blockquote>
 <h3 id="quick-self-check-9">Quick self-check</h3>
 <ul>
@@ -925,12 +926,12 @@ Alumni	Secondary	Graduates staying connected
 <p><strong>In a hurry?</strong> The <a href="walkthroughs/11-sme-review.html">SME Review walkthrough</a> is the one-page version.</p>
 </blockquote>
 <h3 id="the-loop">The loop</h3>
-<p>SME review runs in four steps: <strong>export → the reviewer fills in dropdowns → import → resolve.</strong> Your reviewer needs nothing but Excel. Their answers land in three columns — <code>SME_Decision</code>, <code>SME_Notes</code>, and <code>Content_Owner</code> — which merge in alongside your work and never overwrite your KKE call.</p>
+<p>SME review runs in four steps: <strong>export → the reviewer fills in dropdowns → import → resolve.</strong> Your reviewer needs nothing but Excel. Their answers land in three columns — <code>SME_Decision</code>, <code>SME_Notes</code>, and <code>Content_Owner</code> — which merge in alongside your work and never overwrite your MRA call.</p>
 <p>Three columns track the decision as it moves:</p>
 <ul>
-<li><strong><code>KKE_Recommendation</code></strong> — your original call.</li>
-<li><strong><code>SME_Decision</code></strong> — the expert&#39;s verdict: <strong>Approve</strong>, or <strong>Change: Keep / Kill / Evolve / Exclude</strong> (custom states appear here too).</li>
-<li><strong><code>Final_KKE</code></strong> — the resolved outcome. An <strong>Approve</strong> sets Final to match your call automatically; a <strong>Change</strong> creates a conflict for you to resolve.</li>
+<li><strong><code>MRA_Recommendation</code></strong> — your original call.</li>
+<li><strong><code>SME_Decision</code></strong> — the expert&#39;s verdict: <strong>Approve</strong>, or <strong>Change: Migrate / Revise / Archive / Exclude</strong> (custom states appear here too).</li>
+<li><strong><code>Final_MRA</code></strong> — the resolved outcome. An <strong>Approve</strong> sets Final to match your call automatically; a <strong>Change</strong> creates a conflict for you to resolve.</li>
 </ul>
 <h3 id="export-for-review">Export for review</h3>
 <p>Open <strong>SME → Export for SME Review…</strong>. You can scope the export to a <strong>Group</strong>, a <strong>Primary Tag</strong>, or <strong>All</strong>, and the file ships with data-validation dropdowns on the SME_Decision column so reviewers pick from valid options.</p>
@@ -940,10 +941,10 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="what-the-reviewer-does">What the reviewer does</h3>
 <p>For each page, the SME chooses <strong>Approve</strong> (they agree) or a <strong>Change: …</strong> option (they&#39;d call it differently), and can add notes and a content owner. They save and send the file back.</p>
 <h3 id="import-their-decisions">Import their decisions</h3>
-<p><strong>SME → Import SME Decisions…</strong> reads the returned file and merges the SME columns back in, matched by URL. Where the SME approved, Final KKE is filled to match your call; where they chose a Change, a conflict is created.</p>
+<p><strong>SME → Import SME Decisions…</strong> reads the returned file and merges the SME columns back in, matched by URL. Where the SME approved, Final MRA is filled to match your call; where they chose a Change, a conflict is created.</p>
 <h3 id="compare-then-resolve">Compare, then resolve</h3>
 <ul>
-<li><strong>SME → Compare KKE vs SME…</strong> is a read-only, full-screen overview: every reviewed page side by side (your call, the SME&#39;s, the resolved Final, and a status of ✓ Agree, ↳ Resolved, or ⚠ Pending), with header tallies, a filter for agreements / changes / pending, and click-to-jump to any row.</li>
+<li><strong>SME → Compare MRA vs SME…</strong> is a read-only, full-screen overview: every reviewed page side by side (your call, the SME&#39;s, the resolved Final, and a status of ✓ Agree, ↳ Resolved, or ⚠ Pending), with header tallies, a filter for agreements / changes / pending, and click-to-jump to any row.</li>
 <li><strong>SME → Resolve Conflicts…</strong> is where you actually decide: a list of every disagreement showing the URL, your call, the SME&#39;s, and the current Final. Resolve them one at a time or in bulk.</li>
 </ul>
 <p>The sidebar&#39;s <strong>SME conflicts</strong> and <strong>SME pending</strong> filters help you work the list down, and turning on <strong>Show SME fields</strong> lets you reconcile right in the audit bar.</p>
@@ -951,13 +952,13 @@ Alumni	Secondary	Graduates staying connected
 <ul>
 <li><input disabled="" type="checkbox"> Exported (split by owner if there are multiple reviewers)</li>
 <li><input disabled="" type="checkbox"> Their file imported — the SME columns are populated</li>
-<li><input disabled="" type="checkbox"> You reviewed the divergence in <strong>Compare KKE vs SME</strong></li>
-<li><input disabled="" type="checkbox"> <strong>Resolve Conflicts</strong> is done — every reviewed page has a <strong>Final KKE</strong></li>
+<li><input disabled="" type="checkbox"> You reviewed the divergence in <strong>Compare MRA vs SME</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Resolve Conflicts</strong> is done — every reviewed page has a <strong>Final MRA</strong></li>
 <li><input disabled="" type="checkbox"> The <strong>SME conflicts</strong> and <strong>SME pending</strong> filters are empty</li>
 </ul>
 <hr>
 <h2 id="12-multi-auditor-merge">12. Multi-auditor Merge</h2>
-<p><em>By the end of this section you&#39;ll be able to combine KKE decisions when two people audited the same inventory in parallel, resolving any disagreements cleanly.</em></p>
+<p><em>By the end of this section you&#39;ll be able to combine MRA decisions when two people audited the same inventory in parallel, resolving any disagreements cleanly.</em></p>
 <blockquote>
 <p><strong>In a hurry?</strong> The <a href="walkthroughs/12-multi-auditor-merge.html">Multi-auditor Merge walkthrough</a> is the one-page version.</p>
 </blockquote>
@@ -984,7 +985,7 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="a-related-tool-import--merge">A related tool: Import / Merge</h3>
 <p><strong>File → Import/Merge Audit Decisions…</strong> is the gentler cousin of a full auditor merge: it matches by URL and fills <strong>only empty</strong> fields, leaving your existing decisions untouched. Multi-sheet files offer a sheet picker, column checkboxes show <strong>exists</strong> / <strong>new</strong> badges, and an <strong>&quot;Add new URLs not in current file&quot;</strong> option (on by default) appends rows your file is missing.</p>
 <blockquote>
-<p><strong>Good to know — the change log.</strong> Every change to a KKE, SME Decision, or Final KKE is recorded automatically and written to a hidden <code>KKE_ChangeLog</code> sheet on save (Timestamp, Row, URL, Field, Old Value, New Value). It accumulates across sessions, giving the project a complete decision history — see <a href="#18-pre-flight--hand-off">Pre-flight &amp; Hand-off</a>.</p>
+<p><strong>Good to know — the change log.</strong> Every change to an MRA, SME Decision, or Final MRA is recorded automatically and written to a hidden <code>MRA_ChangeLog</code> sheet on save (Timestamp, Row, URL, Field, Old Value, New Value). It accumulates across sessions, giving the project a complete decision history — see <a href="#18-pre-flight--hand-off">Pre-flight &amp; Hand-off</a>.</p>
 </blockquote>
 <hr>
 <h1 id="e-architect-the-future-site">E. Architect the future site</h1>
@@ -995,7 +996,7 @@ Alumni	Secondary	Graduates staying connected
 </blockquote>
 <h3 id="the-mental-model">The mental model</h3>
 <p>The <strong>sitemap is how your content is organized</strong> — the sections, the hierarchy, where each page lives. Its goal is a shared picture everyone can see: the <strong>Visual Sitemap</strong> (the toolbar&#39;s <em>Visual Sitemap</em> button) turns the structure into an interactive box-tree so stakeholders can <em>look at</em> the organization instead of reading a spreadsheet.</p>
-<p>Your audit rows answer <em>&quot;what do we do with each existing page?&quot;</em> The sitemap answers a different question: <em>&quot;how is the new site organized?&quot;</em> You connect the two by <strong>placing</strong> each Keep/Evolve page onto a node. A node can carry <strong>no</strong> source pages (it&#39;s net-new content you&#39;ll write), <strong>one</strong>, or <strong>many</strong> (it&#39;s a consolidation target).</p>
+<p>Your audit rows answer <em>&quot;what do we do with each existing page?&quot;</em> The sitemap answers a different question: <em>&quot;how is the new site organized?&quot;</em> You connect the two by <strong>placing</strong> each Migrate/Revise page onto a node. A node can carry <strong>no</strong> source pages (it&#39;s net-new content you&#39;ll write), <strong>one</strong>, or <strong>many</strong> (it&#39;s a consolidation target).</p>
 <p><strong>The URL path and the on-page breadcrumb are <em>derived from</em> the sitemap — but they are not bound to it.</strong> By default a page&#39;s URL and breadcrumb follow its position in the tree, and renaming a node cascades to its descendants. But the sitemap is about <em>organization</em>, not <em>addressing</em>, so either can diverge whenever the real site needs it to. The app has a per-node <strong>URL override</strong> and <strong>breadcrumb override</strong> for exactly this (the <em>Addressing &amp; breadcrumb</em> block in the node editor) — so you organize content in the way that makes sense, without being forced into matching URLs or verbose breadcrumbs.</p>
 <blockquote>
 <p><strong>Two everyday examples of the split:</strong></p>
@@ -1009,10 +1010,10 @@ Alumni	Secondary	Graduates staying connected
 <blockquote>
 <p><strong>Starting from nothing?</strong> You don&#39;t have to open the Sitemap first. If the sitemap is still empty, clicking the audit bar&#39;s <strong>Sitemap</strong> button offers an inline form (Label prefilled from the page title, Slug from the URL) with a <strong>Create &amp; assign</strong> button that creates the first root node and drops the current page onto it in one step.</p>
 </blockquote>
-<h3 id="place-every-keepevolve-page">Place every Keep/Evolve page</h3>
+<h3 id="place-every-migraterevise-page">Place every Migrate/Revise page</h3>
 <p>Your goal is to drive <strong>need placement</strong> in the stats line down to <strong>0</strong>.</p>
 <ol>
-<li>In the audit view, set the <strong>KKE filter</strong> to <strong>Keep + Evolve</strong>, then add a field filter for <code>Sitemap_ID is blank</code> and <strong>Apply</strong> — that&#39;s exactly the pages still needing a home.</li>
+<li>In the audit view, set the <strong>MRA filter</strong> to <strong>Migrate + Revise</strong>, then add a field filter for <code>Sitemap_ID is blank</code> and <strong>Apply</strong> — that&#39;s exactly the pages still needing a home.</li>
 <li>For each one, click <strong>Sitemap</strong> in the Decide cluster, drill to the right node, and click <strong>Assign</strong>. Use <strong>+ Child</strong> in the picker to create a new node inline if no good home exists yet.</li>
 </ol>
 <blockquote>
@@ -1041,14 +1042,14 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="read-the-gap-signals">Read the gap signals</h3>
 <p>Two badges tell you where the tree is incomplete:</p>
 <ul>
-<li><strong>NEW</strong> (yellow) — a net-new node: it has descendant pages but no source page of its own. Expected for brand-new sections; a flag if you didn&#39;t mean it. Double-click it to open the editor — an amber banner explains why it&#39;s flagged, points at the <strong>Page Status</strong> field (Build section) for tracking &quot;Not Started&quot; → &quot;In Progress&quot; as the content strategist works it, and a <strong>Create Page</strong> button turns it into a real page: a new spreadsheet row (Keep, tagged <code>net-new</code>), assigned to the node, so it shows up everywhere a normal page does — audit view, exports, the migration tracker. Once it has a page, the NEW badge clears on its own.</li>
+<li><strong>NEW</strong> (yellow) — a net-new node: it has descendant pages but no source page of its own. Expected for brand-new sections; a flag if you didn&#39;t mean it. Double-click it to open the editor — an amber banner explains why it&#39;s flagged, points at the <strong>Page Status</strong> field (Build section) for tracking &quot;Not Started&quot; → &quot;In Progress&quot; as the content strategist works it, and a <strong>Create Page</strong> button turns it into a real page: a new spreadsheet row (Migrate, tagged <code>net-new</code>), assigned to the node, so it shows up everywhere a normal page does — audit view, exports, the migration tracker. Once it has a page, the NEW badge clears on its own.</li>
 <li><strong>Empty leaf</strong> (red) — a node with no pages <em>and</em> no redirects pointing through it. Assign content, mark it net-new, phase it, or delete it before hand-off.</li>
 </ul>
 <p>If any <code>Sitemap_ID</code> is assigned to two nodes, a <strong>⚠ N duplicate IDs</strong> link appears in the stats line — click it to auto-renumber the duplicates.</p>
 <h3 id="track-coverage-from-the-stats-line">Track coverage from the stats line</h3>
 <p>The stats line reads, left to right:</p>
 <p><code>N nodes · M current (A assigned, H net new, E empty) · [phase buckets] · P pages placed · [F fragments] · [status tallies] · X need placement</code></p>
-<p>So <strong>need placement → 0</strong> confirms every Keep/Evolve page is in the IA, <strong>empty</strong> counts your coverage gaps, and the status tallies track build progress (more in <a href="#14-build--direction">Build &amp; Direction</a>). Filter the tree with the <strong>Depth</strong>, <strong>Phase</strong>, and <strong>Build</strong> dropdowns, and use <strong>Collapse All</strong> / <strong>Expand All</strong> to manage large trees.</p>
+<p>So <strong>need placement → 0</strong> confirms every Migrate/Revise page is in the IA, <strong>empty</strong> counts your coverage gaps, and the status tallies track build progress (more in <a href="#14-build--direction">Build &amp; Direction</a>). Filter the tree with the <strong>Depth</strong>, <strong>Phase</strong>, and <strong>Build</strong> dropdowns, and use <strong>Collapse All</strong> / <strong>Expand All</strong> to manage large trees.</p>
 <h3 id="see-it-and-report-on-it">See it and report on it</h3>
 <ul>
 <li><p><strong>Visual Sitemap</strong> (toolbar <strong>Sitemap</strong>) renders the content IA as one interactive box-tree rooted at your homepage, with a stacked shadow signalling a collapsed subtree or a multi-page leaf and a count line under each label (see <strong>Counts</strong> below). It opens live in the app — click a card&#39;s <strong>+/−</strong> to <strong>collapse/expand</strong> it, scroll to <strong>zoom</strong>, drag to <strong>pan</strong>, <strong>Fit</strong> to frame (Shift+1), <strong>100%</strong> for actual size (Shift+0; clicking the zoom readout between <strong>−</strong> and <strong>+</strong> does the same, and +/− on the keyboard step the zoom), toggle <strong>Numbers</strong>, choose what the <strong>Counts</strong> line under each label reports, <strong>Expand all</strong> / <strong>Collapse all</strong> (both re-fit the view, since they change the tree&#39;s size enormously). (Only the +/− toggles a branch — clicking the card body does nothing, so you can&#39;t accidentally hide a section while reaching for its colour.) Controls:</p>
@@ -1086,7 +1087,7 @@ Alumni	Secondary	Graduates staying connected
 <li><strong>Line weight</strong> — <em>Uniform</em> (every line the same, the default and what sitemaps have always drawn) or <strong>By content volume</strong>, where each line&#39;s thickness reflects how many pages sit beneath it. A section carrying 200 pages draws as a thick trunk; a 4-page corner draws thin. A parent&#39;s shared run carries its whole branch and each drop carries that child&#39;s share, so it reads like a trunk splitting into branches.</li>
 <li><strong>Base width</strong> / <strong>Max width</strong> — the thin end and the thick end of that scale. The scale between them is compressed rather than straight-line, because sitemap volumes are lopsided: one enormous section would otherwise flatten everything else into identical hairlines.</li>
 </ul>
-<p>  Volume weighting counts <strong>every</strong> page assigned beneath a node, including ones marked Kill or Consolidate — the line answers &quot;how much content is under here&quot;, which is a different question from the card&#39;s page badge (&quot;how many pages will still be live&quot;). Menus have no page counts, so they always draw at the base width. All of it saves with the project and carries into the HTML, PDF, PNG and Miro exports.</p>
+<p>  Volume weighting counts <strong>every</strong> page assigned beneath a node, including ones marked Archive or Consolidate — the line answers &quot;how much content is under here&quot;, which is a different question from the card&#39;s page badge (&quot;how many pages will still be live&quot;). Menus have no page counts, so they always draw at the base width. All of it saves with the project and carries into the HTML, PDF, PNG and Miro exports.</p>
 </li>
 <li><p><strong>Colors</strong> — a rule engine, covered in full under <a href="#colour-rules-in-depth">Colour rules in depth</a>. In short: pick a <strong>Card style</strong> — <strong>Colour band</strong> (the colour sits on a strip across the top of a white card) or <strong>Heavy outline</strong> (a white card with a thick coloured border, the convention most sitemap decks use and the one that reads better zoomed out over hundreds of cards) — then build rules that test anything on your sitemap <em>or</em> in your spreadsheet. Each rule can set a colour, a fill, and a <strong>line style</strong> (solid / dashed / dotted). New projects start coloured <strong>by depth</strong>; colouring by top-level section keys on the tree&#39;s top-level children, so a site whose pages all hang off a single root node came out effectively one colour. Start from a generator — <strong>By depth</strong>, <strong>By section</strong>, <strong>Mark external</strong> (off-site destinations, inserted at the top of the list so they win over whatever scheme you already have), or <strong>Colour by this</strong> for a single field — then add, recolor, delete, and drag to reorder. Right-click a single node → <strong>Set color</strong> to override just that node. Uses your <strong>Client brand</strong> palette (Project Settings → Identity) when set.</p>
 </li>
@@ -1102,18 +1103,18 @@ Alumni	Secondary	Graduates staying connected
 </li>
 </ul>
 </li>
-<li><p><strong>Treemap</strong> (toolbar <strong>Treemap</strong>, next to Visual Sitemap) shows the same content as space-filling boxes sized by page count — good for &quot;how much of the site is what&quot; at a glance. Pick <strong>Depth</strong> and <strong>Color by</strong> in a small dialog, then <strong>Generate</strong>; there&#39;s no live in-webview settings panel here, so changing either means reopening the dialog. <strong>Depth</strong> rolls deeper levels up into the box above them — Depth 2 shows each top-level section broken into its direct children; <strong>Unlimited</strong> shows the real tree at whatever depth it actually goes. <strong>Color by KKE decision</strong> (each box&#39;s dominant Keep/Kill/Evolve/Consolidate/Exclude call, with the composition percentage) or <strong>top-level section</strong> work at any depth; <strong>Phase</strong>, <strong>Node Type</strong>, <strong>Page Status</strong>, <strong>Build Pattern</strong>, or an <strong>assignee</strong> role are only offered at <strong>Unlimited</strong> depth, since a rolled-up box has no single value to report for those.</p>
-<p>  <em>Which</em> colors get used, though, is yours to set, and that does live in the view. Open the <strong>Legend</strong> and every entry has a color well next to it — change <strong>Keep</strong>, or a section, or a Page Status, and every box in that category follows. <strong>Right-click any box</strong> to override just that one, which is what you want when a client deck needs one section called out. <strong>Reset colors</strong> puts everything back. Your palette saves with the project and is kept per coloring mode, so the colors you chose for the section view don&#39;t disturb the KKE view; it also carries into every export. (Only leaf boxes are recolorable — a box with visible children inside it is structural chrome, not a category.)</p>
+<li><p><strong>Treemap</strong> (toolbar <strong>Treemap</strong>, next to Visual Sitemap) shows the same content as space-filling boxes sized by page count — good for &quot;how much of the site is what&quot; at a glance. Pick <strong>Depth</strong> and <strong>Color by</strong> in a small dialog, then <strong>Generate</strong>; there&#39;s no live in-webview settings panel here, so changing either means reopening the dialog. <strong>Depth</strong> rolls deeper levels up into the box above them — Depth 2 shows each top-level section broken into its direct children; <strong>Unlimited</strong> shows the real tree at whatever depth it actually goes. <strong>Color by MRA decision</strong> (each box&#39;s dominant Migrate/Revise/Archive/Consolidate/Exclude call, with the composition percentage) or <strong>top-level section</strong> work at any depth; <strong>Phase</strong>, <strong>Node Type</strong>, <strong>Page Status</strong>, <strong>Build Pattern</strong>, or an <strong>assignee</strong> role are only offered at <strong>Unlimited</strong> depth, since a rolled-up box has no single value to report for those.</p>
+<p>  <em>Which</em> colors get used, though, is yours to set, and that does live in the view. Open the <strong>Legend</strong> and every entry has a color well next to it — change <strong>Migrate</strong>, or a section, or a Page Status, and every box in that category follows. <strong>Right-click any box</strong> to override just that one, which is what you want when a client deck needs one section called out. <strong>Reset colors</strong> puts everything back. Your palette saves with the project and is kept per coloring mode, so the colors you chose for the section view don&#39;t disturb the MRA view; it also carries into every export. (Only leaf boxes are recolorable — a box with visible children inside it is structural chrome, not a category.)</p>
 <p>  Pan/zoom/Fit, a legend, and the same <strong>Export HTML</strong> / <strong>Export PDF</strong> / <strong>Export PNG</strong> / <strong>Export to Miro</strong> as the Visual Sitemap.</p>
 </li>
 <li><p><strong>Content Flow</strong> (toolbar <strong>Content Flow</strong>, next to Treemap) is the migration itself as a flow diagram: where the content is now on the left, where it ends up on the right, and every band&#39;s thickness a page count. Three readings, toggled inside the view:</p>
 <ul>
-<li><strong>→ Decision</strong> maps the current site straight onto its decisions — Keep, Kill, Evolve, Consolidate, Exclude, and any states you&#39;ve added yourself, each with its own block in the color you gave it. Pages nobody has reviewed collect in an <strong>(unreviewed)</strong> block, so the diagram doubles as a picture of how far the audit has got.</li>
+<li><strong>→ Decision</strong> maps the current site straight onto its decisions — Migrate, Revise, Archive, Consolidate, Exclude, and any states you&#39;ve added yourself, each with its own block in the color you gave it. Pages nobody has reviewed collect in an <strong>(unreviewed)</strong> block, so the diagram doubles as a picture of how far the audit has got.</li>
 <li><strong>→ New sitemap</strong> answers <em>&quot;where did this section&#39;s content go&quot;</em>.</li>
 <li><strong>→ Decision → New</strong> shows both at once, and is usually the version worth putting in front of a client: it makes plain that you&#39;re not just moving pages, you&#39;re deciding about them.</li>
 </ul>
 <p>Bands color <strong>by decision</strong> or <strong>by source</strong>; hover any band or block to isolate its flow.</p>
-<p>The three endpoints on the right that aren&#39;t sitemap sections are the honest part: <strong>Retired</strong> (Kill), <strong>Out of scope</strong> (Exclude), and <strong>Not yet placed</strong> (no sitemap home yet). On most audits one of those is the biggest block on the diagram, and a flow chart that quietly omits the content going nowhere is worse than no diagram. <strong>Consolidated</strong> pages flow <em>through</em> to whatever section their master page lands in — the URL dies but the content survives, so it counts as arriving, with the band still colored as Consolidate — and chained consolidations resolve all the way to the end of the chain.</p>
+<p>The three endpoints on the right that aren&#39;t sitemap sections are the honest part: <strong>Retired</strong> (Archive), <strong>Out of scope</strong> (Exclude), and <strong>Not yet placed</strong> (no sitemap home yet). On most audits one of those is the biggest block on the diagram, and a flow chart that quietly omits the content going nowhere is worse than no diagram. <strong>Consolidated</strong> pages flow <em>through</em> to whatever section their master page lands in — the URL dies but the content survives, so it counts as arriving, with the band still colored as Consolidate — and chained consolidations resolve all the way to the end of the chain.</p>
 <p>Current-site sections come from the <strong>URL path</strong>, not from where a page has been placed (otherwise every placed page would flow from <code>Academics</code> to <code>Academics</code> and the diagram would show nothing). Shared path prefixes are stripped per host, so a crawl rooted at <code>nps.gov/acad/…</code> doesn&#39;t collapse into one bucket, and a locale prefix is stepped past so the columns read as sections rather than <code>Es / De / Zh-Hans</code>. A small dialog up front picks how deep that axis goes — top-level by default, or 2–3 segments to split <code>/academics/programs</code> from <code>/academics/advising</code> — and which reading to open with. Pan/zoom/Fit, a legend, and the same <strong>Export HTML</strong> / <strong>Export PDF</strong> / <strong>Export PNG</strong> / <strong>Export to Miro</strong>. Every export renders <strong>the view you&#39;re currently looking at</strong>, toggles and coloring included, and the exported HTML opens on that view with all the other readings still available — so the client gets everything without the app.</p>
 <p>  On a <strong>Miro board</strong> the flow becomes blocks and weighted connectors, because Miro has no ribbon shape. The reading survives — what exists, how big each block is, what connects to what, in what color — but a band&#39;s thickness is Miro&#39;s own 1–24 stroke scale rather than the exact proportion drawn on screen, and blocks are given a minimum height so their labels fit. Treat it as the workshop version, and the PDF or PNG as the faithful one.</p>
 <blockquote>
@@ -1129,7 +1130,7 @@ Alumni	Secondary	Graduates staying connected
 <p>To resolve pages that landed on the same node, see the Consolidation Candidates workflow in <a href="#9-consolidate">Consolidate</a>.</p>
 <h3 id="quick-self-check-12">Quick self-check</h3>
 <ul>
-<li><input disabled="" type="checkbox"> <strong>need placement = 0</strong> — every Keep/Evolve page sits on a node</li>
+<li><input disabled="" type="checkbox"> <strong>need placement = 0</strong> — every Migrate/Revise page sits on a node</li>
 <li><input disabled="" type="checkbox"> No <strong>empty</strong> leaf nodes left unexplained</li>
 <li><input disabled="" type="checkbox"> No <strong>duplicate Sitemap_ID</strong> warning, and no red duplicate-slug highlights</li>
 <li><input disabled="" type="checkbox"> Out-of-scope work is <strong>phased</strong>, and net-new sections are intentional</li>
@@ -1152,7 +1153,7 @@ Alumni	Secondary	Graduates staying connected
 <p><strong>Select Empty Branches</strong> (in the toolbar) finds every branch with zero assigned pages anywhere in its subtree and checks them for you — the fastest way to spot-clean a tree after reorganizing, without hunting for empty leaves by eye. It won&#39;t also select an empty branch&#39;s children individually; deleting the parent already takes the whole thing.</p>
 <p><strong>Delete Selected…</strong> always deletes the full subtree of each selected node and clears any assignments on pages underneath (pages return to the audit, not deleted — just unassigned). If you&#39;d selected both a node and one of its own descendants, only the ancestor is deleted; the descendant would have gone with it anyway. One confirmation covers the whole batch, and one <strong>Cmd+Z</strong> undoes it — however many nodes it covered.</p>
 <blockquote>
-<p><strong>Building a &quot;current state&quot; sitemap</strong> (see <a href="#placing-many-pages-on-the-sitemap-at-once">Placing many pages on the sitemap at once</a>) routinely leaves branches empty once you start killing or consolidating pages in your forward-planning copy. <strong>Select Empty Branches → Delete Selected…</strong> is the fast way to clear that debris as you go.</p>
+<p><strong>Building a &quot;current state&quot; sitemap</strong> (see <a href="#placing-many-pages-on-the-sitemap-at-once">Placing many pages on the sitemap at once</a>) routinely leaves branches empty once you start archiving or consolidating pages in your forward-planning copy. <strong>Select Empty Branches → Delete Selected…</strong> is the fast way to clear that debris as you go.</p>
 </blockquote>
 <h4 id="the-editors-columns-and-drag-behavior">The editor&#39;s columns and drag behavior</h4>
 <p>The columns are Node (number, toggle, label — it fills the width), Slug, Collapse, Computed Path, Breadcrumb, Pages, and Actions (✎ edit, <strong>+</strong> child, ⧉ clone, ↗ reference, external-URL link, ✕ delete — visible on hover); all are resizable. When you drag, the top/bottom third of a target row inserts before or after it (shown by a line indicator) and the middle reparents (shown by a blue left border). The dragged row fades to 35%, and the drop zone only activates after you&#39;ve moved about 30% in, to avoid accidental drops. Moving a node carries its whole subtree, and all numbers, sort IDs, breadcrumbs, and paths recalculate. Fold state persists across edits.</p>
@@ -1175,7 +1176,7 @@ Alumni	Secondary	Graduates staying connected
 </tr>
 <tr>
 <td><strong>The spreadsheet</strong></td>
-<td>Content Type · KKE · Final KKE · Renders as · Migration Track · Content Theme · Published Status · Target Content Type</td>
+<td>Content Type · MRA · Final MRA · Renders as · Migration Track · Content Theme · Published Status · Target Content Type</td>
 </tr>
 </tbody></table>
 <p>(Plus the structural ones: <strong>Depth</strong>, <strong>Top-level section</strong>, and <strong>Links to another site</strong>.)</p>
@@ -1185,7 +1186,7 @@ Alumni	Secondary	Graduates staying connected
 <li>The normal operators — <strong>is</strong>, <strong>is not</strong>, <strong>contains</strong>, <strong>does not contain</strong>, <strong>is blank</strong>, <strong>is set</strong> — test the node&#39;s <strong>dominant</strong> value: what its pages <em>mostly</em> are.</li>
 <li>The <strong>any page is</strong> operator asks whether <strong>any</strong> page under that node matches.</li>
 </ul>
-<p>That second one is how you flag a section that merely <em>contains</em> something. <code>KKE any page is Kill</code> lights up a section holding one page marked Kill inside an otherwise Keep branch — which a dominant-value rule would never surface, because one Kill among twenty Keeps isn&#39;t the dominant value.</p>
+<p>That second one is how you flag a section that merely <em>contains</em> something. <code>MRA any page is Archive</code> lights up a section holding one page marked Archive inside an otherwise Migrate branch — which a dominant-value rule would never surface, because one Archive among twenty Migrate pages isn&#39;t the dominant value.</p>
 <p><strong>Multiple conditions.</strong> <strong>+ Add condition</strong> stacks conditions on one rule; <em>all</em> of them must match. A rule with no conditions matches everything — that&#39;s your catch-all, and it belongs last (new rules are inserted above it automatically, so it can&#39;t get stranded).</p>
 <p><strong>Rules compose — this is the part worth understanding.</strong> Rules are read top to bottom, but it isn&#39;t simply &quot;first match wins and nothing else applies.&quot; Each visual property — <strong>colour</strong>, <strong>fill</strong>, <strong>line style</strong> — is claimed independently by the <strong>first matching rule that actually sets it</strong>. A rule that leaves a property unset doesn&#39;t claim it, so a rule further down can still supply it — line style has a &quot;— leave unset —&quot; option, and colour has a checkbox you can untick for the same purpose. That means you can encode two different dimensions at once, in separate rules, instead of writing a rule for every combination.</p>
 <blockquote>
@@ -1298,7 +1299,7 @@ Alumni	Secondary	Graduates staying connected
 <p><strong>In a hurry?</strong> The <a href="walkthroughs/15-redirects.html">Redirects walkthrough</a> is the one-page version.</p>
 </blockquote>
 <h3 id="the-mental-model-2">The mental model</h3>
-<p>A redirect is needed for any <strong>Kill</strong> page and any page whose <strong>URL is changing</strong> (its new computed path differs from its current URL); Consolidate pages redirect to their target. You rarely set destinations by hand — Transmission resolves them by a priority order and can re-derive them from the tree on demand. That order, highest first:</p>
+<p>A redirect is needed for any <strong>Archive</strong> page and any page whose <strong>URL is changing</strong> (its new computed path differs from its current URL); Consolidate pages redirect to their target. You rarely set destinations by hand — Transmission resolves them by a priority order and can re-derive them from the tree on demand. That order, highest first:</p>
 <ol>
 <li>A custom destination you typed or picked for the row</li>
 <li>The page&#39;s sitemap node path</li>
@@ -1307,19 +1308,19 @@ Alumni	Secondary	Graduates staying connected
 </ol>
 <p>One special value matters: the literal <strong><code>404</code></strong> means &quot;let this URL die honestly — write no redirect rule,&quot; which is different from a blank destination (still to be decided).</p>
 <h3 id="open-the-redirect-editor">Open the Redirect Editor</h3>
-<p>Open it from the <strong>Redirects</strong> tab or <strong>Cmd+Shift+R</strong>. It lists every page that needs a redirect — Kill pages and URL-changed pages — each showing its KKE badge, its title (click to jump to that row in the audit view), the current URL, an editable destination, and a sitemap picker. Fragments are left out automatically, since they have no public URL.</p>
+<p>Open it from the <strong>Redirects</strong> tab or <strong>Cmd+Shift+R</strong>. It lists every page that needs a redirect — Archive pages and URL-changed pages — each showing its MRA badge, its title (click to jump to that row in the audit view), the current URL, an editable destination, and a sitemap picker. Fragments are left out automatically, since they have no public URL.</p>
 <h3 id="set-destinations-efficiently">Set destinations efficiently</h3>
 <ul>
-<li><strong>Re-derive from sitemap</strong> recomputes destinations from current sitemap paths for every row with a sitemap assignment, plus unplaced Kill/Consolidate rows whose destination the app derived (from a consolidation target or an inherited 3xx). It skips any explicit <code>404</code> and any destination you typed or picked yourself. Run it after you&#39;ve reorganized the sitemap or changed the Site Domain.</li>
+<li><strong>Re-derive from sitemap</strong> recomputes destinations from current sitemap paths for every row with a sitemap assignment, plus unplaced Archive/Consolidate rows whose destination the app derived (from a consolidation target or an inherited 3xx). It skips any explicit <code>404</code> and any destination you typed or picked yourself. Run it after you&#39;ve reorganized the sitemap or changed the Site Domain.</li>
 <li>The per-row <strong>sitemap picker</strong> points a single redirect at a specific node.</li>
 <li>The <strong>404 toggle</strong> marks a row as an intentional 404.</li>
 <li><strong>Find/Replace</strong> opens a bar that <em>filters the list</em> to matching destinations (exact-match optional) and can <strong>Replace All</strong> across them — ideal for domain or path-prefix sweeps.</li>
 </ul>
 <p>Destinations also resolve automatically on <strong>Save</strong>, so the editor is for review and overrides, not a prerequisite for a correct export.</p>
 <h3 id="validate-the-chains">Validate the chains</h3>
-<p><strong>Migration → Redirect Chain Check…</strong> covers two things: redirects that point at another page being killed (repoint those to a live destination), and every <strong>inherited redirect</strong> in the crawl. The same check runs as part of the <a href="#18-pre-flight--hand-off">Pre-flight check</a>.</p>
+<p><strong>Migration → Redirect Chain Check…</strong> covers two things: redirects that point at another page being archived (repoint those to a live destination), and every <strong>inherited redirect</strong> in the crawl. The same check runs as part of the <a href="#18-pre-flight--hand-off">Pre-flight check</a>.</p>
 <h3 id="inherited-redirects--the-3xx-rows-in-your-crawl">Inherited redirects — the 3xx rows in your crawl</h3>
-<p>A 3xx URL isn&#39;t a page, it&#39;s a redirect rule the live site already has. Triage sets those to <code>Kill</code> and copies in the destination the crawl recorded — and from then on <strong>the app re-derives that destination on every save</strong>. That matters more than it sounds: if <code>/old-nursing</code> currently redirects to <code>/programs/nursing</code>, and you later move that page to <code>/academics/nursing</code> in your sitemap, the inherited rule follows it. You don&#39;t have to go back and fix redirects every time the tree changes. The same applies if the target gets consolidated into another page, or is retired to a 404. A chain on the live site (A → B → C) collapses to a single hop, so no rule you ship lands on a URL that is itself being retired.</p>
+<p>A 3xx URL isn&#39;t a page, it&#39;s a redirect rule the live site already has. Triage sets those to <code>Archive</code> and copies in the destination the crawl recorded — and from then on <strong>the app re-derives that destination on every save</strong>. That matters more than it sounds: if <code>/old-nursing</code> currently redirects to <code>/programs/nursing</code>, and you later move that page to <code>/academics/nursing</code> in your sitemap, the inherited rule follows it. You don&#39;t have to go back and fix redirects every time the tree changes. The same applies if the target gets consolidated into another page, or is retired to a 404. A chain on the live site (A → B → C) collapses to a single hop, so no rule you ship lands on a URL that is itself being retired.</p>
 <p>Your own typed destinations are never touched by any of this — a redirect you set by hand stays exactly as you left it.</p>
 <p>What the app <strong>can&#39;t</strong> decide for you gets grouped in the report, and the sidebar&#39;s <strong>Inherited redirect needs review</strong> filter is the worklist:</p>
 <table>
@@ -1346,13 +1347,13 @@ Alumni	Secondary	Graduates staying connected
 <td>Retire it (destination <code>404</code>) or repoint.</td>
 </tr>
 <tr>
-<td><strong>Destination has no KKE decision yet</strong></td>
-<td>It points at a page in your audit that nobody has ruled on. If that page turns out to be Kill, this rule points at nothing.</td>
+<td><strong>Destination has no MRA decision yet</strong></td>
+<td>It points at a page in your audit that nobody has ruled on. If that page turns out to be Archive, this rule points at nothing.</td>
 <td>Decide those pages. The redirects re-derive themselves afterwards — you don&#39;t come back here.</td>
 </tr>
 <tr>
 <td><strong>Destination is being retired with nowhere to go</strong></td>
-<td>It points at a page marked Kill with no redirect of its own, or Consolidate with no target picked.</td>
+<td>It points at a page marked Archive with no redirect of its own, or Consolidate with no target picked.</td>
 <td>Finish the destination page&#39;s decision, or repoint the rule.</td>
 </tr>
 <tr>
@@ -1372,14 +1373,14 @@ Alumni	Secondary	Graduates staying connected
 </tr>
 </tbody></table>
 <p>That &quot;not in this crawl&quot; versus &quot;off-site&quot; split is the one worth reading carefully. Both are destinations the app can&#39;t resolve to a row, but one is a gap in your data and the other is completely normal.</p>
-<p><strong>Why &quot;no KKE decision&quot; and not &quot;not placed on the sitemap&quot;?</strong> Because plenty of migrations keep every URL exactly as it is — the new CMS re-uses the existing paths and nobody builds a sitemap at all. In that project <em>nothing</em> is placed, so a placement-based warning would fire on every single row and mean nothing. Whether a page is placed depends on how you work; whether it has been decided does not. So the check asks the question that holds either way: <strong>is there a page here that we&#39;ve committed to keeping?</strong></p>
+<p><strong>Why &quot;no MRA decision&quot; and not &quot;not placed on the sitemap&quot;?</strong> Because plenty of migrations keep every URL exactly as it is — the new CMS re-uses the existing paths and nobody builds a sitemap at all. In that project <em>nothing</em> is placed, so a placement-based warning would fire on every single row and mean nothing. Whether a page is placed depends on how you work; whether it has been decided does not. So the check asks the question that holds either way: <strong>is there a page here that we&#39;ve committed to keeping?</strong></p>
 <p>This is also the one group you can clear without touching a single redirect. Decide the destination pages and the rules re-derive themselves on the next save.</p>
 <h3 id="check-the-redirects-still-agree-with-the-sitemap">Check the redirects still agree with the sitemap</h3>
-<p><strong>Migration → Redirect Health Check…</strong> answers a different question: not &quot;does this destination work&quot; but &quot;does it still match where the sitemap says the page is going&quot;. Redirects are derived from the sitemap, but the app can&#39;t tell a destination <em>it</em> wrote from one <em>you</em> typed — so once a value exists on a Keep or Evolve page it is never revisited. Reorganize the tree, or build a sitemap and delete it, and the old destinations quietly survive.</p>
+<p><strong>Migration → Redirect Health Check…</strong> answers a different question: not &quot;does this destination work&quot; but &quot;does it still match where the sitemap says the page is going&quot;. Redirects are derived from the sitemap, but the app can&#39;t tell a destination <em>it</em> wrote from one <em>you</em> typed — so once a value exists on a Migrate or Revise page it is never revisited. Reorganize the tree, or build a sitemap and delete it, and the old destinations quietly survive.</p>
 <p>It sorts what it finds into groups, each with the full list of affected pages:</p>
 <ul>
 <li><strong>Pages redirecting to themselves</strong> — a loop. Always wrong, whatever the page&#39;s decision.</li>
-<li><strong>Not on the sitemap, but carrying a redirect</strong> — a Keep/Evolve page with no placement isn&#39;t moving, so it needs no redirect. Usually the largest group, and the one nothing else finds.</li>
+<li><strong>Not on the sitemap, but carrying a redirect</strong> — a Migrate/Revise page with no placement isn&#39;t moving, so it needs no redirect. Usually the largest group, and the one nothing else finds.</li>
 <li><strong>Redirect disagrees with the page&#39;s sitemap node</strong> — re-pointed at the node.</li>
 <li><strong>Placed where it already lives</strong> — the node&#39;s path <em>is</em> the page&#39;s current URL, so the redirect is cleared.</li>
 <li><strong>Worth a look — left alone</strong> — the destination is a real node in your sitemap, so it may well be a deliberate choice (sending a page to its parent, say). Reported, never changed.</li>
@@ -1395,17 +1396,17 @@ Alumni	Secondary	Graduates staying connected
 </ul>
 <h3 id="quick-self-check-14">Quick self-check</h3>
 <ul>
-<li><input disabled="" type="checkbox"> Every Kill / URL-changed page has a destination (or an intentional <strong>404</strong>)</li>
+<li><input disabled="" type="checkbox"> Every Archive / URL-changed page has a destination (or an intentional <strong>404</strong>)</li>
 <li><input disabled="" type="checkbox"> You ran <strong>Re-derive from sitemap</strong> after the tree was finalized</li>
-<li><input disabled="" type="checkbox"> The <strong>Redirect Chain Check</strong> is clean — no redirects into Kill/404 pages, and no inherited redirect left in an actionable group</li>
+<li><input disabled="" type="checkbox"> The <strong>Redirect Chain Check</strong> is clean — no redirects into Archive/404 pages, and no inherited redirect left in an actionable group</li>
 <li><input disabled="" type="checkbox"> The <strong>Redirect Health Check</strong> is clean — no loops, orphans, or destinations that contradict the sitemap</li>
 <li><input disabled="" type="checkbox"> Intentional 404s are marked, not left blank</li>
 <li><input disabled="" type="checkbox"> The redirect map is exported</li>
 </ul>
 <h3 id="going-deeper-5">Going deeper</h3>
-<p><strong>The columns.</strong> Status (a KKE badge or &quot;URL Changed&quot;), Title (click to open the audit row), Current URL, the <strong>→</strong> arrow, the editable Destination URL, and the <strong>🗂</strong> sitemap picker. The toolbar adds a status filter, a text search, and sortable columns that cycle ascending → descending → none.</p>
+<p><strong>The columns.</strong> Status (an MRA badge or &quot;URL Changed&quot;), Title (click to open the audit row), Current URL, the <strong>→</strong> arrow, the editable Destination URL, and the <strong>🗂</strong> sitemap picker. The toolbar adds a status filter, a text search, and sortable columns that cycle ascending → descending → none.</p>
 <p><strong>Setting a destination.</strong> Type any URL (including a cross-server one), pick a node from the sitemap (a 600px dropdown anchored to the right), or leave it blank to be resolved on save. The <strong>default destination</strong> and <strong>site domain</strong> live in Project Settings; changing the domain rewrites destinations that used the old one. On save, <code>Redirect_Destination</code> is filled from the priority chain above — there&#39;s no homepage fallback, so a blank means the page is retired and will 404.</p>
-<p><strong>How Re-derive decides.</strong> Kill and Consolidate rows take the sitemap computed path; Keep/Evolve rows update only when the URL is actually changing; rows with an explicit <code>404</code> are always skipped; and rows with no sitemap assignment are left alone. Every result is visible in the editor before you save, so you can review or override.</p>
+<p><strong>How Re-derive decides.</strong> Archive and Consolidate rows take the sitemap computed path; Migrate/Revise rows update only when the URL is actually changing; rows with an explicit <code>404</code> are always skipped; and rows with no sitemap assignment are left alone. Every result is visible in the editor before you save, so you can review or override.</p>
 <p><strong>A couple of conveniences.</strong> Opening the editor from a page auto-scrolls to that page&#39;s row with a brief highlight. And the exported CSV carries four columns: Source URL, Destination URL, Status Code (<code>301</code>), and a Reason.</p>
 <hr>
 <h2 id="16-producing-the-outputs">16. Producing the Outputs</h2>
@@ -1417,12 +1418,12 @@ Alumni	Secondary	Graduates staying connected
 <p>Reports are read-only views, generated on demand from the current file — run them as often as you like. Every one exports to <strong>PDF</strong> or <strong>HTML</strong> (and the HTML opens cleanly in Word). They fall into three audiences, which is also how the Reports menu is grouped.</p>
 <h3 id="for-stakeholders">For stakeholders</h3>
 <ul>
-<li><p><strong>Executive Summary</strong> — the top-line story: the content inventory, the KKE distribution, auto-generated key findings, SME status, and a section breakdown. Lead a client readout with this.</p>
-<p><strong>It counts content pages, not crawled URLs, and the difference is usually large.</strong> A crawl lists every URL that <em>responded</em> — including every inherited 301 and every dead link. Reporting those as pages invites the one question you don&#39;t want mid-readout: <em>&quot;we&#39;re really migrating twelve thousand pages?&quot;</em> So the Overview leads with <code>URLs crawled</code>, breaks out <strong>existing redirects (3xx)</strong> and <strong>not found / gone (4xx)</strong>, and then gives <strong>content pages audited</strong> — and every figure below it, including the Kill percentage, is over content pages only. On a real higher-ed crawl that moved the headline &quot;recommended for removal&quot; figure from 66% to 31%; the first number was mostly redirects.</p>
+<li><p><strong>Executive Summary</strong> — the top-line story: the content inventory, the MRA distribution, auto-generated key findings, SME status, and a section breakdown. Lead a client readout with this.</p>
+<p><strong>It counts content pages, not crawled URLs, and the difference is usually large.</strong> A crawl lists every URL that <em>responded</em> — including every inherited 301 and every dead link. Reporting those as pages invites the one question you don&#39;t want mid-readout: <em>&quot;we&#39;re really migrating twelve thousand pages?&quot;</em> So the Overview leads with <code>URLs crawled</code>, breaks out <strong>existing redirects (3xx)</strong> and <strong>not found / gone (4xx)</strong>, and then gives <strong>content pages audited</strong> — and every figure below it, including the Archive percentage, is over content pages only. On a real higher-ed crawl that moved the headline &quot;recommended for removal&quot; figure from 66% to 31%; the first number was mostly redirects.</p>
 <p>A 5xx still counts as content — a broken page is a page, and it&#39;s work you&#39;ll be doing. Nothing is hidden: the non-content rows are named, counted, and still in the audit. <strong>By Section</strong> counts content pages too, so it adds up to the content total rather than to the crawl. If a section is missing entirely, check whether its site is marked out of scope — those rows are excluded from every figure in the report, and the banner at the top says how many.</p>
 <p>To see the rows behind the numbers, use the sidebar&#39;s <strong>Existing redirect (3xx — not content)</strong> or <strong>Not content (3xx or 4xx)</strong> filters.</p>
 </li>
-<li><p><strong>Content Inventory by Section</strong> — content pages by section. One ranked table shows every section&#39;s size and the share of each decision. Then a closer look at the ten largest sections: KKE distribution, a few sample pages, and notes counts. Your detailed appendix. Its section counts are the same as the Executive Summary&#39;s By Section.</p>
+<li><p><strong>Content Inventory by Section</strong> — content pages by section. One ranked table shows every section&#39;s size and the share of each decision. Then a closer look at the ten largest sections: MRA distribution, a few sample pages, and notes counts. Your detailed appendix. Its section counts are the same as the Executive Summary&#39;s By Section.</p>
 </li>
 <li><p><strong>SME Review Status</strong> — where expert review stands: overall completion plus a per-Content-Owner table (assigned, reviewed, %, approved vs changed, unresolved conflicts) and a conflict list.</p>
 </li>
@@ -1430,7 +1431,7 @@ Alumni	Secondary	Graduates staying connected
 <ul>
 <li>pages serving only non-priority audiences</li>
 <li>pages reviewed as serving no audience</li>
-<li>Primary-audience pages marked <strong>Kill</strong> (re-read these before signing off the redirect map)</li>
+<li>Primary-audience pages marked <strong>Archive</strong> (re-read these before signing off the redirect map)</li>
 <li><strong>detail</strong> pages serving four or more audiences</li>
 </ul>
 <p>Only detail pages count toward that last one. A landing page serving four or more audiences is normal: a program landing page can rightly serve prospective undergraduates, graduate students, executive-education seekers and certificate seekers at once. So a page is only counted when nothing sits beneath it in the sitemap or its URL path, and even then it&#39;s worth a look, not a defect. The page-by-page lists are in the audit-team appendix.</p>
@@ -1448,7 +1449,7 @@ Alumni	Secondary	Graduates staying connected
 <ul>
 <li><strong>Menu Report</strong> — one section card per menu with its item hierarchy, page-count badges on page references, <code>↗</code> on links, <code>≡</code> on headers, and a red <strong>missing</strong> badge on broken references. Also available as <strong>Menus → Report</strong>. A tight hand-off doc for colleagues and clients.</li>
 <li><strong>Sitemap Coverage Report</strong> — the gap-finder. It lists kept pages that still need a place, net-new nodes, empty nodes, crowded nodes (more than 5 pages) and URLs that change. Its net-new and empty counts use the same definitions as the Sitemap tree&#39;s NEW and ○ badges.</li>
-<li><strong>Content Type Crosswalk</strong> — one row per current type → renders → target type → target spec → migration track, with page volume and KKE breakdown, flagging any type with no crosswalk.</li>
+<li><strong>Content Type Crosswalk</strong> — one row per current type → renders → target type → target spec → migration track, with page volume and MRA breakdown, flagging any type with no crosswalk.</li>
 <li><strong>Component Inventory</strong> — the UI-component picture (see <a href="#20-component-inventory">Component Inventory</a>).</li>
 </ul>
 <h3 id="for-the-build-and-engineering-team">For the build and engineering team</h3>
@@ -1507,7 +1508,7 @@ Alumni	Secondary	Graduates staying connected
 <li>A <strong>frame</strong> sized to the whole sitemap.</li>
 <li><strong>One shape per visible node</strong>, positioned exactly where it sits in the app.</li>
 <li><strong>A connector for every parent → child</strong> relationship.</li>
-<li>The <strong>colours and line styles from your colour rules</strong> (see <a href="#colour-rules-in-depth">Colour rules in depth</a>) — so a board colour-coded by KKE or by builder arrives that way.</li>
+<li>The <strong>colours and line styles from your colour rules</strong> (see <a href="#colour-rules-in-depth">Colour rules in depth</a>) — so a board colour-coded by MRA or by builder arrives that way.</li>
 <li><strong>Collapsed sections as a stacked block</strong> — two offset blocks behind the card, so it&#39;s visibly a folded-up section rather than a page that happens to be a dead end.</li>
 </ul>
 <h4 id="what-to-expect-on-speed-and-fidelity">What to expect on speed and fidelity</h4>
@@ -1519,23 +1520,23 @@ Alumni	Secondary	Graduates staying connected
 <li><strong>Inner padding is app-only.</strong> Miro centres shape text itself and offers no padding control.</li>
 </ul>
 <h3 id="ask-the-audit-a-question-mcp-server">Ask the audit a question (MCP server)</h3>
-<p>The reports above answer a fixed set of questions. An audit raises plenty that aren&#39;t on the list — <em>how many Keep pages under <code>/news</code> have no audience? Which sections did the SME overturn most? What did we decide about the PDFs on the careers subdomain?</em> — and until now the honest answer was &quot;export to Excel and pivot.&quot;</p>
+<p>The reports above answer a fixed set of questions. An audit raises plenty that aren&#39;t on the list — <em>how many Migrate pages under <code>/news</code> have no audience? Which sections did the SME overturn most? What did we decide about the PDFs on the careers subdomain?</em> — and until now the honest answer was &quot;export to Excel and pivot.&quot;</p>
 <p>Transmission ships a small <strong>MCP server</strong> (Model Context Protocol — the standard AI assistants use to talk to tools) that lets Claude Desktop, Claude Code or any other MCP client <strong>read</strong> a <code>.transmission</code> project and answer those questions directly, with real numbers. It&#39;s a developer preview: it works, it&#39;s tested, and it needs a one-time terminal setup.</p>
 <p><strong>What it can do</strong></p>
 <ul>
-<li>Count pages grouped by any column — sections, decisions, audiences, tags, source sites, status codes — with filters, so <em>&quot;Kill pages by section, content pages only&quot;</em> is one question.</li>
+<li>Count pages grouped by any column — sections, decisions, audiences, tags, source sites, status codes — with filters, so <em>&quot;Archive pages by section, content pages only&quot;</em> is one question.</li>
 <li>List matching pages with the columns you choose, or pull one page&#39;s full record with its change history.</li>
 <li>Walk the sitemap with page counts per node, list redirects with who wrote each one, read the audit trail, and read the project&#39;s libraries (audiences, jobs, sites, the content-type crosswalk, the glossary).</li>
 <li>Apply your <strong>saved filters</strong> by name, so the AI sees the same worklists you do.</li>
 </ul>
-<p>It also sends the model the conventions that matter — blank means <em>unreviewed</em>, Kill vs Exclude, content pages vs crawled URLs, the <code>404</code> sentinel — so an untouched crawl doesn&#39;t get reported back as a finished audit.</p>
+<p>It also sends the model the conventions that matter — blank means <em>unreviewed</em>, Archive vs Exclude, content pages vs crawled URLs, the <code>404</code> sentinel — so an untouched crawl doesn&#39;t get reported back as a finished audit.</p>
 <p><strong>How changes come back: proposals</strong></p>
 <p>Claude never edits the audit. When you ask it to — typically after confirming a <code>/section-review</code> worksheet — it <strong>queues proposals</strong>: one per page, with the field, the value and a one-line reason. They land inside your project file, and the app notices the next time its window is active: the <strong>✦</strong> button in the title bar shows a count, and a <strong>Proposals</strong> button appears in the sidebar.</p>
-<p><strong>Review Proposals</strong> (either button, or Project → Review Proposals…) groups them by what is being proposed, so a hundred &quot;Kill — archival news&quot; rows are one decision. Each group shows how many pages, what they currently hold, and who proposed it; ▸ opens the pages with each one&#39;s current value and reason. Tick the groups you agree with and <strong>Accept selected</strong>: the values are written exactly as if you had made the edits — through the same paths, into the change log (with a second <code>(proposal accepted)</code> entry carrying the source and reason), and as one <code>Cmd+Z</code>. Accepting a Kill offers the same sitemap/redirect cleanup as any other Kill. <strong>Reject selected</strong> records the refusal so it isn&#39;t proposed again; unticked groups stay queued.</p>
-<p>What a proposal may touch is deliberately narrow: the decision, notes, tags, group, content type and theme, renders-as, migration track, published status, audiences, primary audience and jobs. Tags, audiences and jobs are <em>added</em> to a page, never removed; a note is appended under what&#39;s there. <code>Final_KKE</code>, sitemap placement, redirects and consolidation targets cannot be proposed — those are set in the app, by you. Proposals need a <code>.transmission</code> project (they live in the file), and the file moves to a newer format the first time this version opens it; older builds of Transmission will ask you to update before opening it.</p>
+<p><strong>Review Proposals</strong> (either button, or Project → Review Proposals…) groups them by what is being proposed, so a hundred &quot;Archive — archival news&quot; rows are one decision. Each group shows how many pages, what they currently hold, and who proposed it; ▸ opens the pages with each one&#39;s current value and reason. Tick the groups you agree with and <strong>Accept selected</strong>: the values are written exactly as if you had made the edits — through the same paths, into the change log (with a second <code>(proposal accepted)</code> entry carrying the source and reason), and as one <code>Cmd+Z</code>. Accepting an Archive offers the same sitemap/redirect cleanup as any other Archive. <strong>Reject selected</strong> records the refusal so it isn&#39;t proposed again; unticked groups stay queued.</p>
+<p>What a proposal may touch is deliberately narrow: the decision, notes, tags, group, content type and theme, renders-as, migration track, published status, audiences, primary audience and jobs. Tags, audiences and jobs are <em>added</em> to a page, never removed; a note is appended under what&#39;s there. <code>Final_MRA</code>, sitemap placement, redirects and consolidation targets cannot be proposed — those are set in the app, by you. Proposals need a <code>.transmission</code> project (they live in the file), and the file moves to a newer format the first time this version opens it; older builds of Transmission will ask you to update before opening it.</p>
 <p><strong>What it deliberately can&#39;t do</strong></p>
 <ul>
-<li><strong>Change anything directly.</strong> It opens the project read-only; the one write it has is the proposals queue above, and nothing in it is applied until you accept it — the same contract Suggested_KKE and the AI audience suggestions already follow.</li>
+<li><strong>Change anything directly.</strong> It opens the project read-only; the one write it has is the proposals queue above, and nothing in it is applied until you accept it — the same contract Suggested_MRA and the AI audience suggestions already follow.</li>
 <li>Read <code>.xlsx</code> files. Use <strong>File → Save As Project…</strong> first.</li>
 <li>Compute the handful of filters only the app can (duplicates, URL variants, redirect review, cross-site duplicates). A saved filter that uses one is refused by name rather than run half-applied.</li>
 </ul>
@@ -1543,8 +1544,8 @@ Alumni	Secondary	Graduates staying connected
 <ul>
 <li><strong><code>/audit-status</code></strong> — where the audit stands: progress both ways (auditor vs client), what moved and by whom, what&#39;s still owed before handoff. For Monday check-ins and client status emails.</li>
 <li><strong><code>/section-review /news</code></strong> — go through a section with you: its patterns, the exceptions worth a human minute, and a proposed-decision worksheet with reasons written in your own audit vocabulary. You confirm, then apply in the app — in bulk with the Multi-bar on a filtered list.</li>
-<li><strong><code>/decision-consistency</code></strong> — before an SME export or handoff: pages whose decision contradicts their neighbours or their data (a Keep that returns 404, a Consolidate with no target, a Kill in a priority-audience section with real traffic), each with the evidence and phrased as a question, not a verdict.</li>
-<li><strong><code>/rubric-sweep</code></strong> — applies <em>this project&#39;s</em> rubric patterns across the whole audit (see <a href="#rubrics">Rubrics</a>): finds the pages a pattern describes using its conditions, reads those pages and the pages their content would go to, and proposes what merges into what, grouped by destination. Questions (a parent that&#39;s itself being killed, a different audience) come back as questions. It reads each page once; the text is cached in the project, so nobody fetches it twice.</li>
+<li><strong><code>/decision-consistency</code></strong> — before an SME export or handoff: pages whose decision contradicts their neighbours or their data (a Migrate that returns 404, a Consolidate with no target, an Archive in a priority-audience section with real traffic), each with the evidence and phrased as a question, not a verdict.</li>
+<li><strong><code>/rubric-sweep</code></strong> — applies <em>this project&#39;s</em> rubric patterns across the whole audit (see <a href="#rubrics">Rubrics</a>): finds the pages a pattern describes using its conditions, reads those pages and the pages their content would go to, and proposes what merges into what, grouped by destination. Questions (a parent that&#39;s itself being archived, a different audience) come back as questions. It reads each page once; the text is cached in the project, so nobody fetches it twice.</li>
 <li><strong><code>ask-the-audit</code></strong> — the discipline behind any ad hoc question: aggregate before listing, content pages for client numbers, and every figure quoted with the sidebar filter that reproduces it.</li>
 </ul>
 <p><strong>The quick way: ✦ → Open in Claude</strong></p>
@@ -1556,7 +1557,7 @@ Alumni	Secondary	Graduates staying connected
 <li>Start a new chat with the Transmission extension connected (✦ → <strong>Open in Claude</strong>).</li>
 </ol>
 <p>The skills only work where the Transmission extension is connected — the Claude desktop app, not claude.ai in a browser. When a Transmission release changes a playbook, replace that skill in <strong>Settings → Capabilities → Skills</strong> with the new zip (remove the old one first if Claude won&#39;t take a second skill with the same name). Keeping the <strong>+</strong> prompts as well does no harm: they&#39;re the same instructions.</p>
-<p><strong>With Claude Code.</strong> If the <code>claude</code> command is installed, the same dialog offers <strong>Code tab</strong> and <strong>Terminal</strong> links: a new Claude Code session with this project connected and the skills loaded. The plugin ships inside Transmission and registers itself with Claude Code the first time (a few seconds); this route also needs Node 22.13 or newer. The dialog tells you if anything is missing. Transmission also notes which project it has open, so a session you start by hand in Claude connects to it without being told. Keep Transmission open while you work: Claude sees each autosave within a couple of seconds, and its proposals show up in the same dialog.</p>
+<p><strong>With Claude Code.</strong> If the <code>claude</code> command is installed, the same dialog offers <strong>Code tab</strong> and <strong>Terminal</strong> links: a new Claude Code session with this project connected and the skills loaded. The plugin ships inside Transmission and registers itself with Claude Code the first time (a few seconds); this route also needs Node 22.13 or newer. The dialog tells you if anything is missing. Transmission also notes which project it has open, so a session you start by hand in Claude connects to it without being told. Migrate Transmission open while you work: Claude sees each autosave within a couple of seconds, and its proposals show up in the same dialog.</p>
 <p><strong>Setting it up by hand</strong> (if you&#39;d rather register it once)</p>
 <p>You need <strong>Node 22.13 or newer</strong> installed (it uses Node&#39;s built-in SQLite; nothing else to install) and a copy of the Transmission source, which contains <code>mcp/server.js</code>.</p>
 <p>For Claude Code, install it as a plugin — that wires the server <em>and</em> the skills in one step:</p>
@@ -1580,7 +1581,7 @@ Alumni	Secondary	Graduates staying connected
 </ul>
 <h3 id="going-deeper-6">Going deeper</h3>
 <p>The <strong>Reports</strong> menu holds everything above. The separate <strong>Migration</strong> menu is reserved for export and validation <em>tools</em> rather than reports — Pre-Handoff Check, Migration Tracker, Export Redirect Map (CSV), and Redirect Chain Check.</p>
-<p>For a live progress view rather than a formal report, open the <strong>Progress Dashboard</strong> with <strong>Cmd+P</strong> (or <strong>View → Audit Progress</strong>): client and project, total and percent reviewed, the KKE breakdown as a stacked bar, flagged/tagged/noted counts, a by-group breakdown, and SME stats. It exports to PDF or HTML using the same layout as every other report: the content-page split, SME review, and a by-section table with each decision&#39;s share.</p>
+<p>For a live progress view rather than a formal report, open the <strong>Progress Dashboard</strong> with <strong>Cmd+P</strong> (or <strong>View → Audit Progress</strong>): client and project, total and percent reviewed, the MRA breakdown as a stacked bar, flagged/tagged/noted counts, a by-group breakdown, and SME stats. It exports to PDF or HTML using the same layout as every other report: the content-page split, SME review, and a by-section table with each decision&#39;s share.</p>
 <p>Every report&#39;s header shows the client and project, the date it was generated, and, when the crawl export includes Screaming Frog&#39;s <strong>Crawl Timestamp</strong> column, the dates the site was crawled. The crawl date is the real &quot;as of&quot; date for the page data; your decisions are always current.</p>
 <p>It counts every row you&#39;re actually auditing, including redirects and error URLs — a 3xx still needs triaging, so it&#39;s still work — with the content split shown beneath the total. <strong>Pages on sites you&#39;ve marked out of scope are left out</strong>, so a retired property can&#39;t hold your completion percentage below 100% forever; a note at the top says how many rows that was and which sites. The Executive Summary counts the same rows but reports only content pages, which is why its total is the smaller of the two.</p>
 <hr>
@@ -1592,15 +1593,15 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="the-mental-model-4">The mental model</h3>
 <p>The Migration Tracker is <em>the</em> engineering deliverable — one <code>.xlsx</code> with four purpose-built sheets, generated from the current state of your project. It&#39;s a snapshot, not a live link, so re-export it whenever the audit moves on. Run the <a href="#18-pre-flight--hand-off">Pre-Handoff Check</a> first.</p>
 <h3 id="export-it">Export it</h3>
-<p>Open <strong>Migration → Migration Tracker…</strong>. A dialog lets you toggle which sheets and options to include (for example, whether Kill/Exclude rows appear in Source Pages, and whether phased nodes are included), then exports. The default filename is <code>{project-slug}-migration-tracker-YYYY-MM-DD.xlsx</code>. (You can also reach it via <strong>File → Export…</strong>.)</p>
+<p>Open <strong>Migration → Migration Tracker…</strong>. A dialog lets you toggle which sheets and options to include (for example, whether Archive/Exclude rows appear in Source Pages, and whether phased nodes are included), then exports. The default filename is <code>{project-slug}-migration-tracker-YYYY-MM-DD.xlsx</code>. (You can also reach it via <strong>File → Export…</strong>.)</p>
 <p>Two controls let you scope the <strong>Sitemap Plan</strong> sheet: a <strong>column picker</strong> (tick exactly which columns to include) and <strong>Only nodes matching the active Build filter</strong> — when you&#39;ve set a Build filter in the Sitemap (say, one assignee or one page status), this exports just the nodes that match it. The toggle shows the active filter and how many nodes match.</p>
 <p><strong>Just want the sitemap nodes, not the whole workbook?</strong> In the Sitemap, set a <strong>Build</strong> (and/or Phase) filter, then use <strong>Export → Filtered nodes → Excel…</strong>. Pick <strong>Rows</strong> (the matching nodes, or all nodes) and <strong>Columns</strong>, and it writes a single sheet — <code>{project-slug}-sitemap-nodes-YYYY-MM-DD.xlsx</code>.</p>
 <h3 id="what-each-sheet-carries">What each sheet carries</h3>
 <ul>
 <li><strong>Sitemap Plan</strong> — one row per sitemap node, with all the build metadata: page status, build pattern, builder/writer/migrator, guidance and briefs, source-page count, the assigned <strong>source-page URL(s)</strong>, the <strong>consolidated-in URL(s)</strong> (any old pages being merged into those assigned pages), net-new flag, phase, in-menu, and external URL. The build team&#39;s master plan.</li>
-<li><strong>Source Pages</strong> — your audit rows joined to their sitemap node: KKE / Final / Suggested calls, Content Type / Renders As / Target, Group, Primary Tag, and the target breadcrumb, path, pattern, and status. The &quot;where does each old page go&quot; map.</li>
-<li><strong>Redirects</strong> — Kill rows plus URL changes; an intentional <code>404</code> surfaces as &quot;(404) — intentional deindex.&quot;</li>
-<li><strong>Archive</strong> — the Kill rows with their notes and tags, for client reference.</li>
+<li><strong>Source Pages</strong> — your audit rows joined to their sitemap node: MRA / Final / Suggested calls, Content Type / Renders As / Target, Group, Primary Tag, and the target breadcrumb, path, pattern, and status. The &quot;where does each old page go&quot; map.</li>
+<li><strong>Redirects</strong> — Archive rows plus URL changes; an intentional <code>404</code> surfaces as &quot;(404) — intentional deindex.&quot;</li>
+<li><strong>Archive</strong> — the Archive rows with their notes and tags, for client reference.</li>
 </ul>
 <p>Each sheet has a frozen header row and pre-tuned column widths, ready to work in directly.</p>
 <h3 id="quick-self-check-16">Quick self-check</h3>
@@ -1622,16 +1623,16 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="run-the-pre-handoff-check">Run the Pre-Handoff Check</h3>
 <p><strong>Migration → Pre-Handoff Check…</strong> reports either &quot;<strong>Ready for handoff</strong>&quot; or &quot;<strong>N issues across M checks</strong>,&quot; covering:</p>
 <ol>
-<li>Every page has a KKE decision.</li>
+<li>Every page has an MRA decision.</li>
 <li>Consolidate pages point to a target.</li>
-<li>Consolidate targets are live (not Kill/Exclude).</li>
+<li>Consolidate targets are live (not Archive/Exclude).</li>
 <li>No redirect chains.</li>
 <li>No duplicate sitemap IDs <em>(sitemap files only)</em>.</li>
 <li>No empty sitemap leaves <em>(sitemap files only)</em>.</li>
 </ol>
 <p>Each failing check lists a sample of the pages plus a one-line fix (which filter to use, which editor to open); the sitemap checks are skipped automatically if the file has no Sitemap sheet. Work top-down — clear unreviewed pages first (they cascade into the other checks), then consolidations, then redirects, then sitemap — re-running after each batch. The check is itself a report, so you can export it to <strong>PDF / HTML</strong> as evidence that the audit passed its gate.</p>
 <h3 id="the-change-log">The change log</h3>
-<p>Every change to a decision field — KKE, SME Decision, Final KKE, and the auto-filled classifications — is recorded during the session and appended to the hidden <strong>KKE_ChangeLog</strong> sheet on save (Timestamp, Row, URL, Field, Old Value, New Value). It accumulates across sessions, so the file always carries a complete history of how the inventory was decided.</p>
+<p>Every change to a decision field — MRA, SME Decision, Final MRA, and the auto-filled classifications — is recorded during the session and appended to the hidden <strong>MRA_ChangeLog</strong> sheet on save (Timestamp, Row, URL, Field, Old Value, New Value). It accumulates across sessions, so the file always carries a complete history of how the inventory was decided.</p>
 <h3 id="quick-self-check-17">Quick self-check</h3>
 <ul>
 <li><input disabled="" type="checkbox"> The Pre-Handoff Check reports <strong>Ready for handoff</strong> (0 issues)</li>
@@ -1650,7 +1651,7 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="two-different-things-called-templates">Two different things called &quot;templates&quot;</h3>
 <p>These two features share a name but are unrelated:</p>
 <ul>
-<li><strong>Audit templates</strong> (<code>.kke-template.json</code>) — a portable snapshot of your <em>setup</em>: field config, vocabularies, KKE states, column mapping, and identity. They carry configuration, never page data.</li>
+<li><strong>Audit templates</strong> (<code>.kke-template.json</code>) — a portable snapshot of your <em>setup</em>: field config, vocabularies, decision states, column mapping, and identity. They carry configuration, never page data.</li>
 <li><strong>Report templates</strong> (Markdown + Mustache) — files that control how a <em>report</em> renders. Today they shape the <strong>Migration Direction Brief</strong>.</li>
 </ul>
 <h3 id="audit-templates--reuse-your-setup">Audit templates — reuse your setup</h3>
@@ -1659,7 +1660,7 @@ Alumni	Secondary	Graduates staying connected
 <li><strong>File → Save Audit Template…</strong> writes a <code>.kke-template.json</code> capturing it all.</li>
 <li>On a new project, <strong>File → Load Audit Template…</strong> applies that setup in one step.</li>
 </ol>
-<p>A template captures your visible fields, tag and group libraries, sidebar columns, custom KKE states, column mapping, auto-advance preference, identity (client, project, site domain, default redirect), and saved filters. It&#39;s the way to standardize a team&#39;s audit conventions across many clients — create one, distribute it.</p>
+<p>A template captures your visible fields, tag and group libraries, sidebar columns, custom decision states, column mapping, auto-advance preference, identity (client, project, site domain, default redirect), and saved filters. It&#39;s the way to standardize a team&#39;s audit conventions across many clients — create one, distribute it.</p>
 <h3 id="report-templates--shape-the-direction-brief">Report templates — shape the Direction Brief</h3>
 <p>Custom report templates are Markdown files with Mustache placeholders, rendered to HTML.</p>
 <ol>
@@ -1695,7 +1696,7 @@ Alumni	Secondary	Graduates staying connected
 <h3 id="curate-the-library">Curate the library</h3>
 <p><strong>Project → Component Library…</strong> opens a two-pane editor where each entry has a name, category, complexity, description, design-system URL, aliases, and notes. <strong>Seed defaults</strong> adds the 57 built-ins, skipping any names you already have.</p>
 <h3 id="run-the-report">Run the report</h3>
-<p><strong>Reports → Component Inventory…</strong> produces a per-component frequency table with a KKE breakdown, a one-off flag for components on two or fewer pages, and the top co-occurring pairs — which often reveal the real page templates your team needs to build.</p>
+<p><strong>Reports → Component Inventory…</strong> produces a per-component frequency table with an MRA breakdown, a one-off flag for components on two or fewer pages, and the top co-occurring pairs — which often reveal the real page templates your team needs to build.</p>
 <h3 id="quick-self-check-19">Quick self-check</h3>
 <ul>
 <li><input disabled="" type="checkbox"> The <strong>Components</strong> cluster is enabled and used while auditing</li>
@@ -1705,7 +1706,7 @@ Alumni	Secondary	Graduates staying connected
 <li><input disabled="" type="checkbox"> One-offs are reviewed — dropped, consolidated, or justified</li>
 </ul>
 <h3 id="going-deeper-7">Going deeper</h3>
-<p>The library lives in your app preferences (<code>prefs.json</code>, so it&#39;s shared across projects) and merges with any per-project additions in the file&#39;s <code>DesignPatternLibrary</code> sheet on open. In the report, a component that appears on 30 Kill pages may not be worth prioritizing, while one on 20 Evolve pages clearly is — the KKE breakdown is there to make that call. Component auditing is best as a <strong>second pass</strong>: filter to Keep + Evolve first (there&#39;s no value cataloguing pages you&#39;re killing), ideally alongside a UX or design colleague who knows the new design system.</p>
+<p>The library lives in your app preferences (<code>prefs.json</code>, so it&#39;s shared across projects) and merges with any per-project additions in the file&#39;s <code>DesignPatternLibrary</code> sheet on open. In the report, a component that appears on 30 Archive pages may not be worth prioritizing, while one on 20 Revise pages clearly is — the MRA breakdown is there to make that call. Component auditing is best as a <strong>second pass</strong>: filter to Migrate + Revise first (there&#39;s no value cataloguing pages you&#39;re archiving), ideally alongside a UX or design colleague who knows the new design system.</p>
 <hr>
 <h1 id="reference-appendix">Reference Appendix</h1>
 <h2 id="audit-columns-1">Audit Columns</h2>
@@ -1718,8 +1719,8 @@ Alumni	Secondary	Graduates staying connected
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>KKE_Recommendation</strong></td>
-<td>Your Keep/Kill/Evolve/Consolidate/Exclude decision</td>
+<td><strong>MRA_Recommendation</strong></td>
+<td>Your Migrate/Revise/Archive/Consolidate/Exclude decision</td>
 </tr>
 <tr>
 <td><strong>Tags</strong></td>
@@ -1754,7 +1755,7 @@ Alumni	Secondary	Graduates staying connected
 <td>Person responsible for the page</td>
 </tr>
 <tr>
-<td><strong>Final_KKE</strong></td>
+<td><strong>Final_MRA</strong></td>
 <td>Resolved recommendation after SME review (incl. Consolidate)</td>
 </tr>
 <tr>
@@ -1783,18 +1784,18 @@ Alumni	Secondary	Graduates staying connected
 </tr>
 <tr>
 <td><strong>Migration_Track</strong></td>
-<td>Scripted / Migrate Records / Configure / Manual Rebuild / Merge / Kill/Redirect</td>
+<td>Scripted / Migrate Records / Configure / Manual Rebuild / Merge / Archive/Redirect</td>
 </tr>
 <tr>
-<td><strong>Suggested_KKE</strong></td>
+<td><strong>Suggested_MRA</strong></td>
 <td>Unified suggestion (GA + Rubric + Audience)</td>
 </tr>
 <tr>
-<td><strong>Suggested_KKE_Sources</strong></td>
+<td><strong>Suggested_MRA_Sources</strong></td>
 <td>JSON per-source breakdown for the badge</td>
 </tr>
 <tr>
-<td><strong>GA_KKE_Recommendation</strong> / <strong>GA_Score</strong></td>
+<td><strong>GA_MRA_Recommendation</strong> / <strong>GA_Score</strong></td>
 <td>GA-derived rec + 0–1 composite</td>
 </tr>
 <tr>
@@ -1873,11 +1874,11 @@ Alumni	Secondary	Graduates staying connected
 </tr>
 <tr>
 <td><strong>Cmd+Z</strong> / <strong>Cmd+Shift+Z</strong></td>
-<td>Undo / Redo (KKE changes, sitemap node deletions)</td>
+<td>Undo / Redo (MRA changes, sitemap node deletions)</td>
 </tr>
 <tr>
 <td><strong>1 / 2 / 3 / 4 / 5 / 0</strong></td>
-<td>Keep / Kill / Evolve / Consolidate / Exclude / Clear (no input focused)</td>
+<td>Migrate / Revise / Archive / Consolidate / Exclude / Clear (no input focused)</td>
 </tr>
 <tr>
 <td><strong>?</strong></td>
@@ -1954,15 +1955,15 @@ Alumni	Secondary	Graduates staying connected
 <td>The sitemap (see <a href="#13-sitemap--ia">§13</a> for the column format)</td>
 </tr>
 <tr>
-<td><strong>KKE_Settings</strong></td>
+<td><strong>MRA_Settings</strong></td>
 <td>Project settings, saved filters, computed-column config (JSON)</td>
 </tr>
 <tr>
-<td><strong>KKE_ChangeLog</strong></td>
+<td><strong>MRA_ChangeLog</strong></td>
 <td>Decision-change audit trail</td>
 </tr>
 <tr>
-<td><strong>KKE_Glossary</strong></td>
+<td><strong>MRA_Glossary</strong></td>
 <td>Tag/group definitions</td>
 </tr>
 <tr>
@@ -1979,7 +1980,7 @@ Alumni	Secondary	Graduates staying connected
 </tr>
 </tbody></table>
 <h2 id="table-view">Table View</h2>
-<p><strong>View → Table</strong> or <strong>Cmd+T</strong> — a full-width spreadsheet view (sidebar hidden). All columns shown. <strong>Sort</strong> any header (asc/desc/none); per-column <strong>text filters</strong> (independent of the sidebar; a banner reminds you Table View filters on its own); <strong>resize</strong> by dragging header edges; <strong>Columns…</strong> toggles visibility + reorder. Selecting a row preserves it when you switch back to Audit. The <strong>#</strong> column is frozen when scrolling horizontally. <strong>Inline editing</strong>: double-click any audit column (KKE-type → dropdown; others → text); Enter/blur commits, Escape cancels, and <strong>Tab / Shift+Tab</strong> commits and hops to the adjacent editable column — so you can work across a row without re-clicking. <strong>Keyboard</strong>: Arrow Up/Down or j/k navigate when no input is focused.</p>
+<p><strong>View → Table</strong> or <strong>Cmd+T</strong> — a full-width spreadsheet view (sidebar hidden). All columns shown. <strong>Sort</strong> any header (asc/desc/none); per-column <strong>text filters</strong> (independent of the sidebar; a banner reminds you Table View filters on its own); <strong>resize</strong> by dragging header edges; <strong>Columns…</strong> toggles visibility + reorder. Selecting a row preserves it when you switch back to Audit. The <strong>#</strong> column is frozen when scrolling horizontally. <strong>Inline editing</strong>: double-click any audit column (MRA-type → dropdown; others → text); Enter/blur commits, Escape cancels, and <strong>Tab / Shift+Tab</strong> commits and hops to the adjacent editable column — so you can work across a row without re-clicking. <strong>Keyboard</strong>: Arrow Up/Down or j/k navigate when no input is focused.</p>
 <h2 id="preferences-persisted">Preferences (persisted)</h2>
 <p>Last opened file (reopened on launch), window bounds, sidebar width, search text, sort order, visible metadata fields, tag library, group library, auto-advance, rubric directory (global + per-file), API key, column mappings (per file), sidebar column selection. Stored in <code>~/Library/Application Support/Transmission/prefs.json</code>.</p>
 <p><strong>The Miro connection is the exception.</strong> Your Miro token is <em>not</em> in <code>prefs.json</code> — it&#39;s stored encrypted in its own file using the OS keychain, and the app&#39;s interface layer can never read it back (it can set one, ask whether one exists, clear it, and ask the main process to make calls on its behalf). Manage it in <strong>App Settings → Miro</strong>; see <a href="#send-the-sitemap-to-miro">Send the sitemap to Miro</a>.</p>

@@ -58,7 +58,7 @@
 <h2 id="0-the-mental-model">0. The mental model</h2>
 <ul>
 <li>The app is a <strong>viewer and editor for your spreadsheet</strong> — it doesn&#39;t own a database. Your <code>.xlsx</code> <em>is</em> the project.</li>
-<li>On open, it <strong>injects its audit columns</strong> (KKE_Recommendation, Tags, Notes, …) if they aren&#39;t already there, and adds a handful of <strong>structural sheets</strong> (Sitemap, KKE_Settings, etc.) to hold project state.</li>
+<li>On open, it <strong>injects its audit columns</strong> (MRA_Recommendation, Tags, Notes, …) if they aren&#39;t already there, and adds a handful of <strong>structural sheets</strong> (Sitemap, MRA_Settings, etc.) to hold project state.</li>
 <li>Everything you do saves <strong>back into that same file</strong>. Hand the file to a colleague with the app and they see exactly your state — decisions, sitemap, settings, change log.</li>
 <li>So: <strong>one file = one project</strong>, fully portable.</li>
 </ul>
@@ -83,12 +83,12 @@
 <h2 id="3-what-got-added-to-your-file">3. What got added to your file</h2>
 <p>On open, the app ensures these exist (and adds them if missing):</p>
 <ul>
-<li><strong>Audit columns</strong> — KKE_Recommendation lands first; Tags, Notes, Group, Primary Tag sit right after the URL column; the rest (SME, migration, CMS, Design_Patterns…) are appended. See the <em>Audit Columns</em> reference.</li>
+<li><strong>Audit columns</strong> — MRA_Recommendation lands first; Tags, Notes, Group, Primary Tag sit right after the URL column; the rest (SME, migration, CMS, Design_Patterns…) are appended. See the <em>Audit Columns</em> reference.</li>
 <li><strong>Structural sheets</strong> (hidden from the data-sheet picker), each carrying part of the project:<ul>
 <li><strong>Sitemap</strong> — the future-state sitemap.</li>
-<li><strong>KKE_Settings</strong> — project settings, saved filters, computed-column config.</li>
-<li><strong>KKE_ChangeLog</strong> — the audit trail of decision changes.</li>
-<li><strong>KKE_Glossary</strong>, <strong>ContentTypeRegistry</strong>, <strong>PatternLibrary</strong> (Target Spec Library), <strong>DesignPatternLibrary</strong> (Component Library).</li>
+<li><strong>MRA_Settings</strong> — project settings, saved filters, computed-column config.</li>
+<li><strong>MRA_ChangeLog</strong> — the audit trail of decision changes.</li>
+<li><strong>MRA_Glossary</strong>, <strong>ContentTypeRegistry</strong>, <strong>PatternLibrary</strong> (Target Spec Library), <strong>DesignPatternLibrary</strong> (Component Library).</li>
 </ul>
 </li>
 </ul>
@@ -96,10 +96,10 @@
 <h2 id="4-the-five-views">4. The five views</h2>
 <p>A persistent <strong>tab strip</strong> below the titlebar (mirrored in the <strong>View</strong> menu) switches between the app&#39;s five views — always one click away:</p>
 <ul>
-<li><strong>Audit</strong> (<strong>Cmd+1</strong>) — the default: sidebar row list + the embedded browser and field bar. Where you make each Keep/Kill/Evolve call.</li>
+<li><strong>Audit</strong> (<strong>Cmd+1</strong>) — the default: sidebar row list + the embedded browser and field bar. Where you make each Migrate/Revise/Archive call.</li>
 <li><strong>Table</strong> (<strong>Cmd+T</strong>) — a full-width spreadsheet of every row and column, with inline editing.</li>
 <li><strong>Sitemap</strong> (<strong>Cmd+Shift+T</strong>) — the drag-and-drop editor for the future-state sitemap.</li>
-<li><strong>Redirects</strong> (<strong>Cmd+Shift+R</strong>) — every Kill or URL-changed page with an editable destination.</li>
+<li><strong>Redirects</strong> (<strong>Cmd+Shift+R</strong>) — every Archive or URL-changed page with an editable destination.</li>
 <li><strong>Menus</strong> (<strong>Cmd+Shift+M</strong>) — build independent navigation menus that reference your sitemap pages.</li>
 </ul>
 <blockquote>
@@ -118,7 +118,7 @@
 <h2 id="6-save--round-trip">6. Save &amp; round-trip</h2>
 <ol>
 <li><strong>File → Save</strong> (<strong>Cmd+S</strong>). The titlebar shows the dirty state; a toast confirms the write.</li>
-<li>On save the app resolves redirect destinations, writes all audit + structural sheets, and appends this session&#39;s changes to <strong>KKE_ChangeLog</strong>.</li>
+<li>On save the app resolves redirect destinations, writes all audit + structural sheets, and appends this session&#39;s changes to <strong>MRA_ChangeLog</strong>.</li>
 <li>Reopen the file (it&#39;s also in <strong>File → Open Recent</strong>) and everything is exactly as you left it.</li>
 </ol>
 <blockquote>
@@ -135,7 +135,7 @@
 <li><input disabled="" type="checkbox"> First <strong>Save</strong> succeeded and the file reopens with state intact</li>
 </ul>
 <hr>
-<p><em>Next: <strong>Project Setup</strong> — configure identity, KKE states, suggestion sources, and the migration vocabularies. See also <a href="../user-guide.html">the User Guide</a> and the <em>Audit Columns</em> reference.</em></p>
+<p><em>Next: <strong>Project Setup</strong> — configure identity, decision states, suggestion sources, and the migration vocabularies. See also <a href="../user-guide.html">the User Guide</a> and the <em>Audit Columns</em> reference.</em></p>
 
 <footer>Transmission — content audit and migration platform. <a href="../../changelog.html">What's new</a></footer>
 </div>

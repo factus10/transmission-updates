@@ -56,22 +56,24 @@ last-reviewed: 2026-04-28</h2>
 <h1 id="glossary">Glossary</h1>
 <p>Every term used elsewhere in these pages, defined once. When in doubt, link here rather than re-defining.</p>
 <hr>
+<h3 id="archive">Archive</h3>
+<p>MRA state (formerly <strong>Kill</strong>): content is low-quality, off-strategy, redundant, or has no audience. Remove it. The URL retires and owes a redirect (or a deliberate 404). See <a href="kke-classic.html#kill">KKE Classic</a>.</p>
 <h3 id="audit">Audit</h3>
 <p>A systematic review of every page on a site to decide what stays, what changes, what merges, and what goes — and to capture rationale and downstream actions for each. See <a href="content-audit-overview.html">Content Audit Overview</a>.</p>
 <h3 id="authority">Authority</h3>
 <p>The source of an audit recommendation. Common authorities: Auditor, SME, Analytics (GA), AI. See <a href="the-five-dimensions.html#5-authority--whose-decision-is-this">The Five Dimensions: Authority</a>.</p>
 <h3 id="authority-stamped">Authority-stamped</h3>
-<p>Data values whose source is recorded with them. <code>KKE_Recommendation</code> is auditor-stamped; <code>SME_Decision</code> is SME-stamped; <code>GA_KKE_Recommendation</code> is analytics-stamped. The current audit tool treats authority as a column dimension; CAD treats it as a first-class concept.</p>
+<p>Data values whose source is recorded with them. <code>MRA_Recommendation</code> is auditor-stamped; <code>SME_Decision</code> is SME-stamped; <code>GA_MRA_Recommendation</code> is analytics-stamped. The current audit tool treats authority as a column dimension; CAD treats it as a first-class concept.</p>
 <h3 id="cad--content-audit-disposition">CAD — Content Audit Disposition</h3>
-<p>The proposed framework that decompresses KKE into separate columns for Scope, Content Fate, URL Fate, and Process State. See <a href="content-audit-disposition.html">Content Audit Disposition</a>.</p>
+<p>The proposed framework that decompresses MRA into separate columns for Scope, Content Fate, URL Fate, and Process State. See <a href="content-audit-disposition.html">Content Audit Disposition</a>.</p>
 <h3 id="cannibalization">Cannibalization</h3>
 <p>When multiple URLs on the same site target the same query/topic and dilute each other&#39;s ranking. The textbook fix is consolidation. See Pattern B in <a href="patterns.html#b-the-implicit-consolidate">Patterns</a>.</p>
 <h3 id="compression-problem">Compression problem</h3>
-<p>The argument that KKE collapses five independent decisions into one column, hiding important distinctions. The central thesis of <a href="the-five-dimensions.html">Why KKE Falls Short</a>.</p>
+<p>The argument that MRA collapses five independent decisions into one column, hiding important distinctions. The central thesis of <a href="the-five-dimensions.html">Why MRA Falls Short</a>.</p>
 <h3 id="confidence">Confidence</h3>
 <p>Synonym for <a href="the-five-dimensions.html#4-process-state--where-is-this-decision-in-the-workflow">Process State</a>. How sure the auditor is about a decision.</p>
 <h3 id="consolidate">Consolidate</h3>
-<p>A KKE state we&#39;ve added to the four originals: this page is going away, and its content is being merged into another page in the inventory. The destination is recorded in <code>Consolidate_Into</code>. See <a href="kke-classic.html#the-fifth-state-consolidate">KKE Classic — The Fifth State</a>.</p>
+<p>An MRA state we&#39;ve added to the four originals: this page is going away, and its content is being merged into another page in the inventory. The destination is recorded in <code>Consolidate_Into</code>. See <a href="kke-classic.html#the-fifth-state-consolidate">KKE Classic — The Fifth State</a>.</p>
 <h3 id="consolidate-target">Consolidate target</h3>
 <p>The page that absorbs another page&#39;s content during a Consolidate operation. Recorded in the <code>Consolidate_Into</code> column on the source page.</p>
 <h3 id="consolidation-candidates">Consolidation Candidates</h3>
@@ -82,34 +84,32 @@ last-reviewed: 2026-04-28</h2>
 <p>Pages that got crawled but aren&#39;t real content — sitemap fragments, JSON endpoints, search results, admin URLs. A common form of OutOfCrawl scope.</p>
 <h3 id="disposition">Disposition</h3>
 <p>Records-management term meaning &quot;what we&#39;re doing with this.&quot; The umbrella term for an audit decision in the <a href="content-audit-disposition.html">CAD framework</a>. A disposition is the combination of Scope + Content Fate + URL Fate (+ optionally Process State).</p>
-<h3 id="evolve">Evolve</h3>
-<p>KKE state: content has value but needs work. Improve in place — rewrite, expand, restructure, update — without changing its identity. See <a href="kke-classic.html#evolve">KKE Classic</a>.</p>
 <h3 id="exclude">Exclude</h3>
-<p>KKE state: page is not part of the audit&#39;s recommendations. Catch-all that conflates several distinct Scope reasons. See <a href="kke-classic.html#exclude">KKE Classic</a> and <a href="patterns.html#a-the-post-launch-problem">Pattern A</a>.</p>
-<h3 id="final_kke">Final_KKE</h3>
+<p>MRA state: page is not part of the audit&#39;s recommendations. Catch-all that conflates several distinct Scope reasons. See <a href="kke-classic.html#exclude">KKE Classic</a> and <a href="patterns.html#a-the-post-launch-problem">Pattern A</a>.</p>
+<h3 id="final_mra">Final_MRA</h3>
 <p>A column representing the resolved disposition after authority-level inputs have been reconciled. Currently column-based; in CAD this becomes the synthesis of multiple authority disposition column-sets.</p>
 <h3 id="five-dimensions">Five Dimensions</h3>
-<p>The conceptual decomposition that KKE compresses: Scope, Content Fate, URL Fate, Process State, Authority. See <a href="the-five-dimensions.html">The Five Dimensions</a>.</p>
+<p>The conceptual decomposition that MRA compresses: Scope, Content Fate, URL Fate, Process State, Authority. See <a href="the-five-dimensions.html">The Five Dimensions</a>.</p>
 <h3 id="folksonomy">Folksonomy</h3>
-<p>A vocabulary that emerges from informal use rather than formal taxonomy. KKE works as a folksonomy — five labels everyone learns in 30 seconds — but degrades when used as a strict taxonomy.</p>
+<p>A vocabulary that emerges from informal use rather than formal taxonomy. MRA works as a folksonomy — five labels everyone learns in 30 seconds — but degrades when used as a strict taxonomy.</p>
 <h3 id="governance">Governance</h3>
 <p>The operational layer that keeps controlled vocabularies clean: detection, normalization, audit trail. See <a href="vocabulary-governance.html">Vocabulary Governance</a>.</p>
-<h3 id="keep">Keep</h3>
-<p>KKE state: content is high-quality, on-strategy, performing well. Migrate as-is. See <a href="kke-classic.html#keep">KKE Classic</a>.</p>
-<h3 id="kill">Kill</h3>
-<p>KKE state: content is low-quality, off-strategy, redundant, or has no audience. Remove. URL retires (with redirect or deliberate 404). See <a href="kke-classic.html#kill">KKE Classic</a>.</p>
 <h3 id="kke">KKE</h3>
-<p>The four-state vocabulary used in most content audits today: Keep / Kill / Evolve / Exclude. We&#39;ve added Consolidate as a fifth. See <a href="kke-classic.html">KKE Classic</a>.</p>
+<p>Keep / Kill / Evolve / Exclude — the four-state vocabulary Transmission used before it adopted MRA, and still the most common one in the industry. Keep = Migrate, Evolve = Revise, Kill = Archive. Transmission reads files and worksheets in these words as MRA. See <a href="kke-classic.html">KKE Classic</a>.</p>
+<h3 id="migrate">Migrate</h3>
+<p>MRA state (formerly <strong>Keep</strong>): content is high-quality, on-strategy, performing well. Carry it forward as-is. See <a href="kke-classic.html#keep">KKE Classic</a>.</p>
 <h3 id="mra">MRA</h3>
-<p>Sibling framework: Migrate / Revise / Archive. Migration-flavored. Same compression problem as KKE. See <a href="kke-classic.html#sibling-frameworks">KKE Classic — Sibling Frameworks</a>.</p>
+<p>Migrate / Revise / Archive — the decision vocabulary Transmission uses, plus Exclude and a fifth state, Consolidate. It renames the classic KKE states one-for-one (Keep → Migrate, Evolve → Revise, Kill → Archive). Some industry uses of MRA treat &quot;Archive&quot; as closer to Exclude; in Transmission, Archive means exactly what Kill did: the page is retired and owes a redirect. See <a href="kke-classic.html#sibling-frameworks">KKE Classic — Sibling Frameworks</a>.</p>
 <h3 id="pattern-a-through-h">Pattern A through H</h3>
-<p>Named patterns in <a href="patterns.html">Patterns Where KKE Breaks</a>. Each is a recurring real-engagement situation that exposes a different facet of KKE&#39;s compression problem.</p>
+<p>Named patterns in <a href="patterns.html">Patterns Where MRA Breaks</a>. Each is a recurring real-engagement situation that exposes a different facet of MRA&#39;s compression problem.</p>
 <h3 id="percentrank">PERCENTRANK</h3>
-<p>Statistical normalization method used in the audit tool&#39;s <a href="../user-guide.html#8-suggested_kke">GA KKE</a> feature: each page&#39;s metric value is converted to its percentile rank against all other pages, so values across radically different scales (sessions, engagement rate, duration) become comparable.</p>
+<p>Statistical normalization method used in the audit tool&#39;s <a href="../user-guide.html#8-suggested_mra">GA MRA</a> feature: each page&#39;s metric value is converted to its percentile rank against all other pages, so values across radically different scales (sessions, engagement rate, duration) become comparable.</p>
 <h3 id="process-state">Process State</h3>
 <p>Where a decision sits in the audit workflow. One of the <a href="the-five-dimensions.html#4-process-state--where-is-this-decision-in-the-workflow">Five Dimensions</a>. Values: Unreviewed, InReview, Decided, PendingSME, PendingStakeholder, Resolved.</p>
+<h3 id="revise">Revise</h3>
+<p>MRA state (formerly <strong>Evolve</strong>): content has value but needs work. Improve in place — rewrite, expand, restructure, update — without changing its identity. See <a href="kke-classic.html#evolve">KKE Classic</a>.</p>
 <h3 id="rogue-value">Rogue value</h3>
-<p>A KKE value present in row data that isn&#39;t in the defined custom states or built-ins. Typically a typo, legacy import, or SME-invented label. See <a href="vocabulary-governance.html#1-detection">Vocabulary Governance — Detection</a>.</p>
+<p>An MRA value present in row data that isn&#39;t in the defined custom states or built-ins. Typically a typo, legacy import, or SME-invented label. See <a href="vocabulary-governance.html#1-detection">Vocabulary Governance — Detection</a>.</p>
 <h3 id="rubric">Rubric</h3>
 <p>A structured set of rules used to evaluate pages against criteria. Field rules (mechanical, evaluated by tool against spreadsheet data) and content rules (subjective, evaluated by AI or auditor). Rubrics produce inputs to the audit decision but live alongside, not inside, the disposition framework.</p>
 <h3 id="scope">Scope</h3>
@@ -117,7 +117,7 @@ last-reviewed: 2026-04-28</h2>
 <h3 id="sme">SME</h3>
 <p>Subject Matter Expert. A non-auditor authority who reviews pages they have domain expertise on. Their input is captured in <code>SME_Decision</code> and <code>SME_Notes</code>.</p>
 <h3 id="split">Split</h3>
-<p>A Content Fate value: one page becomes 2+ pages. Inverse of Consolidate. Currently not first-class in KKE; auditors typically note it in free text.</p>
+<p>A Content Fate value: one page becomes 2+ pages. Inverse of Consolidate. Currently not first-class in MRA; auditors typically note it in free text.</p>
 <h3 id="url-fate">URL Fate</h3>
 <p>What happens to a URL. One of the <a href="the-five-dimensions.html#3-url-fate--what-happens-to-the-url">Five Dimensions</a>. Values: Preserve, Move, Redirect, 404. Independent of Content Fate.</p>
 <h3 id="vocabulary-drift">Vocabulary drift</h3>

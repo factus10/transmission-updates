@@ -52,38 +52,38 @@
 <h1 id="consolidate-walkthrough">Consolidate Walkthrough</h1>
 <p>How to fold redundant pages into a single surviving page — so three thin pages on one topic become one strong page, with the other two redirecting in.</p>
 <blockquote>
-<p>Prerequisite: a file is open with KKE calls in progress.</p>
+<p>Prerequisite: a file is open with MRA calls in progress.</p>
 </blockquote>
 <hr>
 <h2 id="0-the-mental-model">0. The mental model</h2>
 <ul>
-<li><strong>Consolidate</strong> is a KKE call that says &quot;this page&#39;s content merges <em>into</em> another page.&quot; The page you consolidate <strong>away</strong> points at a <strong>target</strong>; the <strong>target</strong> is what survives (usually <strong>Evolve</strong>).</li>
+<li><strong>Consolidate</strong> is an MRA call that says &quot;this page&#39;s content merges <em>into</em> another page.&quot; The page you consolidate <strong>away</strong> points at a <strong>target</strong>; the <strong>target</strong> is what survives (usually <strong>Revise</strong>).</li>
 <li>A consolidated page needs <strong>no sitemap placement</strong> — it folds into its target. The redirect resolver later chases the target through its computed path, any further consolidations, and explicit redirects (cycle-safe) so the URL lands somewhere real.</li>
-<li>The app warns when a consolidate points at a <strong>dead target</strong> (a page that doesn&#39;t exist or is itself being killed) so you never strand a redirect.</li>
+<li>The app warns when a consolidate points at a <strong>dead target</strong> (a page that doesn&#39;t exist or is itself being archived) so you never strand a redirect.</li>
 </ul>
 <hr>
 <h2 id="1-consolidate-one-page">1. Consolidate one page</h2>
 <ol>
 <li>With the page selected, press <strong>4</strong> or click <strong>Consolidate</strong> — this opens <strong>Consolidate into…</strong>, a searchable, sortable list of every page in the inventory.</li>
-<li>Pick the target page. The app sets <code>Consolidate_Into</code> and KKE = <strong>Consolidate</strong>, and clears the page&#39;s own sitemap assignment.</li>
+<li>Pick the target page. The app sets <code>Consolidate_Into</code> and MRA = <strong>Consolidate</strong>, and clears the page&#39;s own sitemap assignment.</li>
 </ol>
 <blockquote>
-<p>It won&#39;t clobber an existing consolidate intent (e.g. one set by an SME&#39;s Final KKE) — your earlier decision is preserved.</p>
+<p>It won&#39;t clobber an existing consolidate intent (e.g. one set by an SME&#39;s Final MRA) — your earlier decision is preserved.</p>
 </blockquote>
 <hr>
 <h2 id="2-find-consolidation-groups-in-bulk">2. Find consolidation groups in bulk</h2>
 <p>When several pages already share one sitemap node, they&#39;re likely consolidation candidates:</p>
 <ul>
 <li><strong>Sitemap → Consolidation Candidates…</strong> lists every node with <strong>2+</strong> assigned pages, largest first.</li>
-<li>For each group, pick the <strong>target</strong> (set to <strong>Evolve</strong>); the rest become <strong>Consolidate</strong> pointing at it, with their nav + explicit redirects cleared. Skip a group to leave it untouched for the session.</li>
+<li>For each group, pick the <strong>target</strong> (set to <strong>Revise</strong>); the rest become <strong>Consolidate</strong> pointing at it, with their nav + explicit redirects cleared. Skip a group to leave it untouched for the session.</li>
 </ul>
-<p>You&#39;ll also get flagged automatically, without running this workflow: marking a page Keep/Evolve (or assigning its sitemap node) when another Keep/Evolve page already sits at that destination pops a <strong>&quot;Did you mean to Consolidate?&quot;</strong> prompt naming the other page, with a one-click <strong>Consolidate into it</strong>.</p>
+<p>You&#39;ll also get flagged automatically, without running this workflow: marking a page Migrate/Revise (or assigning its sitemap node) when another Migrate/Revise page already sits at that destination pops a <strong>&quot;Did you mean to Consolidate?&quot;</strong> prompt naming the other page, with a one-click <strong>Consolidate into it</strong>.</p>
 <hr>
 <h2 id="3-catch-broken-targets">3. Catch broken targets</h2>
 <p>Two sidebar special filters keep consolidations honest:</p>
 <ul>
 <li><strong>Consolidate: no target</strong> — marked Consolidate but no target chosen.</li>
-<li><strong>Consolidate: dead target</strong> — the target doesn&#39;t exist or is itself Kill/missing (the sidebar dot turns amber).</li>
+<li><strong>Consolidate: dead target</strong> — the target doesn&#39;t exist or is itself Archive/missing (the sidebar dot turns amber).</li>
 </ul>
 <p>Resolve both before shipping — every consolidated page must point at a live survivor.</p>
 <hr>
@@ -91,7 +91,7 @@
 <ul>
 <li><input disabled="" type="checkbox"> Every <strong>Consolidate</strong> page has a target (<strong>no target</strong> filter is empty)</li>
 <li><input disabled="" type="checkbox"> No <strong>dead target</strong> warnings remain</li>
-<li><input disabled="" type="checkbox"> Each target survives as <strong>Keep/Evolve</strong> (not itself killed)</li>
+<li><input disabled="" type="checkbox"> Each target survives as <strong>Migrate/Revise</strong> (not itself archived)</li>
 <li><input disabled="" type="checkbox"> Consolidated pages have no stray sitemap assignment</li>
 <li><input disabled="" type="checkbox"> Redirects resolve to a real URL (verify in the Redirect Editor)</li>
 </ul>

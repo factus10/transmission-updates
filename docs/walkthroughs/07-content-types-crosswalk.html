@@ -110,7 +110,7 @@
 <p>When a row&#39;s <strong>Content Type</strong> is set (or changed), the app looks it up in the registry and fills <strong>blank</strong> <code>Renders as</code>, <code>Migration Track</code>, and <code>Target Content Type</code> from the matched entry — <strong>never overwriting</strong> anything you typed. Each auto-filled field is logged to the change log.</p>
 <ul>
 <li>Lookup is case-insensitive exact match first; if that misses, it splits compound types (<code>Article / blog post</code>) on separators and tries each token — so you don&#39;t have to register every variant.</li>
-<li>The <strong>Migrate</strong> cluster shows <strong>Renders as</strong> and <strong>Track</strong>, plus a <strong>ghost suggestion</strong> next to Track when it&#39;s blank (derived from KKE + Renders as) — click to accept.</li>
+<li>The <strong>Migrate</strong> cluster shows <strong>Renders as</strong> and <strong>Track</strong>, plus a <strong>ghost suggestion</strong> next to Track when it&#39;s blank (derived from MRA + Renders as) — click to accept.</li>
 </ul>
 <blockquote>
 <p><strong>Renders as = Fragment (embeddable, no URL)</strong> marks content with no public URL — it&#39;s skipped in redirects and sitemap coverage downstream. A news post, event or profile migrated as a structured record is <strong>Record</strong>, not Fragment: it still has a page and needs a redirect.</p>
@@ -124,7 +124,7 @@
 <hr>
 <h2 id="quick-checklist-for-classified-for-migration">Quick checklist for &quot;classified for migration&quot;</h2>
 <ul>
-<li><input disabled="" type="checkbox"> Every keep/evolve page has a <strong>Content Type</strong></li>
+<li><input disabled="" type="checkbox"> Every migrate/revise page has a <strong>Content Type</strong></li>
 <li><input disabled="" type="checkbox"> The <strong>Content Type Registry</strong> covers every type in use (no &quot;no crosswalk&quot; flags)</li>
 <li><input disabled="" type="checkbox"> <strong>Renders as</strong> populated (Unclassified count → 0)</li>
 <li><input disabled="" type="checkbox"> <strong>Target Content Type</strong> and <strong>→ Target Spec</strong> mapped per type</li>

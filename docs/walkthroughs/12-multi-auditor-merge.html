@@ -50,15 +50,15 @@
 <div class="wrap">
 <nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
 <h1 id="multi-auditor-merge-walkthrough">Multi-auditor Merge Walkthrough</h1>
-<p>How to combine KKE decisions when more than one auditor worked the same inventory in parallel — merge their file into yours and resolve the disagreements.</p>
+<p>How to combine MRA decisions when more than one auditor worked the same inventory in parallel — merge their file into yours and resolve the disagreements.</p>
 <blockquote>
-<p>Prerequisite: two audited copies of the <strong>same</strong> inventory (same URLs), each with KKE calls.</p>
+<p>Prerequisite: two audited copies of the <strong>same</strong> inventory (same URLs), each with MRA calls.</p>
 </blockquote>
 <hr>
 <h2 id="0-the-mental-model">0. The mental model</h2>
 <ul>
 <li>Two auditors split a large crawl, each making calls in their own copy of the file.</li>
-<li>Merging reads the <strong>other</strong> auditor&#39;s decisions, matches rows by URL, and reports <strong>agreements</strong> vs <strong>conflicts</strong> (where the two of you made different KKE calls on the same page).</li>
+<li>Merging reads the <strong>other</strong> auditor&#39;s decisions, matches rows by URL, and reports <strong>agreements</strong> vs <strong>conflicts</strong> (where the two of you made different MRA calls on the same page).</li>
 <li>You resolve conflicts one at a time, choosing whose call wins — the merge never silently overwrites.</li>
 </ul>
 <hr>

@@ -54,22 +54,25 @@
 status: stable
 last-reviewed: 2026-04-28</h2>
 <h1 id="kke--the-classic-framework">KKE — The Classic Framework</h1>
-<p>The four-state vocabulary used in most content audits today, including most of ours. This page documents what KKE <em>is</em> and how it&#39;s used. The argument for moving past it lives in <a href="the-five-dimensions.html">Why KKE Falls Short</a>.</p>
+<p>The four-state vocabulary used in most content audits today, and the one Transmission itself used until it adopted <strong>Migrate / Revise / Archive</strong> (MRA). This page documents what KKE <em>is</em> and how it&#39;s used. The argument for moving past single-column vocabularies like it lives in <a href="the-five-dimensions.html">Why MRA Falls Short</a>.</p>
+<blockquote>
+<p><strong>KKE and MRA in Transmission.</strong> The app&#39;s decisions are now Migrate / Revise / Archive, a one-for-one rename of the states below: <strong>Keep → Migrate</strong>, <strong>Evolve → Revise</strong>, <strong>Kill → Archive</strong>. Exclude and Consolidate are unchanged. The definitions on this page carry over exactly: in Transmission, an Archived page is what a Killed page was, retired and owing a redirect. Files and worksheets that use the old KKE column names and values are read as MRA, and the SME export can write a single worksheet in KKE wording for a client mid-transition.</p>
+</blockquote>
 <h2 id="the-four-states">The four states</h2>
 <h3 id="keep">Keep</h3>
-<p>Content is high-quality, on-strategy, performing well. Migrate as-is. URL may stay or move depending on IA changes; content stays.</p>
+<p><em>Transmission: <strong>Migrate</strong>.</em> Content is high-quality, on-strategy, performing well. Migrate as-is. URL may stay or move depending on IA changes; content stays.</p>
 <p><strong>Typical signals:</strong> healthy traffic, positive engagement metrics, current information, no overlap with other pages.</p>
 <h3 id="kill">Kill</h3>
-<p>Content is low-quality, off-strategy, redundant, or has no audience. Remove it. URL retires (with a redirect to the most appropriate destination, or a deliberate 404).</p>
+<p><em>Transmission: <strong>Archive</strong>.</em> Content is low-quality, off-strategy, redundant, or has no audience. Remove it. URL retires (with a redirect to the most appropriate destination, or a deliberate 404).</p>
 <p><strong>Typical signals:</strong> zero or near-zero traffic, outdated information, broken purpose (e.g. event pages from past events), redundant with better-performing pages.</p>
 <h3 id="evolve">Evolve</h3>
-<p>Content has value but needs work. Improve in place — rewrite, expand, restructure, update — without changing its identity. URL typically stays.</p>
+<p><em>Transmission: <strong>Revise</strong>.</em> Content has value but needs work. Improve in place — rewrite, expand, restructure, update — without changing its identity. URL typically stays.</p>
 <p><strong>Typical signals:</strong> decent traffic but high bounce, partially current information, gaps in coverage, structurally outdated.</p>
 <h3 id="exclude">Exclude</h3>
 <p>Page should not be part of the audit&#39;s recommendations. Either it shouldn&#39;t have been crawled in the first place, or it&#39;s out of scope.</p>
 <p><strong>Typical signals:</strong> crawl noise (sitemap fragments, JSON endpoints, search result pages), administrative URLs, pages owned by another team, regulated content under legal hold.</p>
 <blockquote>
-<p><strong>Note:</strong> the auditor convention has historically conflated several distinct uses of Exclude. See <a href="patterns.html#a-the-post-launch-problem">Patterns: The Post-Launch Problem</a> and <a href="the-five-dimensions.html#scope">Why KKE Falls Short — Scope dimension</a>.</p>
+<p><strong>Note:</strong> the auditor convention has historically conflated several distinct uses of Exclude. See <a href="patterns.html#a-the-post-launch-problem">Patterns: The Post-Launch Problem</a> and <a href="the-five-dimensions.html#scope">Why MRA Falls Short — Scope dimension</a>.</p>
 </blockquote>
 <h2 id="sibling-frameworks">Sibling frameworks</h2>
 <p>KKE is one of several four-bucket triage rubrics used in the industry. They share the same architecture — a single column of mutually-exclusive labels — and the same limitations.</p>
@@ -84,12 +87,12 @@ last-reviewed: 2026-04-28</h2>
 <tbody><tr>
 <td><strong>KKE</strong></td>
 <td>Keep / Kill / Evolve / Exclude</td>
-<td>The version we use most often.</td>
+<td>The classic form, and Transmission&#39;s vocabulary until the MRA rename.</td>
 </tr>
 <tr>
 <td><strong>MRA</strong></td>
 <td>Migrate / Revise / Archive</td>
-<td>Migration-flavored. &quot;Archive&quot; is closer to &quot;Exclude&quot; than to &quot;Kill.&quot;</td>
+<td>Migration-flavored, and what Transmission uses now. In some industry usage &quot;Archive&quot; sits closer to &quot;Exclude&quot; than to &quot;Kill&quot;; in Transmission it means exactly Kill (retired, owes a redirect), and Exclude stays its own state.</td>
 </tr>
 <tr>
 <td><strong>KKER</strong></td>
@@ -124,7 +127,7 @@ last-reviewed: 2026-04-28</h2>
 <li>The five labels fit on one line of a deck.</li>
 <li>Stakeholders grasp the categories instantly.</li>
 </ul>
-<p>It also works fine for <strong>simple sites</strong> where the patterns in <a href="patterns.html">Patterns Where KKE Breaks</a> don&#39;t show up in volume.</p>
+<p>It also works fine for <strong>simple sites</strong> where the patterns in <a href="patterns.html">Patterns Where MRA Breaks</a> don&#39;t show up in volume.</p>
 <h2 id="when-kke-breaks-down">When KKE breaks down</h2>
 <p>The five-state vocabulary stops being enough when:</p>
 <ul>
@@ -138,8 +141,8 @@ last-reviewed: 2026-04-28</h2>
 <h2 id="see-also">See also</h2>
 <ul>
 <li><a href="content-audit-overview.html">Content Audit Overview</a></li>
-<li><a href="the-five-dimensions.html">Why KKE Falls Short — The Five Dimensions</a></li>
-<li><a href="patterns.html">Patterns Where KKE Breaks</a></li>
+<li><a href="the-five-dimensions.html">Why MRA Falls Short — The Five Dimensions</a></li>
+<li><a href="patterns.html">Patterns Where MRA Breaks</a></li>
 <li><a href="content-audit-disposition.html">Content Audit Disposition (CAD)</a></li>
 </ul>
 

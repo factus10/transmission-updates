@@ -58,13 +58,13 @@
 <h2 id="0-the-mental-model">0. The mental model</h2>
 <p>Two unrelated &quot;template&quot; features:</p>
 <ul>
-<li><strong>Audit templates</strong> (<code>.kke-template.json</code>) — a portable snapshot of your <em>setup</em>: field config, vocabularies, KKE states, column mapping, identity. Save once, apply to every new client file so you don&#39;t reconfigure from scratch.</li>
+<li><strong>Audit templates</strong> (<code>.kke-template.json</code>) — a portable snapshot of your <em>setup</em>: field config, vocabularies, decision states, column mapping, identity. Save once, apply to every new client file so you don&#39;t reconfigure from scratch.</li>
 <li><strong>Report templates</strong> (Markdown + Mustache) — files that control how a report <em>renders</em>. Currently they style the <strong>Migration Direction Brief</strong>.</li>
 </ul>
 <hr>
 <h2 id="1-audit-templates--save-your-setup">1. Audit templates — save your setup</h2>
 <ol>
-<li>Configure a file the way you like it (visible fields, tag/group libraries, sidebar columns, custom KKE states, column mapping, identity, saved filters).</li>
+<li>Configure a file the way you like it (visible fields, tag/group libraries, sidebar columns, custom decision states, column mapping, identity, saved filters).</li>
 <li><strong>File → Save Audit Template…</strong>, name it. It writes a <code>.kke-template.json</code> capturing all of the above.</li>
 <li>On a new project: <strong>File → Load Audit Template…</strong> and pick the file — your setup is applied in one step.</li>
 </ol>

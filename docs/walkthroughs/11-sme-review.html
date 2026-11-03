@@ -50,9 +50,9 @@
 <div class="wrap">
 <nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
 <h1 id="sme-review-walkthrough">SME Review Walkthrough</h1>
-<p>How to get subject-matter experts to validate your KKE calls without giving them the app — a round-trip through a self-contained spreadsheet they fill in and you reconcile.</p>
+<p>How to get subject-matter experts to validate your MRA calls without giving them the app — a round-trip through a self-contained spreadsheet they fill in and you reconcile.</p>
 <blockquote>
-<p>Prerequisite: KKE calls made on the pages you want reviewed.</p>
+<p>Prerequisite: MRA calls made on the pages you want reviewed.</p>
 </blockquote>
 <hr>
 <h2 id="0-the-mental-model">0. The mental model</h2>
@@ -60,9 +60,9 @@
 <ul>
 <li>You <strong>export</strong> a standalone <code>.xlsx</code> with built-in dropdowns. The SME needs only Excel.</li>
 <li>They record an <strong>SME Decision</strong> per page (approve your call, or change it) plus notes.</li>
-<li>You <strong>import</strong> their file back, <strong>compare</strong> their decisions against yours, and <strong>resolve</strong> every conflict into a <strong>Final KKE</strong>.</li>
+<li>You <strong>import</strong> their file back, <strong>compare</strong> their decisions against yours, and <strong>resolve</strong> every conflict into a <strong>Final MRA</strong>.</li>
 </ul>
-<p>The SME&#39;s columns (<strong>SME_Decision</strong>, <strong>SME_Notes</strong>, <strong>Content_Owner</strong>) merge in alongside your audit — they never overwrite your original KKE.</p>
+<p>The SME&#39;s columns (<strong>SME_Decision</strong>, <strong>SME_Notes</strong>, <strong>Content_Owner</strong>) merge in alongside your audit — they never overwrite your original MRA.</p>
 <hr>
 <h2 id="1-export-for-review">1. Export for review</h2>
 <ol>
@@ -73,29 +73,32 @@
 <blockquote>
 <p>The file is fully standalone — hand it off by email; the reviewer needs no install.</p>
 </blockquote>
+<blockquote>
+<p><strong>Clients from before the rename.</strong> If a client&#39;s project started when the decisions were still Keep / Kill / Evolve, tick <strong>Use Keep / Kill / Evolve wording</strong> in the export dialog to send that one worksheet in the words they know. It isn&#39;t remembered for the next export. Whatever wording comes back, the import reads it as Migrate / Revise / Archive (&quot;Change: Kill&quot; becomes Archive; a bare &quot;Keep&quot; next to a Migrate recommendation counts as approval) and tells you how many decisions it re-worded.</p>
+</blockquote>
 <hr>
 <h2 id="2-reviewer-fills-it-in">2. Reviewer fills it in</h2>
-<p>Each page row offers an <strong>SME Decision</strong>: <strong>Approve</strong> the recommendation, or <strong>Change: Keep / Kill / Evolve / Exclude</strong>, with room for <strong>SME Notes</strong> and <strong>Content Owner</strong>. They fill, save, send it back.</p>
+<p>Each page row offers an <strong>SME Decision</strong>: <strong>Approve</strong> the recommendation, or <strong>Change: Migrate / Revise / Archive / Exclude</strong>, with room for <strong>SME Notes</strong> and <strong>Content Owner</strong>. They fill, save, send it back.</p>
 <hr>
 <h2 id="3-import-their-decisions">3. Import their decisions</h2>
-<p><strong>SME → Import SME Decisions…</strong> reads the returned file (pick the sheet if prompted) and merges <strong>SME_Decision</strong>, <strong>SME_Notes</strong>, <strong>Content_Owner</strong> into your working data — matched by URL, leaving your KKE column intact.</p>
+<p><strong>SME → Import SME Decisions…</strong> reads the returned file (pick the sheet if prompted) and merges <strong>SME_Decision</strong>, <strong>SME_Notes</strong>, <strong>Content_Owner</strong> into your working data — matched by URL, leaving your MRA column intact.</p>
 <hr>
 <h2 id="4-compare-and-resolve">4. Compare and resolve</h2>
 <ul>
-<li><strong>SME → Compare KKE vs SME…</strong> shows where the SME agreed vs. diverged from your call — a quick read on the review.</li>
-<li><strong>SME → Resolve Conflicts…</strong> reconciles into <strong>Final_KKE</strong>: where the SME <strong>approved</strong>, Final matches your KKE; where they chose <strong>Change: X</strong>, Final becomes their override.</li>
+<li><strong>SME → Compare MRA vs SME…</strong> shows where the SME agreed vs. diverged from your call — a quick read on the review.</li>
+<li><strong>SME → Resolve Conflicts…</strong> reconciles into <strong>Final_MRA</strong>: where the SME <strong>approved</strong>, Final matches your MRA; where they chose <strong>Change: X</strong>, Final becomes their override.</li>
 </ul>
 <p>Two sidebar special filters help you work the list: <strong>SME conflicts</strong> and <strong>SME pending</strong>.</p>
 <blockquote>
-<p>Turn on <strong>Show SME fields</strong> (App Settings) to see SME Decision / Final KKE / Content Owner inline in the <strong>Decide</strong> cluster while you reconcile.</p>
+<p>Turn on <strong>Show SME fields</strong> (App Settings) to see SME Decision / Final MRA / Content Owner inline in the <strong>Decide</strong> cluster while you reconcile.</p>
 </blockquote>
 <hr>
 <h2 id="quick-checklist-for-sme-review-complete">Quick checklist for &quot;SME review complete&quot;</h2>
 <ul>
 <li><input disabled="" type="checkbox"> Exported (split by owner if multiple reviewers)</li>
 <li><input disabled="" type="checkbox"> Reviewer file(s) imported — SME columns populated</li>
-<li><input disabled="" type="checkbox"> <strong>Compare KKE vs SME</strong> reviewed for divergence</li>
-<li><input disabled="" type="checkbox"> <strong>Resolve Conflicts</strong> run — every reviewed page has a <strong>Final KKE</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Compare MRA vs SME</strong> reviewed for divergence</li>
+<li><input disabled="" type="checkbox"> <strong>Resolve Conflicts</strong> run — every reviewed page has a <strong>Final MRA</strong></li>
 <li><input disabled="" type="checkbox"> <strong>SME conflicts / pending</strong> filters are empty</li>
 <li><input disabled="" type="checkbox"> Saved (<strong>Cmd+S</strong>)</li>
 </ul>

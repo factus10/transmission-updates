@@ -52,14 +52,14 @@
 <h1 id="sitemap--ia-walkthrough">Sitemap &amp; IA Walkthrough</h1>
 <p>How to build the <strong>future-state sitemap</strong> and place every page you&#39;re keeping onto it. This is where the audit stops being a list of pages and becomes the shape of the new site.</p>
 <blockquote>
-<p>Prerequisite: you&#39;ve made KKE calls (at least <strong>Keep</strong> / <strong>Evolve</strong>) on the pages that matter. Placement operates on those rows; <strong>Kill</strong> and <strong>Consolidate</strong> pages don&#39;t get placed (they fold into a target or redirect).</p>
+<p>Prerequisite: you&#39;ve made MRA calls (at least <strong>Migrate</strong> / <strong>Revise</strong>) on the pages that matter. Placement operates on those rows; <strong>Archive</strong> and <strong>Consolidate</strong> pages don&#39;t get placed (they fold into a target or redirect).</p>
 </blockquote>
 <hr>
 <h2 id="0-the-mental-model">0. The mental model</h2>
 <ul>
 <li>The <strong>audit rows</strong> answer &quot;what do we do with each <em>existing</em> page?&quot;</li>
 <li>The <strong>sitemap</strong> answers &quot;what is the <em>new</em> site?&quot; — its sections, hierarchy, and URLs.</li>
-<li>You connect the two by <strong>placing</strong> each Keep/Evolve page onto a sitemap node. A node can carry <strong>0</strong> source pages (net-new), <strong>1</strong>, or <strong>many</strong> (a consolidation target).</li>
+<li>You connect the two by <strong>placing</strong> each Migrate/Revise page onto a sitemap node. A node can carry <strong>0</strong> source pages (net-new), <strong>1</strong>, or <strong>many</strong> (a consolidation target).</li>
 <li>The tree is the source of truth for breadcrumbs and the computed URL of every node. Rename a node and the change cascades to its descendants and to every page assigned under it.</li>
 </ul>
 <p>Open the tree with <strong>Cmd+Shift+T</strong> (or the <strong>Sitemap</strong> tab in the view switcher). The <strong>stats line</strong> under the toolbar is your dashboard — learn to read it (see §6).</p>
@@ -67,18 +67,18 @@
 <p>Starting fresh? You don&#39;t have to open the Sitemap first. On any page in the <strong>Audit</strong> view, clicking the audit bar&#39;s <strong>Sitemap</strong> button when the sitemap is still empty offers an inline form (Label prefilled from the title, Slug from the URL) and a <strong>Create &amp; assign</strong> button that creates the first root node and assigns the page in one step.</p>
 </blockquote>
 <hr>
-<h2 id="1-place-every-keepevolve-page">1. Place every Keep/Evolve page</h2>
+<h2 id="1-place-every-migraterevise-page">1. Place every Migrate/Revise page</h2>
 <p>Goal: drive <strong>need placement</strong> in the stats line to <strong>0</strong>.</p>
-<p>&quot;Need placement&quot; = Keep/Evolve rows with no sitemap node yet. To find and assign them:</p>
+<p>&quot;Need placement&quot; = Migrate/Revise rows with no sitemap node yet. To find and assign them:</p>
 <ol>
-<li><strong>Audit</strong> view (<strong>Cmd+1</strong>) → <strong>KKE</strong> filter → check <strong>Keep</strong> + <strong>Evolve</strong> → <strong>+ Field filter</strong> → field <code>Sitemap_ID</code>, operator <strong>is blank</strong> → <strong>Apply</strong>.</li>
+<li><strong>Audit</strong> view (<strong>Cmd+1</strong>) → <strong>MRA</strong> filter → check <strong>Migrate</strong> + <strong>Revise</strong> → <strong>+ Field filter</strong> → field <code>Sitemap_ID</code>, operator <strong>is blank</strong> → <strong>Apply</strong>.</li>
 <li>For each row, click <strong>Sitemap</strong> (in the <strong>DECIDE</strong> cluster) → drill to the right node → <strong>Assign</strong>. Use <strong>+ Child</strong> in the picker footer to create a new node inline if no good home exists yet.</li>
 <li>To place many similar pages at once: multi-select them in the sidebar (<strong>Cmd/Shift-click</strong>), then use the Multi-bar&#39;s <strong>Assign to Sitemap…</strong> action — pick an existing node or create a new bucket, and choose whether the pages land as direct children or keep their URL structure.</li>
 </ol>
 <blockquote>
 <p>Fast path: the stats line&#39;s <strong>N need placement</strong> link is clickable — it jumps you straight to the audit view filtered to exactly those rows. Work the list down to zero.</p>
 </blockquote>
-<p>Consolidation note: pages you marked <strong>Consolidate</strong> don&#39;t need placement — they fold into their target. The <em>target</em> page (usually <strong>Evolve</strong>) is what gets the sitemap node.</p>
+<p>Consolidation note: pages you marked <strong>Consolidate</strong> don&#39;t need placement — they fold into their target. The <em>target</em> page (usually <strong>Revise</strong>) is what gets the sitemap node.</p>
 <hr>
 <h2 id="2-shape-the-future-state-tree">2. Shape the future-state tree</h2>
 <p>In the <strong>Sitemap</strong>:</p>
@@ -125,7 +125,7 @@
 <p>The stats line reads, in order:</p>
 <p><code>N nodes · M current (A assigned, H net new, E empty) · [phase buckets] · P pages placed · [F fragments] · [status tallies] · X need placement</code></p>
 <ul>
-<li><strong>need placement → 0</strong> is your &quot;every Keep/Evolve page is in the IA&quot; check (§1).</li>
+<li><strong>need placement → 0</strong> is your &quot;every Migrate/Revise page is in the IA&quot; check (§1).</li>
 <li><strong>empty</strong> is your coverage-gap count (§5).</li>
 <li><strong>status tallies</strong> (e.g. &quot;5 built · 3 in progress&quot;) track build completion — covered in the Build &amp; Direction walkthrough.</li>
 </ul>
@@ -140,7 +140,7 @@
 <h2 id="7-resolve-overlapping-pages-optional">7. Resolve overlapping pages (optional)</h2>
 <p>If several pages landed on one node, they may be consolidation candidates:</p>
 <ul>
-<li>Toolbar → <strong>Consolidation Candidates…</strong> lists every node with <strong>2+</strong> assigned pages. Pick the target (→ <strong>Evolve</strong>); the rest become <strong>Consolidate</strong> pointing at it, with their sitemap assignment cleared.</li>
+<li>Toolbar → <strong>Consolidation Candidates…</strong> lists every node with <strong>2+</strong> assigned pages. Pick the target (→ <strong>Revise</strong>); the rest become <strong>Consolidate</strong> pointing at it, with their sitemap assignment cleared.</li>
 </ul>
 <hr>
 <h2 id="8-see-it-and-report-on-it">8. See it and report on it</h2>
@@ -158,7 +158,7 @@
 <hr>
 <h2 id="quick-checklist-for-good-ia">Quick checklist for &quot;good IA&quot;</h2>
 <ul>
-<li><input disabled="" type="checkbox"> <strong>need placement = 0</strong> — every Keep/Evolve page sits on a node</li>
+<li><input disabled="" type="checkbox"> <strong>need placement = 0</strong> — every Migrate/Revise page sits on a node</li>
 <li><input disabled="" type="checkbox"> No <strong>empty</strong> leaf nodes left unexplained (assign / net-new / phase / delete)</li>
 <li><input disabled="" type="checkbox"> No <strong>duplicate Sitemap_ID</strong> warning in the stats line</li>
 <li><input disabled="" type="checkbox"> No red <strong>duplicate-slug</strong> highlights within a branch</li>

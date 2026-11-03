@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why KKE Falls Short — The Five Dimensions — Transmission</title>
+<title>Why MRA Falls Short — The Five Dimensions — Transmission</title>
 <style>
   :root {
     color-scheme: light dark;
@@ -50,11 +50,11 @@
 <div class="wrap">
 <nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
 <hr>
-<h2 id="title-why-kke-falls-short--the-five-dimensions-status-working-last-reviewed-2026-04-28">title: Why KKE Falls Short — The Five Dimensions
+<h2 id="title-why-mra-falls-short--the-five-dimensions-status-working-last-reviewed-2026-04-28">title: Why MRA Falls Short — The Five Dimensions
 status: working
 last-reviewed: 2026-04-28</h2>
-<h1 id="why-kke-falls-short--the-five-dimensions">Why KKE Falls Short — The Five Dimensions</h1>
-<p>The core argument: <strong>KKE compresses five independent decisions into one column</strong>. The compression is invisible while audits are simple, then surfaces as a series of subtle bugs as audits get realistic.</p>
+<h1 id="why-mra-falls-short--the-five-dimensions">Why MRA Falls Short — The Five Dimensions</h1>
+<p>The core argument: <strong>MRA compresses five independent decisions into one column</strong>. The compression is invisible while audits are simple, then surfaces as a series of subtle bugs as audits get realistic.</p>
 <p>This page enumerates the dimensions. The <a href="patterns.html">Patterns page</a> shows where they collide with reality.</p>
 <hr>
 <h2 id="1-scope--is-this-page-in-this-audit">1. Scope — Is this page in this audit?</h2>
@@ -91,7 +91,7 @@ last-reviewed: 2026-04-28</h2>
 <td>Aggregated content from another system (job listings, partner content, syndicated feeds)</td>
 </tr>
 </tbody></table>
-<p>KKE collapses all of these into &quot;Exclude.&quot; That&#39;s why the <a href="patterns.html#a-the-post-launch-problem">Post-Launch problem</a> keeps coming up — different reasons for being out-of-audit have different downstream implications, but they look identical in the data.</p>
+<p>MRA collapses all of these into &quot;Exclude.&quot; That&#39;s why the <a href="patterns.html#a-the-post-launch-problem">Post-Launch problem</a> keeps coming up — different reasons for being out-of-audit have different downstream implications, but they look identical in the data.</p>
 <hr>
 <h2 id="2-content-fate--what-happens-to-the-content">2. Content Fate — What happens to the content?</h2>
 <p>Independent of scope and URL. Answers &quot;what should the content of this page become?&quot;</p>
@@ -100,23 +100,23 @@ last-reviewed: 2026-04-28</h2>
 <tr>
 <th>Value</th>
 <th>Meaning</th>
-<th>KKE equivalent</th>
+<th>MRA equivalent</th>
 </tr>
 </thead>
 <tbody><tr>
 <td><strong>Preserve</strong></td>
 <td>Content stays as-is</td>
-<td>Keep</td>
+<td>Migrate</td>
 </tr>
 <tr>
 <td><strong>Improve</strong></td>
 <td>Content is revised in place; retains identity</td>
-<td>Evolve</td>
+<td>Revise</td>
 </tr>
 <tr>
 <td><strong>Replace</strong></td>
 <td>Content is completely rewritten; new content, same role</td>
-<td>(none — usually shoehorned into Evolve)</td>
+<td>(none — usually shoehorned into Revise)</td>
 </tr>
 <tr>
 <td><strong>Merge</strong></td>
@@ -131,12 +131,12 @@ last-reviewed: 2026-04-28</h2>
 <tr>
 <td><strong>Retire</strong></td>
 <td>Content is removed</td>
-<td>Kill</td>
+<td>Archive</td>
 </tr>
 </tbody></table>
-<p>Two of these are missing from KKE: <strong>Replace</strong> and <strong>Split</strong>.</p>
+<p>Two of these are missing from MRA: <strong>Replace</strong> and <strong>Split</strong>.</p>
 <ul>
-<li><strong>Replace matters</strong> because &quot;improve in place&quot; implies iteration. A page that&#39;s stylistically dated but topically fine is Evolve. A page whose entire premise is wrong but whose URL is valuable is Replace. The content team needs to know which.</li>
+<li><strong>Replace matters</strong> because &quot;improve in place&quot; implies iteration. A page that&#39;s stylistically dated but topically fine is Revise. A page whose entire premise is wrong but whose URL is valuable is Replace. The content team needs to know which.</li>
 <li><strong>Split matters</strong> because the inverse of Consolidate happens too. One page doing three jobs (about the team + about services + about history) should become three pages.</li>
 </ul>
 <hr>
@@ -155,7 +155,7 @@ last-reviewed: 2026-04-28</h2>
 </tr>
 <tr>
 <td><strong>Move</strong></td>
-<td>URL changes via nav reorganization (the page is Keep but lives at a new path)</td>
+<td>URL changes via nav reorganization (the page is Migrate but lives at a new path)</td>
 </tr>
 <tr>
 <td><strong>Redirect</strong></td>
@@ -168,12 +168,12 @@ last-reviewed: 2026-04-28</h2>
 </tbody></table>
 <p>Why this is independent:</p>
 <ul>
-<li>A Keep page can get a new URL because the IA reorganized. Same content, different address.</li>
-<li>A Kill page can have no redirect (intentional 404 for low-value or duplicate URLs).</li>
+<li>A Migrate page can get a new URL because the IA reorganized. Same content, different address.</li>
+<li>An Archive page can have no redirect (intentional 404 for low-value or duplicate URLs).</li>
 <li>A Consolidate page always redirects (to the target).</li>
-<li>An Evolve page can keep its URL or move it.</li>
+<li>A Revise page can keep its URL or move it.</li>
 </ul>
-<p>KKE&#39;s single column tangles content fate and URL fate. Our audit tool fixes this implicitly with separate columns (<code>KKE_Recommendation</code> + <code>Redirect_Destination</code> + nav <code>Computed Path</code>), but the framework&#39;s vocabulary doesn&#39;t expose the distinction.</p>
+<p>MRA&#39;s single column tangles content fate and URL fate. Our audit tool fixes this implicitly with separate columns (<code>MRA_Recommendation</code> + <code>Redirect_Destination</code> + nav <code>Computed Path</code>), but the framework&#39;s vocabulary doesn&#39;t expose the distinction.</p>
 <hr>
 <h2 id="4-process-state--where-is-this-decision-in-the-workflow">4. Process State — Where is this decision in the workflow?</h2>
 <p>Decisions move through a process. Where this row sits in that process is itself a piece of information.</p>
@@ -209,8 +209,8 @@ last-reviewed: 2026-04-28</h2>
 <td>Final answer</td>
 </tr>
 </tbody></table>
-<p>KKE has implicit Unreviewed (blank) and Decided (filled in). The middle states are real — auditors absolutely encounter pages they need more info on — but there&#39;s no clean place to put them. They get parked in Notes, with the Flag bookmark, or in Tags.</p>
-<p>The audit tool&#39;s <code>Final_KKE</code> column hints at this dimension: it&#39;s a separate column because the resolution is a separate moment from the initial recommendation. But the pattern stops at SME — it doesn&#39;t generalize to &quot;needs research&quot; or &quot;pending stakeholder.&quot;</p>
+<p>MRA has implicit Unreviewed (blank) and Decided (filled in). The middle states are real — auditors absolutely encounter pages they need more info on — but there&#39;s no clean place to put them. They get parked in Notes, with the Flag bookmark, or in Tags.</p>
+<p>The audit tool&#39;s <code>Final_MRA</code> column hints at this dimension: it&#39;s a separate column because the resolution is a separate moment from the initial recommendation. But the pattern stops at SME — it doesn&#39;t generalize to &quot;needs research&quot; or &quot;pending stakeholder.&quot;</p>
 <hr>
 <h2 id="5-authority--whose-decision-is-this">5. Authority — Whose decision is this?</h2>
 <p>The audit tool&#39;s column proliferation makes this dimension extremely visible:</p>
@@ -222,7 +222,7 @@ last-reviewed: 2026-04-28</h2>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>KKE_Recommendation</code></td>
+<td><code>MRA_Recommendation</code></td>
 <td>Auditor</td>
 </tr>
 <tr>
@@ -230,15 +230,15 @@ last-reviewed: 2026-04-28</h2>
 <td>Domain expert</td>
 </tr>
 <tr>
-<td><code>GA_KKE_Recommendation</code></td>
+<td><code>GA_MRA_Recommendation</code></td>
 <td>Analytics-derived (PERCENTRANK on traffic + engagement)</td>
 </tr>
 <tr>
-<td><code>AI_KKE</code></td>
+<td><code>AI_MRA</code></td>
 <td>AI pattern-match against rubric</td>
 </tr>
 <tr>
-<td><code>Final_KKE</code></td>
+<td><code>Final_MRA</code></td>
 <td>The synthesis</td>
 </tr>
 </tbody></table>
@@ -248,11 +248,11 @@ last-reviewed: 2026-04-28</h2>
 <li>A page about regulated medical content should weight SME heavily.</li>
 <li>A purely promotional page should weight Auditor + Stakeholder.</li>
 </ul>
-<p>KKE-as-originally-conceived assumed one authority per page — the auditor. The audit tool has effectively built a parallel system of authority-stamped recommendations. Treat that as the framework, not as an exception.</p>
+<p>MRA-as-originally-conceived assumed one authority per page — the auditor. The audit tool has effectively built a parallel system of authority-stamped recommendations. Treat that as the framework, not as an exception.</p>
 <h3 id="authority-requires-governance">Authority requires governance</h3>
 <p>Once you accept that an audit has multiple authorities producing recommendations, you also have to accept that authority-stamped vocabularies degrade without active management:</p>
 <ul>
-<li>SMEs invent their own labels (<code>Change: Consolidate</code>, <code>Change: Post-Launch</code>, <code>Evolve - Post</code>)</li>
+<li>SMEs invent their own labels (<code>Change: Consolidate</code>, <code>Change: Post-Launch</code>, <code>Revise - Post</code>)</li>
 <li>Multiple auditors over multiple cycles introduce variants (<code>Post Launch</code> vs <code>Post-Launch</code>)</li>
 <li>Imports from other tools bring legacy values</li>
 </ul>
@@ -269,8 +269,8 @@ last-reviewed: 2026-04-28</h2>
 <hr>
 <h2 id="see-also">See also</h2>
 <ul>
-<li><a href="kke-classic.html">KKE: The Classic Framework</a> — what KKE actually is</li>
-<li><a href="patterns.html">Patterns Where KKE Breaks</a> — concrete examples of the dimensions colliding</li>
+<li><a href="kke-classic.html">KKE: The Classic Framework</a> — the four-state vocabulary MRA renames, and what each state means</li>
+<li><a href="patterns.html">Patterns Where MRA Breaks</a> — concrete examples of the dimensions colliding</li>
 <li><a href="content-audit-disposition.html">Content Audit Disposition (CAD)</a> — what to do about it</li>
 <li><a href="vocabulary-governance.html">Vocabulary Governance</a> — the operational layer Authority requires</li>
 </ul>

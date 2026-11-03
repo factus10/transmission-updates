@@ -65,10 +65,10 @@
 <h2 id="1-run-the-pre-handoff-check">1. Run the Pre-Handoff Check</h2>
 <p><strong>Migration → Pre-Handoff Check…</strong> runs all of these at once and reports &quot;<strong>Ready for handoff</strong>&quot; or &quot;<strong>N issues across M checks</strong>&quot;:</p>
 <ol>
-<li><strong>Every page has a KKE decision</strong> — no unreviewed rows.</li>
+<li><strong>Every page has an MRA decision</strong> — no unreviewed rows.</li>
 <li><strong>Consolidate pages point to a target</strong> — no dangling consolidations.</li>
-<li><strong>Consolidate targets are live</strong> — none point at a Kill/Exclude page.</li>
-<li><strong>No redirect chains</strong> — no Kill redirecting into another Kill/404.</li>
+<li><strong>Consolidate targets are live</strong> — none point at an Archive/Exclude page.</li>
+<li><strong>No redirect chains</strong> — no Archive redirecting into another Archive/404.</li>
 <li><strong>No duplicate nav IDs</strong> — <em>(nav-tree files only)</em>.</li>
 <li><strong>No empty nav leaves</strong> — <em>(nav-tree files only)</em>.</li>
 </ol>
@@ -81,7 +81,7 @@
 <p>The Pre-Handoff Check is itself a report — export it to <strong>PDF / HTML</strong> as evidence the audit passed its gate, to attach to the hand-off.</p>
 <hr>
 <h2 id="3-the-change-log">3. The change log</h2>
-<p>Every change to a decision field (KKE, SME Decision, Final KKE, and auto-filled classifications) is logged to <strong><code>_sessionChangeLog</code></strong> during the session and appended to the <strong>KKE_ChangeLog</strong> sheet on <strong>Save</strong> — timestamp, row, URL, field, old value, new value. It accumulates across sessions, so the file carries a complete history of how the inventory was decided.</p>
+<p>Every change to a decision field (MRA, SME Decision, Final MRA, and auto-filled classifications) is logged to <strong><code>_sessionChangeLog</code></strong> during the session and appended to the <strong>MRA_ChangeLog</strong> sheet on <strong>Save</strong> — timestamp, row, URL, field, old value, new value. It accumulates across sessions, so the file carries a complete history of how the inventory was decided.</p>
 <hr>
 <h2 id="quick-checklist-for-ready-to-hand-off">Quick checklist for &quot;ready to hand off&quot;</h2>
 <ul>

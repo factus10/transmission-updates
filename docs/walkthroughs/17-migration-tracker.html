@@ -50,9 +50,9 @@
 <div class="wrap">
 <nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
 <h1 id="migration-tracker-hand-off-walkthrough">Migration Tracker Hand-off Walkthrough</h1>
-<p>How to package the whole audit into one multi-sheet workbook the migration team can execute against — the single artifact that carries decisions, build metadata, redirects, and the kill list.</p>
+<p>How to package the whole audit into one multi-sheet workbook the migration team can execute against — the single artifact that carries decisions, build metadata, redirects, and the archive list.</p>
 <blockquote>
-<p>Prerequisite: KKE calls, sitemap placement, and (ideally) build metadata in place. Run the <strong>Pre-Handoff Check</strong> first.</p>
+<p>Prerequisite: MRA calls, sitemap placement, and (ideally) build metadata in place. Run the <strong>Pre-Handoff Check</strong> first.</p>
 </blockquote>
 <hr>
 <h2 id="0-the-mental-model">0. The mental model</h2>
@@ -63,14 +63,14 @@
 </ul>
 <hr>
 <h2 id="1-export-it">1. Export it</h2>
-<p><strong>Migration → Migration Tracker…</strong> opens the export dialog with sheet/option toggles. Choose what to include (e.g. whether Kill/Exclude rows appear in Source Pages, whether phased nodes are included), then export. Default filename: <code>{project-slug}-migration-tracker-YYYY-MM-DD.xlsx</code>.</p>
+<p><strong>Migration → Migration Tracker…</strong> opens the export dialog with sheet/option toggles. Choose what to include (e.g. whether Archive/Exclude rows appear in Source Pages, whether phased nodes are included), then export. Default filename: <code>{project-slug}-migration-tracker-YYYY-MM-DD.xlsx</code>.</p>
 <hr>
 <h2 id="2-what-each-sheet-carries">2. What each sheet carries</h2>
 <ul>
 <li><strong>Sitemap Plan</strong> — one row per sitemap node: sort, number, breadcrumb, label, URL, <strong>Page Status</strong>, <strong>Build Pattern</strong>, <strong>Builder / Writer</strong>, build guidance, writer brief, migration notes, source-page count, net-new flag, phase, in-menu, external URL. The build team&#39;s master plan.</li>
-<li><strong>Source Pages</strong> — audit rows joined to their sitemap node: KKE / Final KKE / Suggested KKE, Content Type, Group, Primary Tag, and the target breadcrumb / path / pattern / status. The &quot;where does each old page go&quot; map.</li>
-<li><strong>Redirects</strong> — Kill rows + non-Kill URL changes; intentional <code>404</code>s surface as &quot;(404) — intentional deindex&quot;.</li>
-<li><strong>Archive</strong> — Kill rows with their notes and tags, for client reference (what was removed and why).</li>
+<li><strong>Source Pages</strong> — audit rows joined to their sitemap node: MRA / Final MRA / Suggested MRA, Content Type, Group, Primary Tag, and the target breadcrumb / path / pattern / status. The &quot;where does each old page go&quot; map.</li>
+<li><strong>Redirects</strong> — Archive rows + non-Archive URL changes; intentional <code>404</code>s surface as &quot;(404) — intentional deindex&quot;.</li>
+<li><strong>Archive</strong> — Archive rows with their notes and tags, for client reference (what was removed and why).</li>
 </ul>
 <hr>
 <h2 id="3-when-to-re-export">3. When to re-export</h2>
@@ -79,7 +79,7 @@
 <h2 id="quick-checklist-for-tracker-ready">Quick checklist for &quot;tracker ready&quot;</h2>
 <ul>
 <li><input disabled="" type="checkbox"> <strong>Pre-Handoff Check</strong> clean before exporting</li>
-<li><input disabled="" type="checkbox"> Sheet/option toggles set for this hand-off (Kill inclusion, phased nodes)</li>
+<li><input disabled="" type="checkbox"> Sheet/option toggles set for this hand-off (Archive inclusion, phased nodes)</li>
 <li><input disabled="" type="checkbox"> <strong>Sitemap Plan</strong> carries the build metadata the team needs</li>
 <li><input disabled="" type="checkbox"> <strong>Redirects</strong> sheet matches the Redirect Map</li>
 <li><input disabled="" type="checkbox"> Exported with a clear, dated filename</li>

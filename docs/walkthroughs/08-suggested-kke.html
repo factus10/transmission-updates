@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Suggested_KKE Walkthrough — Transmission</title>
+<title>Suggested_MRA Walkthrough — Transmission</title>
 <style>
   :root {
     color-scheme: light dark;
@@ -49,25 +49,25 @@
 <body>
 <div class="wrap">
 <nav class="crumbs"><a href="../index.html">Transmission documentation</a></nav>
-<h1 id="suggested_kke-walkthrough">Suggested_KKE Walkthrough</h1>
-<p>How to get the app to <em>propose</em> a Keep/Kill/Evolve call so you confirm rather than start from scratch — combining rubric logic, AI judgment, and analytics into one suggestion.</p>
+<h1 id="suggested_mra-walkthrough">Suggested_MRA Walkthrough</h1>
+<p>How to get the app to <em>propose</em> a Migrate/Revise/Archive call so you confirm rather than start from scratch — combining rubric logic, AI judgment, and analytics into one suggestion.</p>
 <blockquote>
 <p>Prerequisite: a file is open. AI assessment needs a <strong>Claude API key</strong> (App Settings); GA needs analytics columns in your data.</p>
 </blockquote>
 <hr>
 <h2 id="0-the-mental-model">0. The mental model</h2>
-<p><strong>Suggested_KKE</strong> is a thin <strong>orchestrator</strong> over up to three independent sources:</p>
+<p><strong>Suggested_MRA</strong> is a thin <strong>orchestrator</strong> over up to three independent sources:</p>
 <ul>
 <li><strong>Rubric</strong> — deterministic rules you write (a small DSL over field values + content checks).</li>
 <li><strong>AI</strong> — Claude&#39;s judgment on the page, written into the assessment result.</li>
 <li><strong>GA</strong> — a composite score from analytics metrics (sessions, engagement, …).</li>
 </ul>
-<p>Each source produces its own recommendation; the orchestrator combines them by <strong>weighted vote</strong> into one <strong>Suggested_KKE</strong>, and records the per-source breakdown. <strong>It never touches your human KKE call</strong> — suggestions sit alongside for you to confirm or override.</p>
+<p>Each source produces its own recommendation; the orchestrator combines them by <strong>weighted vote</strong> into one <strong>Suggested_MRA</strong>, and records the per-source breakdown. <strong>It never touches your human MRA call</strong> — suggestions sit alongside for you to confirm or override.</p>
 <hr>
 <h2 id="1-set-up-the-sources">1. Set up the sources</h2>
 <p>All three are configured from <strong>Project Settings → Suggestions</strong>:</p>
 <ul>
-<li><strong>GA Analytics</strong> — map your analytics columns (sessions, engagement rate, …), set metric weights and Keep/Evolve thresholds.</li>
+<li><strong>GA Analytics</strong> — map your analytics columns (sessions, engagement rate, …), set metric weights and Migrate/Revise thresholds.</li>
 <li><strong>Rubric</strong> — point at your rubrics folder (App Settings → Rubrics folder) and run the batch.</li>
 <li><strong>Source weights</strong> — how much each source counts (GA / Rubric, 0–5), with <strong>Save weights &amp; recompute</strong>.</li>
 </ul>
@@ -75,17 +75,17 @@
 <h2 id="2-generate-suggestions">2. Generate suggestions</h2>
 <ul>
 <li><strong>Rubric across a set:</strong> filter to the rows you want, then <strong>Project → Run Rubric on filtered rows…</strong> (or <strong>Assess</strong> on a single page).</li>
-<li><strong>AI for the backlog:</strong> <strong>Project → AI Suggest for Unreviewed…</strong> generates a suggestion for every <strong>unreviewed</strong> row via Claude (≈1s/row, spends credits; <strong>Esc</strong> aborts). It writes only the assessment result — your KKE column is untouched.</li>
-<li><strong>GA:</strong> <strong>Project → Refresh GA KKE</strong> recomputes the analytics recommendation.</li>
+<li><strong>AI for the backlog:</strong> <strong>Project → AI Suggest for Unreviewed…</strong> generates a suggestion for every <strong>unreviewed</strong> row via Claude (≈1s/row, spends credits; <strong>Esc</strong> aborts). It writes only the assessment result — your MRA column is untouched.</li>
+<li><strong>GA:</strong> <strong>Project → Refresh GA MRA</strong> recomputes the analytics recommendation.</li>
 </ul>
-<p>Each of these automatically rolls its output into <strong>Suggested_KKE</strong> via the orchestrator. To re-run the combine step alone: <strong>Project → Recompute Suggested KKE</strong>.</p>
+<p>Each of these automatically rolls its output into <strong>Suggested_MRA</strong> via the orchestrator. To re-run the combine step alone: <strong>Project → Recompute Suggested MRA</strong>.</p>
 <hr>
 <h2 id="3-read-and-act-on-suggestions">3. Read and act on suggestions</h2>
-<p>In the <strong>Decide</strong> cluster, the <strong>Suggested_KKE badge</strong> shows the winning rec (e.g. &quot;GA: Kill&quot; / &quot;Rubric: Evolve&quot;). Click it for a <strong>popover</strong> listing every source, its rec, and the winner.</p>
+<p>In the <strong>Decide</strong> cluster, the <strong>Suggested_MRA badge</strong> shows the winning rec (e.g. &quot;GA: Archive&quot; / &quot;Rubric: Revise&quot;). Click it for a <strong>popover</strong> listing every source, its rec, and the winner.</p>
 <p>When sources <strong>disagree</strong>, the badge gets a dashed amber border + <strong>⚠</strong> and the popover highlights the conflict. Two sidebar special filters surface these:</p>
 <ul>
 <li><strong>Suggested disagrees</strong> — the sources didn&#39;t agree internally.</li>
-<li><strong>Suggested ≠ your call</strong> — the suggestion differs from the KKE you set.</li>
+<li><strong>Suggested ≠ your call</strong> — the suggestion differs from the MRA you set.</li>
 </ul>
 <blockquote>
 <p>Workflow: confirm the easy agreements fast, then filter to <strong>Suggested ≠ your call</strong> and <strong>Suggested disagrees</strong> to spend your judgment only where it matters.</p>
@@ -97,7 +97,7 @@
 <li><input disabled="" type="checkbox"> <strong>Source weights</strong> reflect how much you trust each</li>
 <li><input disabled="" type="checkbox"> Suggestions generated (batch rubric / AI unreviewed / GA refresh)</li>
 <li><input disabled="" type="checkbox"> Reviewed <strong>disagreements</strong> and <strong>mismatches</strong> via the sidebar filters</li>
-<li><input disabled="" type="checkbox"> Human <strong>KKE</strong> confirmed where it counts (suggestions are inputs, not decisions)</li>
+<li><input disabled="" type="checkbox"> Human <strong>MRA</strong> confirmed where it counts (suggestions are inputs, not decisions)</li>
 </ul>
 <hr>
 <p><em>See also: the <em>Rubric DSL</em> reference, the <strong>Content Types &amp; Crosswalk</strong> walkthrough, and <a href="../user-guide.html">the User Guide</a>.</em></p>

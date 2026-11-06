@@ -1,7 +1,7 @@
 {
-  "version": "2.23.0",
-  "publishedAt": "2026-11-03",
-  "notes": "The decisions are now Migrate, Revise and Archive (formerly Keep, Evolve and Kill; Consolidate and Exclude are unchanged), and the number-key shortcuts follow the new order: 1 Migrate, 2 Revise, 3 Archive. Existing projects, and SME worksheets that come back in the old words, are translated automatically when you open or import them, and the SME export can still use the old wording for a client who expects it.",
+  "version": "2.24.0",
+  "publishedAt": "2026-11-06",
+  "notes": "The Sitemap can now show a node's web page beside the tree: click Preview in the Sitemap toolbar, then click any row to see the page assigned to it, without leaving the Sitemap. Transmission is now built for Apple Silicon Macs (M1 and later) only.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

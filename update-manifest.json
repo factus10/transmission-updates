@@ -1,7 +1,7 @@
 {
-  "version": "2.24.0",
-  "publishedAt": "2026-11-06",
-  "notes": "The Sitemap can now show a node's web page beside the tree: click Preview in the Sitemap toolbar, then click any row to see the page assigned to it, without leaving the Sitemap. Transmission is now built for Apple Silicon Macs (M1 and later) only.",
+  "version": "2.25.0",
+  "publishedAt": "2026-11-12",
+  "notes": "When you export a Visual Sitemap to Miro, collapsed sections can now be exported with their labels only: choose \"Nothing (label only)\" under \"Stacked block shows\" to leave off the \"+3\" or \"3 pages hidden\". The page counts on the board follow the sitemap's Counts setting, not the Numbers checkbox.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

@@ -1,7 +1,7 @@
 {
-  "version": "2.25.0",
-  "publishedAt": "2026-11-12",
-  "notes": "When you export a Visual Sitemap to Miro, collapsed sections can now be exported with their labels only: choose \"Nothing (label only)\" under \"Stacked block shows\" to leave off the \"+3\" or \"3 pages hidden\". The page counts on the board follow the sitemap's Counts setting, not the Numbers checkbox.",
+  "version": "2.26.0",
+  "publishedAt": "2026-11-16",
+  "notes": "Transmission now runs on Intel Macs as well as Apple Silicon. Nothing in the app itself has changed, so on an Apple Silicon Mac this update only keeps you current. On the download page, choose the dmg for your Mac: the arm64 one for Apple Silicon, the x64 one for Intel (About This Mac shows a \"Chip\" line for Apple Silicon and a \"Processor\" line for Intel). The .zip downloads are gone; use the .dmg.",
   "changelogUrl": "https://factus10.github.io/transmission-updates/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission-updates/releases/latest"
 }

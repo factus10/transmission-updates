@@ -1,7 +1,7 @@
 {
-  "version": "2.26.0",
-  "publishedAt": "2026-11-16",
-  "notes": "Transmission now runs on Intel Macs as well as Apple Silicon. Nothing in the app itself has changed, so on an Apple Silicon Mac this update only keeps you current. On the download page, choose the dmg for your Mac: the arm64 one for Apple Silicon, the x64 one for Intel (About This Mac shows a \"Chip\" line for Apple Silicon and a \"Processor\" line for Intel). The .zip downloads are gone; use the .dmg.",
+  "version": "2.27.0",
+  "publishedAt": "2026-11-18",
+  "notes": "Transmission now runs on Windows: the download page has a 64-bit Windows installer beside the two Mac dmgs. Transmission is also open source now, under the MIT license, and its documentation and downloads have moved to github.com/factus10/transmission. On a Mac, the app has a new bundle ID, so the first Miro export after updating may ask to use your saved token (choose Always Allow), and if double-clicking a project opens an older copy of the app, delete that copy from Applications.",
   "changelogUrl": "https://factus10.github.io/transmission/changelog.html",
   "downloadUrl": "https://github.com/factus10/transmission/releases/latest"
 }
